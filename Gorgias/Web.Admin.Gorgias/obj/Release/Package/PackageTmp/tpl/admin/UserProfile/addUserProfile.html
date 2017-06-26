@@ -1,0 +1,78 @@
+﻿<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+        <div class="inner">            
+            <div class="row">                
+                <div class="col-lg-7 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                {{'GettingStarted' | translate}}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>{{'UserProfileNew' | translate}}</h3>
+                            <br>
+                            <div>
+                                <div class="profile-img-wrapper m-t-5 inline">
+                                    <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                    <div class="chat-status available">
+                                    </div>
+                                </div>
+                                <div class="inline m-l-10">
+                                    <p class="small hint-text m-t-5">
+                                        {{'HelperAuthorTitle'| translate}}
+                                        <br> {{'HelperAuthor' | translate}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<div class="container-fluid container-fixed-lg">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>{{'NewUserProfileAccess' | translate}}</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addUserProfileForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <p class="panel-subtitle">
+                                {{'RequiredTitle' | translate}}
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">{{'UserRole' | translate}}</label><div class="col-sm-9"><select id="UserRoleID" class="form-control" ng-model="object.UserRoleID" ng-options="option.UserRoleID as option.UserRoleName for option in UserRoles" title="Please select at least one" required></select><input type="hidden" name="UserRoleID" ng-value="object.UserRoleID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">{{'User' | translate}}</label><div class="col-sm-9"><select id="UserID" class="form-control" ng-model="object.UserID" ng-options="option.UserID as option.UserFullname for option in Users" title="Please select at least one" required></select><input type="hidden" name="UserID" ng-value="object.UserID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">{{'Profile' | translate}}</label><div class="col-sm-9"><select id="ProfileID" class="form-control" ng-model="object.ProfileID" ng-options="option.ProfileID as option.ProfileFullname for option in Profiles" title="Please select at least one" required></select><input type="hidden" name="ProfileID" ng-value="object.ProfileID" /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                    <button type="reset" class="btn btn-default">{{'Reset' | translate}}</button>
+                                    <a class="btn btn-warning" ui-sref="app.forms.userprofile">{{'Cancel' | translate}}</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

@@ -1,0 +1,6 @@
+/* Add here all your CSS customizations */
+.table-responsive {
+    /*overflow-x:hidden;*/
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

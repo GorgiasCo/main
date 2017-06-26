@@ -1,0 +1,66 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addProfileForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Add Profile</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Fullname<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ProfileFullname" ng-model="object.ProfileFullname" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Fullname (English)</label><div class="col-sm-9"><input type="text" name="ProfileFullnameEnglish" ng-model="object.ProfileFullnameEnglish" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" name="ProfileDateCreated" data-plugin-datepicker ng-model="object.ProfileDateCreated" placeholder="eg.: 2017-03-21" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Description</label><div class="col-sm-9"><textarea rows="5" name="ProfileDescription" ng-model="object.ProfileDescription" validate-on="blur" class="form-control" placeholder="Describe Something..."></textarea></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">View<span class="required">*</span></label><div class="col-sm-9"><input type="number" name="ProfileView" ng-model="object.ProfileView" validate-on="blur" class="form-control" placeholder="eg.: 0" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Like<span class="required">*</span></label><div class="col-sm-9"><input type="number" name="ProfileLike" ng-model="object.ProfileLike" validate-on="blur" class="form-control" placeholder="eg.: 0" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">URL</label><div class="col-sm-9"><input type="text" name="ProfileURL" ng-model="object.ProfileURL" validate-on="blur" class="form-control" placeholder="eg.: firstname.Lastname" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Short Description</label><div class="col-sm-9"><input type="text" name="ProfileShortDescription" ng-model="object.ProfileShortDescription" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Email<span class="required">*</span></label><div class="col-sm-9"><input type="email" name="ProfileEmail" ng-model="object.ProfileEmail" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="ProfileStatus" ng-model="object.ProfileStatus" validate-on="blur" value="ProfileStatus" type="checkbox" name="for[]" /><label for="ProfileStatus">Status</label></div></div></div>
+                            <!--<div class="form-group"><label class="col-sm-3 control-label">Industry</label><div class="col-sm-9"><select id="IndustryID" class="form-control" ng-model="object.IndustryID" ng-options="option.IndustryID as option.IndustryName for option in Industries" title="Please select at least one" required></select><input type="hidden" name="IndustryID" ng-value="object.IndustryID" /></div></div>-->
+                            <div class="form-group"><label class="col-sm-3 control-label">Profile Type</label><div class="col-sm-9"><select id="ProfileTypeID" class="form-control" ng-model="object.ProfileTypeID" ng-options="option.ProfileTypeID as option.ProfileTypeName for option in ProfileTypes" title="Please select at least one" required></select><input type="hidden" name="ProfileTypeID" ng-value="object.ProfileTypeID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Theme</label><div class="col-sm-9"><select id="ThemeID" class="form-control" ng-model="object.ThemeID" ng-options="option.ThemeID as option.ThemeName for option in Themes" title="Please select at least one" required></select><input type="hidden" name="ThemeID" ng-value="object.ThemeID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Subscription Type</label><div class="col-sm-9"><select id="SubscriptionTypeID" class="form-control" ng-model="object.SubscriptionTypeID" ng-options="option.SubscriptionTypeID as option.SubscriptionTypeName for option in SubscriptionTypes" title="Please select at least one" required></select><input type="hidden" name="SubscriptionTypeID" ng-value="object.SubscriptionTypeID" /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <a class="btn btn-default" ng-href="/profile">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                        </div>
+                        <h2 class="panel-title">Profile Image, File Upload Drag'n Drop</h2>
+                    </header>
+                    <div class="panel-body">
+                        <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

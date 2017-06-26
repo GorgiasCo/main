@@ -1,0 +1,55 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addIndustryForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Edit Industry</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="IndustryName" ng-model="object.IndustryName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="IndustryStatus" ng-model="object.IndustryStatus" validate-on="blur" value="IndustryStatus" type="checkbox" name="for[]" /><label for="IndustryStatus">Status</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Parent</label><div class="col-sm-9"><input type="text" name="IndustryParentID" ng-model="object.IndustryParentID" validate-on="blur" class="form-control" placeholder="eg.: John Doe"/></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Description</label><div class="col-sm-9"><textarea rows="5" name="IndustryDescription" ng-model="object.IndustryDescription" validate-on="blur" class="form-control" placeholder="Describe Something..."></textarea></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <a class="btn btn-default" ng-href="/industry">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                        </div>
+                        <h2 class="panel-title">File Upload Drag'n Drop</h2>
+                    </header>
+                    <div class="panel-body">
+                        <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

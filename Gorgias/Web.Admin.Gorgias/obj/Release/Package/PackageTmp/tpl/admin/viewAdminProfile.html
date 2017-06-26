@@ -1,0 +1,619 @@
+﻿<div class="social-wrapper">
+    <div class="column_attr" style="text-align:left;position:absolute;top:25px;left:25px;cursor:pointer">
+        <img src="content/images/cross_dark.png" style="cursor:pointer" ng-click="signout()">
+    </div>
+    <div class="column_attr" style="text-align:left;position:absolute;top:25px;right:25px;cursor:pointer">
+        <select ng-options="language | translate for language in languages" ng-model="language" ng-change="updateLanguage()"></select>
+    </div>
+    <div class="social">
+        <div class="jumbotron" data-pages="parallax" ng-controller="headerAdminController" data-social="cover">
+            <!--style="background-size: contain;background-position: center center;background:url(https://gorgiasasia.blob.core.windows.net/images/webcover-{{Profile.ProfileID}}?timestamp={{timestamp}});"-->
+            <div class="cover-photo" ng-if="Profile.ProfileID>0">
+                <img alt="Cover photo" src="https://gorgiasasia.blob.core.windows.net/images/webcover-{{Profile.ProfileID}}?timestamp={{timestamp}}" />
+            </div>
+            <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+                <div class="inner">
+                    <div class="pull-bottom bottom-left m-b-40">
+                        <div class="social-user-profile col-xs-height text-center col-top">
+                            <div class="thumbnail-wrapper d133 circular bordered b-white">
+                                <img alt="Avatar" width="133" height="133" src="{{Profile.ProfileImage}}">
+                            </div>
+                            <br>
+                        </div>
+                        <h5 class="text-white no-margin">welcome to {{Profile.ProfileFullname}}'s Profile</h5>
+                        <h1 class="text-white no-margin"><span class="semi-bold">{{Profile.CountryName}} | {{Profile.IndustryName}} | {{Profile.ProfileTypeName}}</span></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid container-fixed-lg">
+            <section role="main" class="row" id="Content">
+
+                <div class="col-md-6 content_wrapper clearfix">
+
+                    <!-- start: page -->
+                    <div class="sections_group">
+                        <div class="entry-content">
+                            <div class="section">
+
+                                <div class="section_wrapper clearfix">
+                                    <div id="administration" class="column one">
+                                        <div style="margin-top: 31px;">
+                                            <uib-tabset active="activeJustified" justified="true">
+                                                <uib-tab index="0" heading="{{'MyProfile' | translate}}">
+                                                    <div ng-controller="listprofileProfileController">
+                                                        <div ng-show="isList">
+                                                            <form id="form" role="form" novalidate angular-validator name="addProfileForm" class="form-horizontal">
+                                                                <div class="panel-body">
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Fullname' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileFullname}}</b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Fullname' | translate}}(EN)<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileFullnameEnglish}}</b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'DateCreated' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileDateCreated | date:'MMM d, y'}}</b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Description' | translate}}</label><div class="col-sm-9 pull-left text-left"><i>{{object.ProfileDescription}}</i></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'View' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileView  | number}}</b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Like' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileLike | number}}</b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'WebURL' | translate}}</label><div class="col-sm-9 pull-left text-left"><a ng-href="{{object.ProfileURL}}">{{object.ProfileURL}}</a></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'ShortDescription' | translate}}</label><div class="col-sm-9 pull-left text-left"><i>{{object.ProfileShortDescription}}</i></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Email' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileEmail}}</b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'ProfileType' | translate}}</label><div class="col-sm-9 pull-left text-left"><b><i>{{object.ProfileType.ProfileTypeName}}</i></b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Theme' | translate}}</label><div class="col-sm-9 pull-left text-left"><b><i>{{object.Theme.ThemeName}}</i></b></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Subscription' | translate}}</label><div class="col-sm-9 pull-left text-left"><b><i>{{object.SubscriptionType.SubscriptionTypeName}}</i></b></div></div>
+                                                                </div>
+                                                                <footer class="panel-footer">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-9 col-sm-offset-3">
+                                                                            <!--<button class="btn btn-success" ng-click="addNew()">+ New</button>-->
+                                                                            <button class="btn btn-primary" ng-click="edit()">+ {{'Update' | translate}}</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </footer>
+                                                            </form>
+                                                        </div>
+                                                        <div ng-show="isAdd">
+                                                            <form id="form" role="form" novalidate angular-validator name="addProfileForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                                                                <h4 class="mb-xlg">{{'MyProfileInformation' | translate}}</h4>
+                                                                <div class="panel-body">
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Fullname' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ProfileFullname" ng-model="object.ProfileFullname" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Fullname' | translate}} (EN)<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ProfileFullnameEnglish" ng-model="object.ProfileFullnameEnglish" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Description' | translate}}</label><div class="col-sm-9"><textarea rows="5" name="ProfileDescription" ng-model="object.ProfileDescription" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="200"></textarea></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'ShortDescription' | translate}}</label><div class="col-sm-9"><input type="text" name="ProfileShortDescription" ng-model="object.ProfileShortDescription" validate-on="blur" class="form-control" placeholder="eg.: Short Description" maxlength="50" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'WebURL' | translate}}</label><div class="col-sm-9"><input type="text" disabled name="ProfileURL" ng-model="object.ProfileURL" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Email' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input disabled type="email" name="ProfileEmail" ng-model="object.ProfileEmail" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                                                                    <!--<div class="form-group"><label class="col-sm-3 control-label">Industry</label><div class="col-sm-9"><select id="IndustryID" class="form-control" ng-model="object.IndustryID" ng-options="option.IndustryID as option.IndustryName for option in Industries" title="Please select at least one" required></select><input type="hidden" name="IndustryID" ng-value="object.IndustryID" /></div></div>-->
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'ProfileType' | translate}}</label><div class="col-sm-9"><select id="ProfileTypeID" disabled class="form-control" ng-model="object.ProfileTypeID" ng-options="option.ProfileTypeID as option.ProfileTypeName for option in ProfileTypes" title="Please select at least one" required></select><input type="hidden" name="ProfileTypeID" ng-value="object.ProfileTypeID" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Theme' | translate}}</label><div class="col-sm-9"><select id="ThemeID" disabled class="form-control" ng-model="object.ThemeID" ng-options="option.ThemeID as option.ThemeName for option in Themes" title="Please select at least one" required></select><input type="hidden" name="ThemeID" ng-value="object.ThemeID" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Subscription' | translate}}</label><div class="col-sm-9"><select disabled id="SubscriptionTypeID" class="form-control" ng-model="object.SubscriptionTypeID" ng-options="option.SubscriptionTypeID as option.SubscriptionTypeName for option in SubscriptionTypes" title="Please select at least one" required></select><input type="hidden" name="SubscriptionTypeID" ng-value="object.SubscriptionTypeID" /></div></div>
+                                                                    <div class="panel-body">
+                                                                        <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                                                                    </div>
+                                                                </div>
+                                                                <footer class="panel-footer">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-9 col-sm-offset-3">
+                                                                            <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                                                            <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </footer>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </uib-tab>
+                                                <uib-tab index="2" heading="{{'Albums' | translate}}">
+                                                    <div ng-controller="listprofileAlbumController as vm">
+                                                        <div ng-show="isList">
+                                                            <h3 class="admin box-title m-b-0" style="margin-bottom: 27px;"><button class="btn btn-success" ng-click="addNew()" style="margin-left:13px;">+ {{'Album' | translate}}</button></h3>
+                                                            <div class="">
+                                                                <div class="gallery-item" data-width="1" data-height="1" style="float:left;margin-right:11px;" ng-repeat="obj in items">
+                                                                    <!-- START PREVIEW -->
+                                                                    <img preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{obj.AlbumCover}}?timestamp={{timestamp}}" alt="" class="image-responsive-height">
+                                                                    <!-- END PREVIEW -->
+                                                                    <!-- START ITEM OVERLAY DESCRIPTION -->
+                                                                    <div class="overlayer bottom-left full-width">
+                                                                        <div class="overlayer-wrapper item-info ">
+                                                                            <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
+                                                                                <div class="">
+                                                                                    <p class="pull-left bold text-white fs-14 p-t-10">{{obj.AlbumName | cut:true:30:'...'}}</p>
+                                                                                    <h5 class="pull-right semi-bold text-white font-montserrat bold">{{obj.AlbumView}}</h5>
+                                                                                    <div class="clearfix"></div>
+                                                                                    <span class="hint-text pull-left text-white">{{obj.AlbumDateCreated | date:'MMM d, y'}}</span>
+                                                                                    <div class="clearfix"></div>
+                                                                                </div>
+                                                                                <div class="m-t-10">
+                                                                                    <div class="pull-left m-t-10">
+                                                                                        <button class="btn btn-white btn-xs btn-mini bold fs-14" ng-click="edit(obj)" type="button">{{'Edit' | translate}}</button>
+                                                                                    </div>
+                                                                                    <div class="pull-right m-t-10">
+                                                                                        <button class="btn btn-danger btn-xs btn-mini bold fs-14" ng-click="delete(obj)" type="button">{{'Delete' | translate}}</button>
+                                                                                    </div>
+                                                                                    <div class="clearfix"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- END PRODUCT OVERLAY DESCRIPTION -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div ng-show="isAdd">
+                                                            <form id="form" role="form" novalidate angular-validator name="addAddressForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                                                                <h4 class="mb-xlg">{{'AlbumInformation' | translate}}</h4>
+                                                                <div class="panel-body">
+                                                                    <div class="row">
+                                                                        <div class="gallery-item" ng-if="isEdit" data-width="1" data-height="1" style="float:left;margin-right:11px;">
+                                                                            <!-- START PREVIEW -->
+                                                                            <img preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{object.AlbumCover}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{object.AlbumCover}}?timestamp={{timestamp}}" alt="" class="image-responsive-height">
+                                                                            <!-- END PREVIEW -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Name' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AlbumName" ng-model="object.AlbumName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Category' | translate}}</label><div class="col-sm-9"><select id="CategoryID" class="form-control" ng-model="object.CategoryID" ng-options="option.CategoryID as option.CategoryName for option in Categories" title="Please select at least one" required></select><input type="hidden" name="CategoryID" ng-value="object.CategoryID" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'AlbumAvailability' | translate}}</label><div class="col-sm-9"><select id="AlbumAvailability" ng-disabled="isEdit" class="form-control" ng-model="object.AlbumAvailability" ng-options="option.AlbumAvailability as option.AlbumTypeName for option in Availabilities" title="Please select at least one" required></select><input type="hidden" name="AlbumAvailability" ng-value="object.AlbumAvailability" /></div></div>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <h4 class="mb-xlg">{{'AlbumCover' | translate}}</h4>
+                                                                    <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                                                                </div>
+                                                                <div class="panel-body" style="margin-top: 21px;" ng-show="uploadDone || isEdit">
+                                                                    <h4 class="mb-xlg">{{'AlbumImages' | translate}}</h4>
+                                                                    <ng-dropzone class="dropzone" options="dzImagesOptions" callbacks="dzImagesCallbacks" methods="dzImagesMethods"></ng-dropzone>
+                                                                </div>
+                                                                <footer class="panel-footer">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-9 col-sm-offset-3">
+                                                                            <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                                                            <button type="reset" class="button btn btn-default button_js kill_the_icon resetbtn">{{'Reset' | translate}}</button>
+                                                                            <a class="btn btn-warning" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </footer>
+                                                            </form>
+                                                            <div ng-show="isEdit" style="margin-top:21px;">
+                                                                <section class="media-gallery">
+                                                                    <div class="row mg-files">
+                                                                        <div>
+                                                                            <div class="gallery-item" data-width="3" data-height="3" style="float:left;margin-right:11px;" ng-repeat="content in AlbumItems">
+                                                                                <!-- START PREVIEW -->
+                                                                                <img preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{content.ContentURL}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{content.ContentURL}}?timestamp={{timestamp}}" alt="" class="image-responsive-height">
+                                                                                <!-- END PREVIEW -->
+                                                                                <!-- START ITEM OVERLAY DESCRIPTION -->
+                                                                                <div class="overlayer bottom-left full-width">
+                                                                                    <div class="overlayer-wrapper item-info ">
+                                                                                        <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
+                                                                                            <div class="">
+                                                                                                <p class="pull-left bold text-white fs-14 p-t-10">{{obj.AlbumName | cut:true:30:'...'}}</p>
+                                                                                                <h5 class="pull-right semi-bold text-white font-montserrat bold">{{obj.AlbumView}}</h5>
+                                                                                                <div class="clearfix"></div>
+                                                                                                <span class="hint-text pull-left text-white">{{obj.AlbumDateCreated | date:'MMM d, y'}}</span>
+                                                                                                <div class="clearfix"></div>
+                                                                                            </div>
+                                                                                            <div class="m-t-10">
+                                                                                                <div class="pull-right m-t-10">
+                                                                                                    <button class="btn btn-white btn-xs btn-mini bold fs-14" ng-click="deleteContent(content)" type="button">{{'Delete' | translate}}</button>
+                                                                                                </div>
+                                                                                                <div class="clearfix"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- END PRODUCT OVERLAY DESCRIPTION -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </uib-tab>
+                                                <uib-tab index="1" heading="{{'Address' | translate}}">
+                                                    <div ng-controller="listprofileAddressController as vm">
+                                                        <!--<ng-map zoom="3" style="width:600px; height:400px">
+                                                            <marker position="KLCC, Kuala Lumpur, Malaysia"
+                                                                    on-mouseup="markerMove()"
+                                                                    draggable="true"></marker>
+                                                        </ng-map>-->
+                                                        <div ng-show="isList">
+                                                            <h3 class="admin box-title m-b-0"><button class="btn btn-success" ng-click="addNew()">+ {{'Address' | translate}}</button></h3>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover" id="basicTable">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style="width:20%">{{'Actions' | translate}}</th>
+                                                                            <th style="width:20%">{{'Name' | translate}}</th>
+                                                                            <th style="width:29%">{{'Tel' | translate}}</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="obj in items">
+                                                                            <td class="v-align-middle">
+                                                                                <div class="checkbox ">
+                                                                                    <button class="btn btn-warning" ng-click="edit(obj)"><span class="button_icon"><i class="fa fa-pencil"></i></span></button>
+                                                                                    <button class="btn btn-danger" ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></button>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="v-align-middle ">
+                                                                                <p>{{obj.AddressName}}</p>
+                                                                            </td>
+                                                                            <td class="v-align-middle">
+                                                                                <p>{{obj.AddressTel | cut:true:35:' ...'}}</p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div ng-show="isAdd">
+                                                            <form id="form" role="form" novalidate angular-validator name="addAddressForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                                                                <h4 class="mb-xlg">{{'AddressInformation' | translate}}</h4>
+
+                                                                <!--<div map-lazy-load="https://googleMapsUrl-maps.google.com/maps/api/js"
+                                                                     map-lazy-load-params="{{}}">position="-35.39402259277324, 88.03710865714568"
+                                                                    <ng-map center="41,-87" zoom="3"></ng-map>
+                                                                </div>-->
+                                                                <!--<ng-map id="foo" d
+                                                                efault-style="true" lazy-init="true"
+                                                                        center="{{vm.stores.foo.position[0]}}, {{vm.stores.foo.position[1]}}" zoom="3">
+
+                                                                    <marker ng-repeat="(id, store) in vm.stores" id="{{id}}"
+                                                                            position="{{store.position}}"
+                                                                            on-click="vm.showStore(event, id)"></marker>
+
+                                                                    <info-window id="bar">
+                                                                        <div ng-non-bindable="">
+                                                                            Lat: {{anchor.getPosition().lat()}}<br />
+                                                                            Lng: {{anchor.getPosition().lng()}}<br />
+                                                                            <ul>
+                                                                                <li ng-repeat='item in store.items'>{{item}}</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </info-window>
+                                                                </ng-map>-->
+                                                                <div class="panel-body">
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Name' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AddressName" ng-model="object.AddressName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Tel' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AddressTel" ng-model="object.AddressTel" validate-on="blur" class="form-control" placeholder="eg.: +60123456789" required /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Fax' | translate}}</label><div class="col-sm-9"><input type="text" name="AddressFax" ng-model="object.AddressFax" validate-on="blur" class="form-control" placeholder="eg.: +60123456789" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Email' | translate}}</label><div class="col-sm-9"><input type="email" name="AddressEmail" ng-model="object.AddressEmail" validate-on="blur" class="form-control" placeholder="eg.: john@john.com" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Address' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AddressAddress" ng-model="object.AddressAddress" validate-on="blur" class="form-control" placeholder="eg.: Full address with city and country" required /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'ZipCode' | translate}}</label><div class="col-sm-9"><input type="text" name="AddressZipCode" ng-model="object.AddressZipCode" validate-on="blur" class="form-control" placeholder="eg.: 1234567" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'City' | translate}}</label><div class="col-sm-9"><select id="CityID" class="form-control" ng-model="object.CityID" ng-options="option.CityID as option.CityName for option in Cities" title="Please select at least one" required></select><input type="hidden" name="CityID" ng-value="object.CityID" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'AddressType' | translate}}</label><div class="col-sm-9"><select id="AddressTypeID" class="form-control" ng-model="object.AddressTypeID" ng-options="option.AddressTypeID as option.AddressTypeName for option in AddressTypes" title="Please select at least one" required></select><input type="hidden" name="AddressTypeID" ng-value="object.AddressTypeID" /></div></div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">{{'ValidatingAddress' | translate}}</label>
+                                                                        <div class="col-sm-9">
+                                                                            <p>{{'ValidationNote' | translate}}</p>
+                                                                            <button class="btn btn-primary btn-success" ng-click="initMap('foo22')">{{'ValidateAddress' | translate}}</button>
+                                                                            <!--<ng-map id="foo22" centered="true" center="{{object.AddressAddress}}"
+                                                                                    zoom="13" style="width:100vm; height:100vm" default-style="true" lazy-init="true">
+                                                                                <marker position="{{object.AddressAddress}}"
+                                                                                        on-mouseup="markerMove()"
+                                                                                        draggable="true"></marker>
+                                                                            </ng-map>-->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div ng-if="isValidated" map-lazy-load="https://maps.google.com/maps/api/js">
+                                                                        <ng-map id="foo22" name="foo22" centered="true" center="{{object.AddressAddress}}" default-style="false"
+                                                                                zoom="15">
+                                                                            <marker position="{{object.AddressAddress}}"
+                                                                                    on-mouseup="markerMove()"
+                                                                                    draggable="true"></marker>
+                                                                        </ng-map>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                                                                    </div>
+                                                                </div>
+                                                                <footer class="panel-footer">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-9 col-sm-offset-3">
+                                                                            <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                                                            <button type="reset" class="btn btn-warning button_left button_js kill_the_icon resetbtn">{{'Reset' | translate}}</button>
+                                                                            <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </footer>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </uib-tab>
+
+                                                <uib-tab index="3" heading="{{'AboutMe' | translate}}">
+                                                    <div ng-controller="listprofileProfileAttributeController as vm">
+                                                        <div ng-show="isList">
+                                                            <h3 class="admin box-title m-b-0"><button class="btn btn-success" ng-click="addNew()">+ {{'AboutMe' | translate}}</button></h3>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover" id="basicTable">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style="width:20%">{{'Actions' | translate}}</th>
+                                                                            <th style="width:20%">{{'Section' | translate}}</th>
+                                                                            <th style="width:29%">{{'Content' | translate}}</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="obj in items">
+                                                                            <td class="v-align-middle">
+                                                                                <div class="checkbox ">
+                                                                                    <button class="btn btn-warning" ng-click="edit(obj)"><span class="button_icon"><i class="fa fa-pencil"></i></span></button>
+                                                                                    <button class="btn btn-danger" ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></button>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="v-align-middle ">
+                                                                                <p>{{obj.Attribute.AttributeName}}</p>
+                                                                            </td>
+                                                                            <td class="v-align-middle">
+                                                                                <p>{{obj.ProfileAttributeNote | cut:true:35:' ...'}}</p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div ng-show="isAdd">
+                                                            <form id="form" role="form" novalidate angular-validator name="addProfileAttributeForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                                                                <h4 class="mb-xlg">{{'AboutMeSection' | translate}}</h4>
+                                                                <div class="panel-body">
+                                                                    <div ng-show="isAdd && isEdit" class="form-group"><label class="col-sm-3 control-label">{{'Attribute' | translate}}</label><div class="col-sm-9"><select disabled id="AttributeID" class="form-control" ng-model="object.AttributeID" ng-options="option.AttributeID as option.AttributeName for option in Attributes" title="Please select at least one" required></select><input type="hidden" name="AttributeID" ng-value="object.AttributeID" /></div></div>
+                                                                    <div ng-show="isAdd && !isEdit" class="form-group"><label class="col-sm-3 control-label">{{'Attribute' | translate}}</label><div class="col-sm-9"><select id="AttributeID" class="form-control" ng-model="Attribute" ng-options="option as option.AttributeName for option in Attributes" ng-change="attributeUpdate(Attribute)" title="Please select at least one" ngRequired="isAdd && !isEdit"></select><input type="hidden" name="AttributeID" ng-value="object.AttributeID" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'Note' | translate}}</label><div class="col-sm-9"><textarea rows="7" name="ProfileAttributeNote" ng-model="object.ProfileAttributeNote" validate-on="blur" class="form-control" placeholder="{{'DescribeSomething' | translate}}..." required></textarea></div></div>
+                                                                </div>
+                                                                <footer class="panel-footer">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-9 col-sm-offset-3">
+                                                                            <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                                                            <button type="reset" class="btn btn-warning button_left button_js kill_the_icon resetbtn">{{'Reset' | translate}}</button>
+                                                                            <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </footer>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </uib-tab>
+                                            </uib-tabset>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: page -->
+                </div>
+                <div class="col-md-6 content_wrapper clearfix">
+                    <div style="margin-top:23px;">
+                        <uib-accordion id="adminroot" close-others="true">
+                            <div ng-controller="listprofileAgencyController as vm" style="margin-bottom:5px;">
+                                <div uib-accordion-group class="panel-default" heading="{{'Agency' | translate}}" ng-if="items">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <div class="">
+                                                <div class="gallery-item" data-width="1" data-height="1" style="float:left;margin-right:11px;" ng-repeat="obj in items">
+                                                    <!-- START PREVIEW -->
+                                                    <img preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.Profile.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{obj.Profile.ProfileImage}}?timestamp={{timestamp}}" alt="" class="image-responsive-height">
+                                                    <!-- END PREVIEW -->
+                                                    <!-- START ITEM OVERLAY DESCRIPTION -->
+                                                    <div class="overlayer bottom-left full-width">
+                                                        <div class="overlayer-wrapper item-info ">
+                                                            <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
+                                                                <div class="">
+                                                                    <p class="pull-left bold text-white fs-14 p-t-10">{{obj.Profile.ProfileFullname | cut:true:30:'...'}}</p>
+                                                                    <h5 class="pull-right semi-bold text-white font-montserrat bold">{{obj.AlbumView}}</h5>
+                                                                    <div class="clearfix"></div>
+                                                                    <!--<span class="hint-text pull-left text-white">{{obj.AlbumDateCreated | date:'MMM d, y'}}</span>
+                                                                    <div class="clearfix"></div>-->
+                                                                </div>
+                                                                <div class="m-t-10">
+                                                                    <div class="pull-left m-t-10">
+                                                                        <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole != 0" href="/app/forms/administrator/{{obj.Profile.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
+                                                                        <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole == 0" href="/app/forms/master/administrator/{{obj.Profile.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END PRODUCT OVERLAY DESCRIPTION -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div uib-accordion-group class="panel-default" heading="{{'Tags' | translate}}">
+                                <div class="panel">
+                                    <div class="panel-body" ng-controller="listprofileProfileTagController as vm">
+                                        <div class="column one no-margin" id="approundlistadmin" style="margin-bottom: 13px;">
+                                            <div class="btn-group">
+                                                <ul class="horizontal-list">
+                                                    <li ng-repeat="obj in tags"><label class="">{{obj.Tag.TagName}}<a ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></a></label></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <hr class="solid mt-sm mb-lg">
+                                        <form method="get" class="form-horizontal form-bordered" ng-if="tags.length < 10">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group mb-md">
+                                                        <div style="clear:both;"><input type="checkbox" ng-model="object.ProfileTagStatus" class="js-switch" ui-switch="{color: '#10cfbd'}" />{{'PrimaryTag' | translate}}</div>
+
+                                                        <input style="float:left" type="text" class="form-control" ng-model="object.TagName"><button type="button" class="btn btn-primary" ng-click="insertTag()" tabindex="-1">{{'Add' | translate}}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div uib-accordion-group class="panel-default" heading="Industry">
+                                <div class="panel">
+                                    <div class="panel-body" ng-controller="listprofileProfileIndustryController as vm">
+                                        <div class="column one no-margin" id="approundlistadmin" style="margin-bottom: 13px;">
+                                            <div class="btn-group">
+                                                <ul class="horizontal-list">
+                                                    <li ng-repeat="obj in profileIndustries"><label class="btn btn-primary">{{obj.IndustryName}}<a ng-click="delete(obj)"><span class="button_icon"><i class="icon-trash-line"></i></span></a></label></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <hr class="solid mt-sm mb-lg">
+                                        <form method="get" class="form-horizontal form-bordered" ng-if="profileIndustries.length < 3">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group mb-md" >
+                                                        <select id="IndustryID" class="form-control" ng-model="object.IndustryID" ng-options="option.IndustryID as option.IndustryName for option in Industries" title="Please select at least one" style="float:left;" required></select><input type="hidden" name="IndustryID" ng-value="object.IndustryID" /><button type="button" class="btn btn-primary" ng-click="insertTag()" tabindex="-1">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--<div uib-accordion-group class="panel-default" heading="Apps Connections">
+                                <div ng-controller="listprofileExternalLinkController as vm">
+                                    <div ng-show="isList">
+                                        <h3 class="admin box-title m-b-0"><button class="btn btn-success" ng-click="addNew()">+ App</button></h3>
+                                        <div class="table-responsive">
+                                            <table class="table mb-none">
+                                                <thead>
+                                                    <tr>
+                                                        <th>App</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="obj in items">
+                                                        <td><a href="{{obj.ExternalLinkURL}}">{{obj.LinkType.LinkTypeName}}</a></td>
+                                                        <td class="actions">
+                                                            <a ng-click="edit(obj)"><span class="button_icon"><i class="icon-pencil"></i></span></a>
+                                                            <a ng-click="delete(obj)"><span class="button_icon"><i class="icon-trash-line"></i></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isAdd">
+                                        <form id="form" role="form" novalidate angular-validator name="addAddressForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                                            <h4 class="mb-xlg">App Information</h4>
+                                            <div class="panel-body">
+                                                <div class="panel-body">
+                                                    <div ng-show="isAdd && isEdit" class="form-group"><label class="col-sm-3 control-label">App</label><div class="col-sm-9"><select disabled id="LinkTypeID" class="form-control" ng-model="object.LinkTypeID" ng-options="option.LinkTypeID as option.LinkTypeName for option in LinkTypes" title="Please select at least one" required></select><input type="hidden" name="LinkTypeID" ng-value="object.LinkTypeID" /></div></div>
+                                                    <div ng-show="isAdd && !isEdit" class="form-group"><label class="col-sm-3 control-label">App</label><div class="col-sm-9"><select id="LinkTypeID" class="form-control" ng-model="object.LinkTypeID" ng-options="option.LinkTypeID as option.LinkTypeName for option in LinkTypes" title="Please select at least one" required></select><input type="hidden" name="LinkTypeID" ng-value="object.LinkTypeID" /></div></div>
+                                                    <div class="form-group"><label class="col-sm-3 control-label">Link<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ExternalLinkURL" ng-model="object.ExternalLinkURL" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                                                </div>
+                                            </div>
+                                            <footer class="panel-footer">
+                                                <div class="row">
+                                                    <div class="col-sm-9 col-sm-offset-3">
+                                                        <button class="btn btn-primary">Submit</button>
+                                                        <button type="reset" class="button button_left button_js kill_the_icon resetbtn">Reset</button>
+                                                        <a class="btn btn-default" ng-click="redirect()">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div uib-accordion-group class="panel-default" heading="{{'SocialConnection' | translate}}">
+                                <div ng-controller="listprofileProfileSocialNetworkController as vm">
+                                    <div ng-show="isList">
+                                        <h3 class="admin box-title m-b-0"><button class="btn btn-success" ng-click="addNew()">+ {{'SocialNetwork' | translate}}</button></h3>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="basicTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:20%">{{'Actions' | translate}}</th>
+                                                        <th style="width:29%">{{'SocialNetwork' | translate}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="obj in items">
+                                                        <td class="v-align-middle">
+                                                            <div class="checkbox ">
+                                                                <button class="btn btn-warning" ng-click="edit(obj)"><span class="button_icon"><i class="fa fa-pencil"></i></span></button>
+                                                                <button class="btn btn-danger" ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></button>
+                                                            </div>
+                                                        </td>
+                                                        <td class="v-align-middle ">
+                                                            <p><a href="{{obj.ProfileSocialNetworkURL}}">{{obj.SocialNetwork.SocialNetworkName}}</a></p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isAdd">
+                                        <form id="form" role="form" novalidate angular-validator name="addAddressForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                                            <h4 class="mb-xlg">{{'SocialNetworkInformation' | translate}}</h4>
+                                            <div class="panel-body">
+                                                <div ng-show="isAdd && !isEdit" class="form-group"><label class="col-sm-3 control-label">{{'SocialNetwork' | translate}}</label><div class="col-sm-9"><select id="SocialNetworkID" class="form-control" ng-model="object.SocialNetworkID" ng-options="option.SocialNetworkID as option.SocialNetworkName for option in SocialNetworks" title="Please select at least one" required></select><input type="hidden" name="SocialNetworkID" ng-value="object.SocialNetworkID" /></div></div>
+                                                <div ng-show="isAdd && isEdit" class="form-group"><label class="col-sm-3 control-label">{{'SocialNetwork' | translate}}</label><div class="col-sm-9"><select disabled id="SocialNetworkID" class="form-control" ng-model="object.SocialNetworkID" ng-options="option.SocialNetworkID as option.SocialNetworkName for option in SocialNetworks" title="Please select at least one" required></select><input type="hidden" name="SocialNetworkID" ng-value="object.SocialNetworkID" /></div></div>
+                                                <div class="form-group"><label class="col-sm-3 control-label">{{'Link' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ProfileSocialNetworkURL" ng-model="object.ProfileSocialNetworkURL" validate-on="blur" class="form-control" placeholder="eg.: http://www.website.com" required /></div></div>
+                                            </div>
+                                            <footer class="panel-footer">
+                                                <div class="row">
+                                                    <div class="col-sm-9 col-sm-offset-3">
+                                                        <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                                        <button type="reset" class="btn btn-warning button_left button_js kill_the_icon resetbtn">{{'Reset' | translate}}</button>
+                                                        <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div uib-accordion-group class="panel-default" heading="My Official Connections">
+                                <section class="panel" ng-controller="listprofileConnectionController as vm">
+                                    <div>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Requested By</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="obj in items">
+                                                    <td><a href="{{obj.Profile.ProfileID}}">{{obj.Profile.ProfileFullname}}</a></td>
+                                                    <td><button class="btn btn-danger dangerdelete" style="margin-bottom: 0px;" ng-click="edit(obj)" ng-show="obj.ConnectStatus">-</button><button class="button button_yellow button_js activeconnection" ng-click="edit(obj)" style="margin-bottom: 0px;" ng-show="!obj.ConnectStatus">+</button></td>
+                                                    <td class="actions">
+                                                        <a ng-click="delete(obj)"><span class="button_icon"><i class="icon-trash-line"></i></span></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>-->
+                            <div uib-accordion-group class="panel-default" heading="{{'MyWebImages' | translate}}">
+                                <section class="panel" ng-controller="editAdminProfileUploadController as vm">
+                                    <div>
+                                        <div class="panel-body">
+                                            <h4 class="mb-xlg">{{'CoverImage' | translate}}</h4>
+                                            <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4 class="mb-xlg">{{'MenuSlider' | translate}}</h4>
+                                            <ng-dropzone class="dropzone" options="dzMiniImagesOptions" callbacks="dzMiniImagesCallbacks" methods="dzMiniImagesMethods"></ng-dropzone>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4 class="mb-xlg">{{'MicroAppCover' | translate}}</h4>
+                                            <ng-dropzone class="dropzone" options="dzImagesOptions" callbacks="dzImagesCallbacks" methods="dzImagesMethods"></ng-dropzone>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4 class="mb-xlg">{{'MicroAppSplashScreen' | translate}}</h4>
+                                            <ng-dropzone class="dropzone" options="dzDescriptionImagesOptions" callbacks="dzDescriptionImagesCallbacks" methods="dzDescriptionImagesMethods"></ng-dropzone>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </uib-accordion>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+<!-- START JUMBOTRON -->

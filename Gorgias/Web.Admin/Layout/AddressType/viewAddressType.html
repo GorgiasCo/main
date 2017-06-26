@@ -1,0 +1,54 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addAddressTypeForm" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">View Address Type</h2>
+                            <p class="panel-subtitle">
+
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AddressTypeName" ng-model="object.AddressTypeName" validate-on="blur" class="form-control" disabled placeholder="eg.: John Doe" required /></div></div>
+
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="AddressTypeStatus" ng-model="object.AddressTypeStatus" validate-on="blur" value="AddressTypeStatus" disabled type="checkbox" name="for[]" /><label for="AddressTypeStatus">Status</label></div></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <a class="btn btn-default" ng-href="/addresstype">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                        </div>
+                        <h2 class="panel-title">Image</h2>
+                    </header>
+                    <div class="panel-body">
+                    </div>
+                </section>
+            </div>
+
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

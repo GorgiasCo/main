@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="Data Source=YASSER-PC;Initial Catalog=Gorgias;Integrated Security=True" />
+  </variables>
+  <propertySets>
+    <propertySet name="mainV2" template="E:\Yasser\MyScreen\Lovely-Code\mainV2.cst">
+      <property name="SampleStringProperty">SomeValue</property>
+      <property name="SampleBooleanProperty">True</property>
+      <property name="EntityName">GorgiasEntities</property>
+      <property name="SourceDatabase">
+        <connectionString>$(ConnectionString1)</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+      </property>
+      <property name="SolutionName">Gorgias</property>
+      <property name="Location">C:\Users\yasser\Documents\Visual Studio 2015\Projects\Gorgias\Gorgias</property>
+    </propertySet>
+  </propertySets>
+</codeSmith>

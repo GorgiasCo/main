@@ -1,0 +1,26 @@
+﻿<div class="col-md-6" ng-controller="detailController as vm">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a>
+            </div>
+
+            <h2 class="panel-title">City 's List {{vm.message}}</h2>
+        </header>
+        <div class="panel-body">
+            <ul>
+                <li ng-repeat="obj in account"><span>{{obj}}</span></li>
+            </ul>
+            <h3 class="box-title m-b-0"><a class="btn btn-success" href="City-detail.html">New</a></h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped mb-none" id="datatable-default" datatable="" dt-instance="vm.dtInstance" dt-options="dtOptions" dt-columns="dtColumns">
+                   
+                </table>
+            </div>
+        </div>
+    </section>
+</div>         
+
+    
+            

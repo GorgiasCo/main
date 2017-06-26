@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="gorgias__gorgias-me" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\MyWorks-2016\\YAP\\23-12-2016-API-Design-Office\\Gorgias\\Web\.Gorgias\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\MyWorks-2016\\YAP\\23-12-2016-API-Design-Office\\Gorgias\\Web\.Gorgias\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>

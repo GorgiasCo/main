@@ -1,0 +1,41 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addTagForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Edit Tag</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="TagName" ng-model="object.TagName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Is Primary</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="TagIsPrimary" ng-model="object.TagIsPrimary" validate-on="blur" value="TagIsPrimary" type="checkbox" name="for[]" /><label for="TagIsPrimary">Primary</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Weight<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="TagWeight" ng-model="object.TagWeight" validate-on="blur" class="form-control" placeholder="eg.: 10" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="TagStatus" ng-model="object.TagStatus" validate-on="blur" value="TagStatus" type="checkbox" name="for[]" /><label for="TagStatus">Status</label></div></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <a class="btn btn-default" ng-href="/tag">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

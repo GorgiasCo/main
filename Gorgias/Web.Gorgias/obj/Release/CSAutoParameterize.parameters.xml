@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="GorgiasEntities-Web.config Connection String" description="GorgiasEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/gorgiasModel.csdl|res://*/gorgiasModel.ssdl|res://*/gorgiasModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Server=tcp:gorgias.database.windows.net,1433;Initial Catalog=Gorgias;Persist Security Info=False;User ID=charlsvityap;Password=Octove@2015;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Yasser\\YAP\\18-04-2017-Office-API-Database\\Gorgias\\Web\.Gorgias\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GorgiasEntities']/@connectionString" />
+  </parameter>
+  <parameter name="AuthContext-Web.config Connection String" description="AuthContext Connection String used in web.config by the application to access the database." defaultValue="AuthContext_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Yasser\\YAP\\18-04-2017-Office-API-Database\\Gorgias\\Web\.Gorgias\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AuthContext']/@connectionString" />
+  </parameter>
+</parameters>

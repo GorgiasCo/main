@@ -1,0 +1,90 @@
+﻿<div id="Wrapper">
+    <div class="mfn-main-slider">
+        <div class="section dark" id="featured" style="height: 100vh;background-color:; background-image:url(content/images/loginbg.jpg); background-repeat:no-repeat; background-position:center top; background-size:cover; -webkit-background-size:cover;background-attachment:fixed;" data-stellar-background-ratio="1">
+            <div class="section_wrapper clearfix" style="height: 100vh;">
+                <div class="items_group clearfix" style="height: 100vh;">
+                    <!--When you receive the email, click on the link inside to reset your password.
+
+    If you don't see the email after a few minutes, check your spam folder.-->
+                    <div id="custom-modal" style="color:#000000;">
+                        <div id="overlay">
+                            <div ng-if="loginmode==1" class="login-layout">
+                                <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+                                    <img src="/content/images/gorgias_logo.png" width="50" height="50" class="login-gorgias-logo">
+                                    <label class="login-label">Email:</label>
+                                    <input type="email" style="text-align:left;" ng-model="loginData.userName" placeholder="Email Address" required />
+                                    <div style="float:none;">
+                                        <label class="login-label" style="float:left;">Password:</label><label class="login-label forget-password" style="float:right;"><a ng-click="toggleLayout(2)">Lost Password?</a></label>
+                                    </div>
+                                    <input type="password" style="text-align:left;" ng-model="loginData.password" placeholder="Password" required />
+                                    <button class="btn btn-default" ng-disabled="userForm.$invalid" type="submit">Sign In</button>
+                                    <!--<a ng-click="close()">Cancle</a>-->
+                                    <div class="login-action error-message">
+                                        {{loginMessage}}
+                                    </div>
+                                    <!--<div class="login-action">
+                                        Do not have an account? <a class="forget-password" ng-click="toggleLayout(3)">Sign Up!</a>
+                                    </div>-->
+                                </form>
+                            </div>
+                            <div ng-if="loginmode==2" class="login-layout">
+                                <form name="userForgetForm" ng-submit="submitForgetForm(userForgetForm.$valid)" novalidate>
+                                    <img src="/content/images/gorgias_logo.png" width="50" height="50" class="login-gorgias-logo">
+                                    <div style="float:none;">
+                                        <label class="login-label" style="float:left;">Email:</label><label class="login-label forget-password" style="float:right;"><a ng-click="toggleLayout(1)">Sign In</a></label>
+                                    </div>
+                                    <input type="email" style="text-align:left;" ng-model="forget.forgetusername" placeholder="Email Address" required />
+                                    <button class="btn btn-default" ng-disabled="userForgetForm.$invalid" type="submit">Reset</button>
+                                    <!--<a ng-click="close()">Cancle</a>-->
+                                    <div class="login-action error-message">
+                                        {{forgetMessageResult}}
+                                    </div>
+                                </form>
+                            </div>
+                            <div ng-if="loginmode==3" class="login-layout">
+                                <form ng-if="!successRegistration" name="userRegisterForm" ng-submit="submitRegisterForm(userRegisterForm.$valid)" novalidate>
+                                    <img src="/content/images/gorgias_logo.png" width="50" height="50" class="login-gorgias-logo">
+                                    <label class="login-label">Fullname:</label>
+                                    <input type="text" style="text-align:left;" ng-model="registerModel.UserFullname" placeholder="Fullname" required />
+                                    <label class="login-label">Email:</label>
+                                    <input type="email" style="text-align:left;" ng-model="registerModel.UserName" placeholder="Email Address" required />
+                                    <div>
+                                        <div style="width:49%;float:left;margin-right:3px;">
+                                            <label class="login-label">Password:</label>
+                                            <input type="password" style="text-align:left;" ng-model="registerModel.Password" placeholder="Password" required />
+                                        </div>
+                                        <div style="width:49%;float:left;">
+                                            <label class="login-label">Profile Type:</label>
+                                            <select id="ProfileTypeID" class="form-control" ng-model="registerModel.ProfileTypeID" ng-options="option.ProfileTypeID as option.ProfileTypeName for option in ProfileTypes" title="Please select at least one" required></select>
+                                        </div>
+                                    </div>
+                                    <label class="login-label" style="clear:both;">Upload Profile Image:</label>
+                                    <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                                    <div style="margin-top:7px;">
+                                        <button class="btn btn-default" ng-disabled="userRegisterForm.$invalid" type="submit">Register</button>
+                                        <a ng-click="close()">Cancel</a>
+                                    </div>
+                                    <div class="login-action error-message">
+                                        <span ng-repeat="obj in registerMessageResults">{{obj}}</span>
+                                    </div>
+                                    <div class="login-action">
+                                        Do you have an account already? <a class="forget-password" ng-click="toggleLayout(1)">Sign In</a>
+                                    </div>
+                                </form>
+                                <div ng-if="successRegistration">
+                                    <img src="/content/images/gorgias_logo.png" width="50" height="50" class="login-gorgias-logo">
+                                    <div class="login-action">
+                                        Congragulation! Now you are one of the gorgias member. Please activate your membership from your email. Have fun with other Georgias Members.
+                                    </div>
+                                    <button class="btn btn-default" style="margin-top:5px;" ng-click="close()">Done</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="fade"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

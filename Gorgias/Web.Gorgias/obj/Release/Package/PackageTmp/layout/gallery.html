@@ -1,0 +1,165 @@
+﻿<side-Bar profileurl="ProfileURL" profileid="ProfileID" subscribemode="SubscribeMode" profiletypeid="ProfileTypeID" slidermode="1" activemenu="2"></side-Bar>
+<!--<div class="spinnerLoading" ng-show="!isloaded">
+    <div class="spinner"></div>class="content-mobile"
+</div>-->
+<div id="loading-bar-container"></div>
+<div id="Wrapper">
+    <!-- Main Content -->
+    <div id="Content" >
+        <div class="content_wrapper clearfix" id="top">
+            <div class="sections_group">
+                <div class="entry-content">
+                    <div class="section" style="padding-top:50px; padding-bottom:40px;background-color:#f0f0f0;">
+                        <div class="section_wrapper clearfix web-album-padding">
+                            <div class="column one no-margin-column">
+                                <h2 class="title-main-gallery lightFont" style="margin-bottom:27px;">Galleries</h2>
+                                <div id="appcategorylist" class="btn-group">
+                                    <ul class="horizontal-list">
+                                        <slick class="slider" dots="false" slides-to-show="{{featuredSliderNumber}}" touch-move="true" slides-to-scroll="3" settings="slickMenu" ng-if="categoriesLoaded" init-onload="true" data="categories">
+                                            <li><label class="btn btn-primary" ng-model="CategoryID" value="" uib-btn-radio="''" ng-change="$parent.sort(0)">All</label></li>
+                                            <li ng-repeat="obj in categories"><label class="btn btn-primary" ng-model="$parent.CategoryID" value="{{obj.CategoryID}}" uib-btn-radio="'{{obj.CategoryID}}'" ng-change="$parent.sort(obj.CategoryID)">{{obj.CategoryName}}</label></li>
+                                        </slick>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--<div class="column one column_column low-margin">
+                                <!-- Animated area -->
+                            <!--<div class="animate" data-anim-type="fadeInUp">-->
+                            <div class="column one no-margin-column" style="margin-bottom:27px;">
+                                <div class="btn-group" id="applistsort" style="float: right;margin:5px 0px;">
+                                    <div class="btn-group">
+                                        <ul class="horizontal-list">
+                                            <li><label class="btn btn-primary active" ng-model="OrderType" value="1" uib-btn-radio="1">Latest</label></li>
+                                            <li><label class="btn btn-primary" ng-model="OrderType" value="2" uib-btn-radio="2">Trending</label></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="(CategoryID == 0 && isloaded)" class="column one-third column_zoom_box no-margin-column" ng-repeat="obj in albums">
+                                <div class="zoom_box round-box">
+                                    <a ng-click="redirectToSlideshow(obj.AlbumID)">
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}" default-image="Content/Images/preloader.gif" fallback-image="{{obj.AlbumCover}}" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div ng-show="(CategoryID==1 && isloaded)" class="column one-third column_zoom_box no-margin-column" ng-repeat="obj in albums">
+                                <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                                <div class="zoom_box16 round-box">
+                                    <a ng-click="redirectToSlideshow(obj.AlbumID)">
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}" default-image="Content/Images/preloader.gif" fallback-image="{{obj.AlbumCover}}" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div ng-show="CategoryID==2 && isloaded" class="column one-third column_zoom_box no-margin-column" ng-repeat="obj in albums">
+                                <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                                <div class="zoom_box round-box">
+                                    <a ng-click="redirectToSlideshow(obj.AlbumID)">
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}" default-image="Content/Images/preloader.gif" fallback-image="{{obj.AlbumCover}}" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div ng-show="CategoryID==4 && isloaded" class="column one no-margin-column-mvs" style="background-color:#ffffff;" ng-repeat="obj in albums">
+                                <div class="column two-third column_zoom_box no-content-padding no-margin-column-mvs">
+                                    <div class="zoom_box16-press round-box">
+                                        <a ng-click="redirectToSlideshow(obj.AlbumID)">
+                                            <div class="photo round-box">
+                                                <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}" default-image="Content/Images/preloader.gif" fallback-image="{{obj.AlbumCover}}" alt="{{obj.AlbumName}}">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column one-third" style="padding-top:19px;">
+                                    <span class="title press-title">{{obj.AlbumName}}</span><br />
+                                    <span class="gallery-mvs-date">{{obj.AlbumDateCreated | date : "longDate"}}</span>
+                                    <!--<div style="float: right;margin-right: 15px;margin-top:67px;">
+                                        <a href="#" style="font-size:36px;color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:50px;">20</a>
+                                    </div>-->
+                                </div>
+                            </div>
+                            <div ng-show="CategoryID>=5 && isloaded" class="column one-third column_zoom_box no-margin-column" ng-repeat="obj in albums">
+                                <div class="zoom_box round-box">
+                                    <a ng-click="redirectToSlideshow(obj.AlbumID)">
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}" default-image="Content/Images/preloader.gif" fallback-image="{{obj.AlbumCover}}" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--<div class="column one-third" style="padding-top:50px;">class="column one no-margin-column-mvs"
+                                    <span class="title" style="font-size:56px;">{{obj.AlbumName}}</span><br />
+                                    <span class="gallery-mvs-date">{{obj.AlbumDateCreated | date : "longDate"}}</span>
+                                </div>
+                                <div class="column two-third-paper column_zoom_box no-content-padding no-margin-column-mvs">
+                                    <div class="zoom_box16 round-box">
+                                        <a ng-click="redirectToSlideshow(obj.AlbumID)">
+                                            <div class="photo round-box">
+                                                <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}" default-image="Content/Images/preloader.gif" fallback-image="{{obj.AlbumCover}}" alt="{{obj.AlbumName}}">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div style="float: right;margin-right: 15px;margin-top:67px;">
+                                    <a href="#" style="font-size:36px;color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:50px;">20</a> 
+                                </div>-->
+                            </div>
+                            <div ng-show="finishedList && isloaded" class="loadmore-block">
+                                <a ng-click="loadmore()" class="loadmore">View all albums</a>
+                            </div>
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--End of Official Brands-->
+            <div class="section " style="padding-top:30px; padding-bottom:0px; background-color:#DDDDE1">
+                <div class="section_wrapper clearfix">
+                    <!--<div class="items_group clearfix">-->
+                    <div class="column one widgets_wrapper web-contact-padding" style="text-align:center;margin: 0 1% 15px;">
+                        <button ng-click="contact()" class="button-wide-transparent">Contact {{Profile.ProfileFullname}}</button>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+
+            <div class="section the_content">
+                <div class="section_wrapper">
+                    <div class="the_content_wrapper"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer-->
+<footer id="Footer" class="clearfix">
+    <div class="footer_copy" id="socialbar" style="background-color:#54595e">
+        <div class="container">
+            <div class="section">
+                <div class="column one content_wrapper center-align">
+                    <!--Social info area-->
+                    <ul class="social">
+                        <li ng-repeat="objSocialNetwork in SocialNetworks" class="{{objSocialNetwork.SocialNetworkName}}">
+                            <a ng-click="redirectToSocialMedia(objSocialNetwork.ProfileSocialNetworkURL)" title="{{objSocialNetwork.SocialNetworkDescription}}"><i class="{{objSocialNetwork.SocialNetworkDescription}}"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer copyright-->
+    <div class="footer_copy" style="background-color:#a5a8a7;">
+        <div class="container">
+            <div class="column one">
+                <a id="back_to_top" ng-click="goToTop()" class="topbutton button_left button_js gototop" style="position:absolute;"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>
+                <div class="copyright font-color-white" style="text-align:center; font-size:13px;">
+                    {{Profile.ProfileFullname}} Copyrights &copy; 2017
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

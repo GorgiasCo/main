@@ -1,0 +1,48 @@
+﻿<div class="col-md-6">
+    <form id="form" role="form" novalidate angular-validator name="addCategoryForm" angular-validator-submit="AddObject()" class="form-horizontal">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                    <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                </div>
+
+                <h2 class="panel-title">Edit Category</h2>
+                <p class="panel-subtitle">
+                    Please fill required information.
+                </p>
+            </header>
+            <div class="panel-body">
+                <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="CategoryName" ng-model="object.CategoryName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="CategoryStatus" ng-model="object.CategoryStatus" validate-on="blur" value="CategoryStatus" type="checkbox" name="for[]" required /><label for="CategoryStatus">Status</label></div></div></div>
+
+                <div class="form-group"><label class="col-sm-3 control-label">Description</label><div class="col-sm-9"><textarea rows="5" name="CategoryDescription" ng-model="object.CategoryDescription" validate-on="blur" class="form-control" placeholder="Describe Something..."></textarea></div></div>
+                <div class="form-group"><label class="col-sm-3 control-label">Parent ID</label><div class="col-sm-9"><input type="text" name="CategoryParentID" ng-model="object.CategoryParentID" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-default">Reset</button>
+                        <button class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </form>
+</div>
+<div class="col-md-6">
+    <section class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+            </div>
+
+            <h2 class="panel-title">File Upload Drag'n Drop</h2>
+        </header>
+        <div class="panel-body">
+            <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+        </div>
+    </section>
+</div>

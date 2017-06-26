@@ -1,0 +1,319 @@
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\csc.exe
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Web.Admin.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Web.Admin.pdb
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+C:\Users\yasser\documents\visual studio 2015\Projects\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\csc.exe
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Web.Admin.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Web.Admin.pdb
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+D:\MyWorks-2016\YAP\09-12-2016-API-OFFICE\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\csc.exe
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Web.Admin.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Web.Admin.pdb
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+C:\Yasser\YAP\10-03-2017-API-Design-Database-Office\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\csc.exe
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Web.Admin.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Web.Admin.pdb
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+C:\Yasser\YAP\17-03-2017-API-Design-vLast-Office\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\csc.exe
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Web.Admin.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Web.Admin.pdb
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+E:\Yasser\YAP\23-03-2017-Before-Mob-App\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\csc.exe
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Web.Admin.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Web.Admin.pdb
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+E:\Yasser\YAP\03-04-2017-Hottest-Home\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\csc.exe
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Web.Admin.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Web.Admin.pdb
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+E:\Yasser\YAP\11-04-2017-Homr-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\csc.exe
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Web.Admin.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Web.Admin.pdb
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+C:\Yasser\YAP\14-04-2017-Office-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\csc.exe
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Web.Admin.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Web.Admin.pdb
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\csc.exe
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Web.Admin.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Web.Admin.pdb
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\obj\Release\Web.Admin.csprojResolveAssemblyReference.cache
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\obj\Release\Web.Admin.dll
+E:\Yasser\YAP\26-06-2017-Design-Admin\Gorgias\Web.Admin\obj\Release\Web.Admin.pdb

@@ -1,0 +1,62 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addAddressForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Add Address</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AddressName" ng-model="object.AddressName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="AddressStatus" ng-model="object.AddressStatus" validate-on="blur" value="AddressStatus" type="checkbox" name="for[]" /><label for="AddressStatus">Status</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Tel<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AddressTel" ng-model="object.AddressTel" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Fax</label><div class="col-sm-9"><input type="text" name="AddressFax" ng-model="object.AddressFax" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Zip Code</label><div class="col-sm-9"><input type="text" name="AddressZipCode" ng-model="object.AddressZipCode" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Address<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AddressAddress" ng-model="object.AddressAddress" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Email</label><div class="col-sm-9"><input type="email" name="AddressEmail" ng-model="object.AddressEmail" validate-on="blur" class="form-control" placeholder="eg.: John Doe" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">City</label><div class="col-sm-9"><select id="CityID" class="form-control" ng-model="object.CityID" ng-options="option.CityID as option.CityName for option in Cities" title="Please select at least one" required></select><input type="hidden" name="CityID" ng-value="object.CityID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Profile</label><div class="col-sm-9"><select id="ProfileID" class="form-control" ng-model="object.ProfileID" ng-options="option.ProfileID as option.ProfileFullname for option in Profiles" title="Please select at least one" required></select><input type="hidden" name="ProfileID" ng-value="object.ProfileID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Address Type</label><div class="col-sm-9"><select id="AddressTypeID" class="form-control" ng-model="object.AddressTypeID" ng-options="option.AddressTypeID as option.AddressTypeName for option in AddressTypes" title="Please select at least one" required></select><input type="hidden" name="AddressTypeID" ng-value="object.AddressTypeID" /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <a class="btn btn-default" ng-href="/address">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                        </div>
+                        <h2 class="panel-title">File Upload Drag'n Drop</h2>
+                    </header>
+                    <div class="panel-body">
+                        <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

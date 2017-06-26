@@ -1,0 +1,49 @@
+﻿<div id="Wrapper">
+    <div class="mfn-main-slider">
+        <div class="section dark" id="featured" style="height: 100vh;background-color:; background-image:url(https://gorgiasasia.blob.core.windows.net/images/webcover-{{Profile.ProfileID}}?timestamp={{timestamp}}); background-repeat:no-repeat; background-position:center top; background-size:cover; -webkit-background-size:cover;background-attachment:fixed;" data-stellar-background-ratio="1">
+            <div class="section_wrapper clearfix" style="height: 100vh;">
+                <div class="items_group clearfix" style="height: 100vh;">
+                    <div id="custom-modal">
+                        <div id="overlay" ng-if="!isNotValid">
+                            <div class="login-layout" ng-if="!isInstruction">
+                                <div class="zoom_box round-box-about" style="border:5px solid #ffffff;width: 33%;background: #000;margin: 0px auto;">
+                                    <div class="photo round-box-about">
+                                        <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/profile-{{Profile.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{Profile.ProfileImage}}?timestamp={{timestamp}}" alt="">
+                                    </div>
+                                </div>
+                                <h3 style="color:#de0083;">{{Profile.ProfileFullname}}</h3>
+                                <div class="login-action" style="color:#888888;line-height: 19px;">
+                                    {{DownloadProfileMessage}}
+                                </div>
+                                <button class="btn btn-default" ng-click="toggleInstruction()">{{accessToAppMessage}}</button>
+                            </div>
+                            <div class="login-layout" ng-if="isInstruction">
+                                <div class="zoom_box round-box-about" style="border:5px solid #ffffff;width: 33%;background: #000;margin: 0px auto;">
+                                    <div class="photo round-box-about">
+                                        <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/profile-{{Profile.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{Profile.ProfileImage}}?timestamp={{timestamp}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="login-action" style="color:#888888;line-height: 19px;">
+                                    <span ng-if="!isApple">
+                                        <b style="color:#000000;">Android</b>, To add this app, open <img src="content/images/android-home-gorgias.png" width="25" /> the browser option menu and tap on <strong style="color:#de0083;font-weight:800;">Add to homescreen</strong>. <small>The menu can be accessed by pressing the menu hardware button if your device has one, or by tapping the top right menu icon <img src="content/images/android-home-gorgias.png" width="25" /></small>
+                                    </span>
+                                    <br /><br />
+                                    <span ng-if="isApple">
+                                        <b style="color:#000000;">iOS</b>, To add this app: tap <img src="content/images/ios-home-gorgias.png" width="21" /> and then <strong style="color:#de0083;font-weight:800;">Add to Home Screen</strong>.
+                                    </span>
+                                </div>
+                                <!--<button class="btn btn-default" ng-click="toggleInstruction()">Access to Private App</button>-->
+                            </div>
+                        </div>
+                        <div id="overlay" ng-if="isNotValid">
+                            <div class="login-action" style="color:#888888;line-height: 19px;">
+                                The page is not valid.
+                            </div>
+                        </div>
+                        <div id="fade"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+﻿Khodaya Mamnonam.
+My dynamic content here: "SomeValue"
+Call a script method: 
+My conditional content here.
+
+
+           <li><a href="__MigrationHistory.html">__MigrationHistory</a></li>           
+
+
+           <li><a href="Address.html">Address</a></li>           
+
+
+           <li><a href="AddressType.html">AddressType</a></li>           
+
+
+           <li><a href="Album.html">Album</a></li>           
+
+
+           <li><a href="AspNetRoles.html">AspNetRoles</a></li>           
+
+
+           <li><a href="AspNetUserClaims.html">AspNetUserClaims</a></li>           
+
+
+           <li><a href="AspNetUserLogins.html">AspNetUserLogins</a></li>           
+
+
+           <li><a href="AspNetUserRoles.html">AspNetUserRoles</a></li>           
+
+
+           <li><a href="AspNetUsers.html">AspNetUsers</a></li>           
+
+
+           <li><a href="Attribute.html">Attribute</a></li>           
+
+
+           <li><a href="Category.html">Category</a></li>           
+
+
+           <li><a href="City.html">City</a></li>           
+
+
+           <li><a href="Clients.html">Clients</a></li>           
+
+
+           <li><a href="Connection.html">Connection</a></li>           
+
+
+           <li><a href="Content.html">Content</a></li>           
+
+
+           <li><a href="Country.html">Country</a></li>           
+
+
+           <li><a href="ExternalLink.html">ExternalLink</a></li>           
+
+
+           <li><a href="Feature.html">Feature</a></li>           
+
+
+           <li><a href="FeaturedSponsor.html">FeaturedSponsor</a></li>           
+
+
+           <li><a href="Industry.html">Industry</a></li>           
+
+
+           <li><a href="LinkType.html">LinkType</a></li>           
+
+
+           <li><a href="Message.html">Message</a></li>           
+
+
+           <li><a href="Profile.html">Profile</a></li>           
+
+
+           <li><a href="ProfileAttribute.html">ProfileAttribute</a></li>           
+
+
+           <li><a href="ProfileSocialNetwork.html">ProfileSocialNetwork</a></li>           
+
+
+           <li><a href="ProfileTag.html">ProfileTag</a></li>           
+
+
+           <li><a href="ProfileType.html">ProfileType</a></li>           
+
+
+           <li><a href="Recipient.html">Recipient</a></li>           
+
+
+           <li><a href="RefreshTokens.html">RefreshTokens</a></li>           
+
+
+           <li><a href="RequestType.html">RequestType</a></li>           
+
+
+           <li><a href="SocialNetwork.html">SocialNetwork</a></li>           
+
+
+           <li><a href="SubscriptionType.html">SubscriptionType</a></li>           
+
+
+           <li><a href="Tag.html">Tag</a></li>           
+
+
+           <li><a href="Theme.html">Theme</a></li>           
+
+
+           <li><a href="User.html">User</a></li>           
+
+
+           <li><a href="UserProfile.html">UserProfile</a></li>           
+
+
+           <li><a href="UserRole.html">UserRole</a></li>           
+
+
+
+
+            
+
+

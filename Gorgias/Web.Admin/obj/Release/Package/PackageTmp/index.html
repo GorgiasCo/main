@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+<html ng-app="heroesApp" class="fixed">
+<head>
+    <base href="/">
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+
+    <title>Gorgias Administration</title>
+    <meta name="keywords" content="Gorgias" />
+    <meta name="description" content="Gorgias Portal">
+    <meta name="author" content="Gorgias Asia">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link href="assets/stylesheets/ui-bootstrap-2.2.0-csp.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+    <link href="assets/stylesheets/loading-bar.css" rel="stylesheet" />
+    <!-- Specific Page Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="assets/vendor/jquery-ui/jquery-ui.theme.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="assets/vendor/morris.js/morris.css" />
+
+    <!-- Specific Page Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/select2/css/select2.css" />
+    <link rel="stylesheet" href="assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
+
+    <link rel="stylesheet" href="assets/vendor/dropzone/basic.css" />
+    <link rel="stylesheet" href="assets/vendor/dropzone/dropzone.css" />
+    <link href="assets/stylesheets/toastr.css" rel="stylesheet" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+
+    <link href="assets/stylesheets/datetimepicker.css" rel="stylesheet" />
+
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.js"></script>
+
+</head>
+<body>
+
+    <section class="body" >
+
+        <div ng-controller="mainController" ng-show="isValid">
+            <!-- start: header -->
+            <header class="header">
+                <div class="logo-container">
+                    <a href="../" class="logo">
+                        <img src="assets/images/logo.png" height="35" alt="Porto Admin" />
+                    </a>
+                    <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                    </div>
+                </div>
+
+                <!-- start: search & user box -->
+                <div class="header-right">
+                    <!--<ul class="notifications">
+                        <li>
+                            <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <span class="badge">4</span>
+                            </a>
+
+                            <div class="dropdown-menu notification-menu">
+                                <div class="notification-title">
+                                    <span class="pull-right label label-default">230</span>
+                                    Messages
+                                </div>
+
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <figure class="image">
+                                                    <img src="assets/images/!sample-user.jpg" alt="Joseph Doe Junior" class="img-circle" />
+                                                </figure>
+                                                <span class="title">Joseph Doe</span>
+                                                <span class="message">Lorem ipsum dolor sit.</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <figure class="image">
+                                                    <img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle" />
+                                                </figure>
+                                                <span class="title">Joseph Junior</span>
+                                                <span class="message truncate">Truncated message. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet lacinia orci. Proin vestibulum eget risus non luctus. Nunc cursus lacinia lacinia. Nulla molestie malesuada est ac tincidunt. Quisque eget convallis diam, nec venenatis risus. Vestibulum blandit faucibus est et malesuada. Sed interdum cursus dui nec venenatis. Pellentesque non nisi lobortis, rutrum eros ut, convallis nisi. Sed tellus turpis, dignissim sit amet tristique quis, pretium id est. Sed aliquam diam diam, sit amet faucibus tellus ultricies eu. Aliquam lacinia nibh a metus bibendum, eu commodo eros commodo. Sed commodo molestie elit, a molestie lacus porttitor id. Donec facilisis varius sapien, ac fringilla velit porttitor et. Nam tincidunt gravida dui, sed pharetra odio pharetra nec. Duis consectetur venenatis pharetra. Vestibulum egestas nisi quis elementum elementum.</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <figure class="image">
+                                                    <img src="assets/images/!sample-user.jpg" alt="Joe Junior" class="img-circle" />
+                                                </figure>
+                                                <span class="title">Joe Junior</span>
+                                                <span class="message">Lorem ipsum dolor sit.</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <figure class="image">
+                                                    <img src="assets/images/!sample-user.jpg" alt="Joseph Junior" class="img-circle" />
+                                                </figure>
+                                                <span class="title">Joseph Junior</span>
+                                                <span class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet lacinia orci. Proin vestibulum eget risus non luctus. Nunc cursus lacinia lacinia. Nulla molestie malesuada est ac tincidunt. Quisque eget convallis diam.</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    <hr />
+
+                                    <div class="text-right">
+                                        <a href="#" class="view-more">View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>-->
+
+                    <span class="separator"></span>
+
+                    <div id="userbox" class="userbox">
+                        <a href="#" data-toggle="dropdown">
+                            <!--<figure class="profile-picture">
+                                <img src="assets/images/!logged-user.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
+                            </figure>-->
+                            <div class="profile-info" data-lock-name="Administration" data-lock-email="admin">
+                                <span class="name">Administrator</span>
+                            </div>
+                            <i class="fa custom-caret"></i>
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled">
+                                <li class="divider"></li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" ng-click="logOut()"><i class="fa fa-power-off"></i>Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- end: search & user box -->
+            </header>
+            <!-- end: header -->
+            <side-Bar-Admin ng-show="isValid"></side-Bar-Admin>
+        </div>
+        <div ng-view></div>
+    </section>
+    <script src="assets/vendor/jquery/jquery.js"></script>
+    <!-- Datatables Page Vendor -->
+    <script src="assets/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+    <script src="assets/vendor/jquery-datatables/media/js/dataTables.bootstrap4.js"></script>
+
+    <script src="scripts/moment.js"></script>
+    
+    <script src="Scripts/angular.js"></script>
+    
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyDCCM9yE0TtH90XCy5-kjPrh7SRQRPkZhA">
+    </script>    <!-- UI-Router -->
+    <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <!--<script src="scripts/angular-ui-router.js"></script>-->
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+    <script src="scripts/angular-validator.js"></script>
+    <!--<script src="Scripts/authComplete.js"></script>-->
+    <script src="scripts/angular-isotope.js"></script>
+    <script src="scripts/angular-uuid.js"></script>
+
+    <script src="assets/javascripts/datetimepicker.js"></script>
+    <script src="assets/javascripts/datetimepicker.templates.js"></script>
+
+    <script src="Scripts/datatables/angular-datatables.js"></script>
+    <script src="Scripts/datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/datatables/angular-datatables.directive.js"></script>
+    <script src="scripts/loading-bar.js"></script>
+    <script src="scripts/ng-map.min.js"></script>
+    <!--<script src="Scripts/loading-bar.min.js"></script>-->
+    <!-- Vendor -->
+
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-sanitize.min.js"></script>-->
+    <script src="scripts/angular-sanitize.min.js"></script>
+
+    <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+    <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="assets/vendor/jquery-placeholder/jquery-placeholder.js"></script>
+
+    <script src="assets/vendor/isotope/isotope.js"></script>
+
+
+    <!-- Specific Page Vendor -->
+    <script src="assets/vendor/jquery-ui/jquery-ui.js"></script>
+    <script src="assets/vendor/jquery-validation/jquery.validate.js"></script>
+    <script src="assets/vendor/jqueryui-touch-punch/jqueryui-touch-punch.js"></script>
+    <script src="assets/vendor/jquery-appear/jquery-appear.js"></script>
+    <script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="assets/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.js"></script>
+    <script src="assets/vendor/flot.tooltip/flot.tooltip.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.pie.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.categories.js"></script>
+    <script src="assets/vendor/flot/jquery.flot.resize.js"></script>
+    <script src="assets/vendor/jquery-sparkline/jquery-sparkline.js"></script>
+    <script src="assets/vendor/raphael/raphael.js"></script>
+    <script src="assets/vendor/morris.js/morris.js"></script>
+    <script src="assets/vendor/gauge/gauge.js"></script>
+    <script src="assets/vendor/snap.svg/snap.svg.js"></script>
+    <script src="assets/vendor/liquid-meter/liquid.meter.js"></script>
+    <script src="assets/vendor/jqvmap/jquery.vmap.js"></script>
+    <script src="assets/vendor/jqvmap/data/jquery.vmap.sampledata.js"></script>
+    <script src="assets/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
+    <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.africa.js"></script>
+    <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.asia.js"></script>
+    <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.australia.js"></script>
+    <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js"></script>
+    <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js"></script>
+    <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+
+    <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/vendor/dropzone/dropzone.js"></script>
+    <script src="assets/vendor/ng-dropzone-2.0.1/src/js/ng-dropzone.js"></script>
+    <script src="scripts/ui-bootstrap-2.2.0.js"></script>
+    <script src="scripts/ui-bootstrap-tpls-2.2.0.js"></script>
+    <script src="assets/vendor/jquery-validation/jquery.validate.js"></script>
+    <script src="assets/vendor/select2/js/select2.js"></script>
+    <script src="assets/vendor/toastr.js"></script>
+    <!-- Theme Base, Components and Settings -->
+    <script src="assets/javascripts/theme.js"></script>
+    
+    <!-- Theme Custom -->
+    <script src="assets/javascripts/theme.custom.js"></script>
+
+
+    <script src="scripts/SPA/app/app.js"></script>
+    <!--<script src="Scripts/spa/app.js"></script>-->
+    <script src="Scripts/spa/services/apiservice.js"></script>
+    <script src="scripts/SPA/Services/notificationService.js"></script>
+    <script src="Scripts/spa/directive/customPager.directive.js"></script>
+    <script src="scripts/SPA/Filter/CutString.js"></script>
+    <script src="Scripts/SPA/Services/authInterceptorService.js"></script>
+    <script src="Scripts/SPA/Services/authService.js"></script>
+    <script src="Scripts/SPA/Services/ordersService.js"></script>
+    <script src="Scripts/SPA/Services/tokensManagerService.js"></script>
+    <script src="scripts/SPA/directive/sideBarAdmin.js"></script>
+    <script src="scripts/SPA/Services/validityservice.js"></script>
+
+    <script src="Scripts/SPA/LoginController.js"></script>
+    <script src="Scripts/SPA/signupController.js"></script>
+    <script src="Scripts/SPA/mainController.js"></script>
+    <!--<script src="Scripts/SPA/detailCityController.js"></script>
+    
+    <script src="scripts/SPA/Controllers/listCategoryController.js"></script>
+    <script src="scripts/SPA/Controllers/editCategoryController.js"></script>
+    <script src="scripts/SPA/Controllers/addAlbumController.js"></script>
+    <script src="scripts/SPA/Controllers/addCity.js"></script>
+    <script src="scripts/SPA/Controllers/addAddressTypeController.js"></script>
+    <script src="scripts/SPA/Controllers/editCityController.js"></script>
+    <script src="scripts/SPA/Controllers/listCityController.js"></script>-->
+
+    <script src="scripts/SPA/Address/addAddressController.js"></script>
+    <script src="scripts/SPA/Address/editAddressController.js"></script>
+    <script src="scripts/SPA/Address/listAddressController.js"></script>
+    <script src="scripts/SPA/Address/viewAddressController.js"></script>
+    <script src="scripts/SPA/Profile/Address/listprofileAddressController.js"></script>
+    <script src="scripts/SPA/AddressType/addAddressTypeController.js"></script>
+    <script src="scripts/SPA/AddressType/editAddressTypeController.js"></script>
+    <script src="scripts/SPA/AddressType/listAddressTypeController.js"></script>
+    <script src="scripts/SPA/AddressType/viewAddressTypeController.js"></script>
+    <script src="scripts/SPA/Album/addAlbumController.js"></script>
+    <script src="scripts/SPA/Album/editAlbumController.js"></script>
+    <script src="scripts/SPA/Album/listAlbumController.js"></script>
+    <script src="scripts/SPA/Album/viewAlbumController.js"></script>
+    <script src="scripts/SPA/Profile/Album/listprofileAlbumController.js"></script>
+    <script src="scripts/SPA/Attribute/addAttributeController.js"></script>
+    <script src="scripts/SPA/Attribute/editAttributeController.js"></script>
+    <script src="scripts/SPA/Attribute/listAttributeController.js"></script>
+    <script src="scripts/SPA/Attribute/viewAttributeController.js"></script>
+    <script src="scripts/SPA/Category/addCategoryController.js"></script>
+    <script src="scripts/SPA/Category/editCategoryController.js"></script>
+    <script src="scripts/SPA/Category/listCategoryController.js"></script>
+    <script src="scripts/SPA/Category/viewCategoryController.js"></script>
+    <script src="scripts/SPA/City/addCityController.js"></script>
+    <script src="scripts/SPA/City/editCityController.js"></script>
+    <script src="scripts/SPA/City/listCityController.js"></script>
+    <script src="scripts/SPA/City/viewCityController.js"></script>
+    <script src="scripts/SPA/Connection/addConnectionController.js"></script>
+    <script src="scripts/SPA/Connection/editConnectionController.js"></script>
+    <script src="scripts/SPA/Connection/listConnectionController.js"></script>
+    <script src="scripts/SPA/Connection/viewConnectionController.js"></script>
+    <script src="scripts/SPA/Profile/Connection/listprofileConnectionController.js"></script>
+    <script src="scripts/SPA/Content/addContentController.js"></script>
+    <script src="scripts/SPA/Content/editContentController.js"></script>
+    <script src="scripts/SPA/Content/listContentController.js"></script>
+    <script src="scripts/SPA/Content/viewContentController.js"></script>
+    <script src="scripts/SPA/Country/addCountryController.js"></script>
+    <script src="scripts/SPA/Country/editCountryController.js"></script>
+    <script src="scripts/SPA/Country/listCountryController.js"></script>
+    <script src="scripts/SPA/Country/viewCountryController.js"></script>
+    <script src="scripts/SPA/ExternalLink/addExternalLinkController.js"></script>
+    <script src="scripts/SPA/ExternalLink/editExternalLinkController.js"></script>
+    <script src="scripts/SPA/ExternalLink/listExternalLinkController.js"></script>
+    <script src="scripts/SPA/ExternalLink/viewExternalLinkController.js"></script>
+    <script src="scripts/SPA/Profile/ExternalLink/listprofileExternalLinkController.js"></script>
+    <script src="scripts/SPA/Feature/addFeatureController.js"></script>
+    <script src="scripts/SPA/Feature/editFeatureController.js"></script>
+    <script src="scripts/SPA/Feature/listFeatureController.js"></script>
+    <script src="scripts/SPA/Feature/viewFeatureController.js"></script>
+    <script src="scripts/SPA/FeaturedSponsor/addFeaturedSponsorController.js"></script>
+    <script src="scripts/SPA/FeaturedSponsor/editFeaturedSponsorController.js"></script>
+    <script src="scripts/SPA/FeaturedSponsor/listFeaturedSponsorController.js"></script>
+    <script src="scripts/SPA/FeaturedSponsor/viewFeaturedSponsorController.js"></script>
+    <script src="scripts/SPA/Profile/FeaturedSponsor/listprofileFeaturedSponsorController.js"></script>
+    <script src="scripts/SPA/Industry/addIndustryController.js"></script>
+    <script src="scripts/SPA/Industry/editIndustryController.js"></script>
+    <script src="scripts/SPA/Industry/listIndustryController.js"></script>
+    <script src="scripts/SPA/Industry/viewIndustryController.js"></script>
+    <script src="scripts/SPA/LinkType/addLinkTypeController.js"></script>
+    <script src="scripts/SPA/LinkType/editLinkTypeController.js"></script>
+    <script src="scripts/SPA/LinkType/listLinkTypeController.js"></script>
+    <script src="scripts/SPA/LinkType/viewLinkTypeController.js"></script>
+    <script src="scripts/SPA/Message/addMessageController.js"></script>
+    <script src="scripts/SPA/Message/editMessageController.js"></script>
+    <script src="scripts/SPA/Message/listMessageController.js"></script>
+    <script src="scripts/SPA/Message/viewMessageController.js"></script>
+    <script src="scripts/SPA/Profile/Message/listprofileMessageController.js"></script>
+    <script src="scripts/SPA/Profile/addProfileController.js"></script>
+    <script src="scripts/SPA/Profile/editProfileController.js"></script>
+    <script src="scripts/SPA/Profile/listProfileController.js"></script>
+    <script src="scripts/SPA/Profile/viewProfileController.js"></script>
+    <script src="scripts/SPA/Profile/Profile/listprofileProfileController.js"></script>
+    <script src="scripts/SPA/ProfileSocialNetwork/addProfileSocialNetworkController.js"></script>
+    <script src="scripts/SPA/ProfileSocialNetwork/editProfileSocialNetworkController.js"></script>
+    <script src="scripts/SPA/ProfileSocialNetwork/listProfileSocialNetworkController.js"></script>
+    <script src="scripts/SPA/ProfileSocialNetwork/viewProfileSocialNetworkController.js"></script>
+    <script src="scripts/SPA/Profile/ProfileSocialNetwork/listprofileProfileSocialNetworkController.js"></script>
+    <script src="scripts/SPA/ProfileTag/addProfileTagController.js"></script>
+    <script src="scripts/SPA/ProfileTag/editProfileTagController.js"></script>
+    <script src="scripts/SPA/ProfileTag/listProfileTagController.js"></script>
+    <script src="scripts/SPA/ProfileTag/viewProfileTagController.js"></script>
+    <script src="scripts/SPA/Profile/ProfileTag/listprofileProfileTagController.js"></script>
+    <script src="scripts/SPA/ProfileType/addProfileTypeController.js"></script>
+    <script src="scripts/SPA/ProfileType/editProfileTypeController.js"></script>
+    <script src="scripts/SPA/ProfileType/listProfileTypeController.js"></script>
+    <script src="scripts/SPA/ProfileType/viewProfileTypeController.js"></script>
+    <script src="scripts/SPA/Profile/ProfileType/listprofileProfileTypeController.js"></script>
+    <script src="scripts/SPA/RequestType/addRequestTypeController.js"></script>
+    <script src="scripts/SPA/RequestType/editRequestTypeController.js"></script>
+    <script src="scripts/SPA/RequestType/listRequestTypeController.js"></script>
+    <script src="scripts/SPA/RequestType/viewRequestTypeController.js"></script>
+    <script src="scripts/SPA/SocialNetwork/addSocialNetworkController.js"></script>
+    <script src="scripts/SPA/SocialNetwork/editSocialNetworkController.js"></script>
+    <script src="scripts/SPA/SocialNetwork/listSocialNetworkController.js"></script>
+    <script src="scripts/SPA/SocialNetwork/viewSocialNetworkController.js"></script>
+    <script src="scripts/SPA/SubscriptionType/addSubscriptionTypeController.js"></script>
+    <script src="scripts/SPA/SubscriptionType/editSubscriptionTypeController.js"></script>
+    <script src="scripts/SPA/SubscriptionType/listSubscriptionTypeController.js"></script>
+    <script src="scripts/SPA/SubscriptionType/viewSubscriptionTypeController.js"></script>
+    <script src="scripts/SPA/Tag/addTagController.js"></script>
+    <script src="scripts/SPA/Tag/editTagController.js"></script>
+    <script src="scripts/SPA/Tag/listTagController.js"></script>
+    <script src="scripts/SPA/Tag/viewTagController.js"></script>
+    <script src="scripts/SPA/Theme/addThemeController.js"></script>
+    <script src="scripts/SPA/Theme/editThemeController.js"></script>
+    <script src="scripts/SPA/Theme/listThemeController.js"></script>
+    <script src="scripts/SPA/Theme/viewThemeController.js"></script>
+    <script src="scripts/SPA/User/addUserController.js"></script>
+    <script src="scripts/SPA/User/editUserController.js"></script>
+    <script src="scripts/SPA/User/listUserController.js"></script>
+    <script src="scripts/SPA/User/viewUserController.js"></script>
+    <script src="scripts/SPA/UserProfile/addUserProfileController.js"></script>
+    <script src="scripts/SPA/UserProfile/editUserProfileController.js"></script>
+    <script src="scripts/SPA/UserProfile/listUserProfileController.js"></script>
+    <script src="scripts/SPA/UserProfile/viewUserProfileController.js"></script>
+    <script src="scripts/SPA/Profile/UserProfile/listprofileUserProfileController.js"></script>
+    <script src="scripts/SPA/UserRole/addUserRoleController.js"></script>
+    <script src="scripts/SPA/UserRole/editUserRoleController.js"></script>
+    <script src="scripts/SPA/UserRole/listUserRoleController.js"></script>
+    <script src="scripts/SPA/UserRole/viewUserRoleController.js"></script>
+    <script src="scripts/SPA/AlbumType/addAlbumTypeController.js"></script>
+    <script src="scripts/SPA/AlbumType/editAlbumTypeController.js"></script>
+    <script src="scripts/SPA/AlbumType/listAlbumTypeController.js"></script>
+    <script src="scripts/SPA/AlbumType/viewAlbumTypeController.js"></script>
+
+    <script src="scripts/SPA/ProfileAttribute/addProfileAttributeController.js"></script>
+    <script src="scripts/SPA/ProfileAttribute/editProfileAttributeController.js"></script>
+    <script src="scripts/SPA/ProfileAttribute/listProfileAttributeController.js"></script>
+    <script src="scripts/SPA/ProfileAttribute/viewProfileAttributeController.js"></script>
+    <script src="scripts/SPA/Profile/ProfileAttribute/listprofileProfileAttributeController.js"></script>   
+    <script src="scripts/SPA/Profile/editAdminProfileUploadController.js"></script>
+    <script src="scripts/SPA/Profile/viewAdminProfileController.js"></script>
+
+    <script src="scripts/SPA/Newsletter/addNewsletterController.js"></script>
+    <script src="scripts/SPA/Newsletter/editNewsletterController.js"></script>
+    <script src="scripts/SPA/Newsletter/listNewsletterController.js"></script>
+    <script src="scripts/SPA/Newsletter/viewNewsletterController.js"></script>
+
+    <script src="scripts/SPA/Profile/ProfileIndustry/listprofileProfileIndustryController.js"></script>
+    <script src="scripts/SPA/DBTool/dbtoolAddController.js"></script>
+    <script src="scripts/SPA/Dashboard/mainDashboardController.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="assets/javascripts/theme.init.js"></script>
+</body>
+</html>

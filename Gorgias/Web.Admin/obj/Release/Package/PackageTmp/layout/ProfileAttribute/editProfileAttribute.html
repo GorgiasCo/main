@@ -1,0 +1,40 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addProfileAttributeForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Edit Profile Attribute</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Attribute</label><div class="col-sm-9"><select id="AttributeID" class="form-control" ng-model="object.AttributeID" ng-options="option.AttributeID as option.AttributeName for option in Attributes" title="Please select at least one" required></select><input type="hidden" name="AttributeID" ng-value="object.AttributeID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Profile</label><div class="col-sm-9"><select id="ProfileID" class="form-control" ng-model="object.ProfileID" ng-options="option.ProfileID as option.ProfileFullname for option in Profiles" title="Please select at least one" required></select><input type="hidden" name="ProfileID" ng-value="object.ProfileID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Note</label><div class="col-sm-9"><textarea rows="5" name="ProfileAttributeNote" ng-model="object.ProfileAttributeNote" validate-on="blur" class="form-control" placeholder="Describe Something..."></textarea></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <a class="btn btn-default" ng-href="/profileattribute">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

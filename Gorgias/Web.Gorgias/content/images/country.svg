@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.53 63.94">
+  <defs>
+    <!--<filter id="dropshadow" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="5" dy="5" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>filter="url(#dropshadow)"
+      </feMerge>
+    </filter>-->
+    <style>.cls-1{fill:#878787;}</style>
+  </defs>
+  <path  class="cls-1" d="M47.53,0q0,20,0,40a23.26,23.26,0,0,1-4.67,14.37,23,23,0,0,1-16.47,9.47A23.65,23.65,0,0,1,2.2,50.18,22.92,22.92,0,0,1,0,40.49q0-20,0-39.92C0,.38,0,.19,0,0Z"/>
+</svg>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="gorgiasapi" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^E:\\Yasser\\YAP\\06-03-2017-API-Design-Iran\\Gorgias\\Gorgias\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^E:\\Yasser\\YAP\\06-03-2017-API-Design-Iran\\Gorgias\\Gorgias\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="StorageConnection-Web.config Connection String" description="" value="DefaultEndpointsProtocol=https;AccountName=gorgiasasia;AccountKey=pSFKEXa2PhmHONBNwsad8qRisJhbrkBaWOITFfNwjb4T9w5gAIGHyEBNJb8AzCmy9QN0TgL9l3keDw9Pnfi3Gg==" tags="">
+    <parameterEntry kind="XmlFile" scope="E:\\Yasser\\YAP\\06-03-2017-API-Design-Iran\\Gorgias\\Gorgias\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='StorageConnection']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-Gorgias-20161025093304.mdf;Initial Catalog=aspnet-Gorgias-20161025093304;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Yasser\\YAP\\06-03-2017-API-Design-Iran\\Gorgias\\Gorgias\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="AuthContext-Web.config Connection String" description="AuthContext Connection String used in web.config by the application to access the database." value="Server=tcp:gorgias.database.windows.net,1433;Initial Catalog=Gorgias;Persist Security Info=False;User ID=charlsvityap;Password=Octove@2015;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Yasser\\YAP\\06-03-2017-API-Design-Iran\\Gorgias\\Gorgias\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AuthContext']/@connectionString" />
+  </parameter>
+  <parameter name="GorgiasEntities-Web.config Connection String" description="GorgiasEntities Connection String used in web.config by the application to access the database." value="metadata=res://*/gorgiasModel.csdl|res://*/gorgiasModel.ssdl|res://*/gorgiasModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Server=tcp:gorgias.database.windows.net,1433;Initial Catalog=Gorgias;Persist Security Info=False;User ID=charlsvityap;Password=Octove@2015;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Yasser\\YAP\\06-03-2017-API-Design-Iran\\Gorgias\\Gorgias\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GorgiasEntities']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,28 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-xs-12" ng-controller="listUserController as vm">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a>
+                        </div>
+                        <h2 class="panel-title">Users</h2>
+                    </header>
+                    <div class="panel-body">
+                        <h3 class="box-title m-b-0"><a class="btn btn-success" href="user/add">Add New User</a></h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-none" id="datatable-default" datatable="" dt-instance="vm.dtInstance" dt-options="dtOptions" dt-columns="dtColumns"></table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

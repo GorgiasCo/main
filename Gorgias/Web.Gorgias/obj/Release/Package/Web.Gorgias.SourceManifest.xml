@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Gorgias\obj\Release\Package\PackageTmp" />
+  <setAcl path="E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Gorgias\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="E:\Yasser\YAP\18-04-2017-Office-API-Database\Gorgias\Web.Gorgias\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

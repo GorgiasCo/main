@@ -1,0 +1,65 @@
+﻿<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+        <div class="inner">
+            <div class="row">                
+                <div class="col-lg-7 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                {{'GettingStarted' | translate}}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>{{'UserProfileList' | translate}}</h3>
+                            <br>
+                            <div>
+                                <div class="profile-img-wrapper m-t-5 inline">
+                                    <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                    <div class="chat-status available">
+                                    </div>
+                                </div>
+                                <div class="inline m-l-10">
+                                    <p class="small hint-text m-t-5">
+                                        {{'HelperAuthorTitle'| translate}}
+                                        <br> {{'HelperAuthor' | translate}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<div class="container-fluid container-fixed-lg">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>{{'ProfilesAccesses' | translate}}</h2>
+            <h3 class="box-title m-b-0"><a class="btn btn-success" ui-sref="app.forms.userprofilenew">{{'NewUserProfile' | translate}}</a></h3>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-xs-12" ng-controller="listUserProfileController as vm">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a>
+                        </div>
+                    </header>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-none" id="datatable-default" datatable="" dt-instance="vm.dtInstance" dt-options="dtOptions" dt-columns="dtColumns"></table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

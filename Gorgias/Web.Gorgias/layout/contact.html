@@ -1,0 +1,102 @@
+﻿<side-Bar profileurl="ProfileURL" profileid="ProfileID" subscribemode="SubscribeMode" profiletypeid="ProfileTypeID" slidermode="1" activemenu="5"></side-Bar>
+<div id="loading-bar-container"></div>
+<div id="Wrapper" scroll>
+    <!-- Main Content  class="content-mobile"-->
+    <div id="Content">
+        <div class="content_wrapper clearfix">
+            <div class="sections_group">
+                <div class="entry-content">
+                    <div class="section" style="padding-top:25px; padding-bottom:40px;background-color:#f0f0f0;">
+                        <div class="section_wrapper clearfix">
+                            <!--<div class="items_group clearfix">-->
+                            <!-- Page Title-->
+                            <!-- One full width row-->
+                            <form ng-submit="submitForm(addMessageForm.$valid)" novalidate name="addMessageForm" class="form-horizontal">
+                                <div class="column one column_fancy_heading bottom-margin" style="padding-top:70px;padding-bottom:70px;">
+                                    <h2 class="title-main-contacts lightFont">Contacts</h2>
+                                    <p class="boldFont contact-us-text">you have a question or do you want to share a story yourself? Please use the form below to get in touch with me.</p>
+                                </div>
+                                <div class="column one column_column border-bottom bottom-margin">
+                                    <div class="column two-third-custom bottom-margin">
+                                        <input type="text" class="boldFont input-contacts" aria-required="true" disabled aria-invalid="false" placeholder="{{RequestedProfileFullname}}">
+                                    </div>
+                                    <div class="column one-sixth bottom-margin">
+                                        <p class="contact-us-text-form lightFont">From</p>
+                                    </div>
+                                </div>
+                                <div class="column one column_column border-bottom bottom-margin">
+                                    <div class="column two-third-custom bottom-margin">
+                                        <input type="text" class="boldFont input-contacts" aria-required="true" disabled aria-invalid="false" placeholder="{{Profile.ProfileFullname}}">
+                                    </div>
+                                    <div class="column one-sixth bottom-margin">
+                                        <p class="contact-us-text-form lightFont">To</p>
+                                    </div>
+                                </div>
+                                <div class="column one column_column border-bottom bottom-margin">
+                                    <div class="column two-third-custom bottom-margin">
+                                        <input type="text" class="boldFont input-contacts" ng-model="object.ContactSubject" required aria-required="true" aria-invalid="false" placeholder="Select Subject">
+                                    </div>
+                                    <div class="column one-sixth bottom-margin">
+                                        <p class="contact-us-text-form lightFont">Subject</p>
+                                    </div>
+                                </div>
+                                <div class="column one column_column border-bottom bottom-margin">
+                                    <div class="column two-third-custom bottom-margin">
+                                        <textarea class="boldFont input-contacts note-form-contact-us" ng-model="object.ContactNote" required rows="13" aria-required="true" aria-invalid="false" placeholder="Enter your message in short and clean!"></textarea>
+                                    </div>
+                                    <div class="column one-sixth bottom-margin">
+                                        <p class="contact-us-text-form lightFont"></p>
+                                    </div>
+                                </div>
+                                <div class="column one column_column bottom-margin">
+                                    <div style="float: left;padding: 10px 19px;fill: #808080;width: 42px;stroke-width: 2px;stroke: #808080;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58.31 58.33"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M29.68,58.33H28.62c0-.16,0-.31,0-.47q0-13.81,0-27.62c0-.6,0-.52-.51-.52H0v-1.1H28.32c.23,0,.3-.08.28-.29s0-.19,0-.28q0-13.77,0-27.53V0c.33,0,.64,0,.94,0,0,0,.12.1.13.17a2.18,2.18,0,0,1,0,.37q0,13.73,0,27.47c0,.12,0,.25,0,.37s.08.24.25.23H57.83c.49,0,.48-.09.48.46s0,.63-.63.63H30.15c-.47,0-.48,0-.48.47q0,13.81,0,27.62Z" /></g></g></svg>
+                                    </div>
+                                    <div style="float: right;margin-right: 15px;margin-top:2px;margin-bottom:68px;">
+                                        <button ng-disabled="addMessageForm.$invalid" type="submit" class="submit-contact-us">{{sendButton}}</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section the_content">
+                    <div class="section_wrapper">
+                        <div class="the_content_wrapper"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer-->
+<footer id="Footer" class="clearfix">
+    <div class="footer_copy" id="socialbar" style="background-color:#54595e">
+        <div class="container">
+            <div class="section">
+                <div class="column one content_wrapper center-align">
+                    <!--Social info area-->
+                    <ul class="social">
+                        <li ng-repeat="objSocialNetwork in SocialNetworks" class="{{objSocialNetwork.SocialNetworkName}}">
+                            <a ng-click="redirectToSocialMedia(objSocialNetwork.ProfileSocialNetworkURL)" title="Skype"><i class="{{objSocialNetwork.SocialNetworkDescription}}"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer copyright-->
+    <div class="footer_copy" style="background-color:#a5a8a7;">
+        <div class="container">
+            <div class="column one">
+                <a id="back_to_top" ng-click="goToTop()" class="topbutton button_left button_js gototop" style="position:absolute;"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>
+                <div class="copyright font-color-white" style="text-align:center; font-size:13px;">
+                    {{Profile.ProfileFullname}} Copyrights &copy; 2017
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

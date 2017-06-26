@@ -1,0 +1,745 @@
+﻿<div pageslide ps-size="{{pWebSize}}" ps-push="false" ps-body-class="false" onclose="onclose" ps-open="checkedWeb">
+    <div class="mfn-main-slider">
+        <div class="section dark" ng-if="webProfileLoaded" id="about" style="height: 100vh;background-color:; background-image:url(https://gorgiasasia.blob.core.windows.net/images/webcover-{{webProfile.ProfileID}}?timestamp={{timestamp}}); background-repeat:no-repeat; background-position:center center; background-size:cover; -webkit-background-size:cover" data-stellar-background-ratio="1">
+            <div class="clearfix" style="height: 100vh;">
+                <div class="items_group clearfix" style="height: 100vh;">
+                    <div class="column_attr" id="slidertaglist" style="position:absolute;top:11px;right:1px;">
+                        <div class="btn-group">
+                            <ul class="horizontal-list">
+                                <li ng-repeat="obj in webMainTags"><label class="btn btn-primary web-slider-tag-{{webProfile.ThemeClassCode}}">{{obj.TagName}}</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column_attr" style="text-align: left;position:absolute;top:20px;left:11px;">
+                        <a ng-href="/{{webProfile.ProfileURL}}" target="_blank"><img src="content/images/arrow_right_light.png" class="cursor-pointer" /></a><!--ng-click="closeWebSlider()"-->
+                    </div>
+                    <div id="redtheme" class="column_attr" style="text-align: right;position:absolute;top:75px;right:0px;">
+                        <span class="country country-name web-slider-country-{{webProfile.ThemeClassCode}}">{{webProfile.CountryName}}</span><span class="country-code web-slider-country-code-{{webProfile.ThemeClassCode}}">{{webProfile.CountryShortName}}</span>
+                    </div>
+                    <div class="column_attr" style="position:absolute;top:107px;left:6px;">
+                        <h2 class="featured-name-title-web-slider web-slider-name-{{webProfile.ThemeClassCode}}">{{webProfile.ProfileFullname}}</h2>
+                        <div id="slidertaglist2" style="width: 200px;float:none;">
+                            <ul class="horizontal-list">
+                                <li ng-repeat="obj in webTags"><label class="btn btn-primary web-slider-tag-bottom-{{webProfile.ThemeClassCode}}">{{obj.TagName}}</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column_attr" style="position:absolute;bottom:20px;left:6px;">
+                        <div class="featured-description-web-slider boldFont web-slider-description-{{webProfile.ThemeClassCode}}" style="margin-bottom: 20px;">
+                            {{webProfile.ProfileShortDescription | cut:true:60:'...'}}
+                        </div>
+                        <div id="redtheme" style="padding:20px 0px;">
+                            <span ng-click="downloadApp()" style="cursor:pointer;" class="subscribe subscribe-name web-slider-subscription-{{webProfile.ThemeClassCode}}">Get App</span><span class="subscribe subscribe-number web-slider-subscription-like-{{webProfile.ThemeClassCode}}">{{webProfile.ProfileLike}}</span>
+                        </div>
+                        <div style="padding:0px 0px 0px 11px;">
+                            <h4 style="color:#000000;margin-bottom: 0px;font-size: 12px;font-weight: 400;" class="web-slider-available-app-{{webProfile.ThemeClassCode}}">Available Apps</h4>
+                            <a ng-repeat="objExternal in webExternalLinks" ng-href="{{objExternal.ExternalLinkURL}}"><img src="https://gorgiasasia.blob.core.windows.net/images/{{objExternal.LinkTypeImage}}" alt="" width="48" height="48"></a>
+                        </div>
+                    </div>
+                    <div class="column_attr" style="position:absolute;bottom:174px;right:0px;text-align:right;">
+                        <div id="redtheme">
+                            <ul class="menu">
+                                <li>
+                                    <a ng-href="/{{webProfile.ProfileURL}}" target="_blank" class="menuhome lightFont web-slider-menu-home-{{webProfile.ThemeClassCode}}">Home</a>
+                                </li>
+                                <li>
+                                    <a ng-href="/{{webProfile.ProfileURL}}/gallery" target="_blank" class="menugalleries web-slider-menu-gallery-{{webProfile.ThemeClassCode}}">Galleries</a>
+                                </li>
+                                <li>
+                                    <a ng-href="/{{webProfile.ProfileURL}}/about" target="_blank" class="menuabouts web-slider-menu-about-{{webProfile.ThemeClassCode}}">Abouts</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column_attr" style="position:absolute;bottom:140px;right:0px;text-align:right;">
+                        <div style="padding:13px 15px;background-color: #454545;font-size:15px;color:#ffffff;font-weight:900;">
+                            <a target="_blank" href="/{{webProfile.ProfileURL}}/contact"><span style="padding-right: 15px;color:#ffffff;" class="web-slider-contact-{{webProfile.ThemeClassCode}}">CONTACT</span><span style="color:#ffffff;" class="web-slider-contact-title-{{webProfile.ThemeClassCode}}">|</span><span style="color:#F5D22C;padding-left: 15px;">{{ReachUS}}</span></a>
+                        </div>
+                    </div>
+                    <div class="column_attr" style="position:absolute;bottom:16px;right:19px;text-align:right;">
+                        <img ng-src="https://gorgiasasia.blob.core.windows.net/images/qr-web-{{webProfile.ProfileID}}.png" default-image="content/images/qr.png" fallback-image="https://gorgiasasia.blob.core.windows.net/images/qr-web-{{webProfile.ProfileID}}.png" alt="" width="60" height="60">
+                        <!--<img src="content/images/qr.png" alt="" width="60" height="60">-->
+                        <h2 style="color:#000000;margin-bottom: 0px;font-size: 12px;font-weight: 400;margin-top:10px;margin-bottom:12px;" class="web-slider-follow-{{webProfile.ThemeClassCode}}">Follow {{ReachUS}} @</h2>
+                        <div id="Footer-Featured" style="background-color:transparent;border:0px;">
+                            <div id="socialbar" class="footer_copy">
+                                <ul class="social">
+                                    <li ng-repeat="objSocialNetwork in webSocialNetworks" class="{{objSocialNetwork.SocialNetworkName}}">
+                                        <a ng-click="redirectToSocialMedia(objSocialNetwork.ProfileSocialNetworkURL)" title="{{objSocialNetwork.SocialNetworkDescription}}"><i class="{{objSocialNetwork.SocialNetworkDescription}} web-slider-social-{{webProfile.ThemeClassCode}}"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div pageslide ps-size="{{pSize}}" onclose="onclose" ps-open="checked" ps-body-class="true" scrollable>
+    <div class="nano">
+        <div class="nano-content" ng-show="sliderProfileLoaded" style="padding-top:400px; padding-bottom:0px;background-image:url(https://gorgiasasia.blob.core.windows.net/images/slider-{{sliderProfile.ProfileID}}); background-repeat:no-repeat; background-position:top center;">
+            <div>
+                <div class="white-cover"></div>
+                <div class="column_attr" style="text-align: left;position:absolute;top:19px;left:21px;">
+                    <img src="content/images/arrow_left_dark.png" ng-click="closeSlider()" />
+                </div>
+                <div class="column_attr" style="text-align: right;position:absolute;top:19px;right:21px;">
+                    <img src="content/images/more_function_light.png" />
+                </div>
+                <div class="column_attr" style="text-align: right;position:absolute;top:110px;right:0px;">
+                    <span class="country country-code">{{sliderProfile.CountryShortName}}</span>
+                </div>
+                <div class="column one-slider">
+                    <div class="zoom_box16-slider">
+                        <div class="photo round-box">
+                            <img class="scale-with-grid" src="content/agency/images/rightslider/maintwoimage.jpg" alt="">
+                            <div id="infoi" style="color:#C29620;font-size:17px;font-weight:700;">
+                                <span ng-repeat="objSliderMainTag in sliderProfileMainTags">{{objSliderMainTag.TagName}}</span>
+                            </div>
+                            <div class="desc round-box">
+                                <div class="desc_wrap slider-profile-tag-list">
+                                    <!--style="padding-top: 85.5px;"-->
+                                    <div class="desc_txt">
+                                        <div id="tagroundlist-slider" style="z-index:999;position:absolute;left:-8px;">
+                                            <ul class="horizontal-list">
+                                                <li ng-repeat="objSliderTag in sliderProfileTags"><label class="btn btn-primary">{{objSliderTag.TagName}}</label></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column one no-margin" style="position:absolute;top:333px;left:13px;z-index:99">
+                        <div class="column one-third no-margin" style="width:26.333%;">
+                            <div class="zoom_box slider-profile-border">
+                                <a href="#">
+                                    <div class="photo">
+                                        <img class="scale-with-grid" src="{{sliderProfile.ProfileImage}}" alt="">
+                                    </div>
+                                    <div class="desc" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                        <div class="desc_wrap">
+                                            <div class="desc_img">
+                                                <img ng-src="https://gorgiasasia.blob.core.windows.net/images/qr-web-{{sliderProfile.ProfileID}}.png" default-image="content/images/qr.png" fallback-image="https://gorgiasasia.blob.core.windows.net/images/qr-web-{{sliderProfile.ProfileID}}.png" alt="" class="scale-with-grid">
+                                                <!--<img class="scale-with-grid" src="content/images/qr.png" alt="">-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second no-margin archivo-font" style="font-size:20px;font-weight:900;padding-left:19px;padding-top:8px;line-height: 23px;">
+                            {{sliderProfile.ProfileFullname}}
+                        </div>
+                    </div>
+                    <div class="column one no-margin" style="background-color:#D8CA80;z-index:999;width:100%;position: relative;">
+                        <div class="">
+                            <div ng-click="showTab(1)" class="cursor-pointer" style="float:left;display:block;width:15%;padding-top:19px;padding-left:25px;font-size:19px;font-weight:700;color:#ffffff">
+                                Feeds
+                            </div>
+                            <div style="float:right;display:block;text-align: right;padding-right: 19px;padding-top:13px;padding-bottom: 13px;">
+                                <div ng-click="showTab(2)" class="cursor-pointer" style="margin-right: 18px;width: 32px;fill: white;float: left;padding-top: 4px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.59 22.72"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M0,14.51C0,12.77,0,11,0,9.3,0,7.93,0,6.56,0,5.19a2.63,2.63,0,0,1,.3-1.25A3.19,3.19,0,0,1,2.71,2.26a3.21,3.21,0,0,1,.48,0H3.4c5.87,0,11.75,0,17.62,0,1.52,0,3,0,4.55,0a3.23,3.23,0,0,1,2.1.77,3.53,3.53,0,0,1,.62.72,2.73,2.73,0,0,1,.45,1.61c0,2.66,0,5.32,0,8,0,2.11,0,4.21,0,6.32a2.66,2.66,0,0,1-.24,1.15,3.19,3.19,0,0,1-1.95,1.71,3.49,3.49,0,0,1-1.08.16c-1.25,0-2.49,0-3.74,0-4.68-.06-9.37,0-14,0-1.48,0-3,0-4.44,0a3.25,3.25,0,0,1-2-.7A2.89,2.89,0,0,1,0,19.6Q0,17.05,0,14.51Zm1.2.37q0,2.17,0,4.35a4.59,4.59,0,0,0,.06.78,1.62,1.62,0,0,0,.89,1.25,2.42,2.42,0,0,0,1,.24c1,.06,2,0,3.06,0,4.69,0,9.38,0,14.07,0,1.65,0,3.31,0,5,0a4.22,4.22,0,0,0,.8-.07,1.86,1.86,0,0,0,.86-.37,1.67,1.67,0,0,0,.57-.92,3.92,3.92,0,0,0,.09-.86c0-2.32,0-4.63,0-6.95s0-4.5,0-6.75a4.35,4.35,0,0,0-.06-.73,1.64,1.64,0,0,0-.8-1.19,2.3,2.3,0,0,0-1-.29c-1-.06-2,0-3,0-4.71,0-9.42,0-14.14,0-1.56,0-3.11,0-4.67,0l-.65,0a2.3,2.3,0,0,0-1,.3,1.57,1.57,0,0,0-.73,1,3.53,3.53,0,0,0-.11.91c0,1.58,0,3.16,0,4.75S1.21,13.35,1.21,14.88Z" /><path class="cls-2" d="M21.7,19.87h3.85c.14,0,.18,0,.18-.18q0-4,0-8a.9.9,0,0,1,0-.19c0-.06,0-.14,0-.21-.41-.37-.83-.72-1.25-1.08l-1.2-1-1.2-1L20.83,7.14q-.48-.41-1-.83a.14.14,0,0,0-.22,0c-.38.33-.78.63-1.17.94l-1.1.89c-.37.3-.74.6-1.12.88s-.78.62-1.17.94L14,10.83,12.7,11.88l-.66.53s-.06,0-.1,0l-.22-.16c-.39-.31-.8-.62-1.2-.92l-1.43-1.1c-.07-.05-.1,0-.16,0l-.73.54c-.59.46-1.18.91-1.79,1.34-.35.25-.69.52-1,.78l-1.25,1-1,.78a.21.21,0,0,0-.09.2q0,2.41,0,4.82a.61.61,0,0,1,0,.07c0,.06,0,.08.08.08.24,0,.48,0,.72,0,4.74,0,9.49,0,14.23,0C19.25,19.88,20.47,19.87,21.7,19.87ZM5.41,5.06A2.38,2.38,0,0,0,3.34,6.2a2.21,2.21,0,0,0,.2,2.56,2.41,2.41,0,0,0,2.24.82A2.26,2.26,0,0,0,7.61,8.23a2,2,0,0,0-.18-2.1,2.37,2.37,0,0,0-.63-.65A2.49,2.49,0,0,0,5.41,5.06Z" /><path class="cls-1" d="M21.7,19.87c-1.22,0-2.45,0-3.67,0-4.74-.06-9.49,0-14.23,0-.24,0-.48,0-.72,0-.06,0-.09,0-.08-.08a.61.61,0,0,0,0-.07q0-2.41,0-4.82a.21.21,0,0,1,.09-.2l1-.78,1.25-1c.34-.26.68-.53,1-.78.61-.43,1.2-.89,1.79-1.34l.73-.54c.06,0,.1-.06.16,0l1.43,1.1c.4.3.81.6,1.2.92l.22.16s.07,0,.1,0l.66-.53L14,10.83,15.09,10c.39-.31.77-.64,1.17-.94s.75-.58,1.12-.88l1.1-.89c.39-.31.79-.62,1.17-.94a.14.14,0,0,1,.22,0q.47.43,1,.83L22.06,8.2l1.2,1,1.2,1c.42.36.84.71,1.25,1.08.08.07.05.15,0,.21a.9.9,0,0,0,0,.19q0,4,0,8c0,.15,0,.18-.18.18Z" /><path class="cls-1" d="M5.41,5.06a2.49,2.49,0,0,1,1.39.42,2.37,2.37,0,0,1,.63.65,2,2,0,0,1,.18,2.1A2.26,2.26,0,0,1,5.79,9.58a2.41,2.41,0,0,1-2.24-.82,2.21,2.21,0,0,1-.2-2.56A2.38,2.38,0,0,1,5.41,5.06Z" /><path class="cls-1" d="M30.58,3.16a2.73,2.73,0,0,0-.45-1.61,3.53,3.53,0,0,0-.62-.72,3.23,3.23,0,0,0-2.1-.77c-1.52,0-3,0-4.55,0C17,0,11.12,0,5.25,0a4,4,0,0,0-.69,0A3.19,3.19,0,0,0,2.18,1.73a2.38,2.38,0,0,0-.25.73H3.18V2.41a1.57,1.57,0,0,1,.73-1,2.3,2.3,0,0,1,1-.3l.65,0c1.56,0,3.11,0,4.67,0,4.71.06,9.42,0,14.14,0,1,0,2,0,3,0a2.3,2.3,0,0,1,1,.29,1.64,1.64,0,0,1,.8,1.19,4.34,4.34,0,0,1,.06.73c0,2.25,0,4.5,0,6.75s0,4.63,0,6.95a3.92,3.92,0,0,1-.09.86,1.67,1.67,0,0,1-.57.92,1.72,1.72,0,0,1-.66.33v1a1.25,1.25,0,0,0,.33.15,3.19,3.19,0,0,0,1.95-1.71,2.66,2.66,0,0,0,.24-1.15c0-2.11,0-4.21,0-6.32C30.61,8.49,30.58,5.83,30.58,3.16Z" /></g></g></svg>
+                                </div>
+                                <img ng-click="showTab(3)" class="cursor-pointer" src="content/agency/images/icons-more/about_user_white-50.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column one-slider">
+                    <div>
+                        <div ng-if="mainSlider == 1">
+                            <div class="section mcb-section" id="about">
+                                <div id="official-connection" class="column one-slider no-margin-column" style="background-color:rgba(255,255,255,0.8);z-index:-1;margin-bottom:0px;">
+                                    <div ng-repeat="objConnection in sliderProfileConnections" class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;">
+                                        <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                                            <div class="zoom_box round-box">
+                                                <a href="/{{objConnection.ProfileURL}}">
+                                                    <div class="photo round-box">
+                                                        <img class="scale-with-grid" src="{{objConnection.ProfileImage}}" alt="">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                                            <a href="/{{objConnection.ProfileURL}}" style="color:#000000;"><b>{{objConnection.ProfileFullname}}</b></a>
+                                        </div>
+                                    </div>
+                                    <div style="float: right;margin-right: 15px;margin-top:7px;padding:21px 7px;">
+                                        <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:50px;">more Premium App</a>
+                                    </div>
+                                </div>
+
+                                <!--<div class="column one column_column">
+                                    <div class="call_to_action">
+                                        <div class="call_to_action_wrapper">
+                                            <div class="call_left">
+                                                <h3>Click to play</h3>
+                                            </div>
+                                            <div class="call_center">
+                                                <a href="https://www.youtube.com/watch?v=liqoMjRT81A" class="" rel="prettyphoto"><span class="icon_wrapper"><i class="icon-play"></i></span></a>
+                                            </div>
+                                            <div class="call_right">
+                                                <div class="desc">
+                                                    You can setup any youtube or vimeo videos to play. Instead of videos you can also open other things like images or other links. Open videos or images inside popup window or regular.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <div class="column one-slider column_column" ng-repeat="objAlbumSet in sliderProfileAlbumSets" style="background-color:rgba(255,255,255,0.5);z-index:-1;margin-bottom:0px;">
+                                    <div ng-repeat="objAlbum in objAlbumSet.Contents" class="column one-second column_zoom_box no-margin-column">
+                                        <div class="zoom_box round-box">
+                                            <a>
+                                                <div class="photo round-box">
+                                                    <img class="scale-with-grid" src="{{objAlbum}}" alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="column one-slider column_zoom_box no-margin-column" style="background-color:#ffffff;color:black;padding:21px 7px;">
+                                        <div style="float: right;margin-right: 15px;margin-top:7px;width:100%;">
+                                            <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:60%;padding-left:50px;font-size: 26px;">{{objAlbumSet.AlbumName}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column one-slider">
+                                    <footer id="Footer" class="clearfix">
+                                        <div class="footer_copy" style="text-align:center;padding:21px 11px;background-color:#EEDC86">
+                                            <div class="container">
+                                                <div class="section">
+                                                    <div class="column one content_wrapper center-align">
+                                                        <button ng-click="goContact()" class="button-wide-transparent">Contact {{SliderReachUS}} Now</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="footer_copy" id="socialbar" style="background-color:#54595e">
+                                            <div class="container">
+                                                <div class="section">
+                                                    <div class="column one content_wrapper center-align">
+                                                        <!--Social info area-->
+                                                        <ul class="social">
+                                                            <li ng-repeat="objSocialNetwork in SocialNetworks" class="{{objSocialNetwork.SocialNetworkName}}">
+                                                                <a href="{{objSocialNetwork.ProfileSocialNetworkURL}}" title="Skype"><i class="{{objSocialNetwork.SocialNetworkDescription}}"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Footer copyright-->
+                                        <div class="footer_copy" style="background-color:#a5a8a7;">
+                                            <div class="container">
+                                                <div class="column one">
+                                                    <!--<a id="back_to_top" href="#about" class="button button_left button_js"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>-->
+                                                    <div class="copyright font-color-white" style="text-align:center;">
+                                                        {{sliderProfile.ProfileFullname}} Copyrights &copy; 2017
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="mainSlider == 2">
+                            <div class="section mcb-section" id="about">
+                                <div class="column one no-margin" style="background-color:#EBEFF0;z-index:999;width:100%;position: relative;opacity: 0.8;">
+                                    <div id="appcategorylistSlider" class="btn-group" style="padding: 23px;">
+                                        <ul class="horizontal-list">
+                                            <slick class="slider" dots="false" slides-to-show="{{featuredSliderNumber}}" touch-move="true" slides-to-scroll="3" settings="slickMenu" ng-if="categoriesLoaded" init-onload="true" data="categories">
+                                                <li><label class="btn btn-primary" ng-model="CategoryID" value="0" uib-btn-radio="0" ng-change="loadAlbums(0)">All</label></li>
+                                                <li ng-repeat="obj in categories"><label class="btn btn-primary" ng-model="$parent.CategoryID" value="{{obj.CategoryID}}" uib-btn-radio="'{{obj.CategoryID}}'" ng-change="$parent.loadAlbums({{obj.CategoryID}})">{{obj.CategoryName}}</label></li>
+                                            </slick>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.1);z-index:-1;margin-bottom:0px;">
+                                    <div class="column one-second column_zoom_box no-margin-column" ng-repeat="obj in sliderAlbums">
+                                        <div class="zoom_box round-box">
+                                            <a href="#">
+                                                <div class="photo round-box">
+                                                    <img class="scale-with-grid" src="{{obj.AlbumCover}}" alt="{{obj.AlbumName}}">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="mainSlider == 3">
+                            <div class="section mcb-section" id="about">
+                                <div class="column one no-margin" style="background-color:#54595F;z-index:999;width:100%;position: relative;opacity: 0.8;">
+                                    <div id="appaboutlistSlider" class="btn-group" style="padding: 23px;">
+                                        <ul class="horizontal-list">
+                                            <slick class="slider" dots="false" slides-to-show="1" touch-move="true" slides-to-scroll="3" settings="slickMenu">
+                                                <li><label class="btn btn-primary" ng-model="About" value="0" uib-btn-radio="0" ng-change="loadAbout(0)">Me</label></li>
+                                                <li><label class="btn btn-primary" ng-model="About" value="1" uib-btn-radio="1" ng-change="loadAbout(1)">Connections</label></li>
+                                            </slick>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="column one no-margin" style="background-color:#ffffff;z-index:999;width:100%;position: relative;opacity: 0.8;text-align:center;" ng-if="aboutTab == 0">
+                                    <uib-accordion close-others="false">
+                                        <div uib-accordion-group class="panel-default" heading="{{objAbout.AttributeName}}" ng-repeat-start="objAbout in abouts" ng-if="$first" is-open="true">
+                                            <p class="web-about-us-slider-text">{{objAbout.ProfileAttributeNote}}</p>
+                                        </div>
+                                        <div uib-accordion-group class="panel-default" heading="{{objAbout.AttributeName}}" ng-repeat-end="objAbout in abouts" ng-if="!$first" is-open="isAllOpen">
+                                            <p class="web-about-us-slider-text">{{objAbout.ProfileAttributeNote}}</p>
+                                        </div>
+                                    </uib-accordion>
+                                    <button class="button-wide-transparent" style="width:90%;padding:24px 0px;" ng-click="expandAll()">{{aboutExpandTitle}}</button>
+                                </div>
+                                <div ng-if="aboutTab == 1" style="width:100%;position: absolute;top: 63px;z-index: 999;">
+                                    <div style="margin:0px 15px; background-color:#ffffff;color:black;text-align:center;font-size:28px;font-weight:700;padding: 35px 0px;">
+                                        MY CLIENTS
+                                    </div>
+                                    <div id="official-connection" class="column one-slider no-margin-column" style="background-color:rgba(255,255,255,0.8);z-index:-1;margin-bottom:0px;">
+                                        <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;" ng-repeat="objConnection in connections">
+                                            <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                                                <div class="zoom_box round-box">
+                                                    <a href="#">
+                                                        <div class="photo round-box">
+                                                            <img class="scale-with-grid" src="{{objConnection.ProfileImage}}" alt="">
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                                                <b>{{objConnection.ProfileFullname}}</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="mainSlider == 4">
+                            <div class="section mcb-section" id="contactForm">
+                                <div class="column one no-margin" style="background-color:#ffffff;z-index:999;width:100%;position: relative;opacity: 0.8;text-align:center;">
+                                    <form ng-submit="submitForm(addMessageForm.$valid)" novalidate name="addMessageForm" style="background-color:#ffffff;z-index:999;width:100%;position: relative;opacity: 0.8;text-align:center;" class="form-horizontal">
+                                        <div class="column one column_fancy_heading bottom-margin" style="padding-top:10px;padding-bottom:20px;">
+                                            <h2 class="title-main">Contacts</h2>
+                                            <p class="contact-us-text">you have a question or do you want to share a story yourself? Please use the form below to get in touch with me.</p>
+                                        </div>
+                                        <div class="column one column_column border-bottom bottom-margin">
+                                            <div class="column two-third-custom bottom-margin">
+                                                <input type="text" class="boldFont input-contacts" aria-required="true" disabled aria-invalid="false" placeholder="{{RequestedProfileFullname}}">
+                                            </div>
+                                            <div class="column one-sixth bottom-margin">
+                                                <p class="contact-us-text-title">From</p>
+                                            </div>
+                                        </div>
+                                        <div class="column one column_column border-bottom bottom-margin">
+                                            <div class="column two-third-custom bottom-margin">
+                                                <input type="text" class="boldFont input-contacts" aria-required="true" disabled aria-invalid="false" placeholder="{{Profile.ProfileFullname}}">
+                                            </div>
+                                            <div class="column one-sixth bottom-margin">
+                                                <p class="contact-us-text-title">To</p>
+                                            </div>
+                                        </div>
+                                        <div class="column one column_column border-bottom bottom-margin">
+                                            <div class="column two-third-custom bottom-margin">
+                                                <input type="text" class="boldFont input-contacts" ng-model="object.ContactSubject" required aria-required="true" aria-invalid="false" placeholder="Select Subject">
+                                            </div>
+                                            <div class="column one-sixth bottom-margin">
+                                                <p class="contact-us-text-title">Subject</p>
+                                            </div>
+                                        </div>
+                                        <div class="column one column_column border-bottom bottom-margin">
+                                            <div class="column two-third-custom bottom-margin">
+                                                <textarea style="height:113px;" class="boldFont input-contacts note-form-contact-us" ng-model="object.ContactNote" required rows="13" aria-required="true" aria-invalid="false" placeholder="Enter your message in short and clean!"></textarea>
+                                                <!--<textarea class="input-contacts"  ng-model="object.MessageNote" rows="13" aria-required="true" aria-invalid="false" placeholder="Enter your message in short and clean!"></textarea>-->
+                                            </div>
+                                            <div class="column one-sixth bottom-margin">
+                                                <p class="contact-us-text-title">Note</p>
+                                            </div>
+                                        </div>
+                                        <div class="column one column_column bottom-margin">
+                                            <div style="float: right;margin-right: 15px;margin-top:21px;margin-bottom:68px;">
+                                                <button ng-disabled="addMessageForm.$invalid" type="submit" class="submit-contact-us">{{sendButton}}</button>
+                                                <!--<a ng-click="submit()" style="font-size:36px;color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:90px;">Send</a>-->
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div pageslide ps-size="{{pAdsSize}}" ps-auto-close="false" ps-click-outside="false" ps-push="false" ps-open="checkedads">
+    <div class="mfn-main-slider">
+        <div class="section dark" ng-if="checkedads" id="adsSlider" style="height: 100vh;background-color:; background-image:url(https://gorgiasasia.blob.core.windows.net/images/slider-mini-{{adsProfile.ProfileID}}?timestamp={{timestamp}}); background-repeat:no-repeat; background-position:center center; background-size:cover; -webkit-background-size:cover" data-stellar-background-ratio="1">
+            <div class="clearfix" style="height: 100vh;">
+                <div class="items_group clearfix" style="height: 100vh;">
+                    <div class="column_attr" style="position:absolute;bottom:25%;left:8px;">
+                        <div class="featured-description-ads ads-description-{{adsProfile.ThemeClassCode}}">
+                            {{adsProfile.ProfileShortDescription}}
+                        </div>
+                    </div>
+                    <div class="white-cover"></div>
+                    <div class="column_attr" style="text-align: left;position:absolute;top:25px;left:7px;background-color: rgba(51,51,51,0.8);padding: 7px;cursor:pointer">
+                        <img src="content/images/cross_light.png" ng-click="closeAdSlider()" />
+                    </div>
+                    <div class="column one-second no-margin" style="position:absolute;top:40%;left:25%;">
+                        <div class="zoom_box slider-ads-profile-border">
+                            <a href="/{{adsProfile.ProfileURL}}">
+                                <div class="photo">
+                                    <img class="scale-with-grid" ng-src="{{adsProfile.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{adsProfile.ProfileImage}}?timestamp={{timestamp}}" alt="{{adsProfile.ProfileFullname}}">
+                                </div>
+                                <div class="desc" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                    <div class="desc_wrap">
+                                        <div class="desc_img">
+                                            <img ng-src="https://gorgiasasia.blob.core.windows.net/images/qr-web-{{adsProfile.ProfileID}}.png" default-image="content/images/qr.png" fallback-image="https://gorgiasasia.blob.core.windows.net/images/qr-web-{{adsProfile.ProfileID}}.png" alt="{{adsProfile.ProfileFullname}}" class="scale-with-grid-app">
+                                            <!--<img class="scale-with-grid-app" src="content/images/qr.png" alt="">-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div id="loading-bar-container"></div> content/agency/images/366474.jpg-->
+<!--<div class="landscape-not-supported" ng-show="isLandscapeSupported">
+    Landscape is not supported ;)
+</div>-->
+<div id="Wrapper">
+    <div class="mfn-main-slider" cg-busy="{promise:promise,message:'Loading',backdrop:true,templateUrl:'/layout/loading/mainloading.html',delay:0,minDuration:300}" ng-if="mainPage == 1">
+        <div class="section dark" ng-if="ArchiveFeaturesLoaded" id="featured" style="height: 100vh;background-color:; background-image:url(https://gorgiasasia.blob.core.windows.net/images/{{CurrentFeature.FeatureImage}}); background-repeat:no-repeat; background-position:center top; background-size:cover; -webkit-background-size:cover;background-attachment:fixed;" data-stellar-background-ratio="1">
+            <div class="section_wrapper clearfix" style="height: 100vh;">
+                <div class="items_group clearfix" style="height: 100vh;">
+                    <div class="column_attr featured-tags-top" id="slidertaglist">
+                        <div class="btn-group">
+                            <ul class="horizontal-list">
+                                <li ng-repeat="obj in MainTags"><label class="btn btn-primary">{{obj.TagName}}</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="redtheme" class="column_attr featured-country">
+                        <span ng-show="isFeatured" class="country country-name lightFont">{{ProfileProfile.CountryName}}</span><span class="country-code lightFont" style="letter-spacing:0px;font-weight:900;">{{ProfileProfile.CountryShortName}}</span>
+                    </div>
+                    <div class="column_attr featured-name">
+                        <h2 class="featured-name-title">{{ProfileProfile.ProfileFullname}}</h2>
+                        <div id="slidertaglist2" style="width: 200px;float:none;margin-top: 88px;" ng-show="isFeatured">
+                            <ul class="horizontal-list">
+                                <li ng-repeat="obj in ProfileTags"><label class="btn btn-primary lightFont">{{obj.TagName}}</label></li>
+                            </ul>
+                        </div>
+                        <div class="featured-description" ng-show="isFeatured">
+                            {{CurrentFeature.FeatureDescription | cut:true:45:'...'}}
+                        </div>
+                    </div>
+                    <div class="column_attr featured-available-app">
+                        <div id="redtheme" style="padding:20px 0px;">
+                            <span class="subscribe subscribe-name boldFont">SUBSCRIBES</span><span class="subscribe subscribe-number">{{ProfileProfile.ProfileLike}}</span>
+                        </div>
+                        <div style="padding:13px 0px 0px 25px;">
+                            <h4 class="availableApp lightFont">Available Apps</h4>
+                            <a ng-repeat="objExternal in ExternalLinks" ng-href="{{objExternal.ExternalLinkURL}}"><img src="https://gorgiasasia.blob.core.windows.net/images/{{objExternal.LinkTypeImage}}" alt="" width="48" height="48"></a>
+                        </div>
+                    </div>
+                    <div class="column_attr featured-menu" ng-show="isDesktop">
+                        <div id="redtheme">
+                            <ul class="menu">
+                                <li>
+                                    <a ng-href="/{{ProfileProfile.ProfileURL}}" class="menuhome lightFont">Home</a>
+                                </li>
+                                <li>
+                                    <a ng-href="/{{ProfileProfile.ProfileURL}}/gallery" class="menugalleries">Galleries</a>
+                                </li>
+                                <li>
+                                    <a ng-href="/{{ProfileProfile.ProfileURL}}/about" class="menuabouts">Abouts</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column_attr featured-reach" ng-show="isDesktop">
+                        <div style="padding:9px 8px;background-color: #454545;font-size:14px;color:#ffffff;font-weight:900;">
+                            <a ng-href="/{{ProfileProfile.ProfileURL}}/contact"><span style="padding-right: 12px;border-right: 1px solid #fff;margin-right: 12px;color:#ffffff;">REACH</span><span style="color:#F5D22C;">{{ReachUS}}</span></a>
+                        </div>
+                    </div>
+                    <div class="column_attr featured-qr">
+                        <img ng-src="https://gorgiasasia.blob.core.windows.net/images/qr-web-{{ProfileProfile.ProfileID}}.png" default-image="content/images/qr.png" fallback-image="content/images/qr.png" alt="" width="70" height="70" ng-show="isDesktop">
+                        <div style="width:40px;fill:#ffffff;height:40px;" ng-show="!isDesktop" ng-click="toggleFeatured()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.45 59.5"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M29.71,59.46c-3,0-6.06.06-9.09,0A20.36,20.36,0,0,1,8.72,55.3,21,21,0,0,1,.22,41,19,19,0,0,1,0,38.3c0-5.74,0-11.48,0-17.22A20.53,20.53,0,0,1,4.34,8.55,20.93,20.93,0,0,1,17.62.39,20.57,20.57,0,0,1,21.19.05c5.7,0,11.4-.1,17.09,0a20.89,20.89,0,0,1,17.25,9,20.44,20.44,0,0,1,3.76,9.74,19.21,19.21,0,0,1,.14,2.27c0,5.74,0,11.48,0,17.22a20.54,20.54,0,0,1-4.18,12.45,21,21,0,0,1-14,8.44,26,26,0,0,1-3.64.25c-2.62,0-5.25,0-7.87,0Zm0-1.06H38A20.33,20.33,0,0,0,58.37,38c0-5.48,0-11,0-16.44A21.53,21.53,0,0,0,58,17.9,19.84,19.84,0,0,0,50.65,5.53a19.29,19.29,0,0,0-12-4.37c-5.92-.08-11.83,0-17.75,0a18.6,18.6,0,0,0-3.53.39A20.26,20.26,0,0,0,1.11,21.25c0,5.71,0,11.42,0,17.12A19.48,19.48,0,0,0,3,46.59,20.34,20.34,0,0,0,21.4,58.4Z" /><circle class="cls-1" cx="30.48" cy="29.75" r="1.51" /></g></g></svg>
+                        </div>
+                        <!--<img src="content/images/qr.png" alt="" width="40" height="40" >-->
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="entry-content">
+            <div class="section mcb-section" id="about" style="padding-bottom:0px;background-color:#EBEFF0;background-repeat:no-repeat; background-position:center center;background-size:cover;background-attachment:fixed;display:block;">
+                <div class="section_wrapper mcb-section-inner">
+                    <div class="wrap mcb-wrap one  valign-top clearfix">
+                        <div class="mcb-wrap-inner">
+                            <div class="section">
+                                <div class="section_wrapper clearfix">
+                                    <div class="togglePageArrow">
+                                        <i class="fa fa-angle-up cursor-pointer bounce-arrow" style="font-size:36px;color:#a5a8a7" ng-click="pageToggle(2)" aria-hidden="true"></i>
+                                    </div>
+                                    <slick class="slider" settings="slickFeatured" ng-if="ArchiveFeaturesLoaded" init-onload="true" data="ArchiveFeatures">
+                                        <div class="trailer_box trigger" ng-repeat="objArchiveFeatures in ArchiveFeatures">
+                                            <a ng-click="featureDetail(objArchiveFeatures.FeatureID)">
+                                                <!--gorgiasmanager://?PageID={{objArchiveFeatures.ProfileID}}-->
+                                                <img class="scale-with-grid" alt="{{objArchiveFeatures.FeatureTitle}}" preload-image default-image="Content/Images/bars-loading.svg" fallback-image="https://gorgiasasia.blob.core.windows.net/images/{{objArchiveFeatures.FeatureImage}}" ng-src="content/agency/images/366474.jpg">
+                                                <div class="desc">
+                                                    <h2 class="featured_name boldFont">{{objArchiveFeatures.ProfileFullname}}</h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </slick>
+                                    <div style="float:right;margin:5px 0px;padding:11px 0px;">
+                                        <img style="float:right;padding-right: 3px;" src="content/images/logo-gorgias-32.png" width="29" height="26" /><span style="float:right;padding-top: 10px;padding-right: 13px;font-size: 11px;">Featured Gorgias!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content 7-->
+    <div id="Content" ng-if="mainPage == 2">
+        <div class="content_wrapper clearfix">
+            <div class="sections_group">
+                <div class="section">
+                    <div class="mainmanulogo">
+                        <a ng-if="isAdmin" href="/admin/profile/{{adminProfileID}}"><i class="fa fa-2x fa-gear" style="margin-left: 7px;color:#454545"></i></a>
+                        <img class="scale-with-grid" src="content/images/home.svg" ng-show="!checkedWeb && !checked" style="z-index:99999;width:32px;cursor:default" ng-click="pageToggle(1)" alt="Gorgias">
+                    </div>
+                    <div class="main-left-sticker"></div>
+                    <div class="section_wrapper clearfix" style="margin-bottom:13px;">
+                        <div class="column one column_column no-margin-column" style="margin-left: 30px;">
+                            <img class="logo-main cursor-pointer" height="32" style="padding-top:21px;width: 32px;" ng-show="industryOff == false" ng-click="industryToggle()" src="content/images/industryoff.svg" alt="Gorgias">
+                            <img class="logo-main cursor-pointer" width="32" style="padding-top:17px;height: 32px;" ng-show="industryOff == true" ng-click="industryToggle()" src="content/images/industryon.svg" alt="Gorgias">
+                            <div ng-show="industryOff == true" id="applist" class="btn-group custom-margin-div-industry">
+                                <ul class="horizontal-list">
+                                    <li><label class="btn btn-primary" ng-class="{active:industryAll}" ng-click="IndustryAll()">All</label></li>
+                                    <li ng-repeat="obj in Industries"><label class="btn btn-primary" style="float:left;margin-right:7px;" ng-model="obj.selected" uib-btn-checkbox ng-change="$parent.IndustrySort()">{{obj.IndustryName}}</label></li>
+                                    <li ng-repeat="obj in Industries"><!--<label class="btn btn-primary" style="float:left;margin-right:7px;" ng-model="$parent.profileSearch.Industries" value="{{obj.IndustryID}}" uib-btn-radio="'{{obj.IndustryID}}'" ng-change="$parent.sort()">{{obj.IndustryName}}</label>--></li>
+                                </ul>
+                            </div>
+                            <div class="custom-margin-div-country countryTop" style="text-align:center;">
+                                {{countryLabel}}
+                                <div id="countrymemu">
+                                    <div class="countryTop" style="margin-right: 12px;">{{countryLabel}}</div>
+                                    <ul class="countrymenu" style="padding-top:150px;">
+                                        <li><a ng-model="profileSearch.CountryID" ng-click="CountryAll()">All Countries</a></li>
+                                        <li ng-repeat="objCountry in Countries"><a ng-model="$parent.profileSearch.CountryID" value="{{objCountry.CountryID}}" uib-btn-radio="'{{objCountry.CountryID}}'" ng-change="$parent.sortCountry($index)">{{objCountry.CountryName}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column one column_column no-margin-column" style="margin-left: 19px;margin-bottom:0px;">
+                            <!--no-margin-column-->
+                            <div class="btn-group custom-margin-div">
+                                <span class="search-icon">ICONIC</span><br />
+                                <img class="cursor-pointer" src="content/images/tag.svg" width="46" ng-show="isTags && !TagTrial" ng-click="showTags()" />
+                            </div>
+                            <div id="approundlist" class="btn-group" ng-show="isTagsSearch">
+                                <ul class="horizontal-list">
+                                    <li><label ng-click="hiddenTags()" class="btn btn-primary" style="font-size: 11px;padding: 5px 11px;">X</label></li>
+                                </ul>
+
+                                <tags-input ng-model="tags" on-tag-added="onTagAdded($tag)" on-tag-removed="onTagRemoved($tag)" display-property="TagName" placeholder="What do you look for {{windowWidth}}" replace-spaces-with-dashes="false" add-from-autocomplete-only="true" style="width: 91%;float: left;margin-left: 4px;">
+                                    <auto-complete source="loadTags($query)"
+                                                   min-length="0"
+                                                   load-on-focus="false"
+                                                   load-on-empty="true"
+                                                   max-results-to-show="32"></auto-complete><!--template="my-custom-template"-->
+                                </tags-input>
+                                <!--<label class="btn btn-primary" style="float:left;margin-right:7px;" ng-repeat="obj in Tags"><input type="checkbox" checklist-model="$parent.profileSearch.Tags" checklist-value="obj.TagID" checklist-change="$parent.sort()" />{{obj.TagName}}</label>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <div id="approundlist" class="column one no-margin-column" style="margin-left: 19px;" ng-show="isTagsSearch">
+                            <ul class="horizontal-list">
+                                <li><label class="btn btn-primary" ng-class="{active:primaryTagsAll}" ng-click="PrimaryTagsAll()">all tags</label></li>
+                                <li ng-repeat="obj in PrimaryTags"><label class="btn btn-primary" ng-model="obj.selected" uib-btn-checkbox ng-change="$parent.PrimaryTagSort()">{{obj.TagName}}</label></li>
+                            </ul>
+                        </div>
+                        <div class="column one no-margin-column sort-module">
+                            <div class="btn-group profiletype-bar" id="applistsort">
+                                <div class="btn-group">
+                                    <ul class="horizontal-list">
+                                        <li><label class="btn btn-primary" ng-model="profileSearch.ProfileTypeID" value="''" uib-btn-radio="''" ng-change="sort()">All</label></li>
+                                        <li ng-repeat="obj in ProfileTypes"><label class="btn btn-primary" ng-model="$parent.profileSearch.ProfileTypeID" value="{{obj.ProfileTypeID}}" uib-btn-radio="'{{obj.ProfileTypeID}}'" ng-change="$parent.sort()">{{obj.ProfileTypeName}}</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="profile-menu">
+                                <i class="fa fa-user-circle-o cursor-pointer" ng-if="MyProfileTrial" aria-hidden="true" style="font-size:36px;color:#a5a8a7" ng-click="profileSetup()"></i>
+                                <!--<img src="content/images/profile_filter_select.png" ng-click="profileSetup()" />-->
+                            </div>
+                            <div class="sort-bar" id="applistsort">
+                                <!--<div class="btn-group">-->
+                                <ul class="horizontal-list">
+                                    <li><label class="btn btn-primary" ng-model="profileSearch.OrderType" value="1" uib-btn-radio="'1'" ng-change="sort()">Latest</label></li>
+                                    <li><label class="btn btn-primary" ng-model="profileSearch.OrderType" value="2" uib-btn-radio="'2'" ng-change="sort()">Like</label></li>
+                                    <li><label class="btn btn-primary" ng-model="profileSearch.OrderType" value="3" uib-btn-radio="'3'" ng-change="sort()">Trending</label></li>
+                                    <li><label class="btn btn-primary" ng-model="profileSearch.OrderType" value="4" uib-btn-radio="'4'" ng-change="sort()">Nearest</label></li>
+                                    <li><label class="btn btn-primary" ng-model="profileSearch.OrderType" value="5" uib-btn-radio="'5'" ng-change="sort()">A-Z</label></li>
+                                </ul>
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" cg-busy="promise" ng-show="Profiles.Apps.length > 0">
+            <div class="section_wrapper clearfix">
+                <div class="column one column_column section-icons">
+                    <!-- Animated area -->
+                    <!--<div class="animate" data-anim-type="fadeInUp">toggle(app.ProfileID) -->
+                    <div ng-click="toggleWeb(app.ProfileURL)" class="column one-fourth column_zoom_box no-margin-column" ng-repeat="app in Profiles.Apps">
+                        <div class="zoom_box round-box-more5 cursor-pointer">
+                            <a>
+                                <div class="photo">
+                                    <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{app.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{app.ProfileImage}}?timestamp={{timestamp}}" alt="{{app.ProfileFullname}}">
+                                </div>
+                                <div class="desc" style="background-color:rgba(222, 0, 131, 0.7);border-radius: 5px;">
+                                    <div class="desc_wrap">
+                                        <!--style="padding-top: 40%;"-->
+                                        <div class="desc_txt">
+                                            {{app.ProfileFullname}}<span ng-show="profileSearch.OrderType==4">
+                                                <br />{{distance(app.Distance)| number:0}} km
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div ng-show="finishedAppList" class="loadmore-block">
+                        <a ng-click="loadmoreApp()" class="loadmore">more International</a>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <div id="icons" class="section" cg-busy="promise" ng-show="Profiles.Webs.length > 0">
+            <div class="section_wrapper clearfix">
+                <div class="column one column_column section-icons">
+                    <!-- Animated area -->
+                    <!--<div class="animate" data-anim-type="fadeInUp"> ng-href="/web/{{web.ProfileID}}"-->
+                    <div ng-click="toggleWeb(web.ProfileURL)" class="column one-fifth column_zoom_box no-margin-column" ng-repeat="web in Profiles.Webs">
+                        <div class="zoom_box round-box-more cursor-pointer">
+                            <a class="trigger">
+                                <div class="photo">
+                                    <!--round-box desc-->
+                                    <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{web.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{web.ProfileImage}}?timestamp={{timestamp}}" alt="{{web.ProfileFullname}}">
+                                </div>
+                                <div class="desc" style="background-color:rgba(222, 0, 131, 0.7);border-radius: 5px;">
+                                    <div class="desc_wrap">
+                                        <!--style="padding-top: 40%;"-->
+                                        <div class="desc_txt">
+                                            {{web.ProfileFullname}} <span ng-show="profileSearch.OrderType==4">
+                                                <br />{{distance(web.Distance)| number:0}} km
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div ng-show="finishedWebList" class="loadmore-block">
+                        <a ng-click="loadmoreWeb()" class="loadmore">
+                            more Nation
+                        </a>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>      
+        <div class="section" ng-if="!isProfileLoaded" cg-busy="promise" ng-show="Profiles.Sliders.length > 0">
+            <div class="section_wrapper clearfix">
+                <!-- One full width row-->
+                <div class="column one column_column section-icons">
+                    <!-- Animated area -->
+                    <!--<div class="animate" data-anim-type="fadeInUp"> ng-href="/{{slider.ProfileURL}}" toggle(app.ProfileID)-->
+                    <div ng-click="toggleWeb(slider.ProfileURL)" class="column one-sixth column_zoom_box no-margin-column" ng-repeat="slider in Profiles.Sliders">
+                        <div class="zoom_box round-box-more6 cursor-pointer">
+                            <a>
+                                <div class="photo">
+                                    <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{slider.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{slider.ProfileImage}}?timestamp={{timestamp}}" alt="{{slider.ProfileFullname}}">
+                                </div>
+                                <div class="desc" style="background-color:rgba(222, 0, 131, 0.7);border-radius: 5px;">
+                                    <div class="desc_wrap">
+                                        <!--style="padding-top: 24%;"-->
+                                        <div class="desc_txt">
+                                            {{slider.ProfileFullname}}<span ng-show="profileSearch.OrderType==4">
+                                                <br />{{distance(slider.Distance)| number:0}} km
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div ng-show="finishedSliderList" class="loadmore-block">
+                        <a ng-click="loadmoreSlider()" class="loadmore">more Local</a>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <div class="section" ng-if="isProfileLoaded" cg-busy="promise" ng-show="Profiles.Sliders.length > 0">
+            <div class="section_wrapper clearfix">
+                <!-- One full width row-->
+                <div class="column one column_column section-icons">
+                    <!-- Animated area -->
+                    <!--<div class="animate" data-anim-type="fadeInUp"> ng-href="/{{slider.ProfileURL}}" toggle(app.ProfileID)-->
+                    <div ng-click="toggle(slider.ProfileID)" class="column one-sixth column_zoom_box no-margin-column" ng-repeat="slider in Profiles.Sliders">
+                        <div class="zoom_box round-box-more6 cursor-pointer">
+                            <a>
+                                <div class="photo">
+                                    <img class="scale-with-grid" preload-image ng-src="{{slider.ProfileImage}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{slider.ProfileImage}}" alt="{{slider.ProfileFullname}}">
+                                </div>
+                                <div class="desc" style="background-color:rgba(222, 0, 131, 0.7);border-radius: 5px;">
+                                    <div class="desc_wrap">
+                                        <!--style="padding-top: 24%;"-->
+                                        <div class="desc_txt">
+                                            {{slider.ProfileFullname}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div ng-show="finishedSliderList" class="loadmore-block">
+                        <a ng-click="loadmoreSlider()" class="loadmore">more Quick Slider</a>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <div class="section" ng-if="profilesEmptyLoaded">
+            <div class="section_wrapper clearfix">
+                <!-- One full width row-->
+                <div class="column one column_column section-icons" style="height:100vw;text-align: center;padding-top: 100px;">
+                    No Gorgias ;)
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="section the_content copyright-fixed-footer">
+            <div class="section_wrapper">
+                <div class="the_content_wrapper">
+                    <div class="footer-copyright">Gorgias, Copyrights © 2017</div> <div class="footer-copyright-menu"><a ng-click="signIn()" class="footer-menu signin">{{signinTitle}}</a><a class="footer-menu">Terms & Conditions</a><a class="footer-menu">Privacy</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

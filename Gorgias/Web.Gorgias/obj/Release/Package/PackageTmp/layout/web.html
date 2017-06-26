@@ -1,0 +1,206 @@
+﻿<!--<side-Bar></side-Bar>-->
+<side-Bar profileurl="ProfileURL" profileid="ProfileID" subscribemode="SubscribeMode" profiletypeid="ProfileTypeID" slidermode="1" activemenu="1"></side-Bar>
+<!--<div class="spinnerLoading" ng-show="!isloaded"> content/agency/images/366474.jpg
+    <div class="spinner"></div>
+</div>-->
+<div id="loading-bar-container"></div>
+
+<div id="Wrapper" cg-busy="promise">
+    <!-- Header Wrapper -->
+    <div id="Header_wrapper">
+        <!-- Header -->
+        <header id="Header" >
+            <!-- Revolution slider area web-featured-mobile-->
+            <div class="mfn-main-slider">
+                <div class="section dark" id="featured" style="height: 100vh;background-color:rgb(221, 221, 225); background-image:url(https://gorgiasasia.blob.core.windows.net/images/webcover-{{Profile.ProfileID}}?timestamp={{timestamp}}); background-repeat:no-repeat; background-position:center center; background-size:cover; -webkit-background-size:cover" data-stellar-background-ratio="1">
+                    <div class="section_wrapper clearfix" style="height: 100vh;">
+                        <div class="items_group clearfix" style="height: 100vh;">
+                            <div class="column_attr" id="slidertaglist" style="padding-top:31px;position:absolute;top:-3px;right:6px;">
+                                <div class="btn-group">
+                                    <ul class="horizontal-list">
+                                        <li ng-repeat="obj in MainTags"><label class="btn btn-primary web-tag-{{Profile.ThemeClassCode}}">{{obj.TagName}}</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="redtheme" class="column_attr" style="text-align: right;position:absolute;top:98px;right:0px;">
+                                <span class="country country-name web-country-{{Profile.ThemeClassCode}}">{{Profile.CountryName}}</span><span class="country-code web-country-code-{{Profile.ThemeClassCode}}">{{Profile.CountryShortName}}</span>
+                            </div>
+                            <div class="column_attr web-featured-name-position">
+                                <h2 class="web-featured-name web-name-{{Profile.ThemeClassCode}}">{{Profile.ProfileFullname}}</h2>
+                                <div class="featured-description web-featured-description web-description-{{Profile.ThemeClassCode}}">
+                                    {{Profile.ProfileShortDescription | cut:true:60:'...'}}
+                                </div>
+                            </div>
+                            <div class="column_attr web-subscription">
+                                <div id="redtheme" style="padding:20px 0px;">
+                                    <span ng-click="downloadApp()" style="cursor:pointer;" class="subscribe subscribe-name web-subscription-{{Profile.ThemeClassCode}}">Get App</span><span class="subscribe subscribe-number web-subscription-like-{{Profile.ThemeClassCode}}">{{Profile.ProfileLike}}</span>
+                                </div>
+                                <div style="padding:0px 0px 0px 30px;" ng-if="externalLinksLoaded">
+                                    <h4 style="color:#000000;color: #000000;margin-bottom: 0px;font-size: 16px;font-weight: 400;" class="web-available-app-{{Profile.ThemeClassCode}}">Available Apps</h4>
+                                    <a ng-repeat="objExternal in ExternalLinks" ng-href="{{objExternal.ExternalLinkURL}}"><img src="https://gorgiasasia.blob.core.windows.net/images/{{objExternal.LinkTypeImage}}" alt="" width="48" height="48"></a>
+                                    <!--<img src="content/images/download_apple_app_shadow.png" alt="" width="48" height="48">-->
+                                </div>
+                                <div id="slidertaglist2" style="width: 270px;float:none;margin-top: 25px;">
+                                    <ul class="horizontal-list">
+                                        <li ng-repeat="obj in Tags"><label class="btn btn-primary web-tag-bottom-{{Profile.ThemeClassCode}}">{{obj.TagName}}</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="column_attr" style="position:absolute;bottom:16px;right:19px;text-align:right;">
+                                <img src="content/images/qr.png" alt="" width="70" height="70">
+                                <h2 ng-if="socialNetworksLoaded" style="color: #000000;margin-bottom: 0px;font-size: 16px;font-weight: 400;margin-top:10px;margin-bottom:12px;" class="web-follow-{{Profile.ThemeClassCode}}">Follow her @</h2>
+                                <div ng-if="socialNetworksLoaded" id="Footer-Featured" style="background-color:transparent;border:0px;">
+                                    <div id="socialbar" class="footer_copy">
+                                        <ul class="social">
+                                            <li ng-repeat="objSocialNetwork in SocialNetworks" class="{{objSocialNetwork.SocialNetworkName}}">
+                                                <a ng-click="redirectToSocialMedia(objSocialNetwork.ProfileSocialNetworkURL)" title="{{objSocialNetwork.SocialNetworkDescription}}"><i class="{{objSocialNetwork.SocialNetworkDescription}} web-social-{{Profile.ThemeClassCode}}"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <!-- Main Content class="content-mobile"-->
+    <div id="Content">
+        <div class="content_wrapper clearfix">
+            <div class="sections_group">
+                <div class="entry-content">
+                    <div class="section" ng-if="albumLoaded">
+                        <div class="section_wrapper clearfix" style="padding-top:65px;padding-bottom:30px;">
+                            <!--web-album-padding <div class="column one column_column" style="padding-top:21px;">
+                                <!-- Animated area -->
+                            <!--<div class="animate" data-anim-type="fadeInUp">-->
+                            <div class="column one-fifth column_zoom_box no-margin-column" ng-repeat="obj in albums">
+                                <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                                <div class="zoom_box round-box">
+                                    <a ng-click="redirectToSlideshow(obj.AlbumID)"><!--ng-href="/{{ProfileURL}}/slideshow/{{obj.AlbumID}}"-->
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.AlbumCover}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{obj.AlbumCover}}" alt="{{obj.AlbumName}}">
+                                        </div>
+                                        <div class="desc round-box" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                            <div class="desc_wrap" style="padding-top: 25%;">
+                                                <div class="desc_txt">
+                                                    {{obj.AlbumName}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div ng-show="finishedList" class="loadmore-block">
+                                <a ng-click="loadmore()" class="loadmore">View all albums</a>
+                            </div>
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section" ng-if="aboutsLoaded">
+                <div style="position:absolute;width:100%;height:100%;display:block;opacity:0.3;background-image:url(https://gorgiasasia.blob.core.windows.net/images/webcover-{{Profile.ProfileID}}?timestamp={{timestamp}}); background-repeat:no-repeat; background-position:center;background-size:cover;background-attachment:fixed; background-size:cover; -webkit-background-size:cover" data-stellar-background-ratio="0.5"></div>
+                <div class="section_wrapper clearfix">
+                    <div class="column one" style="margin-bottom: 5px;">
+                        <!-- Page Title-->
+                        <!-- One full width row-->
+                        <div class="column one column_column margin-bottom-sm">
+                            <!--<div class="column one-sixth">-->
+                            <h2 class="title-main lightFont about-bg">Abouts</h2>
+                            <!--</div>-->
+                        </div>
+                        <div class="column one column_column border-top margin-bottom-sm" ng-repeat="objAbout in abouts">
+                            <div class="column one-sixth low-margin-bottom web-about-float" style="margin-bottom:3px;">
+                                <h2 class="web-title boldFont">{{objAbout.AttributeName}}</h2>
+                            </div>
+                            <div class="column two-third-custom low-margin-bottom margin-bottom-sm">
+                                <p class="web-about-us-text">{{objAbout.ProfileAttributeNote}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Official Brands-->
+            <div class="section" ng-if="connectionsLoaded">
+                <div class="section_wrapper clearfix web-album-padding">
+                    <div class="column one column_column" style="padding-top:33px;">
+                        <!-- Animated area -->
+                        <!--<div class="animate" data-anim-type="fadeInUp">-->
+                        <div class="column one" style="margin-bottom: 18px;">
+                            <!--<div class="">-->
+                            <!--fancy_heading fancy_heading_icon-->
+                            <h2 class="title-official lightFont">Official Brands</h2>
+                            <!--</div>-->
+                        </div>
+                        <div class="column one-fifth column_zoom_box no-margin-column" ng-repeat="objConnection in connections">
+                            <div class="zoom_box round-box">
+                                <a ng-href="/{{objConnection.ProfileURL}}">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{objConnection.ProfileImage}}" default-image="Content/Images/preloader.gif" fallback-image="{{objConnection.ProfileImage}}" alt="">
+                                    </div>
+                                    <div class="desc round-box" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                        <div class="desc_wrap" style="padding-top:25%;">
+                                            <div class="desc_txt">
+                                                {{objConnection.ProfileFullname}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <!--End of Official Brands-->
+            <div ng-if="profileLoaded" class="section " style="padding-top:20px; padding-bottom:0px; background-color:#DDDDE1">
+                <div class="section_wrapper clearfix">
+                    <!--<div class="items_group clearfix">-->
+                    <div class="column one widgets_wrapper web-contact-padding" style="text-align:center;margin: 0 1% 15px 0px;">
+                        <button ng-click="contact()" class="button-wide-transparent boldFont contact-btn">Contact {{Profile.ProfileFullname}}</button>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+
+            <div class="section the_content">
+                <div class="section_wrapper">
+                    <div class="the_content_wrapper"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer-->
+<footer id="Footer" ng-if="profileLoaded" class="clearfix">
+    <div ng-if="socialNetworksLoaded" class="footer_copy content-mobile" id="socialbar" style="background-color:#54595e">
+        <div class="container">
+            <div class="section">
+                <div class="section_wrapper clearfix">
+                    <div class="column one content_wrapper center-align">
+                        <!--Social info area-->
+                        <ul class="social">
+                            <li ng-repeat="objSocialNetwork in SocialNetworks" class="{{objSocialNetwork.SocialNetworkName}}">
+                                <a ng-click="redirectToSocialMedia(objSocialNetwork.ProfileSocialNetworkURL)" title="{{objSocialNetwork.SocialNetworkDescription}}"><i class="{{objSocialNetwork.SocialNetworkDescription}}"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer copyright-->
+    <div class="footer_copy content-mobile" style="background-color:#a5a8a7;">
+        <div class="container">
+            <div class="column one">
+                <a id="back_to_top" ng-click="goToTop()" class="topbutton button_left button_js gototop" style="position:absolute;"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>
+                <div class="copyright font-color-white" style="text-align:center; font-size:13px;">
+                    {{Profile.ProfileFullname}} Copyrights &copy; 2017
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,64 @@
+﻿<div class="Wrapper">
+    <section role="main" id="Content">
+        <div class="content_wrapper clearfix">
+            <!-- start: page -->
+            <div class="sections_group">
+                <div class="entry-content">
+                    <div class="section">
+                        <div class="column_attr" style="text-align:left;position:absolute;top:25px;left:25px;cursor:pointer">
+                            <img src="content/images/cross_dark.png" style="cursor:pointer" ng-click="signout()">
+                        </div>
+                        <div class="column_attr" style="text-align:left;position:absolute;top:25px;right:25px;cursor:pointer">
+                            <select ng-options="language | translate for language in languages" ng-model="language" ng-change="updateLanguage()"></select>
+                        </div>
+                        <div class="section_wrapper clearfix">
+                            <div class="column one column_zoom_box no-margin-column" ng-controller="headerAdminController" style="position:relative;height: 400px;background-color:rgb(221, 221, 225); background-image:url(content/images/loginbg.jpg); background-repeat:no-repeat; background-position:center center; background-size:cover; -webkit-background-size:cover; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                                <div class="column one no-margin" style="position:absolute;bottom:0px;left:0px;z-index:99;width: 100%;border-radius: 15px;border-top-left-radius: 0px;border-top-right-radius: 0px;">
+                                    <div style="position:absolute;bottom:0px;left:0px;z-index:-5;background-color:rgba(0,0,0,0.6);width: 100%;border-radius: 15px;border-top-left-radius: 0px;border-top-right-radius: 0px;height: 129px;">                 
+                                        <div class="column one no-margin archivo-font" style="margin-left:14px;margin-top:73px;line-height: 23px;">
+                                            <span style="color:white;padding: 7px;padding-left: 15px;padding-right: 15px;border-radius: 8px;font-size:20px;font-weight:900;">Welcome to Agency Content Management System</span><br />
+                                            <!--<span style="color:white;padding: 7px;padding-left: 15px;padding-right: 15px;border-radius: 8px;font-size:13px;font-weight:100;">{{Profile.CountryName}} | {{Profile.IndustryName}} | {{Profile.ProfileTypeName}}</span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="administration" class="column one">
+                                <div style="margin-top: 31px;">
+                                    <div class="column one-fifth column_zoom_box no-margin-column" ng-repeat="obj in Profiles">
+                                        <div class="zoom_box round-box">
+                                            <a ng-href="/admin/agency/profile/edit/{{obj.Profile.ProfileID}}/{{ProfileID}}" target="_blank">
+                                                <div class="photo round-box">
+                                                    <img class="scale-with-grid" preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.Profile.ProfileImage}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{obj.Profile.ProfileImage}}" alt="{{obj.Profile.ProfileFullname}}">
+                                                </div>
+                                                <div class="desc round-box" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                                    <div class="desc_wrap" style="padding-top: 25%;">
+                                                        <div class="desc_txt">
+                                                            {{obj.Profile.ProfileFullname}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end: page -->
+        </div>
+    </section>
+</div>
+<footer id="Footer" class="clearfix" style="margin-left:0px;position: fixed;bottom: 0;width: 100%;">
+    <div class="footer_copy" style="background-color:#a5a8a7;">
+        <div class="container">
+            <div class="column one">
+                <a id="back_to_top" ng-click="goToTop()" class="topbutton button_left button_js gototop" style="position:absolute;"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>
+                <div class="copyright font-color-white" style="text-align:center; font-size:13px;">
+                    {{'GorgiasCopyrights' | translate}} &copy; 2017
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

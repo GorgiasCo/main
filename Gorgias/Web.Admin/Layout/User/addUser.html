@@ -1,0 +1,52 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addUserForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Add User</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Fullname<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="UserFullname" ng-model="object.UserFullname" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Email<span class="required">*</span></label><div class="col-sm-9"><input type="email" name="UserEmail" ng-model="object.UserEmail" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Block</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="UserIsBlocked" ng-model="object.UserIsBlocked" validate-on="blur" value="UserIsBlocked" type="checkbox" name="for[]" /><label for="UserIsBlocked">Block</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="UserStatus" ng-model="object.UserStatus" validate-on="blur" value="UserStatus" type="checkbox" name="for[]" /><label for="UserStatus">Status</label></div></div></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Country</label><div class="col-sm-9">
+                                    <select id="CountryID" class="form-control" ng-model="object.CountryID" ng-options="option.CountryID as option.CountryName for option in Countries" title="Please select Country">
+                                        <option value="">None</option>
+                                    </select>
+                                    <input type="hidden" name="CountryID" ng-value="object.CountryID" />
+                                </div>
+                            </div>
+                            <!--<div class="form-group"><label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="UserDateCreated" data-plugin-datepicker ng-model="object.UserDateCreated" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Date Confirmed<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="UserDateConfirmed" data-plugin-datepicker ng-model="object.UserDateConfirmed" validate-on="blur" class="form-control" required /></div></div></div>-->
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <a class="btn btn-default" ng-href="/user">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

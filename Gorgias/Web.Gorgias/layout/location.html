@@ -1,0 +1,137 @@
+﻿<side-Bar profileurl="ProfileURL" profileid="ProfileID" subscribemode="SubscribeMode" profiletypeid="ProfileTypeID" slidermode="1" activemenu="4"></side-Bar>
+
+<div id="loading-bar-container"></div>
+
+<div id="Wrapper">
+    <!-- Header Wrapper -->
+    <div id="Header_wrapper">
+        <!-- Header -->
+        <header id="Header"></header>
+    </div>
+    <!-- Main Content -->
+    <div id="Content">
+        <div class="content_wrapper clearfix" id="top">
+            <div class="sections_group">
+                <div class="entry-content">
+                    <div class="section" style="padding-top:50px; padding-bottom:40px;background-color:#f0f0f0;">
+                        <div class="section_wrapper clearfix">
+                            <div class="column one no-margin-column">
+                                <h2 class="title-main-gallery lightFont" style="margin-bottom:27px;">Reach Us</h2>
+                                <div id="appcategorylist" class="btn-group">
+                                    <ul class="horizontal-list">
+                                        <slick class="slider" dots="false" slides-to-show="{{addressTypeSliderNumber}}" touch-move="true" slides-to-scroll="3" settings="slickMenu" ng-if="addressTypesLoaded" init-onload="true" data="addressTypes">
+                                            <li><label class="btn btn-primary" ng-model="AddressTypeID" value="0" uib-btn-radio="'0'" ng-change="$parent.sort(0)">All</label></li>
+                                            <li ng-repeat="obj in addressTypes"><label class="btn btn-primary" ng-model="$parent.AddressTypeID" value="{{obj.AddressTypeID}}" uib-btn-radio="'{{obj.AddressTypeID}}'" ng-change="$parent.sort(obj.AddressTypeID)">{{obj.AddressTypeName}}</label></li>
+                                        </slick>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--<div class="column one no-margin-column" style="margin-bottom:27px;">
+                                <div class="btn-group" id="applistsort" style="float: left;margin-top:19px;">
+                                    <div class="btn-group">
+                                        <ul class="horizontal-list">
+                                            <li><label class="btn btn-primary" ng-model="OrderType" value="1" uib-btn-radio="'1'" ng-change="sort()">All</label></li>
+                                            <li><label class="btn btn-primary" ng-model="OrderType" value="1" uib-btn-radio="'1'" ng-change="sort()">Address</label></li>
+                                            <li><label class="btn btn-primary" ng-model="OrderType" value="2" uib-btn-radio="'2'" ng-change="sort()">Like</label></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn-group" id="applistsort" style="float: right;margin-top:19px;">
+                                    <div class="btn-group">
+                                        <ul class="horizontal-list">
+                                            <li><label class="btn btn-primary" ng-model="OrderType" value="1" uib-btn-radio="'1'" ng-change="sort()">Latest</label></li>
+                                            <li><label class="btn btn-primary" ng-model="OrderType" value="2" uib-btn-radio="'2'" ng-change="sort()">Like</label></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!-- Remove when Controller Ready ;)
+                            <div ng-show="isSelectedMovie" class="column one-third column_zoom_box no-margin-column" ng-repeat="obj in albums"> heading="{{obj.CountryName}}"
+                            </div>-->
+                            <div class="column one no-margin-column">
+                                <uib-accordion close-others="true">
+                                    <div uib-accordion-group class="panel-default" id="addresscountry" ng-repeat="obj in locations" is-open="$first">
+                                        <uib-accordion-heading style="text-align:left;">
+                                            <!--<span ng-click="mapUpdateCountry($index)" style="text-align:left;">{{obj.CountryName}}</span>-->
+                                            <span ng-click="reRednerMap()" style="text-align:left;">{{obj.CountryName}}</span>
+                                        </uib-accordion-heading>
+                                        <uib-accordion close-others="true">
+                                            <div uib-accordion-group class="panel-default" id="addressname" ng-repeat="objAddress in obj.Addresses" is-open="$first">
+                                                <uib-accordion-heading style="text-align:left;">
+                                                    <!--<span ng-click="$parent.$parent.mapUpdate(objAddress.AddressName)" style="text-align:left;">{{objAddress.AddressName}}</span>-->
+                                                    <span ng-click="$parent.$parent.reRednerMap()" style="text-align:left;">{{objAddress.AddressName}}</span>
+                                                </uib-accordion-heading>
+                                                <div class="column one column_zoom_box no-content-padding no-margin-column-mvs" style="float:none;width: 100%;margin: 0px;">
+                                                    <div id="mapImage">
+                                                        <ng-map id="{{objAddress.AddressName}}" lazy-init="false" map-initialized="reRednerMap()" centered="true" center="[{{objAddress.getLat}}, {{objAddress.getLng}}]"
+                                                                zoom="7" style="position:absolute;width:100%;overflow:hidden;">
+                                                            <marker position="[{{objAddress.getLat}}, {{objAddress.getLng}}]"></marker>
+                                                        </ng-map>
+                                                        <div class="mapInformation">
+                                                            <span class="addresstxt">{{objAddress.AddressAddress}},</span>
+                                                            <span class="addresstxt">{{objAddress.City.CityName}}, </span>
+                                                            <span class="addresstxt">{{obj.CountryName}}</span>
+                                                        </div>
+                                                        <div class="mapName">
+                                                            {{objAddress.AddressName}}
+                                                        </div>
+                                                        <div class="zoom_box16 round-box">
+                                                            <div class="photo round-box">
+                                                                <img class="scale-with-grid" src="https://gorgiasasia.blob.core.windows.net/images/address-{{objAddress.AddressImage}}" />
+                                                                <div id="map">
+                                                                    <!--
+                                                                    <ng-map id="{{objAddress.AddressName}}" lazy-init="true" centered="true" center="[{{objAddress.getLat}}, {{objAddress.getLng}}]"
+                                                                            zoom="7" style="width:100vw;" map-initialized="mapUpdate(objAddress.AddressName)">
+                                                                        <marker position="[{{objAddress.getLat}}, {{objAddress.getLng}}]"></marker>
+                                                                    </ng-map>-->
+                                                                    <!--
+                                                                    <img class="scale-with-grid" src="/content/agency/images/rightslider/address2.jpg" />-->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </uib-accordion>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section the_content">
+                <div class="section_wrapper">
+                    <div class="the_content_wrapper"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer-->
+<footer id="Footer" class="clearfix">
+    <div class="footer_copy" id="socialbar" style="background-color:#54595e">
+        <div class="container">
+            <div class="section">
+                <div class="column one content_wrapper center-align">
+                    <!--Social info area-->
+                    <ul class="social">
+                        <li ng-repeat="objSocialNetwork in SocialNetworks" class="{{objSocialNetwork.SocialNetworkName}}">
+                            <a href="{{objSocialNetwork.ProfileSocialNetworkURL}}" title="Skype"><i class="{{objSocialNetwork.SocialNetworkDescription}}"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer copyright-->
+    <div class="footer_copy" style="background-color:#a5a8a7;">
+        <div class="container">
+            <div class="column one">
+                <a id="back_to_top" ng-click="goToTop()" class="topbutton button_left button_js gototop" style="position:absolute;"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>
+                <div class="copyright font-color-white" style="text-align:center; font-size:13px;">
+                    {{Profile.ProfileFullname}} Copyrights &copy; 2017
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

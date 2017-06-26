@@ -1,0 +1,134 @@
+<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+        <div class="inner">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Getting started
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>One of the most underestimated elements of design is typography. However, it’s critical in both print and web media. We Made it Perfect in both.</h3>
+                            <br>
+                            <div>
+                                <div class="profile-img-wrapper m-t-5 inline">
+                                    <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                    <div class="chat-status available">
+                                    </div>
+                                </div>
+                                <div class="inline m-l-10">
+                                    <p class="small hint-text m-t-5">
+                                        VIA senior product manager
+                                        <br> Cecilia @ Gorgias
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<!-- START CONTAINER FLUID -->
+<div class="container-fluid container-fixed-lg">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- START PANEL -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        {{'MyProfileInformation' | translate}}
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form id="form" role="form" novalidate angular-validator name="addProfileForm" angular-validator-submit="AddObject()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'Fullname' | translate}}</label>
+                                    <input type="text" name="ProfileFullname" ng-model="object.ProfileFullname" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default">
+                                    <label>{{'Fullname' | translate}} (English)</label>
+                                    <input type="text" name="ProfileFullname" ng-model="object.ProfileFullnameEnglish" validate-on="blur" class="form-control" placeholder="eg.: John Doe" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'Email' | translate}}</label>
+                                    <input disabled type="email" name="ProfileEmail" ng-model="object.ProfileEmail" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'WebURL' | translate}}</label>
+                                    <input type="text" disabled name="ProfileURL" ng-model="object.ProfileURL" validate-on="blur" class="form-control" placeholder="eg.: John Doe" />
+                                </div>
+                            </div>
+                        </div>
+                        <div pg-form-group class="form-group form-group-default required">
+                            <label>{{'Description' | translate}}</label>
+                            <textarea rows="5" style="height: 70px;" name="ProfileDescription" ng-model="object.ProfileDescription" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="200" required></textarea>
+                        </div>
+                        <div pg-form-group class="form-group form-group-default required">
+                            <label>{{'ShortDescription' | translate}}</label>
+                            <input type="text" name="ProfileShortDescription" ng-model="object.ProfileShortDescription" validate-on="blur" class="form-control" placeholder="eg.: Short Description" maxlength="50" required />
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'ProfileType' | translate}}</label>
+                                    <select id="ProfileTypeID" disabled class="form-control" ng-model="object.ProfileTypeID" ng-options="option.ProfileTypeID as option.ProfileTypeName for option in ProfileTypes" title="Please select at least one" required></select><input type="hidden" name="ProfileTypeID" ng-value="object.ProfileTypeID" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'Subscription' | translate}}</label>
+                                    <select disabled id="SubscriptionTypeID" class="form-control" ng-model="object.SubscriptionTypeID" ng-options="option.SubscriptionTypeID as option.SubscriptionTypeName for option in SubscriptionTypes" title="Please select at least one" required></select><input type="hidden" name="SubscriptionTypeID" ng-value="object.SubscriptionTypeID" />
+                                </div>
+                            </div>
+                        </div>
+                        <div pg-form-group class="form-group form-group-default required">
+                            <label>{{'Theme' | translate}}</label>
+                            <select id="ThemeID" class="form-control cs-select cs-skin-slide" ng-model="object.ThemeID" ng-options="option.ThemeID as option.ThemeName for option in Themes" title="Please select at least one" required></select><input type="hidden" name="ThemeID" ng-value="object.ThemeID" />
+                        </div>
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        Profile Photo
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <h5>
+                                        Upload profile photo here.
+                                    </h5>
+                                    <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary" ng-disabled="addProfileForm.$invalid">{{'Submit' | translate}}</button>
+                                <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- END PANEL -->
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER FLUID -->

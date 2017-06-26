@@ -1,0 +1,1267 @@
+﻿<div ng-show="aboutTab == 1">
+    Me
+</div>
+<div ng-show="aboutTab == 2">
+    Connections
+</div>        
+<!-- Header -->
+<div id="Header_wrapper" class="bg-parallax" data-enllax-ratio="0.3">
+    <header id="Header">
+        <div class="header_placeholder"></div>
+        <div id="Top_bar">
+            <div class="container">
+                <div class="column three-fourth">
+                    <div class="top_bar_left clearfix" style="width: 1784px;">
+                        <div class="logo">
+                            <a id="logo" href="#" title="BeArchitect2 - BeTheme">
+                                <img class="logo-main scale-with-grid" src="content/images/industry_dark.png" alt="architect2">
+                                <img class="logo-sticky scale-with-grid" src="content/images/industry_dark.png" alt="architect2">
+                                <!--<img class="logo-mobile scale-with-grid" src="content/images/industry_dark.png" alt="architect2">-->
+                            </a>
+                        </div>
+                        <div class="menu_wrapper">
+                            <nav id="menu" class="menu-main-menu-container">
+                                <div id="applist" class="btn-group custom-margin-div-industry">
+                                    <ul class="horizontal-list">
+                                        <li><label class="btn btn-primary" ng-model="profileSearch.IndustryID" value="''" uib-btn-radio="''" ng-change="sort()">All</label></li>
+                                        <li ng-repeat="obj in Industries"><label class="btn btn-primary" style="float:left;margin-right:7px;" ng-model="$parent.profileSearch.IndustryID" value="{{obj.IndustryID}}" uib-btn-radio="'{{obj.IndustryID}}'" ng-change="$parent.sort()">{{obj.IndustryName}}</label></li>
+                                    </ul>
+                                </div>
+                                <!--<ul id="menu-main-menu" class="menu">
+                                    <li id="menu-item-8" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2 current_page_item">
+                                        <a href="index-architect2.html"><span>Home</span></a>
+                                    </li>
+                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/studio.html"><span>Studio</span></a>
+                                    </li>
+                                    <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/designers.html"><span>Designers</span></a>
+                                    </li>
+                                    <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/realizations.html"><span>Realizations</span></a>
+                                    </li>
+                                    <li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/contact.html"><span>Contact</span></a>
+                                    </li>
+                                    <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom">
+                                        <a target="_blank" href="http://themeforest.net/item/betheme-html-responsive-multipurpose-template/13925633?ref=beantownthemes"><span><span style="padding: 0; color: #b8a892;">Buy now</span></span></a>
+                                    </li>
+                                </ul>-->
+                            </nav><a class="responsive-menu-toggle " href="#"><i class="icon-menu"></i></a>
+                        </div>
+                        <div class="secondary_menu_wrapper">salam</div>
+                        <div class="banner_wrapper"></div>
+                        <div class="search_wrapper">
+                            <form method="get" id="searchform" action="#">
+                                <i class="icon_search icon-search"></i><a href="#" class="icon_close"><i class="icon-cancel"></i></a>
+                                <input type="text" class="field" name="s" id="s" placeholder="Enter your search">
+                                <input type="submit" class="submit" value="" style="display:none;">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="column one-fifth">
+                    <div class="custom-margin-div-industry" style="text-align:center;">
+                        country
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<!--Start Slider in Slider ;)-->
+<div ng-carousel ng-carousel-name="example-carousel1" ng-carousel-watch="slides">
+    <slidecontainer>
+        <slide>
+            <div class="section mcb-section" id="about">
+                <!--<div class="section_wrapper mcb-section-inner">
+                    <div class="wrap mcb-wrap one  valign-top clearfix">
+                        <div class="mcb-wrap-inner">
+                            <div class="column one-slider  no-margin">
+                                <div class="animate fadeInLeft" data-anim-type="fadeInLeft">
+                                    <h5>1</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+
+                <div id="official-connection" class="column one-slider no-margin-column" style="background-color:rgba(255,255,255,0.8);z-index:-1;margin-bottom:0px;">
+                    <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;">
+                        <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                            <b>The Jewellerists</b><br />
+                            Jewellery Designer
+                        </div>
+                    </div>
+                    <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;">
+                        <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                            <b>The Jewellerists</b><br />
+                            Jewellery Designer
+                        </div>
+                    </div>
+                    <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;">
+                        <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                            <b>The Jewellerists</b><br />
+                            Jewellery Designer
+                        </div>
+                    </div>
+                    <div style="float: right;margin-right: 15px;margin-top:7px;padding:21px 7px;">
+                        <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:50px;">more Premium App</a> <!--<img src="content/agency/images/icons-more/arrow_right_dark_more.png"/>-->
+                    </div>
+                </div>
+
+                <!--<div class="column one column_column">
+                    <div class="call_to_action">
+                        <div class="call_to_action_wrapper">
+                            <div class="call_left">
+                                <h3>Click to play</h3>
+                            </div>
+                            <div class="call_center">
+                                <a href="https://www.youtube.com/watch?v=liqoMjRT81A" class="" rel="prettyphoto"><span class="icon_wrapper"><i class="icon-play"></i></span></a>
+                            </div>
+                            <div class="call_right">
+                                <div class="desc">
+                                    You can setup any youtube or vimeo videos to play. Instead of videos you can also open other things like images or other links. Open videos or images inside popup window or regular.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+
+                <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);z-index:-1;margin-bottom:0px;">
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                </div>
+                                <!--<div class="desc round-box" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                    <div class="desc_wrap" style="padding-top: 85.5px;">
+                                        <div class="desc_img">
+                                            <img class="scale-with-grid" src="content/webdesign/images/home_webdesign_offer1_icon.png" alt="">
+                                        </div>
+                                        <div class="desc_txt">
+                                            Bernice Designer
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(10).jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(9).jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="http://gorgias.asia/dashboard/agent/uploads/24nq2atkecu8swgcsg.jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-slider column_zoom_box no-margin-column" style="background-color:#ffffff;color:black;padding:21px 7px;">
+                        <div style="float: right;margin-right: 15px;margin-top:7px;width:100%;">
+                            <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:60%;padding-left:50px;font-size: 26px;">Jewellery</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);z-index:-1;margin-bottom:0px;">
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                </div>
+                                <!--<div class="desc round-box" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                    <div class="desc_wrap" style="padding-top: 85.5px;">
+                                        <div class="desc_img">
+                                            <img class="scale-with-grid" src="content/webdesign/images/home_webdesign_offer1_icon.png" alt="">
+                                        </div>
+                                        <div class="desc_txt">
+                                            Bernice Designer
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(10).jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(9).jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="http://gorgias.asia/dashboard/agent/uploads/24nq2atkecu8swgcsg.jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-slider column_zoom_box no-margin-column" style="background-color:#ffffff;color:black;padding:21px 7px;">
+                        <div style="float: right;margin-right: 15px;margin-top:7px;width:100%;">
+                            <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:60%;padding-left:50px;font-size: 26px;">Jewellery</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);z-index:-1;margin-bottom:0px;">
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(10).jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="content/agency/images/slides/pic(9).jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-second column_zoom_box no-margin-column">
+                        <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                        <div class="zoom_box round-box">
+                            <a href="#">
+                                <div class="photo round-box">
+                                    <img class="scale-with-grid" src="http://gorgias.asia/dashboard/agent/uploads/24nq2atkecu8swgcsg.jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column one-slider column_zoom_box no-margin-column" style="background-color:#ffffff;color:black;padding:21px 7px;">
+                        <div style="float: right;margin-right: 15px;margin-top:7px;width:100%;">
+                            <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:60%;padding-left:50px;font-size: 26px;">Jewellery</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column one-slider">
+                    <footer id="Footer" class="clearfix">
+                        <div class="footer_copy" style="text-align:center;padding:21px 11px;background-color:#EEDC86">
+                            <div class="container">
+                                <div class="section">
+                                    <div class="column one content_wrapper center-align">
+                                        <button class="button-wide-transparent">Contact Her Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer_copy" id="socialbar" style="background-color:#54595e">
+                            <div class="container">
+                                <div class="section">
+                                    <div class="column one content_wrapper center-align">
+                                        <!--Social info area-->
+                                        <ul class="social">
+                                            <li class="skype">
+                                                <a href="#" title="Skype"><i class="icon-skype"></i></a>
+                                            </li>
+                                            <li class="facebook">
+                                                <a href="#" title="Facebook"><i class="icon-facebook"></i></a>
+                                            </li>
+                                            <li class="googleplus">
+                                                <a href="#" title="Google+"><i class="icon-gplus"></i></a>
+                                            </li>
+                                            <li class="twitter">
+                                                <a href="#" title="Twitter"><i class="icon-twitter"></i></a>
+                                            </li>
+                                            <li class="vimeo">
+                                                <a href="#" title="Vimeo"><i class="icon-vimeo"></i></a>
+                                            </li>
+                                            <li class="youtube">
+                                                <a href="#" title="YouTube"><i class="icon-play"></i></a>
+                                            </li>
+                                            <li class="flickr">
+                                                <a href="#" title="Flickr"><i class="icon-flickr"></i></a>
+                                            </li>
+                                            <li class="linkedin">
+                                                <a href="#" title="LinkedIn"><i class="icon-linkedin"></i></a>
+                                            </li>
+                                            <li class="pinterest">
+                                                <a href="#" title="Pinterest"><i class="icon-pinterest"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Footer copyright-->
+                        <div class="footer_copy" style="background-color:#a5a8a7;">
+                            <div class="container">
+                                <div class="column one">
+                                    <!--<a id="back_to_top" href="#about" class="button button_left button_js"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>-->
+                                    <div class="copyright font-color-white" style="text-align:center;">
+                                        Fan BingBing Copyrights &copy; 2016
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </slide>
+        <slide>
+            <div class="section mcb-section" id="about">
+                <div class="column one no-margin" style="background-color:#54595F;z-index:999;width:100%;position: relative;">
+                    <div id="appcategorylist" class="btn-group">
+                        <ul class="horizontal-list">
+                            <slick class="slider" dots="true" slides-to-show="{{featuredSliderNumber}}" touch-move="true" slides-to-scroll="3" settings="slickMenu" ng-if="categoriesLoaded" init-onload="true" data="categories">
+                                <li><label class="btn btn-primary" ng-model="$parent.CategoryID" value="" uib-btn-radio="''" ng-change="$parent.sort()">All</label></li>
+                                <li ng-repeat="obj in categories"><label class="btn btn-primary" ng-model="$parent.CategoryID" value="{{obj.CategoryID}}" uib-btn-radio="'{{obj.CategoryID}}'" ng-change="$parent.sort()">{{obj.CategoryName}}</label></li>
+                            </slick>
+                        </ul>
+                    </div>
+                    <div class="">
+                        <div style="float:left;display:block;width:15%;padding-top: 15px;">
+                            Feeds
+                        </div>
+                        <div style="float:right;display:block;text-align: right;padding-right: 19px;padding-top:12px;">
+                            <img ng-click="Carousel.get('example-carousel1').toIndex(2)" src="content/agency/images/icons-more/about_user_white-50.png" />
+                            <img ng-click="Carousel.get('example-carousel1').toIndex(1)" src="content/agency/images/icons-more/about_user_white-50.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </slide>
+        <slide>Slide 4</slide>
+    </slidecontainer>
+</div>
+<!--END-->
+<div id="Header_wrapper" class="bg-parallax" data-enllax-ratio="0.3">
+    <header id="Header">
+        <div class="header_placeholder"></div>
+        <div id="Top_bar">
+            <div class="container">
+                <div class="column three-fourth">
+                    <div class="top_bar_left clearfix" style="width: 1784px;">
+                        <div class="logo">
+                            <a id="logo" href="#" title="BeArchitect2 - BeTheme">
+                                <img class="logo-main scale-with-grid" src="content/images/industry_dark.png" alt="architect2">
+                                <img class="logo-sticky scale-with-grid" src="content/images/industry_dark.png" alt="architect2">
+                                <!--<img class="logo-mobile scale-with-grid" src="content/images/industry_dark.png" alt="architect2">-->
+                            </a>
+                        </div>
+                        <div class="menu_wrapper">
+                            <nav id="menu" class="menu-main-menu-container">
+                                <div id="applist" class="btn-group custom-margin-div-industry">
+                                    <ul class="horizontal-list">
+                                        <li><label class="btn btn-primary" ng-model="profileSearch.IndustryID" value="''" uib-btn-radio="''" ng-change="sort()">All</label></li>
+                                        <li ng-repeat="obj in Industries"><label class="btn btn-primary" style="float:left;margin-right:7px;" ng-model="$parent.profileSearch.IndustryID" value="{{obj.IndustryID}}" uib-btn-radio="'{{obj.IndustryID}}'" ng-change="$parent.sort()">{{obj.IndustryName}}</label></li>
+                                    </ul>
+                                </div>
+                                <!--<ul id="menu-main-menu" class="menu">
+                                    <li id="menu-item-8" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2 current_page_item">
+                                        <a href="index-architect2.html"><span>Home</span></a>
+                                    </li>
+                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/studio.html"><span>Studio</span></a>
+                                    </li>
+                                    <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/designers.html"><span>Designers</span></a>
+                                    </li>
+                                    <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/realizations.html"><span>Realizations</span></a>
+                                    </li>
+                                    <li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/contact.html"><span>Contact</span></a>
+                                    </li>
+                                    <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom">
+                                        <a target="_blank" href="http://themeforest.net/item/betheme-html-responsive-multipurpose-template/13925633?ref=beantownthemes"><span><span style="padding: 0; color: #b8a892;">Buy now</span></span></a>
+                                    </li>
+                                </ul>-->
+                            </nav><a class="responsive-menu-toggle " href="#"><i class="icon-menu"></i></a>
+                        </div>
+                        <div class="secondary_menu_wrapper">salam</div>
+                        <div class="banner_wrapper"></div>
+                        <div class="search_wrapper">
+                            <form method="get" id="searchform" action="#">
+                                <i class="icon_search icon-search"></i><a href="#" class="icon_close"><i class="icon-cancel"></i></a>
+                                <input type="text" class="field" name="s" id="s" placeholder="Enter your search">
+                                <input type="submit" class="submit" value="" style="display:none;">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="column one-fifth">
+                    <div class="custom-margin-div-industry" style="text-align:center;">
+                        country
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<div class="section mcb-section" id="about" style="padding-top:80px; padding-bottom:0px;background-color:#EBEFF0;background-repeat:no-repeat; background-position:center center;background-size:cover;background-attachment:fixed;display:block;">
+    <div class="section_wrapper mcb-section-inner">
+        <div class="wrap mcb-wrap one  valign-top clearfix">
+            <div class="mcb-wrap-inner">
+                <div class="section">
+                    <div class="section_wrapper clearfix">
+                        <div ng-click="toggleWeb()" class="column one-third column_column no-content-padding center-align">
+                            <div class="trailer_box trigger">
+                                <a href="#">
+                                    <img class="scale-with-grid" alt="Vitae adipiscing turpis aenea" src="content/agency/images/366474.jpg">
+
+                                    <div class="desc">
+                                        <!--<div class="subtitle"> Vitae adipis </div>-->
+                                        <h2>Siti Nur Haliza</h2>
+                                        <!--<div class="line"></div>-->
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div ng-click="toggle()" class="column one-third column_column no-content-padding center-align">
+
+                            <div class="trailer_box trigger-web">
+                                <a href="#">
+                                    <img class="scale-with-grid" alt="Vitae adipiscing turpis aenea" src="content/agency/images/366474.jpg">
+
+                                    <div class="desc">
+                                        <!--<div class="subtitle"> Vitae adipis </div>-->
+                                        <h2>Amber Chia</h2>
+                                        <!--<div class="line"></div>-->
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div ng-click="toggle()" class="column one-third column_column no-content-padding center-align">
+                            <div class="trailer_box trigger">
+                                <a href="#">
+                                    <img class="scale-with-grid" alt="Vitae adipiscing turpis aenea" src="content/agency/images/366474.jpg">
+
+                                    <div class="desc">
+                                        <!--<div class="subtitle"> Vitae adipis </div>-->
+                                        <h2>Dato Leen</h2>
+                                        <!--<div class="line"></div>-->
+                                    </div>
+                                </a>
+                            </div>
+                            <a style="float:right;">Featured Gorgias!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id='slider-web'>
+
+</div>
+<div id='slider'>
+
+</div>
+<div pageslide ps-size="1000px" ps-push="false" ps-open="checkedWeb">
+    <div class="mfn-main-slider">
+        <div class="section dark" id="about" style="height: 100vh;width:  1000px; background-color:; background-image:url(content/agency/images/366474.jpg); background-repeat:no-repeat; background-position:center center; background-size:cover; -webkit-background-size:cover" data-stellar-background-ratio="1">
+            <div class="clearfix" style="height: 100vh;">
+                <div class="items_group clearfix" style="height: 100vh;">
+                    <div class="column one column_column">
+                        <div class="column one column_column">
+                            <div class="column_attr" id="approundlist" style="float: right;padding-top:31px;">
+                                <div class="btn-group">
+                                    <ul class="horizontal-list">
+                                        <li><label class="btn btn-primary" ng-model="profileSearch.ProfileTypeID" value="''" uib-btn-radio="''" ng-change="sort()">All</label></li>
+                                        <li ng-repeat="obj in ProfileTypes"><label class="btn btn-primary" ng-model="$parent.profileSearch.ProfileTypeID" value="{{obj.ProfileTypeID}}" uib-btn-radio="'{{obj.ProfileTypeID}}'" ng-change="$parent.sort()">{{obj.ProfileTypeName}}</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column two-third column_column">
+                            <div class="column_attr ">
+                                <h2 style="font-size: 40px; line-height: 40px; margin-bottom: 25px;font-weight:700;color:#fbdc03;text-shadow: 2px 2px 5px #54595F;">FAN BINGBING</h2>
+                                <p class="featured-description" style="width: 40%;font-weight: 700;color: #434343;font-size: 20px;line-height: 30px;">
+                                    Fan Bingbing is a Chinese actress, television producer and pop singer. She topped the Forbes China Celebrity 100 list in 2013, 2014, and 2015, after ranking in the top 10 every year since 2006.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="column one-third column_column">
+                            <div class="column_attr" style="text-align: right;">
+                                <span class="country country-name">CHINA</span><span class="country country-code">CHN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column one column_column" style="position: absolute;bottom: 0;margin-top:17px;margin-bottom: 0px;">
+                        <div class="column one-third column_column">
+                            <div class="column_attr">
+                                <div style="padding:20px 0px;">
+                                    <span class="subscribe subscribe-name">SUBSCRIBE</span><span class="subscribe subscribe-number">158,251+</span>
+                                </div>
+                                <h4 style="color:#000000;">Available Apps</h4>
+                                <img src="content/images/download_apple_app_shadow.png" alt="" width="36" height="36">
+                                <img src="content/images/download_android_app_shadow.png" alt="" width="36" height="36">
+                            </div>
+                        </div>
+                        <div class="column one-third column_column" style="text-align:right;float: right;">
+                            <div class="column_attr">
+                                <img src="content/images/qr.png" alt="" width="130" height="130">
+                                <h2 style="font-size:20px;line-height: 20px;color:#000000;">Follow her @</h2>
+                                <div id="Footer-Featured" style="background-color:transparent;border:0px;">
+                                    <div id="socialbar" class="footer_copy">
+                                        <ul class="social">
+                                            <li class="skype">
+                                                <a href="#" title="Skype"><i class="icon-skype"></i></a>
+                                            </li>
+                                            <li class="facebook">
+                                                <a href="#" title="Facebook"><i class="icon-facebook"></i></a>
+                                            </li>
+                                            <li class="googleplus">
+                                                <a href="#" title="Google+"><i class="icon-gplus"></i></a>
+                                            </li>
+                                            <li class="twitter">
+                                                <a href="#" title="Twitter"><i class="icon-twitter"></i></a>
+                                            </li>
+                                            <li class="vimeo">
+                                                <a href="#" title="Vimeo"><i class="icon-vimeo"></i></a>
+                                            </li>
+                                            <li class="youtube">
+                                                <a href="#" title="YouTube"><i class="icon-play"></i></a>
+                                            </li>
+                                            <li class="flickr">
+                                                <a href="#" title="Flickr"><i class="icon-flickr"></i></a>
+                                            </li>
+                                            <li class="linkedin">
+                                                <a href="#" title="LinkedIn"><i class="icon-linkedin"></i></a>
+                                            </li>
+                                            <li class="pinterest">
+                                                <a href="#" title="Pinterest"><i class="icon-pinterest"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div pageslide ps-size="500px" ps-open="checked" scrollable>
+    <div class="nano">
+        <div class="nano-content" style="padding-top:440px; padding-bottom:0px;background-image:url(content/agency/images/rightslider/mainimage.jpg); background-repeat:no-repeat; background-position:top center;">
+            <div>
+                <div class="white-cover"></div>
+                <div class="column one-slider">
+                    <div class="zoom_box16-slider">
+                        <a href="#">
+                            <div class="photo round-box">
+                                <img class="scale-with-grid" src="content/agency/images/rightslider/maintwoimage.jpg" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="column one no-margin" style="position:absolute;top:333px;left:33px;z-index:99">
+                        <div class="column one-third no-margin">
+                            <div class="zoom_box slider-profile-border">
+                                <a href="#">
+                                    <div class="photo">
+                                        <img class="scale-with-grid" src="content/agency/images/rightslider/profile.jpg" alt="">
+                                    </div>
+                                    <div class="desc" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                        <div class="desc_wrap" style="padding-top: 85.5px;">
+                                            <div class="desc_img">
+                                                <img class="scale-with-grid" src="content/agency/images/slides/qr.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column two-third no-margin archivo-font" style="font-size:28px;font-weight:500;padding-left:19px;padding-top:51px;">
+                            Jamie Ang
+                        </div>
+
+                    </div>
+                    <div class="topdiv-simple" id="topdiv">
+                        <div class="">
+                            <div style="float:left;display:block;width:15%;padding-top: 15px;">
+                                Feeds
+                            </div>
+                            <div style="float:right;display:block;width: 80%;text-align: right;padding-right: 19px;padding-top:12px;">
+                                <img src="content/agency/images/icons-more/about_user_white-50.png" />
+                                <img src="content/agency/images/icons-more/about_user_white-50.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="white-cover"></div>-->
+                <div class="section mcb-section" id="about">
+                    <!--<div class="section_wrapper mcb-section-inner">
+                        <div class="wrap mcb-wrap one  valign-top clearfix">
+                            <div class="mcb-wrap-inner">
+                                <div class="column one-slider  no-margin">
+                                    <div class="animate fadeInLeft" data-anim-type="fadeInLeft">
+                                        <h5>1</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+
+                    <div id="official-connection" class="column one-slider no-margin-column" style="background-color:rgba(255,255,255,0.8);z-index:-1;margin-bottom:0px;">
+                        <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;">
+                            <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                                <div class="zoom_box round-box">
+                                    <a href="#">
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                                <b>The Jewellerists</b><br />
+                                Jewellery Designer
+                            </div>
+                        </div>
+                        <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;">
+                            <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                                <div class="zoom_box round-box">
+                                    <a href="#">
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                                <b>The Jewellerists</b><br />
+                                Jewellery Designer
+                            </div>
+                        </div>
+                        <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);margin:0px;margin-bottom:2px;">
+                            <div class="column one-fourth no-margin-slider" style="margin-left:15px;">
+                                <div class="zoom_box round-box">
+                                    <a href="#">
+                                        <div class="photo round-box">
+                                            <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="column tow-third no-margin-slider" style="margin-left:19px;vertical-align:middle;min-height:100%;font-size:19px;font-weight:400;padding-top:25px;">
+                                <b>The Jewellerists</b><br />
+                                Jewellery Designer
+                            </div>
+                        </div>
+                        <div style="float: right;margin-right: 15px;margin-top:7px;padding:21px 7px;">
+                            <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:50px;">more Premium App</a> <!--<img src="content/agency/images/icons-more/arrow_right_dark_more.png"/>-->
+                        </div>
+                    </div>
+
+                    <!--<div class="column one column_column">
+                        <div class="call_to_action">
+                            <div class="call_to_action_wrapper">
+                                <div class="call_left">
+                                    <h3>Click to play</h3>
+                                </div>
+                                <div class="call_center">
+                                    <a href="https://www.youtube.com/watch?v=liqoMjRT81A" class="" rel="prettyphoto"><span class="icon_wrapper"><i class="icon-play"></i></span></a>
+                                </div>
+                                <div class="call_right">
+                                    <div class="desc">
+                                        You can setup any youtube or vimeo videos to play. Instead of videos you can also open other things like images or other links. Open videos or images inside popup window or regular.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+
+                    <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);z-index:-1;margin-bottom:0px;">
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                    </div>
+                                    <!--<div class="desc round-box" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                        <div class="desc_wrap" style="padding-top: 85.5px;">
+                                            <div class="desc_img">
+                                                <img class="scale-with-grid" src="content/webdesign/images/home_webdesign_offer1_icon.png" alt="">
+                                            </div>
+                                            <div class="desc_txt">
+                                                Bernice Designer
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(10).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(9).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="http://gorgias.asia/dashboard/agent/uploads/24nq2atkecu8swgcsg.jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-slider column_zoom_box no-margin-column" style="background-color:#ffffff;color:black;padding:21px 7px;">
+                            <div style="float: right;margin-right: 15px;margin-top:7px;width:100%;">
+                                <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:60%;padding-left:50px;font-size: 26px;">Jewellery</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);z-index:-1;margin-bottom:0px;">
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                    </div>
+                                    <!--<div class="desc round-box" style="background-color:rgba(12, 123, 175, 0.8);border-radius: 5px;">
+                                        <div class="desc_wrap" style="padding-top: 85.5px;">
+                                            <div class="desc_img">
+                                                <img class="scale-with-grid" src="content/webdesign/images/home_webdesign_offer1_icon.png" alt="">
+                                            </div>
+                                            <div class="desc_txt">
+                                                Bernice Designer
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(10).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(9).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="http://gorgias.asia/dashboard/agent/uploads/24nq2atkecu8swgcsg.jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-slider column_zoom_box no-margin-column" style="background-color:#ffffff;color:black;padding:21px 7px;">
+                            <div style="float: right;margin-right: 15px;margin-top:7px;width:100%;">
+                                <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:60%;padding-left:50px;font-size: 26px;">Jewellery</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column one-slider column_column" style="background-color:rgba(255,255,255,0.5);z-index:-1;margin-bottom:0px;">
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(11).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(10).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="content/agency/images/slides/pic(9).jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-second column_zoom_box no-margin-column">
+                            <!--<a href='content/app/images/home_app_gallery_7.jpg'><img src="content/app/images/home_app_gallery_7-300x300.jpg" class="attachment-thumbnail" alt="home_app_gallery_7" /></a>-->
+                            <div class="zoom_box round-box">
+                                <a href="#">
+                                    <div class="photo round-box">
+                                        <img class="scale-with-grid" src="http://gorgias.asia/dashboard/agent/uploads/24nq2atkecu8swgcsg.jpg" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column one-slider column_zoom_box no-margin-column" style="background-color:#ffffff;color:black;padding:21px 7px;">
+                            <div style="float: right;margin-right: 15px;margin-top:7px;width:100%;">
+                                <a href="#" style="color:#54595F;background:url(content/agency/images/icons-more/arrow_right_dark_more.png) no-repeat center right;padding:10px 10px;padding-right:60%;padding-left:50px;font-size: 26px;">Jewellery</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column one-slider">
+                        <footer id="Footer" class="clearfix">
+                            <div class="footer_copy" style="text-align:center;padding:21px 11px;background-color:#EEDC86">
+                                <div class="container">
+                                    <div class="section">
+                                        <div class="column one content_wrapper center-align">
+                                            <button class="button-wide-transparent">Contact Her Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer_copy" id="socialbar" style="background-color:#54595e">
+                                <div class="container">
+                                    <div class="section">
+                                        <div class="column one content_wrapper center-align">
+                                            <!--Social info area-->
+                                            <ul class="social">
+                                                <li class="skype">
+                                                    <a href="#" title="Skype"><i class="icon-skype"></i></a>
+                                                </li>
+                                                <li class="facebook">
+                                                    <a href="#" title="Facebook"><i class="icon-facebook"></i></a>
+                                                </li>
+                                                <li class="googleplus">
+                                                    <a href="#" title="Google+"><i class="icon-gplus"></i></a>
+                                                </li>
+                                                <li class="twitter">
+                                                    <a href="#" title="Twitter"><i class="icon-twitter"></i></a>
+                                                </li>
+                                                <li class="vimeo">
+                                                    <a href="#" title="Vimeo"><i class="icon-vimeo"></i></a>
+                                                </li>
+                                                <li class="youtube">
+                                                    <a href="#" title="YouTube"><i class="icon-play"></i></a>
+                                                </li>
+                                                <li class="flickr">
+                                                    <a href="#" title="Flickr"><i class="icon-flickr"></i></a>
+                                                </li>
+                                                <li class="linkedin">
+                                                    <a href="#" title="LinkedIn"><i class="icon-linkedin"></i></a>
+                                                </li>
+                                                <li class="pinterest">
+                                                    <a href="#" title="Pinterest"><i class="icon-pinterest"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Footer copyright-->
+                            <div class="footer_copy" style="background-color:#a5a8a7;">
+                                <div class="container">
+                                    <div class="column one">
+                                        <!--<a id="back_to_top" href="#about" class="button button_left button_js"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>-->
+                                        <div class="copyright font-color-white" style="text-align:center;">
+                                            Fan BingBing Copyrights &copy; 2016
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a ng-click="toggle()" class="button">Close</a>
+
+</div>
+<!--Latest Header ;) Thanks GOD-->
+<div id="Header_wrapper" class="bg-parallax" data-enllax-ratio="0.3" ng-show="mainPage == 2">
+    <header id="Header">
+        <div class="header_placeholder"></div>
+        <div id="Top_bar">
+            <!--style="display:none;"-->
+            <div class="container">
+                <div class="column three-fourth">
+                    <div class="top_bar_left clearfix" style="width: 1784px;">
+                        <div class="logo">
+                            <a id="logo" href="#" title="BeArchitect2 - BeTheme">
+                                <img class="logo-main scale-with-grid" src="content/images/industry_dark.png" alt="architect2">
+                                <img class="logo-sticky scale-with-grid" src="content/images/industry_dark.png" alt="architect2">
+                                <!--<img class="logo-mobile scale-with-grid" src="content/images/industry_dark.png" alt="architect2">-->
+                            </a>
+                        </div>
+                        <div class="menu_wrapper">
+                            <nav id="menu" class="menu-main-menu-container">
+                                <div id="applist" class="btn-group custom-margin-div-industry">
+                                    <ul class="horizontal-list">
+                                        <li><label class="btn btn-primary" ng-model="profileSearch.IndustryID" value="''" uib-btn-radio="''" ng-change="sort()">All</label></li>
+                                        <li ng-repeat="obj in Industries"><label class="btn btn-primary" style="float:left;margin-right:7px;" ng-model="$parent.profileSearch.IndustryID" value="{{obj.IndustryID}}" uib-btn-radio="'{{obj.IndustryID}}'" ng-change="$parent.sort()">{{obj.IndustryName}}</label></li>
+                                    </ul>
+                                </div>
+                                <!--<ul id="menu-main-menu" class="menu">
+                                    <li id="menu-item-8" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2 current_page_item">
+                                        <a href="index-architect2.html"><span>Home</span></a>
+                                    </li>
+                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/studio.html"><span>Studio</span></a>
+                                    </li>
+                                    <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/designers.html"><span>Designers</span></a>
+                                    </li>
+                                    <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/realizations.html"><span>Realizations</span></a>
+                                    </li>
+                                    <li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page">
+                                        <a href="content/architect2/contact.html"><span>Contact</span></a>
+                                    </li>
+                                    <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom">
+                                        <a target="_blank" href="http://themeforest.net/item/betheme-html-responsive-multipurpose-template/13925633?ref=beantownthemes"><span><span style="padding: 0; color: #b8a892;">Buy now</span></span></a>
+                                    </li>
+                                </ul>-->
+                            </nav><a class="responsive-menu-toggle " href="#"><i class="icon-menu"></i></a>
+                        </div>
+                        <div class="secondary_menu_wrapper">salam</div>
+                        <div class="banner_wrapper"></div>
+                        <div class="search_wrapper">
+                            <form method="get" id="searchform" action="#">
+                                <i class="icon_search icon-search"></i><a href="#" class="icon_close"><i class="icon-cancel"></i></a>
+                                <input type="text" class="field" name="s" id="s" placeholder="Enter your search">
+                                <input type="submit" class="submit" value="" style="display:none;">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="column one-fifth">
+                    <div class="custom-margin-div-industry" style="text-align:center;">
+                        country
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<!--Index-->
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 "> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="gorgiasapp">
+<!--<![endif]-->
+
+<head>
+    <base href="/">
+
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <title>Be</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="content/agency/images/favicon.ico">
+
+    <!-- FONTS -->
+    <link rel='stylesheet' id='Lato-css' href='https://fonts.googleapis.com/css?family=Lato:100,100italic,300,400,400italic,500,700'>
+    <link rel='stylesheet' id='Roboto-css' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700'>
+    <link rel='stylesheet' id='Patua+One-css' href='https://fonts.googleapis.com/css?family=Patua+One:100,300,400,400italic,700'>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
+    <!-- CSS -->
+    <!--<link href="css/bootstrap.css" rel="stylesheet" />-->
+    <link rel='stylesheet' id='global-css' href='css/global.css'>
+    <link rel='stylesheet' id='structure-css' href='content/agency/css/structure.css'>
+
+    <!--<link href="css/ng-tags-input.bootstrap.min.css" rel="stylesheet" />-->
+    <link href="css/ng-tags-input.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/admin/vendor/dropzone/basic.css" />
+    <link rel="stylesheet" href="css/admin/vendor/dropzone/dropzone.css" />
+
+    <!--<link rel='stylesheet' id='local-css' href='content/architect2/css/architect2.css'>-->
+    <link rel='stylesheet' id='custom-css' href='content/agency/css/nanoscroller.css'>
+    <!--<link rel='stylesheet' id='local-css' href='content/agency/css/agency.css'>-->
+    <link rel='stylesheet' id='custom-css' href='content/agency/css/custom.css'>
+    <link href="css/angular-carousel.css" rel="stylesheet" />
+
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!--<link rel='stylesheet' id='local-css' href='content/app/css/app.css'>-->
+    <link href="css/toastr.css" rel="stylesheet" />
+    <link href="css/ui-bootstrap-2.2.0-csp.css" rel="stylesheet" />
+    <link href="css/loading-bar.css" rel="stylesheet" />
+    <link href="css/angular-busy.css" rel="stylesheet" />
+
+    <!-- Revolution Slider -->
+    <link rel="stylesheet" href="plugins/rs-plugin/css/settings.css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="css/admin/assets/vendor/bootstrap/css/bootstrap.css" />
+    <link href="assets/stylesheets/ui-bootstrap-2.2.0-csp.css" rel="stylesheet" />
+    <link href="css/slick.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="css/admin/assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="css/admin/assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="css/admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+    <link href="css/admin/assets/stylesheets/loading-bar.css" rel="stylesheet" />-->
+    <!-- Specific Page Vendor CSS -->
+    <!--<link rel="stylesheet" href="css/admin/assets/vendor/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="css/admin/assets/vendor/jquery-ui/jquery-ui.theme.css" />
+    <link rel="stylesheet" href="css/admin/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="css/admin/assets/vendor/morris.js/morris.css" />-->
+    <!-- Specific Page Vendor CSS -->
+    <!--<link rel="stylesheet" href="css/admin/assets/vendor/select2/css/select2.css" />
+    <link rel="stylesheet" href="css/admin/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="css/admin/assets/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
+
+
+    <link href="css/admin/assets/stylesheets/toastr.css" rel="stylesheet" />
+
+    <link href="css/admin/stylesheets/theme.css" rel="stylesheet" />
+    <link href="css/admin/stylesheets/skins/default.css" rel="stylesheet" />
+    <link href="css/admin/stylesheets/theme-custom.css" rel="stylesheet" />-->
+
+</head>
+<!--<body class="home page template-slider layout-full-width sticky-white no-content-padding" ng-class="{{headercreative}}"> sticky-header sticky-white-->
+<body scroll class="home page template-slider layout-full-width header-below header-fw minimalist-header-no ab-hide subheader-both-center menu-line-below menuo-no-borders menuo-right footer-copy-center" ng-class="{{headercreative}}">
+    <div id="top"></div>
+    <!-- Main Theme Wrapper autoscroll="true" -->
+    <div class="ng-view" autoscroll="true"></div>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyDCCM9yE0TtH90XCy5-kjPrh7SRQRPkZhA">
+    </script>
+    <!-- JS -->
+    <!--<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+
+    <script src="js/jquery.scrollify.js"></script>
+
+
+    <!--<script type="text/javascript" src="js/jquery.nanoscroller.min.js"></script>-->
+    <!--<script src="https://hammerjs.github.io/dist/hammer.min.js"></script>-->
+    <script src="js/slick.js"></script>
+    <script src="css/admin/vendor/dropzone/dropzone.js"></script>
+    <!--<script src="js/Headroom.js"></script>-->
+    <!--<script src="js/jQuery.headroom.js"></script>-->
+    <!-- AngularJS-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular.js"></script>-->
+    <script src="js/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.js"></script>
+    <script src="js/angular-fullpage.js"></script>
+    <script src="js/angular-local-storage.min.js"></script>
+    <script src="js/angular-mocks.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/angular-validator.js"></script>
+    <!--<script src="js/loading-bar.min.js"></script>-->
+
+    <script src="js/angular-pageslide-directive.js"></script>
+    <!--<script src="js/scrollable.js"></script>-->
+    <script src="js/checklist-model.js"></script>
+    <script src="js/ng-tags-input.min.js"></script>
+    <script src="js/geolocation.js"></script>
+    <script src="js/lethargy.js"></script>
+    <script src="js/hamster.js"></script>
+    <script src="js/angular-scrollify.js"></script>
+    <!--<script src="js/sticky.js"></script>-->
+    <!--<script src="js/angular-revolution.js"></script>-->
+    <!--<script src="js/authComplete.js"></script>-->
+    <script src="js/angular-carousel.js"></script>
+    <!--<script src="js/ngslick.js"></script>-->
+    <script src="js/angular-slick.js"></script>
+    <script src="css/admin/vendor/ng-dropzone-2.0.1/src/js/ng-dropzone.js"></script>
+    <script src="js/angular-preload-image.js"></script>
+
+    <!--yasser-->
+    <script type="text/javascript" src="js/mfn.menu.js"></script>
+    <script type="text/javascript" src="js/jquery.plugins.js"></script>
+    <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="js/animations/animations.js"></script>
+
+    <!--Yadet Nare On Koni-->
+    <!--<script type="text/javascript" src="js/scripts.js"></script>-->
+
+    <script type="text/javascript" src="plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="plugins/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="js/ui-bootstrap-2.2.0.js"></script>
+    <script src="js/ui-bootstrap-tpls-2.2.0.js"></script>
+    <script src="js/ng-map.min.js"></script>
+    <script src="js/loading-bar.js"></script>
+    <script src="js/angular-busy.js"></script>
+
+
+    <!--<script src="js/angular.headroom.js"></script>-->
+    <!--<script src="js/angular-revolution.js"></script>-->
+    <!--<script tpye="text/javascript" src="//rawgit.com/cmelo/angular-sticky/master/cmelo-sticky.js"></script>-->
+    <!--<script type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=false&amp;ver=5.9'></script>-->
+    <script src="js/angular-modal-service.js"></script>
+
+    <script src="js/toastr.js"></script>
+
+    <script src="js/spa/app/app.js"></script>
+    <!-- Services -->
+    <script src="js/spa/services/apiservice.js"></script>
+    <script src="js/spa/services/authInterceptorService.js"></script>
+    <script src="js/spa/services/authService.js"></script>
+    <script src="js/spa/services/notificationService.js"></script>
+    <script src="js/spa/services/tokensManagerService.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/spa/controller/mainController.js"></script>
+    <script src="js/spa/controller/webController.js"></script>
+    <script src="js/spa/controller/galleryController.js"></script>
+    <script src="js/spa/controller/slideshowController.js"></script>
+    <script src="js/spa/controller/contactController.js"></script>
+    <script src="js/spa/controller/loginController.js"></script>
+    <script src="js/spa/controller/aboutController.js"></script>
+    <script src="js/spa/controller/locationController.js"></script>
+
+    <script src="js/spa/filter/CutString.js"></script>
+    <!--Admin-->
+    <script src="js/spa/controller/admin/Profile/viewAdminProfileController.js"></script>
+    <script src="js/spa/controller/admin/Profile/Address/listprofileAddressController.js"></script>
+    <script src="js/spa/controller/admin/Profile/Album/listprofileAlbumController.js"></script>
+    <script src="js/spa/controller/admin/Profile/Connection/listprofileConnectionController.js"></script>
+    <script src="js/spa/controller/admin/Profile/ExternalLink/listprofileExternalLinkController.js"></script>
+    <script src="js/spa/controller/admin/Profile/ProfileAttribute/listprofileProfileAttributeController.js"></script>
+    <script src="js/spa/controller/admin/Profile/ProfileIndustry/listprofileProfileIndustryController.js"></script>
+    <script src="js/spa/controller/admin/Profile/ProfileSocialNetwork/listprofileProfileSocialNetworkController.js"></script>
+    <script src="js/spa/controller/admin/Profile/ProfileTag/listprofileProfileTagController.js"></script>
+    <script src="js/spa/controller/admin/Profile/Profile/listprofileProfileController.js"></script>
+
+    <script src="js/spa/directive/sideBar.js"></script>
+    <script src="js/spa/directive/rev-slider.js"></script>
+    <!--<script src="js/spa/directive/ddnStickyWrapper.js"></script>-->
+    <!--
+    <script src="js/spa/directive/scrollerSticky.js"></script>-->
+    <script src="js/spa/directive/scroll.js"></script>
+
+
+
+
+
+</body>
+
+</html>

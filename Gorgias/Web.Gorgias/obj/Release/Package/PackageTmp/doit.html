@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Gorgias">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--<meta property="al:ios:url" content="applinks://docs" />
+    <meta property="al:ios:app_store_id" content="12345" />
+    <meta property="al:ios:app_name" content="App Links" />
+    <meta property="al:android:url" content="applinks://docs" />
+    <meta property="al:android:app_name" content="App Links" />
+    <meta property="al:android:package" content="org.applinks" />
+    <meta property="al:web:url"
+          content="http://applinks.org/documentation" />-->
+
+    <!--<link rel="shortcut icon" sizes="16x16" href="content/images/icon-16x16.png">
+    <link rel="shortcut icon" sizes="196x196" href="content/images/icon-196x196.png">-->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="content/images/apple-icon-57x57-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="content/images/apple-icon-72x72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="content/images/apple-icon-114x114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="content/images/apple-icon-144x144-precomposed.png" />
+    <meta charset="utf-8" />
+    <link href="css/addtohomescreen.css" rel="stylesheet" />
+</head>
+<body>
+
+    <a href="http://gorgias.com/app/">Test Page</a>
+    <a href="http://gorgias.com/app/1003">Test with ID 3</a>
+    <a href="http://gorgias.com/app/1000">Manooo bezan</a>
+    <a href="http://gorgias.com/">App Only</a>
+
+    <br />
+
+    <a href="http://gorgias/test/">Test Page</a>
+    <a href="http://gorgias/test/?userid=1000">Test with ID 3</a>
+    <a href="http://gorgias/test/?userid=1003">Test with ID 4</a>
+    <a href="http://gorgias/">App Only</a>
+
+    <h2>IOS ;)</h2>
+    <a href="gorgias://">Test Page</a>
+    <a href="gorgias://1000">Test with ID 3</a>
+    <a href="gorgias://1003">Test with ID 4</a>
+
+    <br />
+
+    <h2>IOS ;)</h2>
+    <a href="http://gorgias.com">NEW HTTP Test Page</a>
+    <a href="http://gorgias.com/?userid=3">New Test with ID 3</a>
+    <a href="http://gorgias.com/?userid=4">New Test with ID 4</a>
+    <!--<script>
+        if ("standalone" in window.navigator && window.navigator.standalone) { //checks if you're in app mode
+            window.location = 'http://www.domain.com';  //the URL you want to refer to.
+        }
+    </script>-->
+    <!--<script src="js/addtohomescreen.js"></script>
+    <script>
+        //addToHomescreen({
+        //    detectHomescreen: true
+        //});
+        addToHomescreen.removeSession();     // use this to remove the localStorage variable
+        var ath = addToHomescreen({
+            debug: 'android',           // activate debug mode in ios emulation
+            skipFirstVisit: false,	// show at first access
+            startDelay: 0,          // display the message right away
+            lifespan: 0,            // do not automatically kill the call out
+            displayPace: 0,         // do not obey the display pace
+            privateModeOverride: true,	// show the message in private mode
+            maxDisplayCount: 0      // do not obey the max display count
+        });
+        ath.clearSession();      // reset the user session
+    </script>-->
+</body>
+</html>

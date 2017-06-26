@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="Data Source=YASSER-PC;Initial Catalog=Gorgias;Integrated Security=True" />
+    <add key="ConnectionString2" value="Data Source=DESKTOP-3OB440P\SEPID;Initial Catalog=Gorgias;Integrated Security=True" />
+  </variables>
+  <propertySets>
+    <propertySet name="mainV2" template="..\..\Lovely-Code\mainV2.cst">
+      <property name="SampleStringProperty">SomeValue</property>
+      <property name="SampleBooleanProperty">True</property>
+      <property name="SourceTables">
+        <connectionString>$(ConnectionString2)</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+        <tableList>
+      <table>
+        <owner>dbo</owner>
+        <name>Address</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>AddressType</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Album</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Attribute</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Category</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>City</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Connection</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Content</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Country</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ExternalLink</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Feature</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>FeaturedSponsor</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Industry</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>LinkType</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Message</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Profile</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProfileSocialNetwork</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProfileTag</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProfileType</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>RequestType</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>SocialNetwork</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>SubscriptionType</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Tag</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Theme</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>User</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>UserProfile</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>UserRole</name>
+      </table>
+    </tableList>
+      </property>
+      <property name="EntityName">GorgiasEntities</property>
+      <property name="SourceDatabase">
+        <connectionString>$(ConnectionString2)</connectionString>
+        <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+      </property>
+      <property name="SolutionName">Gorgias</property>
+      <property name="Location">D:\MyWorks-2016\YAP\4-11-2016-API-Office\Gorgias\Gorgias</property>
+    </propertySet>
+  </propertySets>
+</codeSmith>

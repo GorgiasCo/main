@@ -1,0 +1,89 @@
+﻿<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+        <div class="inner">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 ">
+                    <!-- START PANEL -->
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                {{'GettingStarted' | translate}}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h3>{{'UserNew' | translate}}</h3>
+                            <br>
+                            <div>
+                                <div class="profile-img-wrapper m-t-5 inline">
+                                    <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                                    <div class="chat-status available">
+                                    </div>
+                                </div>
+                                <div class="inline m-l-10">
+                                    <p class="small hint-text m-t-5">
+                                        {{'HelperAuthorTitle'| translate}}
+                                        <br> {{'HelperAuthor' | translate}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PANEL -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<div class="container-fluid container-fixed-lg">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>{{'NewUser' | translate}}</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addUserForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <p class="panel-subtitle">
+                                {{'RequiredTitle' | translate}}
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">{{'Fullname' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="UserFullname" ng-model="object.UserFullname" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">{{'Email' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="email" name="UserEmail" ng-model="object.UserEmail" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">{{'Block' | translate}}</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="UserIsBlocked" ng-model="object.UserIsBlocked" validate-on="blur" value="UserIsBlocked" type="checkbox" name="for[]" /><label for="UserIsBlocked">{{'Block' | translate}}</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">{{'Status' | translate}}</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="UserStatus" ng-model="object.UserStatus" validate-on="blur" value="UserStatus" type="checkbox" name="for[]" /><label for="UserStatus">{{'Status' | translate}}</label></div></div></div>
+                            <!--<div class="form-group">
+                                <label class="col-sm-3 control-label">Country</label><div class="col-sm-9">
+                                    <select id="CountryID" class="form-control" ng-model="object.CountryID" ng-options="option.CountryID as option.CountryName for option in Countries" title="Please select Country">
+                                        <option value="">None</option>
+                                    </select>
+                                    <input type="hidden" name="CountryID" ng-value="object.CountryID" />
+                                </div>
+                            </div>-->
+                            <!--<div class="form-group"><label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="UserDateCreated" data-plugin-datepicker ng-model="object.UserDateCreated" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Date Confirmed<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="UserDateConfirmed" data-plugin-datepicker ng-model="object.UserDateConfirmed" validate-on="blur" class="form-control" required /></div></div></div>-->
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                    <button type="reset" class="btn btn-default">{{'Reset' | translate}}</button>
+                                    <a class="btn btn-warning" ui-sref="app.forms.user">{{'Cancel' | translate}}</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

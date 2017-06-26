@@ -1,0 +1,53 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addFeaturedSponsorForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Add Featured Sponsor</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Feature</label><div class="col-sm-9"><select validate-on="blur" id="FeatureID" class="form-control" ng-model="object.FeatureID" ng-options="option.FeatureID as option.FeatureTitle for option in Features" title="Please select at least one" required></select><input type="hidden" name="FeatureID" ng-value="object.FeatureID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Profile</label><div class="col-sm-9"><select validate-on="blur" id="ProfileID" class="form-control" ng-model="object.ProfileID" ng-options="option.ProfileID as option.ProfileFullname for option in Profiles" title="Please select at least one" required></select><input type="hidden" name="ProfileID" ng-value="object.ProfileID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Mode<span class="required">*</span></label><div class="col-sm-9"><input type="text" value="1" name="FeaturedSponsorMode" ng-model="object.FeaturedSponsorMode" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Featured Role<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    <select name="type" ng-model="object.FeaturedRole" validate-on="blur" class="form-control" ng-dropdown required>
+                                        <option ng-option value="">Select</option>
+                                        <option ng-option value="0">Organizer</option>
+                                        <option ng-option value="1">Ambassador</option>
+                                        <option ng-option value="2">Additional Sponser</option>
+                                    </select>
+                                    <!--<input type="text" name="FeaturedRole" ng-model="object.FeaturedRole" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />-->
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <a class="btn btn-default" ng-href="/featuredsponsor">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

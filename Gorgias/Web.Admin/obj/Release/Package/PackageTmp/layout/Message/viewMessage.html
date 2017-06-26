@@ -1,0 +1,40 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addMessageForm" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">View Message</h2>
+                            <p class="panel-subtitle">
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Note</label><div class="col-sm-9"><textarea rows="5" name="MessageNote" ng-model="object.MessageNote" validate-on="blur" class="form-control" disabled placeholder="Describe Something..."></textarea></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="MessageDateCreated" data-plugin-datepicker ng-model="object.MessageDateCreated" validate-on="blur" class="form-control" disabled required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Subject<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="MessageSubject" ng-model="object.MessageSubject" validate-on="blur" class="form-control" disabled placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="MessageStatus" ng-model="object.MessageStatus" validate-on="blur" value="MessageStatus" disabled type="checkbox" name="for[]" /><label for="MessageStatus">Status</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Profile</label><div class="col-sm-9"><select id="ProfileID" class="form-control" ng-model="object.ProfileID" ng-options="option.ProfileID as option.ProfileFullname for option in Profiles" title="Please select at least one" required></select><input type="hidden" name="ProfileID" ng-value="object.ProfileID" /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <a class="btn btn-default" ng-href="/message">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>
