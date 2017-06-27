@@ -87,7 +87,7 @@
         function insertObject() {
             if ($scope.isEdit == false) {
                 if ($scope.hasFile) {
-                    $scope.object.AlbumAvailability = 0;
+                    //$scope.object.AlbumAvailability = 0;
                     apiService.post($scope.baseURL + 'api/Album/Hottest', $scope.object,
                         objectSucceded,
                         objectFailed);
@@ -96,7 +96,7 @@
                     notificationService.displayError('Album cover is required.');
                 }
             } else {
-                $scope.object.AlbumAvailability = 0;
+                //$scope.object.AlbumAvailability = 0;
                 apiService.post($scope.baseURL + 'api/Album/Hottest/AlbumID/' + $scope.objectItemID, $scope.object,
                     objectSucceded,
                     objectFailed);
@@ -226,6 +226,11 @@
                 console.log('success ;)');
                 console.log(file, xhr);
                 $scope.uploadDone = true;
+                if ($scope.object.AlbumAvailability > 0) {
+                    loadSendNotification(1);
+                } else {
+                    loadSendNotification(2)
+                }
                 $scope.dzImagesMethods.processQueue();
                 //redirectBack();
             },
@@ -271,6 +276,7 @@
                 this.on("queuecomplete", function (file) {
                     alert("All files have been uploaded ");
                     if ($scope.isEdit) {
+                        loadSendNotification(3);
                         loadContent();
                     } else {
                         loadItems();
@@ -360,6 +366,135 @@
             notificationService.displayError(response.data.Errors);
         }
         //end ;)      
+
+        loadAvailabilityItems();
+
+        function loadAvailabilityItems() {
+            apiService.get($scope.baseURL + 'api/Mobile/Album/Availability/' + $scope.item, null,
+            availabilityItemsLoadCompleted,
+            availabilityItemsLoadFailed);
+        }
+
+        function availabilityItemsLoadCompleted(response) {
+            console.log(response.data.Result);
+            $scope.Availabilities = response.data.Result;
+            notificationService.displaySuccess("Albums Loaded");
+        }
+
+        function availabilityItemsLoadFailed(response) {
+            notificationService.displayError(response.data.Errors);
+        }
+
+        loadProfile();
+
+        function loadProfile() {
+            apiService.get($scope.baseURL + 'api/Profile/ProfileID/' + $scope.item, null,
+            ProfileLoadCompleted,
+            ProfileLoadFailed);
+        }
+
+        function ProfileLoadCompleted(response) {
+            console.log(response.data.Result, 'Notification Profile Profile Profile ;)');
+            $scope.nProfile = response.data.Result;
+        }
+
+        function ProfileLoadFailed(error) {
+            console.log(error, 'Notification');
+        }
+
+        function _secondsToString(seconds) {
+            var value = seconds;
+            console.log(seconds, 'Notification');
+
+            var units = {
+                "year": 24 * 60 * 365,
+                "month": 24 * 60 * 30,
+                "week": 24 * 60 * 7,
+                "day": 24 * 60,
+                "hour": 60,
+                "minute": 1
+            }
+
+            $scope.resultN = []
+
+            for (var name in units) {
+                var p = Math.floor(value / units[name]);
+                if (p == 1) $scope.resultN.push(" " + p + " " + name);
+                if (p >= 2) $scope.resultN.push(" " + p + " " + name + "s");
+                value %= units[name]
+            }
+            //return result;
+            console.log($scope.resultN, 'Notification');
+        }
+
+        _secondsToString(60);
+        console.log($scope.resultN, 'Notification');
+
+
+
+        function loadSendNotification(item) {
+            if (item == 1) {
+                //New Candid
+                _secondsToString($scope.object.AlbumAvailability);
+
+                for (var i = 0, len = $scope.Availabilities.length; i < len; i++) {
+                    var obj = $scope.Availabilities[i];
+                    console.log(obj, 'Notification lol');
+                    if (obj.AlbumAvailability == $scope.object.AlbumAvailability) {
+                        console.log(obj, 'Notification II');
+                        $scope.AvailabilityName = obj.AlbumTypeName;
+                    }
+                }
+
+                $scope.notificationDate = {
+                    body: $scope.nProfile.ProfileFullname + " has published awesome candid " + $scope.AvailabilityName + " expires in" + $scope.resultN,
+                    title: "ICONIC Candid",
+                    albumid: $scope.object.AlbumID,
+                    channelid: "ch" + $scope.item
+                };
+            } else if (item == 2) {
+                //New Album                    
+                if ($scope.object.CategoryID != 6) {
+                    $scope.albumType = ' album';
+                } else {
+                    $scope.albumType = ' moment';
+                }
+                $scope.notificationDate = {
+                    body: $scope.nProfile.ProfileFullname + " has published new awesome " + $scope.albumType,
+                    title: "Update",
+                    albumid: $scope.object.AlbumID,
+                    channelid: "chp" + $scope.item
+                };
+            } else {
+                //Update Album
+                //New Album                    
+                if ($scope.object.CategoryID != 6) {
+                    $scope.albumType = ' album';
+                } else {
+                    $scope.albumType = ' moment';
+                }
+                $scope.notificationDate = {
+                    body: $scope.nProfile.ProfileFullname + " has updated the album",
+                    title: "Update",
+                    albumid: $scope.object.AlbumID,
+                    channelid: "chp" + $scope.item
+                };
+            }
+            console.log($scope.notificationDate, 'Notification');
+            apiService.post($scope.baseURL + 'api/web/notification', $scope.notificationDate,
+            sendNotificationLoadCompleted,
+            sendNotificationLoadFailed);
+        }
+
+        function sendNotificationLoadCompleted(response) {
+            console.log(response.data.Result, 'Notification');
+
+        }
+
+        function sendNotificationLoadFailed(response) {
+            console.log(response, 'Notification');
+        }
+
 
     }]);
 })(angular.module('heroesApp'));

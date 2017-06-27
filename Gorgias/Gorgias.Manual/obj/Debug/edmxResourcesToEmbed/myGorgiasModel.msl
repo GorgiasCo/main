@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GorgiasModelStoreContainer" CdmEntityContainer="GorgiasEntities">
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="GorgiasModel.Album">
+        <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+          <ScalarProperty Name="AlbumDateCreated" ColumnName="AlbumDateCreated" />
+          <ScalarProperty Name="AlbumStatus" ColumnName="AlbumStatus" />
+          <ScalarProperty Name="AlbumCover" ColumnName="AlbumCover" />
+          <ScalarProperty Name="AlbumIsDeleted" ColumnName="AlbumIsDeleted" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="AlbumView" ColumnName="AlbumView" />
+          <ScalarProperty Name="AlbumDatePublish" ColumnName="AlbumDatePublish" />
+          <ScalarProperty Name="AlbumDateExpire" ColumnName="AlbumDateExpire" />
+          <ScalarProperty Name="AlbumAvailability" ColumnName="AlbumAvailability" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contents">
+      <EntityTypeMapping TypeName="GorgiasModel.Content">
+        <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
+          <ScalarProperty Name="ContentURL" ColumnName="ContentURL" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="ContentStatus" ColumnName="ContentStatus" />
+          <ScalarProperty Name="ContentIsDeleted" ColumnName="ContentIsDeleted" />
+          <ScalarProperty Name="ContentCreatedDate" ColumnName="ContentCreatedDate" />
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="ContentLike" ColumnName="ContentLike" />
+          <ScalarProperty Name="ContentGeoLocation" ColumnName="ContentGeoLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -123,7 +123,7 @@
             }
             function actionsHtml(data, type, full, meta) {
                 console.log(data);
-                return '<a class="btn btn-warning" href="/app/forms/administrator/' + full.ProfileID + '">' +
+                return '<a class="btn btn-warning" href="/app/forms/master/administrator/' + full.ProfileID + '">' +
                     '   <i class="fa fa-edit"></i>' +
                     '</a>&nbsp;' +
                     '<button class="btn btn-danger" ng-click="delete(\'' + full.ProfileID + '\')">' +
@@ -164,7 +164,7 @@
             }
 
             function viewHtml(data, type, full, meta) {
-                return '<a href="/app/forms/administrator/' + full.ProfileID + '">' + data + '</a>';
+                return '<a href="/app/forms/master/administrator/' + full.ProfileID + '">' + data + '</a>';
             }
             //end datatables ;)
         }]);

@@ -210,6 +210,8 @@
             console.log('$scope.newFile');
         }
         //End dropzone ;)
+
+
         
     }]);
 })(angular.module('heroesApp'));

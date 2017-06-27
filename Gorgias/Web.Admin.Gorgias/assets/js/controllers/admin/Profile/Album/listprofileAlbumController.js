@@ -38,13 +38,13 @@
 
 
             //Object ;)
-            $scope.object = { ProfileID: $stateParams.id, AlbumStatus: true, AlbumAvailability: 0 };//$route.current.params.id
+            $scope.object = { ProfileID: $stateParams.id, AlbumStatus: true };//$route.current.params.id AlbumAvailability: 0
 
             function addNew() {
                 $scope.isList = false;
                 $scope.isAdd = true;
                 $scope.isEdit = false;
-                $scope.object = { ProfileID: $stateParams.id, AlbumStatus: true, AlbumAvailability: 0 };//$route.current.params.id
+                $scope.object = { ProfileID: $stateParams.id, AlbumStatus: true };//$route.current.params.id AlbumAvailability: 0
 
                 //Load Components
                 loadCategories();

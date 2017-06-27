@@ -204,6 +204,20 @@ namespace Gorgias.BusinessLayer.Facades
             }
         }
 
+        public CommentDTO Insert(Business.DataTransferObjects.Mobile.CommentCustomModel objComment)
+        {
+            CommentDTO result = Mapper.Map<CommentDTO>(DataLayer.DataLayerFacade.CommentRepository().Insert(objComment.CommentNote, 0, DateTime.UtcNow, true, objComment.ProfileID, objComment.ContentID));
+
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return new CommentDTO();
+            }
+        }
+
         public bool Delete(int CommentID)
         {
             bool result = DataLayer.DataLayerFacade.CommentRepository().Delete(CommentID);

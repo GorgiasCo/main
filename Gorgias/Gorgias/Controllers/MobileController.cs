@@ -12,7 +12,7 @@ namespace Gorgias.Controllers
     [RoutePrefix("api")]
     public class MobileController : ApiControllerBase
     {
-        [Route("Mobile/Comments/Content/{ContentID}/{page}/{pagesize}", Name = "GetMobileCommentsByContent")]
+        [Route("Mobile/Comments/Content/{ContentID}/{pagesize}/{page}", Name = "GetMobileCommentsByContent")]
         [HttpGet]
         public HttpResponseMessage GetCommentsByContentID(HttpRequestMessage request, int ContentID, int page, int pagesize)
         {
@@ -48,6 +48,26 @@ namespace Gorgias.Controllers
                 else
                 {
                     response = request.CreateResponse<IEnumerable<Business.DataTransferObjects.Mobile.AddressModelV2>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/Profile/NewUser", Name = "CreateNewMobileUser")]
+        [HttpGet]
+        public HttpResponseMessage CreateNewMobileUser(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                string result = BusinessLayer.Facades.Facade.WebFacade().createNewMobileUser();
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -501,5 +521,34 @@ namespace Gorgias.Controllers
                 return response;
             });
         }
+        
+        [Route("Mobile/Comment", Name = "CommentMobileInsert")]
+        [HttpPost]
+        public HttpResponseMessage Post(HttpRequestMessage request, Business.DataTransferObjects.Mobile.CommentCustomModel objComment)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    Business.DataTransferObjects.CommentDTO result = BusinessLayer.Facades.Facade.CommentFacade().Insert(objComment);
+                    if (result != null)
+                    {
+                        response = request.CreateResponse<Business.DataTransferObjects.CommentDTO>(HttpStatusCode.Created, result);
+                    }
+                    else
+                    {
+                        response = request.CreateResponse<string>(HttpStatusCode.Found, null);
+                    }
+                }
+                return response;
+            });
+        }
+
     }
 }

@@ -356,6 +356,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\AlbumMobileAdminModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AlbumMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\CategoryMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\CommentCustomModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\CommentModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ContentLikesModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ContentMobileModel.cs" />

@@ -82,6 +82,50 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public Profile Insert()
+        {
+            try
+            {
+                string username = DateTime.UtcNow.ToString("yyMMdd");
+                Profile obj = new Profile();
+                obj.ProfileFullname = username;
+                obj.ProfileFullnameEnglish = username;
+                obj.ProfileIsPeople = false;
+                obj.ProfileIsDeleted = false;
+                obj.ProfileDateCreated = DateTime.UtcNow;
+                obj.ProfileDescription = username;
+                obj.ProfileView = 0;
+                obj.ProfileLike = 0;
+                obj.ProfileURL = username;
+                obj.ProfileShortDescription = username;
+                //If want to use FB profile image possible to key in ;)
+                obj.ProfileImage = "na";
+                obj.ProfileEmail = username;
+                obj.ProfileStatus = true;
+                obj.ProfileIsConfirmed = false;
+                //obj.IndustryID = IndustryID;
+                obj.ProfileTypeID = 1;
+                obj.ThemeID = 3;
+                obj.SubscriptionTypeID = 4;
+                context.Profiles.Add(obj);
+                context.SaveChanges();
+                //Update after Insert for ID ;)
+                //obj.ProfileImage = "profile-" + obj.ProfileID + ".jpg";
+                obj.ProfileImage = "https://gorgiasasia.blob.core.windows.net/images/" + "profile-" + obj.ProfileID + ".jpg";
+                obj.ProfileURL = username + obj.ProfileID;
+                obj.ProfileFullname = username + obj.ProfileID;
+                obj.ProfileFullnameEnglish = username + obj.ProfileID;
+                obj.ProfileEmail = username + obj.ProfileID + "@gorgias.com";
+
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new Profile();
+            }
+        }
+
         public Profile Insert(String ProfileFullname, string ProfileFullnameEnglish, Boolean ProfileIsPeople, Boolean ProfileIsDeleted, DateTime ProfileDateCreated, String ProfileDescription, int ProfileView, int ProfileLike, String ProfileURL, String ProfileShortDescription, String ProfileImage, String ProfileEmail, Boolean ProfileStatus, Boolean ProfileIsConfirmed, int ProfileTypeID, int ThemeID, int SubscriptionTypeID, int UserID)
         {
             try

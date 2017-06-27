@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GorgiasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+          </Key>
+          <Property Name="AlbumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="AlbumDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="AlbumStatus" Type="bit" Nullable="false" />
+          <Property Name="AlbumCover" Type="nvarchar" MaxLength="250" />
+          <Property Name="AlbumIsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="ProfileID" Type="int" Nullable="false" />
+          <Property Name="AlbumView" Type="int" Nullable="false" />
+          <Property Name="AlbumDatePublish" Type="datetime" Nullable="false" />
+          <Property Name="AlbumDateExpire" Type="datetime" Nullable="false" />
+          <Property Name="AlbumAvailability" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContentTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="ContentURL" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ContentType" Type="int" Nullable="false" />
+          <Property Name="ContentStatus" Type="bit" Nullable="false" />
+          <Property Name="ContentIsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ContentCreatedDate" Type="datetime" />
+          <Property Name="AlbumID" Type="int" Nullable="false" />
+          <Property Name="ContentLike" Type="int" Nullable="false" />
+          <Property Name="ContentGeoLocation" Type="geography" />
+        </EntityType>
+        <Association Name="FK_Content_Album">
+          <End Role="Album" Type="Self.Album" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Content" Type="Self.Content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="Content">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GorgiasModelStoreContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Content_Album" Association="Self.FK_Content_Album">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="Content" EntitySet="Content" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GorgiasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+          </Key>
+          <Property Name="AlbumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AlbumDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AlbumStatus" Type="Boolean" Nullable="false" />
+          <Property Name="AlbumCover" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AlbumIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
+          <Property Name="AlbumView" Type="Int32" Nullable="false" />
+          <Property Name="AlbumDatePublish" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AlbumDateExpire" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AlbumAvailability" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contents" Relationship="Self.FK_Content_Album" FromRole="Album" ToRole="Content" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContentTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ContentURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContentType" Type="Int32" Nullable="false" />
+          <Property Name="ContentStatus" Type="Boolean" Nullable="false" />
+          <Property Name="ContentIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ContentCreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="AlbumID" Type="Int32" Nullable="false" />
+          <Property Name="ContentLike" Type="Int32" Nullable="false" />
+          <Property Name="ContentGeoLocation" Type="Geography" Nullable="true" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_Content_Album" FromRole="Content" ToRole="Album" />
+        </EntityType>
+        <Association Name="FK_Content_Album">
+          <End Role="Album" Type="Self.Album" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Content" Type="Self.Content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="Content">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GorgiasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="Contents" EntityType="Self.Content" />
+          <AssociationSet Name="FK_Content_Album" Association="Self.FK_Content_Album">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Content" EntitySet="Contents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GorgiasModelStoreContainer" CdmEntityContainer="GorgiasEntities">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="GorgiasModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+                <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+                <ScalarProperty Name="AlbumDateCreated" ColumnName="AlbumDateCreated" />
+                <ScalarProperty Name="AlbumStatus" ColumnName="AlbumStatus" />
+                <ScalarProperty Name="AlbumCover" ColumnName="AlbumCover" />
+                <ScalarProperty Name="AlbumIsDeleted" ColumnName="AlbumIsDeleted" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="AlbumView" ColumnName="AlbumView" />
+                <ScalarProperty Name="AlbumDatePublish" ColumnName="AlbumDatePublish" />
+                <ScalarProperty Name="AlbumDateExpire" ColumnName="AlbumDateExpire" />
+                <ScalarProperty Name="AlbumAvailability" ColumnName="AlbumAvailability" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contents">
+            <EntityTypeMapping TypeName="GorgiasModel.Content">
+              <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
+                <ScalarProperty Name="ContentURL" ColumnName="ContentURL" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentStatus" ColumnName="ContentStatus" />
+                <ScalarProperty Name="ContentIsDeleted" ColumnName="ContentIsDeleted" />
+                <ScalarProperty Name="ContentCreatedDate" ColumnName="ContentCreatedDate" />
+                <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+                <ScalarProperty Name="ContentLike" ColumnName="ContentLike" />
+                <ScalarProperty Name="ContentGeoLocation" ColumnName="ContentGeoLocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

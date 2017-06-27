@@ -273,6 +273,11 @@ namespace Gorgias.Business.Facades.Web
             return DataLayer.DataLayerFacade.AddressRepository().GetAddressesByProfileID(ProfileID); 
         }
 
+        public string createNewMobileUser()
+        {            
+            return DataLayer.DataLayerFacade.ProfileRepository().Insert().ProfileID.ToString();
+        }
+
         public GalleryPageModel getGalleryPage(string ProfileURL, int pagenumber, int pagesize, int CategoryID, int OrderType)
         {
             GalleryPageModel result = new GalleryPageModel();
