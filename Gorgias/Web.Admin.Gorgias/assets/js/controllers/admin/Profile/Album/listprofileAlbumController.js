@@ -335,7 +335,7 @@
             $scope.masterFileName = "album";
             //dropzone ;)
             $scope.dzOptions = {
-                url: $scope.baseURL + 'api/images/name?ImageName=' + $scope.filename + '&MasterFileName=album',
+                url: $scope.baseURL + 'api/images/name?ImageName=' + $scope.filename,
                 paramName: 'photo',
                 maxFilesize: '10',
                 acceptedFiles: 'image/jpeg, images/jpg, image/png',
@@ -347,10 +347,17 @@
                         $scope.hasFile = true;
                         //$scope.object.AlbumCover = 'album-' + file.name;
                         var newFileName = uuid.v4() + '.jpg';
-                        $scope.filename = 'album-' + newFileName;// file.name;//uuid.v4()
-                        console.log('filename', newFileName, $scope.filename);
-                        $scope.object.AlbumCover = ngAuthSettings.cdn_albums + 'album-' + newFileName;//file.name;//uuid.v4()
-                        console.log($scope.hasFile);
+                        if ($scope.object.AlbumAvailability > 0) {
+                            $scope.filename = 'hottest-album-' + newFileName;// file.name;//uuid.v4()
+                            console.log('filename', newFileName, $scope.filename);
+                            $scope.object.AlbumCover = ngAuthSettings.cdn_albums + 'hottest-album-' + newFileName;//file.name;//uuid.v4()
+                            console.log($scope.hasFile);
+                        } else {
+                            $scope.filename = 'album-' + newFileName + '&MasterFileName=album';// file.name;//uuid.v4()
+                            console.log('filename', newFileName, $scope.filename);
+                            $scope.object.AlbumCover = ngAuthSettings.cdn_albums + 'album-' + newFileName;//file.name;//uuid.v4()
+                            console.log($scope.hasFile);
+                        }
                     }),
                     this.on("processing", function (file) {
                         this.options.url = $scope.baseURL + 'api/images/name?ImageName=' + $scope.filename + '&MasterFileName=album';
@@ -441,7 +448,7 @@
                             loadContent();
                         } else {
                             loadItems();
-                            $scope.object = { ProfileID: $route.current.params.id, AlbumStatus: true };
+                            $scope.object = { ProfileID: $stateParams.id, AlbumStatus: true };
                         }
                         redirect();
                     });
