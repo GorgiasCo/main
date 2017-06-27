@@ -187,7 +187,7 @@
         $scope.filename = '';
         //dropzone ;)
         $scope.dzOptions = {
-            url: $scope.baseURL + 'api/images/name?ImageName=' + $scope.filename + '&MasterFileName=album',
+            url: $scope.baseURL + 'api/images/name?ImageName=' + $scope.filename,
             paramName: 'photo',
             maxFilesize: '10',
             acceptedFiles: 'image/jpeg, images/jpg, image/png',
@@ -196,11 +196,19 @@
             autoProcessQueue: false,
             init: function () {
                 this.on("addedfile", function (file) {
-                    $scope.hasFile = true;
-                    $scope.albumV4Name = uuid.v4();
-                    $scope.filename = 'album-' + $scope.albumV4Name;
-                    $scope.object.AlbumCover = ngAuthSettings.cdn_albums + 'album-' + $scope.albumV4Name;//file.name;
-                    console.log($scope.hasFile);
+                    if ($scope.object.AlbumAvailability > 0) {
+                        $scope.hasFile = true;
+                        $scope.albumV4Name = uuid.v4();
+                        $scope.filename = 'hottest-album-' + $scope.albumV4Name + '.jpg';
+                        $scope.object.AlbumCover = ngAuthSettings.cdn_albums + 'hottest-album-' + $scope.albumV4Name + '.jpg';//file.name;
+                        console.log($scope.hasFile);
+                    } else {
+                        $scope.hasFile = true;
+                        $scope.albumV4Name = uuid.v4();
+                        $scope.filename = 'album-' + $scope.albumV4Name + '.jpg' + '&MasterFileName=album';
+                        $scope.object.AlbumCover = ngAuthSettings.cdn_albums + 'album-' + $scope.albumV4Name + '.jpg';//file.name;
+                        console.log($scope.hasFile);
+                    }
                 }),
                 this.on("processing", function (file) {
                     this.options.url = $scope.baseURL + 'api/images/name?ImageName=' + $scope.filename + '&MasterFileName=album';
