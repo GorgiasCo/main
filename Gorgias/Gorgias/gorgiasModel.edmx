@@ -48,6 +48,7 @@
           <Property Name="AlbumDatePublish" Type="datetime" Nullable="false" />
           <Property Name="AlbumDateExpire" Type="datetime" Nullable="false" />
           <Property Name="AlbumAvailability" Type="int" Nullable="false" />
+          <Property Name="AlbumHasComment" Type="bit" />
         </EntityType>
         <EntityType Name="AlbumType">
           <Key>
@@ -122,7 +123,7 @@
             <PropertyRef Name="ContentID" />
           </Key>
           <Property Name="ContentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ContentTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="ContentTitle" Type="nvarchar" MaxLength="500" />
           <Property Name="ContentURL" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="ContentType" Type="int" Nullable="false" />
           <Property Name="ContentStatus" Type="bit" Nullable="false" />
@@ -1258,6 +1259,7 @@
           <Property Name="AlbumDateExpire" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AlbumAvailability" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AlbumType" Relationship="GorgiasModel.FK_Album_AlbumType" FromRole="Album" ToRole="AlbumType" />
+          <Property Name="AlbumHasComment" Type="Boolean" />
         </EntityType>
         <EntityType Name="Attribute">
           <Key>
@@ -1318,7 +1320,7 @@
             <PropertyRef Name="ContentID" />
           </Key>
           <Property Name="ContentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContentTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContentTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ContentURL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ContentType" Type="Int32" Nullable="false" />
           <Property Name="ContentStatus" Type="Boolean" Nullable="false" />
@@ -2104,6 +2106,7 @@
           <EntitySetMapping Name="Albums">
             <EntityTypeMapping TypeName="GorgiasModel.Album">
               <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="AlbumHasComment" ColumnName="AlbumHasComment" />
                 <ScalarProperty Name="AlbumAvailability" ColumnName="AlbumAvailability" />
                 <ScalarProperty Name="AlbumDateExpire" ColumnName="AlbumDateExpire" />
                 <ScalarProperty Name="AlbumDatePublish" ColumnName="AlbumDatePublish" />

@@ -32,6 +32,7 @@ namespace Gorgias
         public System.DateTime AlbumDatePublish { get; set; }
         public System.DateTime AlbumDateExpire { get; set; }
         public int AlbumAvailability { get; set; }
+        public Nullable<bool> AlbumHasComment { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Profile Profile { get; set; }

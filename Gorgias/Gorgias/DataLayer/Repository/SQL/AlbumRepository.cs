@@ -75,7 +75,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public Album Insert(String AlbumName, DateTime AlbumDateCreated, DateTime AlbumDatePublish, int AlbumAvailability, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID)
+        public Album Insert(String AlbumName, DateTime AlbumDateCreated, DateTime AlbumDatePublish, int AlbumAvailability, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, bool? AlbumHasComment)
         {
             try
             {
@@ -88,6 +88,14 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.CategoryID = CategoryID;
                 obj.ProfileID = ProfileID;
                 obj.AlbumDatePublish = obj.AlbumDateCreated;
+
+                if (AlbumHasComment.HasValue)
+                {
+                    obj.AlbumHasComment = AlbumHasComment.Value;
+                } else
+                {
+                    obj.AlbumHasComment = false;
+                }
 
                 //Add for Hottest
                 if (AlbumAvailability > 0)
@@ -156,7 +164,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(int AlbumID, String AlbumName, DateTime AlbumDateCreated, DateTime AlbumDatePublish, int AlbumAvailability, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID)
+        public bool Update(int AlbumID, String AlbumName, DateTime AlbumDateCreated, DateTime AlbumDatePublish, int AlbumAvailability, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, bool? AlbumHasComment)
         {
             Album obj = new Album();
             obj = (from w in context.Albums where w.AlbumID == AlbumID select w).FirstOrDefault();
@@ -171,6 +179,15 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.AlbumIsDeleted = AlbumIsDeleted;
                 obj.CategoryID = CategoryID;
                 obj.ProfileID = ProfileID;
+
+                if (AlbumHasComment.HasValue)
+                {
+                    obj.AlbumHasComment = AlbumHasComment.Value;
+                }
+                else
+                {
+                    obj.AlbumHasComment = false;
+                }
 
                 //Add for Hottest
                 if (AlbumAvailability > 0)

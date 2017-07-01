@@ -5,9 +5,9 @@
 
 //var serviceBase = 'https://gorgiasapi.azurewebsites.net/';
 //var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
-//var serviceBase = 'http://localhost:43587/';
+var serviceBase = 'http://localhost:43587/';
 //var serviceBase = 'http://apiigorgias.azurewebsites.net/';
-var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
+//var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
 
 
 angular.module('gorgiasapp')
@@ -157,13 +157,14 @@ angular.module('gorgiasapp')
                 IsBlocked: 'Blocked',
                 Register: 'Register',
                 Confirmed: 'Confirmed',
-                AlbumAvailability: 'Album Availability',
+                AlbumAvailability: 'Album Type',
                 hasPublishedNewAwesome: " has published new awesome ",
                 hasUpdatedAlbum: " has updated the album",
                 hasPublishedNewAwesomeCandid: " has published awesome candid ",
                 expiredInTitle: " expires in",
                 candidNotificationTitle: "ICONIC Candid",
                 updateNotificationTitle: " Update",
+                AlbumHasComments: "Allow Comments",//允许评论
                 
 
 
@@ -272,6 +273,8 @@ angular.module('gorgiasapp')
                   IsBlocked: '封鎖',
                   Register: '註冊',
                   Confirmed: '確認',
+                  AlbumHasComments: "允许评论",
+                  AlbumAvailability: '相簿类型',
 
                   hasPublishedNewAwesome: " PO了最新最棒的 ",
                   hasUpdatedAlbum: " 更新相簿",
@@ -383,6 +386,8 @@ angular.module('gorgiasapp')
                     IsBlocked: 'Disekat',
                     Register: 'Daftar',
                     Confirmed: 'Ditetapkan',
+                    AlbumHasComments: "Memberi Komen",
+                    AlbumAvailability: 'Jenis Album',
 
                     hasPublishedNewAwesome: " telah menerbitkan post baru ",
                     hasUpdatedAlbum: " telah update album baru",

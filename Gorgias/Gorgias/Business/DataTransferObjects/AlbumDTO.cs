@@ -19,6 +19,7 @@ namespace Gorgias.Business.DataTransferObjects
         public DateTime AlbumDateExpires { get; set; }
         public DateTime AlbumDatePublish { get; set; } 
         public int AlbumAvailability { get; set; }
+        public bool? AlbumHasComment { get; set; }
         public virtual CategoryDTO Category { get; set; }
         public virtual ProfileDTO Profile { get; set; }
 

@@ -197,7 +197,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public AlbumDTO InsertForMobile(AlbumDTO objAlbum)
         {
-            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumDateCreated, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, true, objAlbum.AlbumCover, objAlbum.AlbumIsDeleted, objAlbum.CategoryID, objAlbum.ProfileID));
+            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumDateCreated, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, true, objAlbum.AlbumCover, objAlbum.AlbumIsDeleted, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumHasComment));
 
             if (result != null)
             {
@@ -211,7 +211,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public AlbumDTO InsertHottest(AlbumDTO objAlbum)
         {
-            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumDateCreated, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.AlbumIsDeleted, objAlbum.CategoryID, objAlbum.ProfileID));
+            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumDateCreated, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.AlbumIsDeleted, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumHasComment));
 
             if (result != null)
             {
@@ -240,7 +240,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public bool UpdateHottest(int AlbumID, AlbumDTO objAlbum)
         {
-            bool result = DataLayer.DataLayerFacade.AlbumRepository().Update(objAlbum.AlbumID, objAlbum.AlbumName, objAlbum.AlbumDateCreated, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.AlbumIsDeleted, objAlbum.CategoryID, objAlbum.ProfileID);
+            bool result = DataLayer.DataLayerFacade.AlbumRepository().Update(objAlbum.AlbumID, objAlbum.AlbumName, objAlbum.AlbumDateCreated, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.AlbumIsDeleted, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumHasComment);
             if (result)
             {
                 return true;
