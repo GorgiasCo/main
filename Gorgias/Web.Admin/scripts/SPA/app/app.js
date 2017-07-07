@@ -584,6 +584,18 @@
                 templateUrl: "/layout/login.html",
                 controller: "loginController"
             })
+
+            .when("/stats", {
+                templateUrl: "/layout/Dashboard/stats.html",
+                //controller:
+            })
+
+            .when("/finance", {
+                templateUrl: "/layout/Dashboard/finance.html",
+                //controller: ""
+
+            })
+
             //.when("/signup", {
             //    templateUrl: "/layout/signup.html",
             //    controller: "signupController"
