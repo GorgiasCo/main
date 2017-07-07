@@ -1,0 +1,1031 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GorgiasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GorgiasEntities" annotation:LazyLoadingEnabled="false">
+    <EntitySet Name="Addresses" EntityType="GorgiasModel.Address" />
+    <EntitySet Name="AddressTypes" EntityType="GorgiasModel.AddressType" />
+    <EntitySet Name="Albums" EntityType="GorgiasModel.Album" />
+    <EntitySet Name="Attributes" EntityType="GorgiasModel.Attribute" />
+    <EntitySet Name="Categories" EntityType="GorgiasModel.Category" />
+    <EntitySet Name="Cities" EntityType="GorgiasModel.City" />
+    <EntitySet Name="Connections" EntityType="GorgiasModel.Connection" />
+    <EntitySet Name="Contents" EntityType="GorgiasModel.Content" />
+    <EntitySet Name="Countries" EntityType="GorgiasModel.Country" />
+    <EntitySet Name="ExternalLinks" EntityType="GorgiasModel.ExternalLink" />
+    <EntitySet Name="Features" EntityType="GorgiasModel.Feature" />
+    <EntitySet Name="FeaturedSponsors" EntityType="GorgiasModel.FeaturedSponsor" />
+    <EntitySet Name="Industries" EntityType="GorgiasModel.Industry" />
+    <EntitySet Name="LinkTypes" EntityType="GorgiasModel.LinkType" />
+    <EntitySet Name="Messages" EntityType="GorgiasModel.Message" />
+    <EntitySet Name="Profiles" EntityType="GorgiasModel.Profile" />
+    <EntitySet Name="ProfileAttributes" EntityType="GorgiasModel.ProfileAttribute" />
+    <EntitySet Name="ProfileSocialNetworks" EntityType="GorgiasModel.ProfileSocialNetwork" />
+    <EntitySet Name="ProfileTags" EntityType="GorgiasModel.ProfileTag" />
+    <EntitySet Name="ProfileTypes" EntityType="GorgiasModel.ProfileType" />
+    <EntitySet Name="RequestTypes" EntityType="GorgiasModel.RequestType" />
+    <EntitySet Name="SocialNetworks" EntityType="GorgiasModel.SocialNetwork" />
+    <EntitySet Name="SubscriptionTypes" EntityType="GorgiasModel.SubscriptionType" />
+    <EntitySet Name="Tags" EntityType="GorgiasModel.Tag" />
+    <EntitySet Name="Themes" EntityType="GorgiasModel.Theme" />
+    <EntitySet Name="Users" EntityType="GorgiasModel.User" />
+    <EntitySet Name="UserProfiles" EntityType="GorgiasModel.UserProfile" />
+    <EntitySet Name="UserRoles" EntityType="GorgiasModel.UserRole" />
+    <AssociationSet Name="FK_Address_AddressType" Association="GorgiasModel.FK_Address_AddressType">
+      <End Role="AddressType" EntitySet="AddressTypes" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_City" Association="GorgiasModel.FK_Address_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Profile" Association="GorgiasModel.FK_Address_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Album_Category" Association="GorgiasModel.FK_Album_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Album" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Album_Profile" Association="GorgiasModel.FK_Album_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Album" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Content_Album" Association="GorgiasModel.FK_Content_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Content" EntitySet="Contents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileAttribute_Attribute" Association="GorgiasModel.FK_ProfileAttribute_Attribute">
+      <End Role="Attribute" EntitySet="Attributes" />
+      <End Role="ProfileAttribute" EntitySet="ProfileAttributes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="GorgiasModel.FK_City_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Connection_Profile" Association="GorgiasModel.FK_Connection_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Connection" EntitySet="Connections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Connection_Profile1" Association="GorgiasModel.FK_Connection_Profile1">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Connection" EntitySet="Connections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Connection_RequestType" Association="GorgiasModel.FK_Connection_RequestType">
+      <End Role="RequestType" EntitySet="RequestTypes" />
+      <End Role="Connection" EntitySet="Connections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExternalLink_LinkType" Association="GorgiasModel.FK_ExternalLink_LinkType">
+      <End Role="LinkType" EntitySet="LinkTypes" />
+      <End Role="ExternalLink" EntitySet="ExternalLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExternalLink_Profile" Association="GorgiasModel.FK_ExternalLink_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ExternalLink" EntitySet="ExternalLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeaturedSponsor_FeaturedSponsor" Association="GorgiasModel.FK_FeaturedSponsor_FeaturedSponsor">
+      <End Role="Feature" EntitySet="Features" />
+      <End Role="FeaturedSponsor" EntitySet="FeaturedSponsors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeaturedSponsor_Profile" Association="GorgiasModel.FK_FeaturedSponsor_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="FeaturedSponsor" EntitySet="FeaturedSponsors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_Profile" Association="GorgiasModel.FK_Message_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_ProfileType" Association="GorgiasModel.FK_Profile_ProfileType">
+      <End Role="ProfileType" EntitySet="ProfileTypes" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_SubscriptionType" Association="GorgiasModel.FK_Profile_SubscriptionType">
+      <End Role="SubscriptionType" EntitySet="SubscriptionTypes" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_Theme" Association="GorgiasModel.FK_Profile_Theme">
+      <End Role="Theme" EntitySet="Themes" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileAttribute_Profile" Association="GorgiasModel.FK_ProfileAttribute_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileAttribute" EntitySet="ProfileAttributes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileSocialNetwork_Profile" Association="GorgiasModel.FK_ProfileSocialNetwork_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileSocialNetwork" EntitySet="ProfileSocialNetworks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileTag_Profile" Association="GorgiasModel.FK_ProfileTag_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileTag" EntitySet="ProfileTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_Profile" Association="GorgiasModel.FK_UserProfile_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileSocialNetwork_SocialNetwork" Association="GorgiasModel.FK_ProfileSocialNetwork_SocialNetwork">
+      <End Role="SocialNetwork" EntitySet="SocialNetworks" />
+      <End Role="ProfileSocialNetwork" EntitySet="ProfileSocialNetworks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileTag_Tag" Association="GorgiasModel.FK_ProfileTag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="ProfileTag" EntitySet="ProfileTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_User" Association="GorgiasModel.FK_UserProfile_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_UserRole" Association="GorgiasModel.FK_UserProfile_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="Recipient" Association="GorgiasModel.Recipient">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
+    <EntitySet Name="Newsletters" EntityType="GorgiasModel.Newsletter" />
+    <FunctionImport Name="updateProfileLike">
+      <Parameter Name="ProfileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="ProfileIndustry" Association="GorgiasModel.ProfileIndustry">
+      <End Role="Industry" EntitySet="Industries" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
+    <EntitySet Name="AlbumTypes" EntityType="GorgiasModel.AlbumType" />
+    <AssociationSet Name="FK_Album_AlbumType" Association="GorgiasModel.FK_Album_AlbumType">
+      <End Role="AlbumType" EntitySet="AlbumTypes" />
+      <End Role="Album" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Country" Association="GorgiasModel.FK_User_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="Comments" EntityType="GorgiasModel.Comment" />
+    <AssociationSet Name="FK_Comment_Content" Association="GorgiasModel.FK_Comment_Content">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Profile" Association="GorgiasModel.FK_Comment_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="AddressStatus" Type="Boolean" Nullable="false" />
+    <Property Name="AddressTel" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
+    <Property Name="AddressFax" Type="String" MaxLength="17" FixedLength="false" Unicode="true" />
+    <Property Name="AddressZipCode" Type="String" MaxLength="17" FixedLength="false" Unicode="true" />
+    <Property Name="AddressAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AddressEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddressImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="AddressTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AddressType" Relationship="GorgiasModel.FK_Address_AddressType" FromRole="Address" ToRole="AddressType" />
+    <NavigationProperty Name="City" Relationship="GorgiasModel.FK_Address_City" FromRole="Address" ToRole="City" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Address_Profile" FromRole="Address" ToRole="Profile" />
+    <Property Name="AddressLocation" Type="Geography" />
+  </EntityType>
+  <EntityType Name="AddressType">
+    <Key>
+      <PropertyRef Name="AddressTypeID" />
+    </Key>
+    <Property Name="AddressTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressTypeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AddressTypeImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AddressTypeStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="GorgiasModel.FK_Address_AddressType" FromRole="AddressType" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+    </Key>
+    <Property Name="AlbumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AlbumName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="AlbumDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AlbumStatus" Type="Boolean" Nullable="false" />
+    <Property Name="AlbumCover" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="AlbumIsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="GorgiasModel.FK_Album_Category" FromRole="Album" ToRole="Category" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Album_Profile" FromRole="Album" ToRole="Profile" />
+    <NavigationProperty Name="Contents" Relationship="GorgiasModel.FK_Content_Album" FromRole="Album" ToRole="Content" />
+    <Property Name="AlbumView" Type="Int32" Nullable="false" />
+    <Property Name="AlbumDatePublish" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AlbumDateExpire" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AlbumAvailability" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AlbumType" Relationship="GorgiasModel.FK_Album_AlbumType" FromRole="Album" ToRole="AlbumType" />
+    <Property Name="AlbumHasComment" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Attribute">
+    <Key>
+      <PropertyRef Name="AttributeID" />
+    </Key>
+    <Property Name="AttributeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="AttributeCaption" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="AttributeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="AttributeMode" Type="Int32" Nullable="false" />
+    <Property Name="AttributeRule" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AttributeType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AttributeImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AttributeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProfileAttributes" Relationship="GorgiasModel.FK_ProfileAttribute_Attribute" FromRole="Attribute" ToRole="ProfileAttribute" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryStatus" Type="Boolean" Nullable="false" />
+    <Property Name="CategoryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryParentID" Type="Int32" />
+    <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_Category" FromRole="Category" ToRole="Album" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="CityStatus" Type="Boolean" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="CityUpdateDate" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Addresses" Relationship="GorgiasModel.FK_Address_City" FromRole="City" ToRole="Address" />
+    <NavigationProperty Name="Country" Relationship="GorgiasModel.FK_City_Country" FromRole="City" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="Connection">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+      <PropertyRef Name="RequestedProfileID" />
+      <PropertyRef Name="RequestTypeID" />
+    </Key>
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="RequestedProfileID" Type="Int32" Nullable="false" />
+    <Property Name="RequestTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ConnectStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ConnectDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Connection_Profile" FromRole="Connection" ToRole="Profile" />
+    <NavigationProperty Name="Profile1" Relationship="GorgiasModel.FK_Connection_Profile1" FromRole="Connection" ToRole="Profile" />
+    <NavigationProperty Name="RequestType" Relationship="GorgiasModel.FK_Connection_RequestType" FromRole="Connection" ToRole="RequestType" />
+  </EntityType>
+  <EntityType Name="Content">
+    <Key>
+      <PropertyRef Name="ContentID" />
+    </Key>
+    <Property Name="ContentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContentTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ContentURL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContentType" Type="Int32" Nullable="false" />
+    <Property Name="ContentStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ContentIsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="AlbumID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Album" Relationship="GorgiasModel.FK_Content_Album" FromRole="Content" ToRole="Album" />
+    <Property Name="ContentCreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ContentLike" Type="Int32" Nullable="false" />
+    <Property Name="ContentGeoLocation" Type="Geography" />
+    <NavigationProperty Name="Comments" Relationship="GorgiasModel.FK_Comment_Content" FromRole="Content" ToRole="Comment" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="CountryShortName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CountryStatus" Type="Boolean" />
+    <Property Name="CountryPhoneCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="CountryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CountryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cities" Relationship="GorgiasModel.FK_City_Country" FromRole="Country" ToRole="City" />
+    <NavigationProperty Name="Users" Relationship="GorgiasModel.FK_User_Country" FromRole="Country" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ExternalLink">
+    <Key>
+      <PropertyRef Name="LinkTypeID" />
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="LinkTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ExternalLinkURL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LinkType" Relationship="GorgiasModel.FK_ExternalLink_LinkType" FromRole="ExternalLink" ToRole="LinkType" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ExternalLink_Profile" FromRole="ExternalLink" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Feature">
+    <Key>
+      <PropertyRef Name="FeatureID" />
+    </Key>
+    <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FeatureTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="FeatureDateCreated" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FeatureDateExpired" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FeatureStatus" Type="Boolean" Nullable="false" />
+    <Property Name="FeatureIsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="FeatureImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FeatureDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FeaturedSponsors" Relationship="GorgiasModel.FK_FeaturedSponsor_FeaturedSponsor" FromRole="Feature" ToRole="FeaturedSponsor" />
+  </EntityType>
+  <EntityType Name="FeaturedSponsor">
+    <Key>
+      <PropertyRef Name="FeatureID" />
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="FeatureID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="FeaturedSponsorMode" Type="Int32" Nullable="false" />
+    <Property Name="FeaturedRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Feature" Relationship="GorgiasModel.FK_FeaturedSponsor_FeaturedSponsor" FromRole="FeaturedSponsor" ToRole="Feature" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_FeaturedSponsor_Profile" FromRole="FeaturedSponsor" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="IndustryID" />
+    </Key>
+    <Property Name="IndustryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IndustryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IndustryStatus" Type="Boolean" Nullable="false" />
+    <Property Name="IndustryParentID" Type="Int32" />
+    <Property Name="IndustryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IndustryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Profiles" Relationship="GorgiasModel.ProfileIndustry" FromRole="Industry" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="LinkType">
+    <Key>
+      <PropertyRef Name="LinkTypeID" />
+    </Key>
+    <Property Name="LinkTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LinkTypeName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="LinkTypeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="LinkTypeImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LinkTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ExternalLinks" Relationship="GorgiasModel.FK_ExternalLink_LinkType" FromRole="LinkType" ToRole="ExternalLink" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MessageNote" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MessageDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MessageSubject" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MessageStatus" Type="Boolean" Nullable="false" />
+    <Property Name="MessageIsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Message_Profile" FromRole="Message" ToRole="Profile" />
+    <NavigationProperty Name="Profile1" Relationship="GorgiasModel.Recipient" FromRole="Message" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="ProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfileFullname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileIsPeople" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileIsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProfileDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileView" Type="Int32" Nullable="false" />
+    <Property Name="ProfileLike" Type="Int32" Nullable="false" />
+    <Property Name="ProfileURL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileIsConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ThemeID" Type="Int32" Nullable="false" />
+    <Property Name="SubscriptionTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="GorgiasModel.FK_Address_Profile" FromRole="Profile" ToRole="Address" />
+    <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_Profile" FromRole="Profile" ToRole="Album" />
+    <NavigationProperty Name="Connections" Relationship="GorgiasModel.FK_Connection_Profile" FromRole="Profile" ToRole="Connection" />
+    <NavigationProperty Name="Connections1" Relationship="GorgiasModel.FK_Connection_Profile1" FromRole="Profile" ToRole="Connection" />
+    <NavigationProperty Name="ExternalLinks" Relationship="GorgiasModel.FK_ExternalLink_Profile" FromRole="Profile" ToRole="ExternalLink" />
+    <NavigationProperty Name="FeaturedSponsors" Relationship="GorgiasModel.FK_FeaturedSponsor_Profile" FromRole="Profile" ToRole="FeaturedSponsor" />
+    <NavigationProperty Name="Messages" Relationship="GorgiasModel.FK_Message_Profile" FromRole="Profile" ToRole="Message" />
+    <NavigationProperty Name="ProfileType" Relationship="GorgiasModel.FK_Profile_ProfileType" FromRole="Profile" ToRole="ProfileType" />
+    <NavigationProperty Name="SubscriptionType" Relationship="GorgiasModel.FK_Profile_SubscriptionType" FromRole="Profile" ToRole="SubscriptionType" />
+    <NavigationProperty Name="Theme" Relationship="GorgiasModel.FK_Profile_Theme" FromRole="Profile" ToRole="Theme" />
+    <NavigationProperty Name="ProfileAttributes" Relationship="GorgiasModel.FK_ProfileAttribute_Profile" FromRole="Profile" ToRole="ProfileAttribute" />
+    <NavigationProperty Name="ProfileSocialNetworks" Relationship="GorgiasModel.FK_ProfileSocialNetwork_Profile" FromRole="Profile" ToRole="ProfileSocialNetwork" />
+    <NavigationProperty Name="ProfileTags" Relationship="GorgiasModel.FK_ProfileTag_Profile" FromRole="Profile" ToRole="ProfileTag" />
+    <NavigationProperty Name="UserProfiles" Relationship="GorgiasModel.FK_UserProfile_Profile" FromRole="Profile" ToRole="UserProfile" />
+    <NavigationProperty Name="Messages1" Relationship="GorgiasModel.Recipient" FromRole="Profile" ToRole="Message" />
+    <Property Name="ProfileCredit" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Industries" Relationship="GorgiasModel.ProfileIndustry" FromRole="Profile" ToRole="Industry" />
+    <Property Name="ProfileFullnameEnglish" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Comments" Relationship="GorgiasModel.FK_Comment_Profile" FromRole="Profile" ToRole="Comment" />
+  </EntityType>
+  <EntityType Name="ProfileAttribute">
+    <Key>
+      <PropertyRef Name="AttributeID" />
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="AttributeID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileAttributeNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Attribute" Relationship="GorgiasModel.FK_ProfileAttribute_Attribute" FromRole="ProfileAttribute" ToRole="Attribute" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileAttribute_Profile" FromRole="ProfileAttribute" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="ProfileSocialNetwork">
+    <Key>
+      <PropertyRef Name="SocialNetworkID" />
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="SocialNetworkID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileSocialNetworkURL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileSocialNetwork_Profile" FromRole="ProfileSocialNetwork" ToRole="Profile" />
+    <NavigationProperty Name="SocialNetwork" Relationship="GorgiasModel.FK_ProfileSocialNetwork_SocialNetwork" FromRole="ProfileSocialNetwork" ToRole="SocialNetwork" />
+  </EntityType>
+  <EntityType Name="ProfileTag">
+    <Key>
+      <PropertyRef Name="TagID" />
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="TagID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileTagStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileTag_Profile" FromRole="ProfileTag" ToRole="Profile" />
+    <NavigationProperty Name="Tag" Relationship="GorgiasModel.FK_ProfileTag_Tag" FromRole="ProfileTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="ProfileType">
+    <Key>
+      <PropertyRef Name="ProfileTypeID" />
+    </Key>
+    <Property Name="ProfileTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfileTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileTypeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileTypeImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileTypeParentID" Type="Int32" />
+    <NavigationProperty Name="Profiles" Relationship="GorgiasModel.FK_Profile_ProfileType" FromRole="ProfileType" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="RequestType">
+    <Key>
+      <PropertyRef Name="RequestTypeID" />
+    </Key>
+    <Property Name="RequestTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequestTypeName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="RequestTypeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="RequestIsRestricted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Connections" Relationship="GorgiasModel.FK_Connection_RequestType" FromRole="RequestType" ToRole="Connection" />
+  </EntityType>
+  <EntityType Name="SocialNetwork">
+    <Key>
+      <PropertyRef Name="SocialNetworkID" />
+    </Key>
+    <Property Name="SocialNetworkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SocialNetworkName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SocialNetworkStatus" Type="Boolean" Nullable="false" />
+    <Property Name="SocialNetworkURL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SocialNetworkImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SocialNetworkDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProfileSocialNetworks" Relationship="GorgiasModel.FK_ProfileSocialNetwork_SocialNetwork" FromRole="SocialNetwork" ToRole="ProfileSocialNetwork" />
+  </EntityType>
+  <EntityType Name="SubscriptionType">
+    <Key>
+      <PropertyRef Name="SubscriptionTypeID" />
+    </Key>
+    <Property Name="SubscriptionTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubscriptionTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SubscriptionTypeFee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="SubscriptionTypeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="SubscriptionTypeImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SubscriptionTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Profiles" Relationship="GorgiasModel.FK_Profile_SubscriptionType" FromRole="SubscriptionType" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagID" />
+    </Key>
+    <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TagStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ProfileTags" Relationship="GorgiasModel.FK_ProfileTag_Tag" FromRole="Tag" ToRole="ProfileTag" />
+    <Property Name="TagIsPrimary" Type="Boolean" Nullable="false" />
+    <Property Name="TagWeight" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Theme">
+    <Key>
+      <PropertyRef Name="ThemeID" />
+    </Key>
+    <Property Name="ThemeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ThemeName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="ThemeClassCode" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="ThemeStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Profiles" Relationship="GorgiasModel.FK_Profile_Theme" FromRole="Theme" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserFullname" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="UserStatus" Type="Boolean" Nullable="false" />
+    <Property Name="UserIsBlocked" Type="Boolean" Nullable="false" />
+    <Property Name="UserDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserDateConfirmed" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserProfiles" Relationship="GorgiasModel.FK_UserProfile_User" FromRole="User" ToRole="UserProfile" />
+    <Property Name="CountryID" Type="Int32" />
+    <NavigationProperty Name="Country" Relationship="GorgiasModel.FK_User_Country" FromRole="User" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+      <PropertyRef Name="UserRoleID" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_UserProfile_Profile" FromRole="UserProfile" ToRole="Profile" />
+    <NavigationProperty Name="User" Relationship="GorgiasModel.FK_UserProfile_User" FromRole="UserProfile" ToRole="User" />
+    <NavigationProperty Name="UserRole" Relationship="GorgiasModel.FK_UserProfile_UserRole" FromRole="UserProfile" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserRoleName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="UserRoleStatus" Type="Boolean" Nullable="false" />
+    <Property Name="UserRoleImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="UserRoleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserProfiles" Relationship="GorgiasModel.FK_UserProfile_UserRole" FromRole="UserRole" ToRole="UserProfile" />
+  </EntityType>
+  <Association Name="FK_Address_AddressType">
+    <End Type="GorgiasModel.AddressType" Role="AddressType" Multiplicity="1" />
+    <End Type="GorgiasModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddressType">
+        <PropertyRef Name="AddressTypeID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="AddressTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_City">
+    <End Type="GorgiasModel.City" Role="City" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Album_Category">
+    <End Type="GorgiasModel.Category" Role="Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Album_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Content_Album">
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Content" Role="Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileAttribute_Attribute">
+    <End Type="GorgiasModel.Attribute" Role="Attribute" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileAttribute" Role="ProfileAttribute" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attribute">
+        <PropertyRef Name="AttributeID" />
+      </Principal>
+      <Dependent Role="ProfileAttribute">
+        <PropertyRef Name="AttributeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Type="GorgiasModel.Country" Role="Country" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Connection_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Connection" Role="Connection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Connection">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Connection_Profile1">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="GorgiasModel.Connection" Role="Connection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Connection">
+        <PropertyRef Name="RequestedProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Connection_RequestType">
+    <End Type="GorgiasModel.RequestType" Role="RequestType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Connection" Role="Connection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RequestType">
+        <PropertyRef Name="RequestTypeID" />
+      </Principal>
+      <Dependent Role="Connection">
+        <PropertyRef Name="RequestTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExternalLink_LinkType">
+    <End Type="GorgiasModel.LinkType" Role="LinkType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ExternalLink" Role="ExternalLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkType">
+        <PropertyRef Name="LinkTypeID" />
+      </Principal>
+      <Dependent Role="ExternalLink">
+        <PropertyRef Name="LinkTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExternalLink_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ExternalLink" Role="ExternalLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ExternalLink">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeaturedSponsor_FeaturedSponsor">
+    <End Type="GorgiasModel.Feature" Role="Feature" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.FeaturedSponsor" Role="FeaturedSponsor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feature">
+        <PropertyRef Name="FeatureID" />
+      </Principal>
+      <Dependent Role="FeaturedSponsor">
+        <PropertyRef Name="FeatureID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeaturedSponsor_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.FeaturedSponsor" Role="FeaturedSponsor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="FeaturedSponsor">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Message" Role="Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_ProfileType">
+    <End Type="GorgiasModel.ProfileType" Role="ProfileType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileType">
+        <PropertyRef Name="ProfileTypeID" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="ProfileTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_SubscriptionType">
+    <End Type="GorgiasModel.SubscriptionType" Role="SubscriptionType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubscriptionType">
+        <PropertyRef Name="SubscriptionTypeID" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="SubscriptionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_Theme">
+    <End Type="GorgiasModel.Theme" Role="Theme" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Theme">
+        <PropertyRef Name="ThemeID" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="ThemeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileAttribute_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileAttribute" Role="ProfileAttribute" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileAttribute">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileSocialNetwork_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileSocialNetwork" Role="ProfileSocialNetwork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileSocialNetwork">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileTag_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileTag" Role="ProfileTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileTag">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileSocialNetwork_SocialNetwork">
+    <End Type="GorgiasModel.SocialNetwork" Role="SocialNetwork" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileSocialNetwork" Role="ProfileSocialNetwork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SocialNetwork">
+        <PropertyRef Name="SocialNetworkID" />
+      </Principal>
+      <Dependent Role="ProfileSocialNetwork">
+        <PropertyRef Name="SocialNetworkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileTag_Tag">
+    <End Type="GorgiasModel.Tag" Role="Tag" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileTag" Role="ProfileTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagID" />
+      </Principal>
+      <Dependent Role="ProfileTag">
+        <PropertyRef Name="TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_User">
+    <End Type="GorgiasModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_UserRole">
+    <End Type="GorgiasModel.UserRole" Role="UserRole" Multiplicity="1" />
+    <End Type="GorgiasModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="UserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Recipient">
+    <End Type="GorgiasModel.Message" Role="Message" Multiplicity="*" />
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="Newsletter">
+    <Key>
+      <PropertyRef Name="NewsletterID" />
+    </Key>
+    <Property Name="NewsletterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NewsletterName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="NewsletterNote" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NewsletterStatus" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="ProfileIndustry">
+    <End Type="GorgiasModel.Industry" Role="Industry" Multiplicity="*" />
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="*" />
+  </Association>
+  <EntityType Name="AlbumType">
+    <Key>
+      <PropertyRef Name="AlbumTypeID" />
+    </Key>
+    <Property Name="AlbumTypeID" Type="Int32" Nullable="false" />
+    <Property Name="AlbumTypeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AlbumTypeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="AlbumTypeLimitation" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_AlbumType" FromRole="AlbumType" ToRole="Album" />
+  </EntityType>
+  <Association Name="FK_Album_AlbumType">
+    <End Type="GorgiasModel.AlbumType" Role="AlbumType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AlbumType">
+        <PropertyRef Name="AlbumTypeID" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="AlbumAvailability" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Country">
+    <End Type="GorgiasModel.Country" Role="Country" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommentNote" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentLike" Type="Int32" Nullable="false" />
+    <Property Name="CommentDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CommentStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ContentID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Content" Relationship="GorgiasModel.FK_Comment_Content" FromRole="Comment" ToRole="Content" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Comment_Profile" FromRole="Comment" ToRole="Profile" />
+  </EntityType>
+  <Association Name="FK_Comment_Content">
+    <End Type="GorgiasModel.Content" Role="Content" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ContentID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="GorgiasModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

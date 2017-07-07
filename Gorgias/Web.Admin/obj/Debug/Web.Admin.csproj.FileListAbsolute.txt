@@ -893,3 +893,35 @@ C:\Yasser\YAP\main\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompi
 C:\Yasser\YAP\main\Gorgias\Web.Admin\obj\Debug\Web.Admin.csprojResolveAssemblyReference.cache
 C:\Yasser\YAP\main\Gorgias\Web.Admin\obj\Debug\Web.Admin.dll
 C:\Yasser\YAP\main\Gorgias\Web.Admin\obj\Debug\Web.Admin.pdb
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\csc.exe
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\System.Collections.Immutable.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\System.Reflection.Metadata.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\vbc.exe
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\roslyn\VBCSCompiler.exe.config
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Web.Admin.dll.config
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Web.Admin.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Web.Admin.pdb
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.Agent.Intercept.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.Web.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.DependencyCollector.xml
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.Web.xml
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.AI.WindowsServer.xml
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.ApplicationInsights.xml
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\obj\Debug\Web.Admin.csprojResolveAssemblyReference.cache
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\obj\Debug\Web.Admin.dll
+D:\My Projects\GitHubRepos\main\Gorgias\Web.Admin\obj\Debug\Web.Admin.pdb
