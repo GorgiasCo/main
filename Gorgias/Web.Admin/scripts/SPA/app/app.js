@@ -585,6 +585,12 @@
                 controller: "loginController"
             })
 
+            .when("/dashboardBETA", {
+                templateUrl: "/layout/Dashboard/dashboardBETA.html"
+                //controller:
+
+            })
+
             .when("/stats", {
                 templateUrl: "/layout/Dashboard/stats.html",
                 //controller:

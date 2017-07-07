@@ -153,6 +153,8 @@
     <Content Include="layout\Country\listCountry.html" />
     <Content Include="layout\Country\viewCountry.html" />
     <Content Include="layout\Dashboard\dashboard.html" />
+    <Content Include="layout\Dashboard\finance.html" />
+    <Content Include="layout\Dashboard\stats.html" />
     <Content Include="layout\DBTool\dbtoolAdd.html" />
     <Content Include="layout\directive\customPager.html" />
     <Content Include="layout\directive\sideBarAdmin.html" />
