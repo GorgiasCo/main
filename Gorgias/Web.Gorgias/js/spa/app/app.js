@@ -2,7 +2,7 @@
     'use strict';
     //'pageslide-directive7','angular-loading-bar','chieffancypants.loadingBar','ngMaterial'
     var app = angular
-        .module('gorgiasapp', ['ngRoute', 'LocalStorageModule', 'ngCookies', 'angularValidator', 'ui.bootstrap', 'chieffancypants.loadingBar', 'checklist-model', 'ngTagsInput', 'pageslide-directive', 'geolocation', 'ngMap', 'thatisuday.dropzone', 'angularModalService', 'angular-carousel', 'slickCarousel', 'angular-preload-image', 'ngAnimate', 'cgBusy', 'ismobile', 'pascalprecht.translate', 'angular-uuid'])
+        .module('gorgiasapp', ['ngRoute', 'LocalStorageModule', 'ngCookies', 'angularValidator', 'ui.bootstrap', 'chieffancypants.loadingBar', 'checklist-model', 'ngTagsInput', 'pageslide-directive', 'geolocation', 'ngMap', 'thatisuday.dropzone', 'angularModalService', 'angular-carousel', 'slickCarousel', 'angular-preload-image', 'ngAnimate', 'cgBusy', 'ismobile', 'pascalprecht.translate', 'angular-uuid', 'ngLocationUpdate'])
         .config(config);
 
     app.value('cgBusyDefaults', {
@@ -129,45 +129,45 @@
             Fullname: 'Fullname',
             DateCreated: 'Date Created',
             Description: 'Description',
-            View:'View',
-            Like:'Like',
-            WebURL:'Web URL',
+            View: 'View',
+            Like: 'Like',
+            WebURL: 'Web URL',
             ShortDescription: 'Short Description',
-            Email:'Email',
+            Email: 'Email',
             ProfileType: 'Profile Type',
-            Theme:'Theme',
+            Theme: 'Theme',
             Subscription: 'Subscription',
-            Submit:'Submit',
+            Submit: 'Submit',
             Cancel: 'Cancel',
             Address: 'Address',
-            Name:'Name',
-            Tel:'Tel',
-            Fax:'Fax',
+            Name: 'Name',
+            Tel: 'Tel',
+            Fax: 'Fax',
             ZipCode: 'Zip Code',
-            City:'City',
+            City: 'City',
             AddressType: 'Address Type',
             ValidatingAddress: 'Validating Address',
             ValidateAddress: 'Validate Address',
             ValidationNote: 'Please just click on validate before submit your address. Then submit it.',
-            Reset:'Reset',
-            Albums:'Albums',
-            Album:'Album',
+            Reset: 'Reset',
+            Albums: 'Albums',
+            Album: 'Album',
             MyProfile: 'My Profile',
             AboutMe: 'About Me',
             AlbumInformation: 'Album Information',
             Category: 'Category',
             AlbumCover: 'Album Cover',
             AlbumImages: 'Album Images',
-            Actions:'Actions',
-            Section:'Section',
-            Content:'Content',
+            Actions: 'Actions',
+            Section: 'Section',
+            Content: 'Content',
             AboutMeSection: 'About Me Section',
-            Note:'Note',
+            Note: 'Note',
             DescribeSomething: 'Describe Something',
-            Tags:'Tags',
+            Tags: 'Tags',
             PrimaryTag: 'Primary Tag',
-            Add:'Add',
-            DeleteNote:'Are you sure to delete?',
+            Add: 'Add',
+            DeleteNote: 'Are you sure to delete?',
             SocialConnection: 'Social Connection',
             SocialNetwork: 'Social Network',
             SocialNetworkInformation: 'Social Network Information',
@@ -246,80 +246,93 @@
               MyWebImages: '屏幕图片',
           })
             .translations('my', {
-              AllMyProfile: 'Profiles',
-              Fullname: 'Nama Penuh',
-              DateCreated: 'Tarikh Daftar',
-              Description: 'Deskripsi',
-              View: 'View',
-              Like: 'Like',
-              WebURL: 'Alamat web',
-              ShortDescription: 'Deskripsi ringkas',
-              Email: 'E-mel',
-              ProfileType: 'Jenis profil',
-              Theme: 'Tema',
-              Subscription: 'Langgangan',
-              Submit: 'Hantar',
-              Cancel: 'Batal',
-              Address: 'Alamat',
-              Name: 'Nama',
-              Tel: 'Telefon',
-              Fax: 'Fax',
-              ZipCode: 'Poskod',
-              City: 'bandar',
-              AddressType: 'Jenis alamat',
-              ValidatingAddress: '',
-              ValidationNote: 'Sila mengesahkan alamat sebelum teruskan',
-              ValidateAddress: 'Sahkan Alamat',
-              Reset: 'menetapkan semula',
-              Albums: 'Album',
-              Album: 'Album',
-              MyProfile: 'Profil Saya',
-              AboutMe: 'Mengenai Saya',
-              AlbumInformation: 'Maklumat Album',
-              Category: 'Kategori',
-              AlbumCover: 'Lampiran Album',
-              AlbumImages: 'Imej Album',
-              Actions: 'Tindakan',
-              Section: 'Seksyen',
-              Content: 'Kandungan',
-              AboutMeSection: 'Seksyen mengenai saya',
-              Note: 'Nota',
-              DescribeSomething: 'Menggambarkan sesuatu',
-              Tags: 'Tags',
-              PrimaryTag: 'Tag Utama',
-              Add: 'Tambah',
-              DeleteNote: 'Anda Pasti?',
-              SocialConnection: 'Rangkaian Sosial',
-              SocialNetwork: 'Rangkaian Sosial',
-              SocialNetworkInformation: 'Informasi Rangkaian Sosial',
-              Link: 'Link',
-              CoverImage: 'Lampiran Gambar',
-              MenuSlider: 'Slider Menu',
-              MicroAppCover: 'Lampiran Mikro-App',
-              MicroAppSplashScreen: 'Skrin Utama Mikro-App',
-              GorgiasCopyrights: 'Hakcipta Gorgias',
-              AddressInformation: 'Maklumat Alamat',
-              Update: 'Ubah',
-              MyProfileInformation: 'My Profile Information',
-              Delete: 'Memadamkan',
-              Edit: 'Edit',
-              MyWebImages: 'Imej Web Saya',
+                AllMyProfile: 'Profiles',
+                Fullname: 'Nama Penuh',
+                DateCreated: 'Tarikh Daftar',
+                Description: 'Deskripsi',
+                View: 'View',
+                Like: 'Like',
+                WebURL: 'Alamat web',
+                ShortDescription: 'Deskripsi ringkas',
+                Email: 'E-mel',
+                ProfileType: 'Jenis profil',
+                Theme: 'Tema',
+                Subscription: 'Langgangan',
+                Submit: 'Hantar',
+                Cancel: 'Batal',
+                Address: 'Alamat',
+                Name: 'Nama',
+                Tel: 'Telefon',
+                Fax: 'Fax',
+                ZipCode: 'Poskod',
+                City: 'bandar',
+                AddressType: 'Jenis alamat',
+                ValidatingAddress: '',
+                ValidationNote: 'Sila mengesahkan alamat sebelum teruskan',
+                ValidateAddress: 'Sahkan Alamat',
+                Reset: 'menetapkan semula',
+                Albums: 'Album',
+                Album: 'Album',
+                MyProfile: 'Profil Saya',
+                AboutMe: 'Mengenai Saya',
+                AlbumInformation: 'Maklumat Album',
+                Category: 'Kategori',
+                AlbumCover: 'Lampiran Album',
+                AlbumImages: 'Imej Album',
+                Actions: 'Tindakan',
+                Section: 'Seksyen',
+                Content: 'Kandungan',
+                AboutMeSection: 'Seksyen mengenai saya',
+                Note: 'Nota',
+                DescribeSomething: 'Menggambarkan sesuatu',
+                Tags: 'Tags',
+                PrimaryTag: 'Tag Utama',
+                Add: 'Tambah',
+                DeleteNote: 'Anda Pasti?',
+                SocialConnection: 'Rangkaian Sosial',
+                SocialNetwork: 'Rangkaian Sosial',
+                SocialNetworkInformation: 'Informasi Rangkaian Sosial',
+                Link: 'Link',
+                CoverImage: 'Lampiran Gambar',
+                MenuSlider: 'Slider Menu',
+                MicroAppCover: 'Lampiran Mikro-App',
+                MicroAppSplashScreen: 'Skrin Utama Mikro-App',
+                GorgiasCopyrights: 'Hakcipta Gorgias',
+                AddressInformation: 'Maklumat Alamat',
+                Update: 'Ubah',
+                MyProfileInformation: 'My Profile Information',
+                Delete: 'Memadamkan',
+                Edit: 'Edit',
+                MyWebImages: 'Imej Web Saya',
 
-          });
+            });
 
         $translateProvider.preferredLanguage('en');
         $translateProvider.useLocalStorage();
 
     });
 
-    app.run(['authService', '$location', "$rootScope", "$window", '$anchorScroll', function (authService, $location, $rootScope, $window, $anchorScroll) {
-        authService.fillAuthData();
+    app.run(['authService', '$location', "$rootScope", "$window", '$anchorScroll', '$route',
+        function (authService, $location, $rootScope, $window, $anchorScroll, $route) {
+            authService.fillAuthData();
 
-        $rootScope.$on('$routeChangeSuccess', function (evt, absNewUrl, absOldUrl) {
-            $anchorScroll('top');
-            //$rootScope.query = $.param(absNewUrl.params);
-        });
+            $rootScope.$on('$routeChangeSuccess', function (evt, absNewUrl, absOldUrl) {
+                $anchorScroll('top');
+                //$rootScope.query = $.param(absNewUrl.params);
+            });
 
-    }]);
+            var original = $location.path;
+            $location.path = function (path, reload) {
+                if (reload === false) {
+                    var lastRoute = $route.current;
+                    var un = $rootScope.$on('$locationChangeSuccess', function () {
+                        $route.current = lastRoute;
+                        un();
+                    });
+                }
+                return original.apply($location, [path]);
+            };
+
+        }]);
 
 })(jQuery);

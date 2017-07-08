@@ -107,7 +107,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IEnumerable<UserProfile> GetAdministrationCountryUserProfile(int CountryID)
         {
-            return (from w in context.UserProfiles.Include("Profile").Include("User") where w.UserRoleID == 1 && w.Profile.Addresses.Any(m=> m.City.CountryID == CountryID) && w.Profile.SubscriptionTypeID != 5 orderby w.ProfileID descending select w).ToList();
+            return (from w in context.UserProfiles.Include("Profile").Include("User") where w.Profile.Addresses.Any(m=> m.City.CountryID == CountryID) && w.Profile.SubscriptionTypeID != 5 orderby w.ProfileID descending select w).ToList().Distinct();
         }
 
         public IEnumerable<UserProfile> GetUserProfileAgency(int UserID)

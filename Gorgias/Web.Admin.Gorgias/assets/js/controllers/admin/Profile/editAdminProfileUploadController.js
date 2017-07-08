@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.controller('editAdminProfileUploadController', ['$scope', '$stateParams', '$http', 'apiService', 'ngAuthSettings', '$location', 'notificationService',
-        function ($scope, $stateParams, $http, apiService, ngAuthSettings, $location, notificationService) {
+    app.controller('editAdminProfileUploadController', ['$scope', '$state', '$stateParams', '$http', 'apiService', 'ngAuthSettings', '$location', 'notificationService',
+        function ($scope, $state, $stateParams, $http, apiService, ngAuthSettings, $location, notificationService) {
 
         var vm = this;
         $scope.object = {};
@@ -56,7 +56,8 @@
             'complete': function (file, xhr) {
                 $scope.removedfile(file);
                 //$location.path('/admin/profile/' + $scope.ProfileID);
-                $route.reload();
+                //$route.reload();
+                $state.reload();
                 console.log(file, xhr, 'done yohooo');
             },
         };

@@ -1,6 +1,6 @@
 ﻿'use strict';
-angular.module('gorgiasapp').controller('listprofileProfileController', ['$scope', '$stateParams', '$http', '$compile', 'apiService', 'ngAuthSettings', '$location', 'notificationService',
-        function ($scope, $stateParams, $http, $compile, apiService, ngAuthSettings, $location, notificationService) {
+angular.module('gorgiasapp').controller('listprofileProfileController', ['$scope', '$state', '$stateParams', '$http', '$compile', 'apiService', 'ngAuthSettings', '$location', 'notificationService',
+        function ($scope, $state, $stateParams, $http, $compile, apiService, ngAuthSettings, $location, notificationService) {
 
             $scope.project = {
                 description: 'Nuclear Missile Defense System',
@@ -261,7 +261,8 @@ angular.module('gorgiasapp').controller('listprofileProfileController', ['$scope
                     console.log('success ;)');
                     console.log(file, xhr);
                     //redirect();
-                    $route.reload();
+                    //$route.reload();
+                    $state.reload();
                 },
             };
 

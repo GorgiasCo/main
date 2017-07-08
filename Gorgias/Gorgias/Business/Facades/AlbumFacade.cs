@@ -24,6 +24,12 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public bool UpdateAlbumComment(int AlbumID)
+        {
+            bool result = DataLayer.DataLayerFacade.AlbumRepository().UpdateComment(AlbumID);
+            return result;
+        }
+
         public bool UpdateAlbumView(int AlbumID)
         {
             bool result = DataLayer.DataLayerFacade.AlbumRepository().Update(AlbumID);

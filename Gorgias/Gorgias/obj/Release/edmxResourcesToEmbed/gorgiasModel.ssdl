@@ -43,6 +43,7 @@
     <Property Name="AlbumDatePublish" Type="datetime" Nullable="false" />
     <Property Name="AlbumDateExpire" Type="datetime" Nullable="false" />
     <Property Name="AlbumAvailability" Type="int" Nullable="false" />
+    <Property Name="AlbumHasComment" Type="bit" />
   </EntityType>
   <EntityType Name="AlbumType">
     <Key>
@@ -117,7 +118,7 @@
       <PropertyRef Name="ContentID" />
     </Key>
     <Property Name="ContentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ContentTitle" Type="nvarchar" MaxLength="250" />
+    <Property Name="ContentTitle" Type="nvarchar" MaxLength="500" />
     <Property Name="ContentURL" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="ContentType" Type="int" Nullable="false" />
     <Property Name="ContentStatus" Type="bit" Nullable="false" />

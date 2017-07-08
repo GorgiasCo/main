@@ -13,6 +13,7 @@ namespace Gorgias.DataLayer.Interface
         bool Update(int AlbumID, String AlbumName, DateTime AlbumDateCreated, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID);
         bool Update(int AlbumID, String AlbumName, DateTime AlbumDateCreated, DateTime AlbumDatePublish, int AlbumAvailability, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, bool? AlbumHasComment);
         bool Update(int AlbumID);
+        bool UpdateComment(int AlbumID);
         bool Delete(int AlbumID);
 
         Album GetAlbum(int AlbumID);

@@ -594,8 +594,8 @@
 
     
     //var serviceBase = 'http://gorgiasapi.azurewebsites.net/';
-    var serviceBase = 'http://localhost:43587/';
-    //var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
+    //var serviceBase = 'http://localhost:43587/';
+    var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
     //var serviceBase = 'http://devgorgias.azurewebsites.net/';
 
     app.constant('ngAuthSettings', {

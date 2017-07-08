@@ -33,6 +33,7 @@
     <EntitySetMapping Name="Albums">
       <EntityTypeMapping TypeName="GorgiasModel.Album">
         <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="AlbumHasComment" ColumnName="AlbumHasComment" />
           <ScalarProperty Name="AlbumAvailability" ColumnName="AlbumAvailability" />
           <ScalarProperty Name="AlbumDateExpire" ColumnName="AlbumDateExpire" />
           <ScalarProperty Name="AlbumDatePublish" ColumnName="AlbumDatePublish" />

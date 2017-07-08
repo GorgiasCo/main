@@ -273,14 +273,15 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                IEnumerable<UserProfileDTO> result = BusinessLayer.Facades.Facade.WebFacade().getAdministrationCountryProfile(UserID);
+                // add s, UserProfile
+                IEnumerable<ProfileDTO> result = BusinessLayer.Facades.Facade.WebFacade().getAdministrationCountryProfiles(UserID);
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<UserProfileDTO>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<ProfileDTO>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });

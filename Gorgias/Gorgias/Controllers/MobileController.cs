@@ -60,14 +60,14 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                string result = BusinessLayer.Facades.Facade.WebFacade().createNewMobileUser();
-                if (result == null)
+                int result = BusinessLayer.Facades.Facade.WebFacade().createNewMobileUser();
+                if (result == 0)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<string>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<int>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -129,6 +129,20 @@ namespace Gorgias.Controllers
                 {
                     response = request.CreateResponse<IEnumerable<CategoryMobileModel>>(HttpStatusCode.OK, result);
                 }
+                return response;
+            });
+        }
+
+        [Route("Mobile/Album/Comment/Status/{AlbumID}", Name = "UpdateAlbumCommentStatus")]
+        [HttpGet]
+        public HttpResponseMessage UpdateAlbumComment(HttpRequestMessage request, int AlbumID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.AlbumFacade().UpdateAlbumComment(AlbumID);
+                
+                response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
                 return response;
             });
         }
@@ -521,7 +535,42 @@ namespace Gorgias.Controllers
                 return response;
             });
         }
-        
+
+        [Route("Mobile/Album/{Availability}/{CategoryID}/{ProfileID}/{AlbumHasComment}", Name = "MobileAlbumInsertWithComment")]
+        [HttpPost]
+        public HttpResponseMessage PostAlbum(HttpRequestMessage request, List<ContentUploadMobileModel> objContents, int Availability, int CategoryID, int ProfileID, int AlbumHasComment)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    Business.DataTransferObjects.AlbumDTO result;
+                    if(AlbumHasComment == 1) {
+                        result = BusinessLayer.Facades.Facade.ContentFacade().Insert(objContents, Availability, CategoryID, ProfileID, true);
+                    }
+                    else
+                    {
+                        result = BusinessLayer.Facades.Facade.ContentFacade().Insert(objContents, Availability, CategoryID, ProfileID, false);
+                    }
+                    if (result != null)
+                    {
+                        response = request.CreateResponse<Business.DataTransferObjects.AlbumDTO>(HttpStatusCode.Created, result);
+                    }
+                    else
+                    {
+                        response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                    }
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/Comment", Name = "CommentMobileInsert")]
         [HttpPost]
         public HttpResponseMessage Post(HttpRequestMessage request, Business.DataTransferObjects.Mobile.CommentCustomModel objComment)

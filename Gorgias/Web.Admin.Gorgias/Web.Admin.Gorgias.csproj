@@ -589,7 +589,6 @@
     <Content Include="assets\img\invoice\squarespace2x.png" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\logo_2x.png" />
-    <Content Include="assets\img\logo_white.png" />
     <Content Include="assets\img\logo_white_2x.png" />
     <Content Include="assets\img\maps\dashboard-map-dotted.png" />
     <Content Include="assets\img\maps\marker-alt-complete.svg" />

@@ -51,7 +51,7 @@
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'Description' | translate}}</label><div class="col-sm-9 pull-left text-left"><i>{{object.ProfileDescription}}</i></div></div>
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'View' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileView  | number}}</b></div></div>
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'Like' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileLike | number}}</b></div></div>
-                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'WebURL' | translate}}</label><div class="col-sm-9 pull-left text-left"><a ng-href="{{object.ProfileURL}}">{{object.ProfileURL}}</a></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'WebURL' | translate}}</label><div class="col-sm-9 pull-left text-left"><a ng-href="https://www.gorgias.com/{{object.ProfileURL}}">{{object.ProfileURL}}</a></div></div>
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'ShortDescription' | translate}}</label><div class="col-sm-9 pull-left text-left"><i>{{object.ProfileShortDescription}}</i></div></div>
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'Email' | translate}}<span class="required"></span></label><div class="col-sm-9 pull-left text-left"><b>{{object.ProfileEmail}}</b></div></div>
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'ProfileType' | translate}}</label><div class="col-sm-9 pull-left text-left"><b><i>{{object.ProfileType.ProfileTypeName}}</i></b></div></div>
@@ -148,6 +148,7 @@
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'Name' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="AlbumName" ng-model="object.AlbumName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'Category' | translate}}</label><div class="col-sm-9"><select id="CategoryID" class="form-control" ng-model="object.CategoryID" ng-options="option.CategoryID as option.CategoryName for option in Categories" title="Please select at least one" required></select><input type="hidden" name="CategoryID" ng-value="object.CategoryID" /></div></div>
                                                                     <div class="form-group"><label class="col-sm-3 control-label">{{'AlbumAvailability' | translate}}</label><div class="col-sm-9"><select id="AlbumAvailability" ng-disabled="isEdit" class="form-control" ng-model="object.AlbumAvailability" ng-options="option.AlbumAvailability as option.AlbumTypeName for option in Availabilities" title="Please select at least one" required></select><input type="hidden" name="AlbumAvailability" ng-value="object.AlbumAvailability" /></div></div>
+                                                                    <div class="form-group"><label class="col-sm-3 control-label">{{'AlbumHasComments' | translate}}</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="AlbumHasComment" ng-model="object.AlbumHasComment" validate-on="blur" value="AlbumHasComment" type="checkbox" name="for[]" /><label for="AlbumHasComment">{{'AlbumHasComments' | translate}}</label></div></div></div>
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     <h4 class="mb-xlg">{{'AlbumCover' | translate}}</h4>
@@ -443,18 +444,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<div uib-accordion-group class="panel-default" heading="Industry">
+                            <div uib-accordion-group class="panel-default" heading="Industry">
                                 <div class="panel">
                                     <div class="panel-body" ng-controller="listprofileProfileIndustryController as vm">
                                         <div class="column one no-margin" id="approundlistadmin" style="margin-bottom: 13px;">
                                             <div class="btn-group">
                                                 <ul class="horizontal-list">
-                                                    <li ng-repeat="obj in profileIndustries"><label class="btn btn-primary">{{obj.IndustryName}}<a ng-click="delete(obj)"><span class="button_icon"><i class="icon-trash-line"></i></span></a></label></li>
+                                                    <li ng-repeat="obj in profileIndustries"><label>{{obj.IndustryName}}<a ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></a></label></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <hr class="solid mt-sm mb-lg">
-                                        <form method="get" class="form-horizontal form-bordered" ng-if="profileIndustries.length < 3">
+                                        <form method="get" class="form-horizontal form-bordered" ng-if="profileIndustries.length < adminLimitation">
                                             <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <div class="input-group mb-md" >
@@ -465,7 +466,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>-->
+                            </div>
                             <!--<div uib-accordion-group class="panel-default" heading="Apps Connections">
                                 <div ng-controller="listprofileExternalLinkController as vm">
                                     <div ng-show="isList">

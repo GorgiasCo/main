@@ -38,14 +38,20 @@
                     window.location = 'gorgias://app?profileid=' + $scope.ProfileID;
                 } else {
                     $scope.accessToAppMessage = 'Access to Private';
-                    console.log('it is desktop ya ;)');
+                    //$location.path = 'yasser';
+                    console.log('it is desktop ya ;)', $location.path);
                 }
             } else {
                 console.log(document.documentElement.clientHeight, screen.height, 'stand');
                 console.log($window.navigator.standalone, 'stand');
                 console.log($window.matchMedia('(display-mode: standalone)').matches, 'stand');
                 $scope.accessToAppMessage = 'Access to Private App';
-                console.log('standalone');
+                //$location.path = 'yasser';
+                //$location.path('gorgias://?id=3233').replace().reload(false);
+                //location.replace("https://www.w3schools.com");
+                //history.pushState(null, null, '/en/step2');
+
+                console.log('standalone', $location.path);
             }
         }
         

@@ -14,5 +14,13 @@ namespace Gorgias.Business.DataTransferObjects.Mobile
 
         public string ProfileFullname { get; set; }
 
+        public string CommentDate
+        {
+            get
+            {
+                return Infrastruture.Core.DateToMoment.TimeAgo(CommentDateTime);
+            }
+        }
+
     }
 }

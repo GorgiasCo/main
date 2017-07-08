@@ -67,7 +67,7 @@ angular.module('gorgiasapp')
             console.log($scope.ProfileID, 'log in now admin', authService.authentication.userID, 'auth', authService.authentication);
 
             //$scope.ProfileID = $stateParams.current.params.id;
-            $scope.ProfileID = 1001;// $stateParams.id;
+            $scope.ProfileID = $stateParams.id;
             $scope.hasFile = false;
 
             $scope.checkedMenu = false;

@@ -55,7 +55,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public DTResult<ProfileDTO> FilterResult(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param)
         {
-            var basequery = DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable();
+            var basequery = DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable().Where(m=> m.SubscriptionTypeID != 4);
 
             if (search.Length > 0)
             {

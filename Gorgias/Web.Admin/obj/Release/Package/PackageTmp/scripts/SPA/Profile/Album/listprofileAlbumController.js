@@ -85,6 +85,9 @@
 
         //Insert Object ;)
         function insertObject() {
+            console.log("insertObject", $scope.isEdit);
+            console.log('hi hi album its me ;)', $scope.object);
+            //$scope.object.AlbumHasComment = true;
             if ($scope.isEdit == false) {
                 if ($scope.hasFile) {
                     //$scope.object.AlbumAvailability = 0;
@@ -384,7 +387,7 @@
         }
 
         function availabilityItemsLoadCompleted(response) {
-            console.log(response.data.Result);
+            console.log(response.data.Result, 'availability haha');
             $scope.Availabilities = response.data.Result;
             notificationService.displaySuccess("Albums Loaded");
         }

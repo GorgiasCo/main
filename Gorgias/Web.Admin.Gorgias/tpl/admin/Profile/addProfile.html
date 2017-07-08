@@ -118,13 +118,167 @@
                                 </div>
                             </div>
                         </div>
+                        <!--Address Begin-->
+                        <div pg-form-group class="form-group form-group-default required">
+                            <label>{{'AddressName' | translate}}</label>
+                            <input type="text" name="AddressName" ng-model="objectAddress.AddressName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <button class="btn btn-primary" ng-disabled="addProfileForm.$invalid">{{'Submit' | translate}}</button>
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'Tel' | translate}}</label>
+                                    <input type="text" name="AddressTel" ng-model="objectAddress.AddressTel" validate-on="blur" class="form-control" placeholder="eg.: +60123456789" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default">
+                                    <label>{{'Fax' | translate}}</label>
+                                    <input type="text" name="AddressFax" ng-model="objectAddress.AddressFax" validate-on="blur" class="form-control" placeholder="eg.: +60123456789" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default">
+                                    <label>{{'Email' | translate}}</label>
+                                    <input type="email" name="AddressEmail" ng-model="objectAddress.AddressEmail" validate-on="blur" class="form-control" placeholder="eg.: john@john.com" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default">
+                                    <label>{{'ZipCode' | translate}}</label>
+                                    <input type="text" name="AddressZipCode" ng-model="objectAddress.AddressZipCode" validate-on="blur" class="form-control" placeholder="eg.: 1234567" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'City' | translate}}</label>
+                                    <select id="CityID" class="form-control" ng-model="objectAddress.CityID" ng-options="option.CityID as option.CityName for option in Cities" title="Please select at least one" required></select><input type="hidden" name="CityID" ng-value="objectAddress.CityID" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div pg-form-group class="form-group form-group-default required">
+                                    <label>{{'AddressType' | translate}}</label>
+                                    <select id="AddressTypeID" class="form-control" ng-model="objectAddress.AddressTypeID" ng-options="option.AddressTypeID as option.AddressTypeName for option in AddressTypes" title="Please select at least one" required></select><input type="hidden" name="AddressTypeID" ng-value="object.AddressTypeID" />
+                                </div>
+                            </div>
+                        </div>
+                        <div pg-form-group class="form-group form-group-default required">
+                            <label>{{'Address' | translate}}</label>
+                            <input type="text" name="AddressAddress" ng-model="objectAddress.AddressAddress" validate-on="blur" class="form-control" placeholder="eg.: Full address with city and country" required />
+                        </div>
+                        <div pg-form-group class="form-group form-group-default required">
+                            <label>{{'ValidatingAddress' | translate}}</label>
+                            <p>{{'ValidationNote' | translate}}</p>
+                            <button class="btn btn-primary btn-success" ng-click="initMap('foo22')">{{'ValidateAddress' | translate}}</button>
+
+                        </div>
+                        <div class="row">
+                            <div class="panel-body">
+                                <div ng-if="isValidated" map-lazy-load="https://maps.google.com/maps/api/js">
+                                    <ng-map id="foo22" name="foo22" centered="true" center="{{objectAddress.AddressAddress}}" default-style="false"
+                                            zoom="15">
+                                        <marker position="{{objectAddress.AddressAddress}}"
+                                                on-mouseup="markerMove()"
+                                                draggable="true"></marker>
+                                    </ng-map>
+                                </div>
+
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        {{'AddressPhoto' | translate}}
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <ng-dropzone class="dropzone" options="dzAddressOptions" callbacks="dzAddressCallbacks" methods="dzAddressMethods"></ng-dropzone>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Address End-->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary" type="submit" ng-disabled="addProfileForm.$invalid">{{'Submit' | translate}}</button>
                                 <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
                             </div>
                         </div>
                     </form>
+                    <!--<form id="form" role="form" novalidate angular-validator name="addAddressForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                        <h4 class="mb-xlg">{{'AddressInformation' | translate}}</h4>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'Name' | translate}}<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="AddressName" ng-model="object.AddressName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'Tel' | translate}}<span class="required">*</span></label><div class="col-sm-9">
+                                    <input type="text" name="AddressTel" ng-model="object.AddressTel" validate-on="blur" class="form-control" placeholder="eg.: +60123456789" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'Fax' | translate}}</label><div class="col-sm-9">
+                                    <input type="text" name="AddressFax" ng-model="object.AddressFax" validate-on="blur" class="form-control" placeholder="eg.: +60123456789" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'Email' | translate}}</label><div class="col-sm-9">
+                                    <input type="email" name="AddressEmail" ng-model="object.AddressEmail" validate-on="blur" class="form-control" placeholder="eg.: john@john.com" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'Address' | translate}}<span class="required">*</span></label><div class="col-sm-9">
+                                    <input type="text" name="AddressAddress" ng-model="object.AddressAddress" validate-on="blur" class="form-control" placeholder="eg.: Full address with city and country" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'ZipCode' | translate}}</label><div class="col-sm-9">
+                                    <input type="text" name="AddressZipCode" ng-model="object.AddressZipCode" validate-on="blur" class="form-control" placeholder="eg.: 1234567" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'City' | translate}}</label><div class="col-sm-9">
+                                    <select id="CityID" class="form-control" ng-model="object.CityID" ng-options="option.CityID as option.CityName for option in Cities" title="Please select at least one" required></select><input type="hidden" name="CityID" ng-value="object.CityID" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'AddressType' | translate}}</label><div class="col-sm-9">
+                                    <select id="AddressTypeID" class="form-control" ng-model="object.AddressTypeID" ng-options="option.AddressTypeID as option.AddressTypeName for option in AddressTypes" title="Please select at least one" required></select><input type="hidden" name="AddressTypeID" ng-value="object.AddressTypeID" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{'ValidatingAddress' | translate}}</label>
+                                <div class="col-sm-9">
+                                    <p>{{'ValidationNote' | translate}}</p>
+                                    <button class="btn btn-primary btn-success" ng-click="initMap('foo22')">{{'ValidateAddress' | translate}}</button>
+                                </div>
+                            </div>
+                            <div ng-if="isValidated" map-lazy-load="https://maps.google.com/maps/api/js">
+                                <ng-map id="foo22" name="foo22" centered="true" center="{{object.AddressAddress}}" default-style="false"
+                                        zoom="15">
+                                    <marker position="{{object.AddressAddress}}"
+                                            on-mouseup="markerMove()"
+                                            draggable="true"></marker>
+                                </ng-map>
+                            </div>
+                            <div class="form-group">
+                                <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                            </div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                    <button type="reset" class="btn btn-warning button_left button_js kill_the_icon resetbtn">{{'Reset' | translate}}</button>
+                                    <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </form>-->
                 </div>
             </div>
             <!-- END PANEL -->

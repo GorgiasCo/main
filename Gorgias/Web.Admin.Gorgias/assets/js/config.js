@@ -5,9 +5,9 @@
 
 //var serviceBase = 'https://gorgiasapi.azurewebsites.net/';
 //var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
-var serviceBase = 'http://localhost:43587/';
+//var serviceBase = 'http://localhost:43587/';
 //var serviceBase = 'http://apiigorgias.azurewebsites.net/';
-//var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
+var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
 
 
 angular.module('gorgiasapp')
@@ -76,6 +76,8 @@ angular.module('gorgiasapp')
                 ZipCode: 'Zip Code',
                 City: 'City',
                 AddressType: 'Address Type',
+                AddressPhoto: 'Address Photo',
+                AddressName: 'Address Name',
                 ValidatingAddress: 'Validating Address',
                 ValidateAddress: 'Validate Address',
                 ValidationNote: 'Please just click on validate before submit your address. Then submit it.',
@@ -192,6 +194,8 @@ angular.module('gorgiasapp')
                   ZipCode: '邮政编码',
                   City: '城市',
                   AddressType: '地址类型',
+                  AddressName: '地址名称',
+                  AddressPhoto: '地址照片',
                   ValidatingAddress: '验证地址',
                   ValidationNote: '请在提交您的地址之前点击验证, 然后提交',
                   ValidateAddress: '验证地址',
@@ -305,6 +309,8 @@ angular.module('gorgiasapp')
                     ZipCode: 'Poskod',
                     City: 'bandar',
                     AddressType: 'Jenis alamat',
+                    AddressPhoto: 'Alamat Foto',
+                    AddressName: 'Nama Alamat',
                     ValidatingAddress: '',
                     ValidationNote: 'Sila mengesahkan alamat sebelum teruskan',
                     ValidateAddress: 'Sahkan Alamat',

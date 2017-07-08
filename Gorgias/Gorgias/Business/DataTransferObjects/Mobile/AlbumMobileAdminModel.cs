@@ -25,6 +25,9 @@ namespace Gorgias.Business.DataTransferObjects.Mobile
         public DateTime AlbumDateExpire { get; set; }
         public int AlbumAvailability { get; set; }
 
+        public int AlbumComments { get; set; }
+        public bool? AlbumHasComment { get; set; }
+
         public string blurAlbumCover
         {
             get

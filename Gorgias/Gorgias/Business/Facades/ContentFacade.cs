@@ -181,6 +181,7 @@ namespace Gorgias.BusinessLayer.Facades
             objAlbum.CategoryID = CategoryID;
             objAlbum.ProfileID = ProfileID;
             objAlbum.AlbumAvailability = Availability;
+            objAlbum.AlbumHasComment = true;
 
             AlbumDTO result = Facade.AlbumFacade().InsertForMobile(objAlbum);
             if(result.AlbumID > 0)
@@ -202,6 +203,54 @@ namespace Gorgias.BusinessLayer.Facades
                     {
                         obj.ContentTitle = objContent.ContentTitle;
                     }                   
+                    obj.ContentType = 1;
+                    obj.ContentCreatedDate = DateTime.UtcNow;
+                    // System.Configuration.ConfigurationManager.AppSettings["ContentCDN"] Can be used for CDN main Path
+                    obj.ContentURL = objContent.ContentURL;
+                    Insert(obj);
+                }
+            }
+            return result;
+        }
+
+        public AlbumDTO Insert(List<Business.DataTransferObjects.Mobile.ContentUploadMobileModel> objContents, int Availability, int CategoryID, int ProfileID, bool AlbumHasComment)
+        {
+            AlbumDTO objAlbum = new AlbumDTO();
+            objAlbum.AlbumCover = objContents.First().ContentURL;
+            objAlbum.AlbumName = objContents.First().ContentTitle;
+            objAlbum.AlbumDateCreated = DateTime.UtcNow;
+            objAlbum.AlbumDateExpires = objAlbum.AlbumDateCreated;
+            objAlbum.AlbumDatePublish = objAlbum.AlbumDateCreated;
+            objAlbum.AlbumHasComment = AlbumHasComment;
+            objAlbum.AlbumIsDeleted = false;
+            objAlbum.AlbumStatus = true;
+            objAlbum.AlbumView = 0;
+            objAlbum.CategoryID = CategoryID;
+            objAlbum.ProfileID = ProfileID;
+            objAlbum.AlbumAvailability = Availability;
+            //objAlbum.AlbumHasComment = true;
+
+            AlbumDTO result = Facade.AlbumFacade().InsertForMobile(objAlbum);
+            if (result.AlbumID > 0)
+            {
+                //To add album cover as independent image in album to get likes ;) like Facebook ;)
+                //objContents.RemoveAt(0);
+                //We reverse the list
+                objContents.Reverse();
+                foreach (Business.DataTransferObjects.Mobile.ContentUploadMobileModel objContent in objContents)
+                {
+                    ContentDTO obj = new ContentDTO();
+                    obj.AlbumID = result.AlbumID;
+                    obj.ContentIsDeleted = false;
+                    obj.ContentStatus = true;
+                    if (objContent.ContentTitle == string.Empty)
+                    {
+                        obj.ContentTitle = null;
+                    }
+                    else
+                    {
+                        obj.ContentTitle = objContent.ContentTitle;
+                    }
                     obj.ContentType = 1;
                     obj.ContentCreatedDate = DateTime.UtcNow;
                     // System.Configuration.ConfigurationManager.AppSettings["ContentCDN"] Can be used for CDN main Path

@@ -19,15 +19,15 @@
             <div class="row">
                 <div class="gallery-item" data-width="1" data-height="1" style="float:left;margin-right:11px;" ng-repeat="obj in Profiles">
                     <!-- START PREVIEW -->
-                    <img preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.Profile.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{obj.Profile.ProfileImage}}?timestamp={{timestamp}}" alt="" class="image-responsive-height">
+                    <img preload-image ng-src="https://gorgiasasia.blob.core.windows.net/images/{{obj.ProfileImage}}?timestamp={{timestamp}}" default-image="Content/Images/bars-loading.svg" fallback-image="{{obj.ProfileImage}}?timestamp={{timestamp}}" alt="" class="image-responsive-height">
                     <!-- END PREVIEW -->
                     <!-- START ITEM OVERLAY DESCRIPTION -->
                     <div class="overlayer bottom-left full-width">
                         <div class="overlayer-wrapper item-info ">
                             <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
                                 <div class="">
-                                    <p class="pull-left bold text-white fs-14 p-t-10">{{obj.Profile.ProfileFullname | cut:true:30:'...'}}</p>
-                                    <h5 class="pull-right semi-bold text-white font-montserrat bold">{{obj.Profile.ProfileLike}}</h5>
+                                    <p class="pull-left bold text-white fs-14 p-t-10">{{obj.ProfileFullname | cut:true:30:'...'}}</p>
+                                    <h5 class="pull-right semi-bold text-white font-montserrat bold">{{obj.ProfileLike}}</h5>
                                     <div class="clearfix"></div>
                                     <!--<span class="hint-text pull-left text-white">{{obj.ProfileDateCreated | date:'MMM d, y'}}</span>
                                     <div class="clearfix"></div>-->
@@ -35,9 +35,9 @@
                             </div>
                             <div class="m-t-10">
                                 <div class="pull-left m-t-10">
-                                    <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole==5" href="/app/forms/administrator/{{obj.Profile.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
-                                    <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole==0" href="/app/forms/master/administrator/{{obj.Profile.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
-                                    <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole==4" href="/app/forms/preview/{{obj.Profile.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
+                                    <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole==5" href="/app/forms/administrator/{{obj.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
+                                    <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole==0" href="/app/forms/master/administrator/{{obj.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
+                                    <a class="btn btn-white btn-xs btn-mini bold fs-14" ng-if="editLinkRole==4" href="/app/forms/preview/{{obj.ProfileID}}" target="_blank">{{'Edit' | translate}}</a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

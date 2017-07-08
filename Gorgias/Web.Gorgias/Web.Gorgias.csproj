@@ -1454,6 +1454,7 @@
     <Content Include="js\angular-google-maps.min.js" />
     <Content Include="js\angular-ismobile.js" />
     <Content Include="js\angular-ismobile.min.js" />
+    <Content Include="js\angular-location-update.js" />
     <Content Include="js\angular-material.min.js" />
     <Content Include="js\angular-messages.min.js" />
     <Content Include="js\angular-modal-service.js" />

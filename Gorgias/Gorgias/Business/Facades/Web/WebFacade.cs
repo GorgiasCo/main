@@ -136,6 +136,19 @@ namespace Gorgias.Business.Facades.Web
             return null;
         }
 
+        public IEnumerable<ProfileDTO> getAdministrationCountryProfiles(int UserID)
+        {
+            UserDTO objUser = new UserFacade().GetUser(UserID);
+            if (objUser != null)
+            {
+                if (objUser.CountryID != null)
+                {
+                    return Mapper.Map<List<ProfileDTO>>(DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable().Where(m => m.Addresses.Any(a => a.City.CountryID == objUser.CountryID.Value)));
+                }
+            }
+            return null;
+        }
+
         public IEnumerable<UserProfileDTO> getUserProfilesAgency(int UserID)
         {
             return new UserProfileFacade().GetUserProfileAgency(UserID);
@@ -273,9 +286,9 @@ namespace Gorgias.Business.Facades.Web
             return DataLayer.DataLayerFacade.AddressRepository().GetAddressesByProfileID(ProfileID); 
         }
 
-        public string createNewMobileUser()
+        public int createNewMobileUser()
         {            
-            return DataLayer.DataLayerFacade.ProfileRepository().Insert().ProfileID.ToString();
+            return DataLayer.DataLayerFacade.ProfileRepository().Insert().ProfileID;
         }
 
         public GalleryPageModel getGalleryPage(string ProfileURL, int pagenumber, int pagesize, int CategoryID, int OrderType)

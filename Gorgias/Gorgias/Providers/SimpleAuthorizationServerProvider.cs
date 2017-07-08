@@ -95,6 +95,7 @@ namespace Gorgias.Providers
                 //{
                 //    userRole = role.RoleId;
                 //}
+
                 if (user == null)
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
