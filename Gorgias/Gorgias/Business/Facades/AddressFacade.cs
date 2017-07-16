@@ -18,13 +18,30 @@ using System.Data.Entity.Spatial;
 namespace Gorgias.BusinessLayer.Facades
 {   
     public class AddressFacade
-    {                
+    {   
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="AddressID"></param>
+        /// <returns></returns>
+                             
         public AddressDTO GetAddress(int AddressID)
         {
             AddressDTO result = Mapper.Map<AddressDTO>(DataLayer.DataLayerFacade.AddressRepository().GetAddress(AddressID));             
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="sortOrder"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <param name="columnFilters"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public DTResult<AddressDTO> FilterResult(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param)
         {
             var basequery = DataLayer.DataLayerFacade.AddressRepository().GetAddressesAllAsQueryable();

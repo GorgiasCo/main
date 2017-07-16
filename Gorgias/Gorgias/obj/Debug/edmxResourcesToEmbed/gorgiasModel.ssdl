@@ -215,6 +215,18 @@
     <Property Name="NewsletterNote" Type="ntext" Nullable="false" />
     <Property Name="NewsletterStatus" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentDateCreated" Type="datetime" Nullable="false" />
+    <Property Name="PaymentDatePaid" Type="datetime" />
+    <Property Name="PaymentIsPaid" Type="bit" Nullable="false" />
+    <Property Name="PaymentAmount" Type="float" Nullable="false" />
+    <Property Name="PaymentNote" Type="ntext" />
+    <Property Name="ProfileCommissionID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Profile">
     <Key>
       <PropertyRef Name="ProfileID" />
@@ -248,6 +260,18 @@
     <Property Name="ProfileID" Type="int" Nullable="false" />
     <Property Name="ProfileAttributeNote" Type="ntext" />
   </EntityType>
+  <EntityType Name="ProfileCommission">
+    <Key>
+      <PropertyRef Name="ProfileCommissionID" />
+    </Key>
+    <Property Name="ProfileCommissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfileCommissionRate" Type="float" Nullable="false" />
+    <Property Name="ProfileCommissionDateCreated" Type="datetime" Nullable="false" />
+    <Property Name="ProfileCommissionStatus" Type="bit" Nullable="false" />
+    <Property Name="ProfileID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserRoleID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProfileIndustry">
     <Key>
       <PropertyRef Name="IndustryID" />
@@ -255,6 +279,17 @@
     </Key>
     <Property Name="IndustryID" Type="int" Nullable="false" />
     <Property Name="ProfileID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProfileReport">
+    <Key>
+      <PropertyRef Name="ProfileReportID" />
+    </Key>
+    <Property Name="ProfileReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfileReportActivityCount" Type="int" Nullable="false" />
+    <Property Name="ProfileReportRevenue" Type="float" Nullable="false" />
+    <Property Name="ReportTypeID" Type="int" Nullable="false" />
+    <Property Name="ProfileID" Type="int" Nullable="false" />
+    <Property Name="RevenueID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProfileSocialNetwork">
     <Key>
@@ -292,6 +327,15 @@
     <Property Name="MessageID" Type="int" Nullable="false" />
     <Property Name="ProfileID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ReportType">
+    <Key>
+      <PropertyRef Name="ReportTypeID" />
+    </Key>
+    <Property Name="ReportTypeID" Type="int" Nullable="false" />
+    <Property Name="ReportTypeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ReportTypeIsCountable" Type="bit" Nullable="false" />
+    <Property Name="ReportTypeStatus" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="RequestType">
     <Key>
       <PropertyRef Name="RequestTypeID" />
@@ -300,6 +344,16 @@
     <Property Name="RequestTypeName" Type="nvarchar" MaxLength="70" Nullable="false" />
     <Property Name="RequestTypeStatus" Type="bit" Nullable="false" />
     <Property Name="RequestIsRestricted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Revenue">
+    <Key>
+      <PropertyRef Name="RevenueID" />
+    </Key>
+    <Property Name="RevenueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RevenueDateCreated" Type="datetime" Nullable="false" />
+    <Property Name="RevenueAmount" Type="float" Nullable="false" />
+    <Property Name="RevenueTotalViews" Type="int" Nullable="false" />
+    <Property Name="RevenueMemberShare" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="SocialNetwork">
     <Key>
@@ -621,6 +675,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Payment_Payment">
+    <End Role="ProfileCommission" Type="Self.ProfileCommission" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileCommission">
+        <PropertyRef Name="ProfileCommissionID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="ProfileCommissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Profile_ProfileType">
     <End Role="ProfileType" Type="Self.ProfileType" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -691,6 +759,48 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProfileCommission_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileCommission" Type="Self.ProfileCommission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileCommission">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileCommission_User">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileCommission" Type="Self.ProfileCommission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProfileCommission">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileCommission_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileCommission" Type="Self.ProfileCommission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="ProfileCommission">
+        <PropertyRef Name="UserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProfileIndustry_Industry">
     <End Role="Industry" Type="Self.Industry" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -714,6 +824,48 @@
       </Principal>
       <Dependent Role="ProfileIndustry">
         <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileReport_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileReport" Type="Self.ProfileReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileReport">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileReport_ReportType">
+    <End Role="ReportType" Type="Self.ReportType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileReport" Type="Self.ProfileReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReportType">
+        <PropertyRef Name="ReportTypeID" />
+      </Principal>
+      <Dependent Role="ProfileReport">
+        <PropertyRef Name="ReportTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileReport_Revenue">
+    <End Role="Revenue" Type="Self.Revenue" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileReport" Type="Self.ProfileReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Revenue">
+        <PropertyRef Name="RevenueID" />
+      </Principal>
+      <Dependent Role="ProfileReport">
+        <PropertyRef Name="RevenueID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -875,14 +1027,19 @@
     <EntitySet Name="LinkType" EntityType="Self.LinkType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Newsletter" EntityType="Self.Newsletter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileAttribute" EntityType="Self.ProfileAttribute" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfileCommission" EntityType="Self.ProfileCommission" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileIndustry" EntityType="Self.ProfileIndustry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfileReport" EntityType="Self.ProfileReport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileSocialNetwork" EntityType="Self.ProfileSocialNetwork" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileTag" EntityType="Self.ProfileTag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileType" EntityType="Self.ProfileType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReportType" EntityType="Self.ReportType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RequestType" EntityType="Self.RequestType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SocialNetwork" EntityType="Self.SocialNetwork" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubscriptionType" EntityType="Self.SubscriptionType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
@@ -962,6 +1119,10 @@
       <End Role="Profile" EntitySet="Profile" />
       <End Role="Message" EntitySet="Message" />
     </AssociationSet>
+    <AssociationSet Name="FK_Payment_Payment" Association="Self.FK_Payment_Payment">
+      <End Role="ProfileCommission" EntitySet="ProfileCommission" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
     <AssociationSet Name="FK_Profile_ProfileType" Association="Self.FK_Profile_ProfileType">
       <End Role="ProfileType" EntitySet="ProfileType" />
       <End Role="Profile" EntitySet="Profile" />
@@ -982,6 +1143,18 @@
       <End Role="Profile" EntitySet="Profile" />
       <End Role="ProfileAttribute" EntitySet="ProfileAttribute" />
     </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommission_Profile" Association="Self.FK_ProfileCommission_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="ProfileCommission" EntitySet="ProfileCommission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommission_User" Association="Self.FK_ProfileCommission_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="ProfileCommission" EntitySet="ProfileCommission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommission_UserRole" Association="Self.FK_ProfileCommission_UserRole">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="ProfileCommission" EntitySet="ProfileCommission" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProfileIndustry_Industry" Association="Self.FK_ProfileIndustry_Industry">
       <End Role="Industry" EntitySet="Industry" />
       <End Role="ProfileIndustry" EntitySet="ProfileIndustry" />
@@ -989,6 +1162,18 @@
     <AssociationSet Name="FK_ProfileIndustry_Profile" Association="Self.FK_ProfileIndustry_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="ProfileIndustry" EntitySet="ProfileIndustry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileReport_Profile" Association="Self.FK_ProfileReport_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="ProfileReport" EntitySet="ProfileReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileReport_ReportType" Association="Self.FK_ProfileReport_ReportType">
+      <End Role="ReportType" EntitySet="ReportType" />
+      <End Role="ProfileReport" EntitySet="ProfileReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileReport_Revenue" Association="Self.FK_ProfileReport_Revenue">
+      <End Role="Revenue" EntitySet="Revenue" />
+      <End Role="ProfileReport" EntitySet="ProfileReport" />
     </AssociationSet>
     <AssociationSet Name="FK_ProfileSocialNetwork_Profile" Association="Self.FK_ProfileSocialNetwork_Profile">
       <End Role="Profile" EntitySet="Profile" />

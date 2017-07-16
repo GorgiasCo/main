@@ -1,8 +1,28 @@
 ﻿using Gorgias.Business.Facades.Web;
 namespace Gorgias.BusinessLayer.Facades
-{       	     
+{
     public static class Facade
     {
+        public static PaymentFacade PaymentFacade()
+        {
+            return new PaymentFacade();
+        }
+        public static ProfileCommissionFacade ProfileCommissionFacade()
+        {
+            return new ProfileCommissionFacade();
+        }
+        public static ProfileReportFacade ProfileReportFacade()
+        {
+            return new ProfileReportFacade();
+        }
+        public static RevenueFacade RevenueFacade()
+        {
+            return new RevenueFacade();
+        }
+        public static ReportTypeFacade ReportTypeFacade()
+        {
+            return new ReportTypeFacade();
+        }
         public static CommentFacade CommentFacade()
         {
             return new CommentFacade();
@@ -23,7 +43,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             return new DBToolFacade();
         }
-        public static WebFacade WebFacade() {
+        public static WebFacade WebFacade()
+        {
             return new WebFacade();
         }
         public static ReportFacade ReportFacade()
@@ -143,5 +164,5 @@ namespace Gorgias.BusinessLayer.Facades
             return new UserRoleFacade();
         }
     }
-}   
+}
 

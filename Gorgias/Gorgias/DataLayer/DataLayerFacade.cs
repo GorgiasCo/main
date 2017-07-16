@@ -5,11 +5,31 @@ namespace Gorgias.DataLayer
 {       	     
     public static class DataLayerFacade
     {
-        public static Interface.ICommentRepository CommentRepository()
+        public static IPaymentRepository PaymentRepository()
+        {
+            return new Repository.SQL.PaymentRepository();
+        }
+        public static IProfileCommissionRepository ProfileCommissionRepository()
+        {
+            return new Repository.SQL.ProfileCommissionRepository();
+        }
+        public static IProfileReportRepository ProfileReportRepository()
+        {
+            return new Repository.SQL.ProfileReportRepository();
+        }
+        public static IRevenueRepository RevenueRepository()
+        {
+            return new Repository.SQL.RevenueRepository();
+        }
+        public static IReportTypeRepository ReportTypeRepository()
+        {
+            return new Repository.SQL.ReportTypeRepository();
+        }
+        public static ICommentRepository CommentRepository()
         {
             return new Repository.SQL.CommentRepository();
         }
-        public static Interface.IAlbumTypeRepository AlbumTypeRepository()
+        public static IAlbumTypeRepository AlbumTypeRepository()
         {
             return new Repository.SQL.AlbumTypeRepository();
         }

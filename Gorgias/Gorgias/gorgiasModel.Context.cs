@@ -59,6 +59,11 @@ namespace Gorgias
         public virtual DbSet<Newsletter> Newsletters { get; set; }
         public virtual DbSet<AlbumType> AlbumTypes { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<ProfileCommission> ProfileCommissions { get; set; }
+        public virtual DbSet<ProfileReport> ProfileReports { get; set; }
+        public virtual DbSet<ReportType> ReportTypes { get; set; }
+        public virtual DbSet<Revenue> Revenues { get; set; }
     
         public virtual int updateProfileLike(Nullable<int> profileID)
         {

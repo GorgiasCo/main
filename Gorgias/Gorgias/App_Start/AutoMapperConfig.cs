@@ -44,6 +44,11 @@ namespace Gorgias
                 cfg.CreateMap<AlbumType, Business.DataTransferObjects.AlbumTypeDTO>();
                 cfg.CreateMap<User, UserCustomDTO>();
                 cfg.CreateMap<Comment, Business.DataTransferObjects.CommentDTO>();
+                cfg.CreateMap<ReportType, Business.DataTransferObjects.ReportTypeDTO>();
+                cfg.CreateMap<Revenue, Business.DataTransferObjects.RevenueDTO>();
+                cfg.CreateMap<ProfileReport, Business.DataTransferObjects.ProfileReportDTO>();
+                cfg.CreateMap<ProfileCommission, Business.DataTransferObjects.ProfileCommissionDTO>();
+                cfg.CreateMap<Payment, Business.DataTransferObjects.PaymentDTO>();
             });   
         }
     }

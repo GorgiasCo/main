@@ -18,6 +18,7 @@ namespace Gorgias
         public UserRole()
         {
             this.UserProfiles = new HashSet<UserProfile>();
+            this.ProfileCommissions = new HashSet<ProfileCommission>();
         }
     
         public int UserRoleID { get; set; }
@@ -28,5 +29,7 @@ namespace Gorgias
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProfileCommission> ProfileCommissions { get; set; }
     }
 }

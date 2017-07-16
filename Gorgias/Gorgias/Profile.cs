@@ -31,6 +31,8 @@ namespace Gorgias
             this.Messages1 = new HashSet<Message>();
             this.Industries = new HashSet<Industry>();
             this.Comments = new HashSet<Comment>();
+            this.ProfileCommissions = new HashSet<ProfileCommission>();
+            this.ProfileReports = new HashSet<ProfileReport>();
         }
     
         public int ProfileID { get; set; }
@@ -84,5 +86,9 @@ namespace Gorgias
         public virtual ICollection<Industry> Industries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProfileCommission> ProfileCommissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProfileReport> ProfileReports { get; set; }
     }
 }

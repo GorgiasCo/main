@@ -1,0 +1,42 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+<div class="col-md-6">
+							<form id="form" role="form" novalidate angular-validator name="addReportTypeForm" class="form-horizontal">
+								<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+											<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+										</div>
+										<h2 class="panel-title">View Report Type</h2>
+										<p class="panel-subtitle">
+											
+										</p>
+									</header>
+                                    <div class="panel-body">
+                                        <div class="form-group"><label class="col-sm-3 control-label">ID<span class="required">*</span></label><div class="col-sm-9"><input disabled type="text" name="ReportTypeID" ng-model="object.ReportTypeID" validate-on="blur" class="form-control" placeholder="eg.: 1" required /></div></div>
+                                        <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input disabled type="text" name="ReportTypeName" ng-model="object.ReportTypeName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                                        <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="ReportTypeStatus" ng-model="object.ReportTypeStatus" validate-on="blur" disabled value="ReportTypeStatus" type="checkbox" name="for[]" /><label for="ReportTypeStatus">Status</label></div></div></div>
+                                        <div class="form-group"><label class="col-sm-3 control-label">Is Countable</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="ReportTypeIsCountable" ng-model="object.ReportTypeIsCountable" disabled validate-on="blur" value="ReportTypeIsCountable" type="checkbox" name="for[]" /><label for="ReportTypeStatus">Yes</label></div></div></div>
+                                    </div>
+									<footer class="panel-footer">
+										<div class="row">
+											<div class="col-sm-9 col-sm-offset-3">												
+                                                <a class="btn btn-default" ng-href="/reporttype">Cancel</a>
+											</div>
+										</div>
+									</footer>
+								</section>
+							</form>
+						</div>
+                            </div>
+        <!-- end: page -->
+    </section>
+</div>
+
+                        

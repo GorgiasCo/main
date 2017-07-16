@@ -45,6 +45,7 @@
                 console.log(document.documentElement.clientHeight, screen.height, 'stand');
                 console.log($window.navigator.standalone, 'stand');
                 console.log($window.matchMedia('(display-mode: standalone)').matches, 'stand');
+
                 $scope.accessToAppMessage = 'Access to Private App';
                 //$location.path = 'yasser';
                 //$location.path('gorgias://?id=3233').replace().reload(false);

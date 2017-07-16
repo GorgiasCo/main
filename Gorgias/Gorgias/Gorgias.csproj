@@ -363,13 +363,18 @@
     <Compile Include="Business\DataTransferObjects\Mobile\ContentUploadMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ProfileSliderModel.cs" />
     <Compile Include="Business\DataTransferObjects\NewsletterDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\PaymentDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileAttributeDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ProfileCommissionDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileIndustryDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ProfileReportDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileSocialNetworkDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileTagDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ReportTypeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumInformation.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumLike.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumResult.cs" />
+    <Compile Include="Business\DataTransferObjects\RevenueDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserCustomDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserProfileDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Web\AddressModel.cs" />
@@ -420,10 +425,15 @@
     <Compile Include="Business\Facades\CommentFacade.cs" />
     <Compile Include="Business\Facades\ExternalLinkFacade.cs" />
     <Compile Include="Business\Facades\NewsletterFacade.cs" />
+    <Compile Include="Business\Facades\PaymentFacade.cs" />
     <Compile Include="Business\Facades\ProfileAttributeFacade.cs" />
+    <Compile Include="Business\Facades\ProfileCommissionFacade.cs" />
     <Compile Include="Business\Facades\ProfileIndustryFacade.cs" />
+    <Compile Include="Business\Facades\ProfileReportFacade.cs" />
     <Compile Include="Business\Facades\ProfileSocialNetworkFacade.cs" />
     <Compile Include="Business\Facades\ProfileTagFacade.cs" />
+    <Compile Include="Business\Facades\ReportTypeFacade.cs" />
+    <Compile Include="Business\Facades\RevenueFacade.cs" />
     <Compile Include="Business\Facades\UserProfileFacade.cs" />
     <Compile Include="Business\Facades\Web\DBToolFacade.cs" />
     <Compile Include="Business\Facades\Web\ReportFacade.cs" />
@@ -484,13 +494,18 @@
     <Compile Include="Business\Validators\LinkTypeValidator.cs" />
     <Compile Include="Business\Validators\MessageValidator.cs" />
     <Compile Include="Business\Validators\NewsletterValidator.cs" />
+    <Compile Include="Business\Validators\PaymentValidator.cs" />
     <Compile Include="Business\Validators\ProfileAttributeValidator.cs" />
+    <Compile Include="Business\Validators\ProfileCommissionValidator.cs" />
     <Compile Include="Business\Validators\ProfileIndustryValidator.cs" />
+    <Compile Include="Business\Validators\ProfileReportValidator.cs" />
     <Compile Include="Business\Validators\ProfileSocialNetworkValidator.cs" />
     <Compile Include="Business\Validators\ProfileTagValidator.cs" />
     <Compile Include="Business\Validators\ProfileTypeValidator.cs" />
     <Compile Include="Business\Validators\ProfileValidator.cs" />
+    <Compile Include="Business\Validators\ReportTypeValidator.cs" />
     <Compile Include="Business\Validators\RequestTypeValidator.cs" />
+    <Compile Include="Business\Validators\RevenueValidator.cs" />
     <Compile Include="Business\Validators\SocialNetworkValidator.cs" />
     <Compile Include="Business\Validators\SubscriptionTypeValidator.cs" />
     <Compile Include="Business\Validators\TagValidator.cs" />
@@ -537,14 +552,19 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Controllers\NewsletterController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProfileAttributeController.cs" />
+    <Compile Include="Controllers\ProfileCommissionController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ProfileIndustryController.cs" />
+    <Compile Include="Controllers\ProfileReportController.cs" />
     <Compile Include="Controllers\ProfileSocialNetworkController.cs" />
     <Compile Include="Controllers\ProfileTagController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ReportTypeController.cs" />
     <Compile Include="Controllers\RequestTypeController.cs" />
+    <Compile Include="Controllers\RevenueController.cs" />
     <Compile Include="Controllers\SocialNetworkController.cs" />
     <Compile Include="Controllers\SubscriptionTypeController.cs" />
     <Compile Include="Controllers\TagController.cs" />
@@ -578,13 +598,18 @@
     <Compile Include="DataLayer\Interface\ILinkTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IMessageRepository.cs" />
     <Compile Include="DataLayer\Interface\INewsletterRepository.cs" />
+    <Compile Include="DataLayer\Interface\IPaymentRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileAttributeRepository.cs" />
+    <Compile Include="DataLayer\Interface\IProfileCommissionRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileIndustryRepository.cs" />
+    <Compile Include="DataLayer\Interface\IProfileReportRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileSocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileTagRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileTypeRepository.cs" />
+    <Compile Include="DataLayer\Interface\IReportTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IRequestTypeRepository.cs" />
+    <Compile Include="DataLayer\Interface\IRevenueRepository.cs" />
     <Compile Include="DataLayer\Interface\ISocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Interface\ISubscriptionTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\ITagRepository.cs" />
@@ -613,13 +638,18 @@
     <Compile Include="DataLayer\Repository\SQL\LinkTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\MessageRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\NewsletterRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\PaymentRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileAttributeRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ProfileCommissionRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileIndustryRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ProfileReportRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileSocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileTagRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileTypeRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ReportTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\RequestTypeRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\RevenueRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\SocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\SubscriptionTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\TagRepository.cs" />
@@ -705,10 +735,19 @@
     <Compile Include="Newsletter.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Profile.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfileAttribute.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileCommission.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileReport.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfileSocialNetwork.cs">
@@ -726,10 +765,16 @@
     <Compile Include="Providers\GoogleAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
+    <Compile Include="ReportType.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="RequestType.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Revenue.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Services\Abstract\IEncryptionService.cs" />
     <Compile Include="Services\Abstract\IMembershipService.cs" />
     <Compile Include="Services\EncryptionService.cs" />
