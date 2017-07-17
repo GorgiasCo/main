@@ -19,8 +19,52 @@
                             </p>
                         </header>
                         <div class="panel-body">
-                            <div class="form-group"><label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="PaymentDateCreated" data-plugin-datepicker ng-model="object.PaymentDateCreated" validate-on="blur" class="form-control" required /></div></div></div>
-                            <div class="form-group"><label class="col-sm-3 control-label">Date Paid<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="PaymentDatePaid" data-plugin-datepicker ng-model="object.PaymentDatePaid" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Amount<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-money"></i></span><input type="text" name="PaymentAmount" ng-model="object.PaymentAmount" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Is Paid</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="ProfileCommissionStatus" ng-model="object.ProfileCommissionStatus" validate-on="blur" value="ProfileCommissionStatus" type="checkbox" name="for[]" /><label for="ProfileCommissionStatus">Yes</label></div></div></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <div uib-dropdown>
+                                            <div uib-dropdown-toggle class="input-group">
+                                                <input type="text" class="form-control" data-ng-model="object.PaymentDateCreated" />
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" uib-tooltip="Open Calendar">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                        <span class="sr-only">Calendar</span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div uib-dropdown-menu role="menu" auto-close="outsideClick">
+                                                <datetimepicker data-ng-model="object.PaymentDateCreated">
+                                                </datetimepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Date Paid<span class="required">*</span></label><div class="col-sm-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <div uib-dropdown>
+                                            <div uib-dropdown-toggle class="input-group">
+                                                <input type="text" class="form-control" data-ng-model="object.PaymentDatePaid" />
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" uib-tooltip="Open Calendar">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                        <span class="sr-only">Calendar</span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div uib-dropdown-menu role="menu" auto-close="outsideClick">
+                                                <datetimepicker data-ng-model="object.PaymentDatePaid">
+                                                </datetimepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group"><label class="col-sm-3 control-label">Note</label><div class="col-sm-9"><textarea rows="5" name="PaymentNote" ng-model="object.PaymentNote" validate-on="blur" class="form-control" placeholder="Describe Something..."></textarea></div></div>
                             <div class="form-group"><label class="col-sm-3 control-label">Profile Commission</label><div class="col-sm-9"><select id="ProfileCommissionID" class="form-control" ng-model="object.ProfileCommissionID" ng-options="option.ProfileCommissionID as option.ProfileCommissionDateCreated for option in ProfileCommissions" title="Please select at least one" required></select><input type="hidden" name="ProfileCommissionID" ng-value="object.ProfileCommissionID" /></div></div>
                         </div>

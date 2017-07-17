@@ -22,7 +22,8 @@
         //datatables
         $scope.dtColumns = [
             //here We will add .withOption('name','column_name') for send column name to the server
-                    DTColumnBuilder.newColumn("ProfileCommissionRate", "Rate").withOption('name', 'ProfileCommissionRate').renderWith(viewHtml),                
+            DTColumnBuilder.newColumn("Profile.ProfileFullname", "Profile").withOption('name', 'Profile.ProfileFullname').renderWith(viewProfileHtml),
+            DTColumnBuilder.newColumn("ProfileCommissionRate", "Rate").withOption('name', 'ProfileCommissionRate').renderWith(viewHtml),                
             DTColumnBuilder.newColumn("ProfileCommissionDateCreated", "DateCreated").withOption('name', 'ProfileCommissionDateCreated'),
             DTColumnBuilder.newColumn("ProfileCommissionStatus", "Status").withOption('name', 'ProfileCommissionStatus'),
             DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().renderWith(actionsHtml)
@@ -105,6 +106,9 @@
         }
         function viewHtml(data, type, full, meta) {
             return '<a href="/profilecommission/' + full.ProfileCommissionID + '">'+ data + '</a>';
+        }
+        function viewProfileHtml(data, type, full, meta) {
+            return '<a href="/profile/profile/' + full.ProfileID + '">' + data + '</a>';
         }
         //end datatables ;)
     }]);

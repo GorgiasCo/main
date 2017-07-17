@@ -122,7 +122,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         //IQueryable
 		public IQueryable<ProfileReport> GetProfileReportsAllAsQueryable()
 		{
-			return (from w in context.ProfileReports orderby w.ProfileReportID descending select w).AsQueryable();
+			return (from w in context.ProfileReports.Include("Profile").Include("ReportType") orderby w.ProfileReportID descending select w).AsQueryable();
 		}
         //IQueryable Pagings
         public IQueryable<ProfileReport> GetProfileReportsAllAsQueryable(int page = 1, int pageSize = 7, string filter=null)
