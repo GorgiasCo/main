@@ -106,6 +106,21 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Revenues where w.RevenueID == RevenueID select w).FirstOrDefault();
         }
 
+        public Revenue GetRevenueCurrent()
+        {
+            int currentDay = DateTime.UtcNow.Day;
+            int currentMonth = DateTime.UtcNow.Month;
+            int currentYear = DateTime.UtcNow.Year;
+            var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear select w).First();
+            if(result.ProfileReports.Count != 0)
+            {
+                throw new Exception("The Revenue and Profile Report was done before for " + DateTime.UtcNow);
+            } else
+            {
+                return result;
+            }
+        }
+
         //Lists
         public List<Revenue> GetRevenuesAll()
         {

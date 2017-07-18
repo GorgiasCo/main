@@ -13,6 +13,7 @@ namespace Gorgias.DataLayer.Interface
         bool Delete(int RevenueID);
 
         Revenue GetRevenue(int RevenueID);
+        Revenue GetRevenueCurrent();
 
         //List
         List<Revenue> GetRevenuesAll();

@@ -1,6 +1,8 @@
 ﻿using System;
 using FluentValidation.Attributes;
 using Gorgias.Business.Validators;
+using System.Collections.Generic;
+
 namespace Gorgias.Business.DataTransferObjects
 {
 
@@ -12,6 +14,8 @@ namespace Gorgias.Business.DataTransferObjects
         public double RevenueAmount { get; set; }
         public int RevenueTotalViews { get; set; }
         public double RevenueMemberShare { get; set; }
+        //public virtual IEnumerable<ProfileReportDTO> ProfileReports { get; set; }
+
     }
 }
 
