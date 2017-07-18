@@ -14,6 +14,7 @@ namespace Gorgias.DataLayer.Interface
 
         Revenue GetRevenue(int RevenueID);
         Revenue GetRevenueCurrent();
+        Revenue GetRevenueCurrentReport();
 
         //List
         List<Revenue> GetRevenuesAll();

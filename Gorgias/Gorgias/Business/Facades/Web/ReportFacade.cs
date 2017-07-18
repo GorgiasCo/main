@@ -13,13 +13,65 @@ namespace Gorgias.Business.Facades.Web
 
         public IList<DataTransferObjects.Report.ProfileReport> getCurrentProfileReport(int UserID)
         {
+            DataTransferObjects.RevenueDTO resultRevenue;
+            try
+            {
+                resultRevenue = new BusinessLayer.Facades.RevenueFacade().GetRevenueCurrentReport();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
             IList<DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent(UserID);
+
+            foreach (DataTransferObjects.Report.ProfileReport obj in result)
+            {
+                var previousResults = new BusinessLayer.Facades.ProfileReportFacade().GetProfileReportsByProfileID(obj.ProfileID);
+                //First time or no ;)
+                if (previousResults.Count() != 0)
+                {
+                    obj.ProfileView = compareValues(setNullableInt(obj.ProfileView), previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount);
+                    obj.AlbumView = compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount);
+                    obj.AlbumComments = compareValues(setNullableInt(obj.AlbumComments), previousResults.Where(m => m.ReportTypeID == 3).First().ProfileReportActivityCount);
+                    obj.AlbumLikes = compareValues(setNullableInt(obj.AlbumLikes), previousResults.Where(m => m.ReportTypeID == 4).First().ProfileReportActivityCount);
+                    obj.StayOnConnection = compareValues(setNullableInt(obj.StayOnConnection), previousResults.Where(m => m.ReportTypeID == 5).First().ProfileReportActivityCount);
+                    obj.Subscription = compareValues(setNullableInt(obj.Subscription), previousResults.Where(m => m.ReportTypeID == 6).First().ProfileReportActivityCount);
+                }
+            }
+
             return result;
         }
 
         public IList<DataTransferObjects.Report.ProfileReport> getCurrentProfileReportByCountry(int CountryID)
         {
+            DataTransferObjects.RevenueDTO resultRevenue;
+            try
+            {
+                resultRevenue = new BusinessLayer.Facades.RevenueFacade().GetRevenueCurrentReport();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
             IList<DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrentByCountry(CountryID);
+
+            foreach (DataTransferObjects.Report.ProfileReport obj in result)
+            {
+                var previousResults = new BusinessLayer.Facades.ProfileReportFacade().GetProfileReportsByProfileID(obj.ProfileID);
+                //First time or no ;)
+                if (previousResults.Count() != 0)
+                {
+                    obj.ProfileView = compareValues(setNullableInt(obj.ProfileView), previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount);
+                    obj.AlbumView = compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount);
+                    obj.AlbumComments = compareValues(setNullableInt(obj.AlbumComments), previousResults.Where(m => m.ReportTypeID == 3).First().ProfileReportActivityCount);
+                    obj.AlbumLikes = compareValues(setNullableInt(obj.AlbumLikes), previousResults.Where(m => m.ReportTypeID == 4).First().ProfileReportActivityCount);
+                    obj.StayOnConnection = compareValues(setNullableInt(obj.StayOnConnection), previousResults.Where(m => m.ReportTypeID == 5).First().ProfileReportActivityCount);
+                    obj.Subscription = compareValues(setNullableInt(obj.Subscription), previousResults.Where(m => m.ReportTypeID == 6).First().ProfileReportActivityCount);
+                }
+            }
+
             return result;
         }
 

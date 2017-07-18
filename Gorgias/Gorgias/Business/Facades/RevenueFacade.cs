@@ -30,6 +30,12 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public RevenueDTO GetRevenueCurrentReport()
+        {
+            RevenueDTO result = Mapper.Map<RevenueDTO>(DataLayer.DataLayerFacade.RevenueRepository().GetRevenueCurrentReport());
+            return result;
+        }
+
         public DTResult<RevenueDTO> FilterResult(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param)
         {
             var basequery = DataLayer.DataLayerFacade.RevenueRepository().GetRevenuesAllAsQueryable();
