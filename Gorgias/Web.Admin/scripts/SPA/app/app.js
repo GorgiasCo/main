@@ -100,6 +100,22 @@
                 templateUrl: "/layout/Payment/editPayment.html",
                 controller: "editPaymentController"
             })
+            .when("/fbactivity", {
+                templateUrl: "/layout/FBActivity/listFBActivity.html",
+                controller: "listFBActivityController"
+            })
+            .when("/fbactivity/add", {
+                templateUrl: "/layout/FBActivity/addFBActivity.html",
+                controller: "addFBActivityController"
+            })
+            .when("/fbactivity/:fbactivityid", {
+                templateUrl: "/layout/FBActivity/viewFBActivity.html",
+                controller: "viewFBActivityController"
+            })
+            .when("/fbactivity/edit/:fbactivityid", {
+                templateUrl: "/layout/FBActivity/editFBActivity.html",
+                controller: "editFBActivityController"
+            })
             .when("/newsletter/add", {
                 templateUrl: "/layout/Newsletter/addNewsletter.html",
                 controller: "addNewsletterController"

@@ -350,6 +350,7 @@
     <Compile Include="Business\DataTransferObjects\CountryDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Email\EmailDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ExternalLinkDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\FBActivityDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AddressModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AddressModelV2.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AlbumAvailabilityModel.cs" />
@@ -424,6 +425,7 @@
     <Compile Include="Business\Facades\AlbumTypeFacade.cs" />
     <Compile Include="Business\Facades\CommentFacade.cs" />
     <Compile Include="Business\Facades\ExternalLinkFacade.cs" />
+    <Compile Include="Business\Facades\FBActivityFacade.cs" />
     <Compile Include="Business\Facades\NewsletterFacade.cs" />
     <Compile Include="Business\Facades\PaymentFacade.cs" />
     <Compile Include="Business\Facades\ProfileAttributeFacade.cs" />
@@ -488,6 +490,7 @@
     <Compile Include="Business\Validators\ContentValidator.cs" />
     <Compile Include="Business\Validators\CountryValidator.cs" />
     <Compile Include="Business\Validators\ExternalLinkValidator.cs" />
+    <Compile Include="Business\Validators\FBActivityValidator.cs" />
     <Compile Include="Business\Validators\FeaturedSponsorValidator.cs" />
     <Compile Include="Business\Validators\FeatureValidator.cs" />
     <Compile Include="Business\Validators\IndustryValidator.cs" />
@@ -543,6 +546,7 @@
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\ExternalLinkController.cs" />
+    <Compile Include="Controllers\FBActivityController.cs" />
     <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\FeaturedSponsorController.cs" />
     <Compile Include="Controllers\GenreController.cs" />
@@ -592,6 +596,7 @@
     <Compile Include="DataLayer\Interface\IContentRepository.cs" />
     <Compile Include="DataLayer\Interface\ICountryRepository.cs" />
     <Compile Include="DataLayer\Interface\IExternalLinkRepository.cs" />
+    <Compile Include="DataLayer\Interface\IFBActivityRepository.cs" />
     <Compile Include="DataLayer\Interface\IFeaturedSponsorRepository.cs" />
     <Compile Include="DataLayer\Interface\IFeatureRepository.cs" />
     <Compile Include="DataLayer\Interface\IIndustryRepository.cs" />
@@ -631,6 +636,7 @@
     <Compile Include="DataLayer\Repository\SQL\ContentRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\CountryRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ExternalLinkRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\FBActivityRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\FeaturedSponsorRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\FeatureRepository.cs" />
     <Compile Include="DataLayer\Interface\IAlbumTypeRepository.cs" />
@@ -659,6 +665,9 @@
     <Compile Include="DataLayer\Repository\SQL\UserRoleRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\Web\WebRepository.cs" />
     <Compile Include="ExternalLink.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FBActivity.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Feature.cs">

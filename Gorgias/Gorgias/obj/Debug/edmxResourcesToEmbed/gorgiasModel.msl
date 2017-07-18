@@ -460,5 +460,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FBActivities">
+      <EntityTypeMapping TypeName="GorgiasModel.FBActivity">
+        <MappingFragment StoreEntitySet="FBActivity">
+          <ScalarProperty Name="FBActivityType" ColumnName="FBActivityType" />
+          <ScalarProperty Name="FBActivityDate" ColumnName="FBActivityDate" />
+          <ScalarProperty Name="FBActivityCount" ColumnName="FBActivityCount" />
+          <ScalarProperty Name="FBActivityID" ColumnName="FBActivityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -5,6 +5,10 @@ namespace Gorgias.DataLayer
 {       	     
     public static class DataLayerFacade
     {
+        public static IFBActivityRepository FBActivityRepository()
+        {
+            return new Repository.SQL.FBActivityRepository();
+        }
         public static IPaymentRepository PaymentRepository()
         {
             return new Repository.SQL.PaymentRepository();

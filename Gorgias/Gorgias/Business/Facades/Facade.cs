@@ -3,6 +3,10 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public static class Facade
     {
+        public static FBActivityFacade FBActivityFacade()
+        {
+            return new FBActivityFacade();
+        }
         public static PaymentFacade PaymentFacade()
         {
             return new PaymentFacade();

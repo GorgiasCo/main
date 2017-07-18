@@ -154,6 +154,15 @@
           <Property Name="ProfileID" Type="int" Nullable="false" />
           <Property Name="ExternalLinkURL" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
+        <EntityType Name="FBActivity">
+          <Key>
+            <PropertyRef Name="FBActivityID" />
+          </Key>
+          <Property Name="FBActivityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FBActivityCount" Type="decimal" Precision="18" Scale="12" Nullable="false" />
+          <Property Name="FBActivityDate" Type="datetime" Nullable="false" />
+          <Property Name="FBActivityType" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="FeatureID" />
@@ -1026,6 +1035,7 @@
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExternalLink" EntityType="Self.ExternalLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FBActivity" EntityType="Self.FBActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeaturedSponsor" EntityType="Self.FeaturedSponsor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
@@ -1425,6 +1435,7 @@
             <End Role="Revenue" EntitySet="Revenues" />
             <End Role="ProfileReport" EntitySet="ProfileReports" />
           </AssociationSet>
+          <EntitySet Name="FBActivities" EntityType="GorgiasModel.FBActivity" />
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -2452,6 +2463,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FBActivity">
+          <Key>
+            <PropertyRef Name="FBActivityID" />
+          </Key>
+          <Property Name="FBActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FBActivityCount" Type="Decimal" Nullable="false" Precision="18" Scale="12" />
+          <Property Name="FBActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FBActivityType" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2914,6 +2934,16 @@
                 <ScalarProperty Name="RevenueAmount" ColumnName="RevenueAmount" />
                 <ScalarProperty Name="RevenueDateCreated" ColumnName="RevenueDateCreated" />
                 <ScalarProperty Name="RevenueID" ColumnName="RevenueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FBActivities">
+            <EntityTypeMapping TypeName="GorgiasModel.FBActivity">
+              <MappingFragment StoreEntitySet="FBActivity">
+                <ScalarProperty Name="FBActivityType" ColumnName="FBActivityType" />
+                <ScalarProperty Name="FBActivityDate" ColumnName="FBActivityDate" />
+                <ScalarProperty Name="FBActivityCount" ColumnName="FBActivityCount" />
+                <ScalarProperty Name="FBActivityID" ColumnName="FBActivityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

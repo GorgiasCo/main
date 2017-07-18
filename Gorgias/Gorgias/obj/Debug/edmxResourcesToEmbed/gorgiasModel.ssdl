@@ -149,6 +149,15 @@
     <Property Name="ProfileID" Type="int" Nullable="false" />
     <Property Name="ExternalLinkURL" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
+  <EntityType Name="FBActivity">
+    <Key>
+      <PropertyRef Name="FBActivityID" />
+    </Key>
+    <Property Name="FBActivityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FBActivityCount" Type="decimal" Precision="18" Scale="12" Nullable="false" />
+    <Property Name="FBActivityDate" Type="datetime" Nullable="false" />
+    <Property Name="FBActivityType" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Feature">
     <Key>
       <PropertyRef Name="FeatureID" />
@@ -1021,6 +1030,7 @@
     <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ExternalLink" EntityType="Self.ExternalLink" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FBActivity" EntityType="Self.FBActivity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeaturedSponsor" EntityType="Self.FeaturedSponsor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
