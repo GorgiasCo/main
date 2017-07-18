@@ -18,6 +18,9 @@ namespace Gorgias.DataLayer.Interface
 
         //List
         List<FBActivity> GetFBActivitiesAll();
+        Business.DataTransferObjects.Report.FBReport GetFBActivitiesAllCurrent();
+        Business.DataTransferObjects.Report.FBReport GetFBActivitiesAllCurrentMonth();
+        Business.DataTransferObjects.Report.FBReport GetFBActivitiesAllCurrentOverall();
         List<FBActivity> GetFBActivitiesAll(int page = 1, int pageSize = 7, string filter=null);
         
         

@@ -17,6 +17,7 @@ namespace Gorgias.DataLayer.Interface
         bool Delete(int ProfileID);
 
         Profile GetProfile(int ProfileID);
+        IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();
         Business.DataTransferObjects.Web.AdminMiniProfile GetMiniProfile(int ProfileID);
         Business.DataTransferObjects.Web.LowAppProfileModel GetLowAppProfile(string ProfileURL);
         Profile GetProfile(string ProfileEmail);

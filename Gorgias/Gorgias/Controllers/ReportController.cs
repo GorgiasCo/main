@@ -12,6 +12,27 @@ namespace Gorgias.Controllers
     [RoutePrefix("api")]
     public class ReportController : ApiControllerBase
     {
+
+        [Route("Reports/Profiles/Current", Name = "GetProfilesCurrentReport")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesCurrentReport(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                IEnumerable<Business.DataTransferObjects.Report.ProfileReport> result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReport();
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<Business.DataTransferObjects.Report.ProfileReport>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Reports/AlbumLikes/{UserID}/{Availability}/{OrderType}", Name = "GetAlbumLikes")]
         [HttpGet]
         public HttpResponseMessage GetAlbumLikes(HttpRequestMessage request, int UserID, int Availability, int OrderType)

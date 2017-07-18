@@ -167,6 +167,10 @@ namespace Gorgias.DataLayer.Repository.SQL
 		{
 			return (from w in context.ProfileReports where w.ProfileID == ProfileID orderby w.ProfileReportID descending select w).AsQueryable();
 		}
+        public IEnumerable<ProfileReport> GetProfileReportsByProfileIDAsIEnumerable(int ProfileID)
+        {
+            return (from w in context.ProfileReports where w.ProfileID == ProfileID orderby w.ProfileReportID descending select w).AsEnumerable();
+        }
         public IQueryable<ProfileReport> GetProfileReportsByProfileIDAsQueryable(int ProfileID, int page = 1, int pageSize = 7, string filter=null)
         {
             return (from w in context.ProfileReports where w.ProfileID == ProfileID orderby w.ProfileReportID descending select w).Skip(pageSize * (page - 1)).Take(pageSize).AsQueryable();

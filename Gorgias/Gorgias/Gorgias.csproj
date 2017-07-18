@@ -375,6 +375,8 @@
     <Compile Include="Business\DataTransferObjects\Report\AlbumInformation.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumLike.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumResult.cs" />
+    <Compile Include="Business\DataTransferObjects\Report\FBReport.cs" />
+    <Compile Include="Business\DataTransferObjects\Report\ProfileReport.cs" />
     <Compile Include="Business\DataTransferObjects\RevenueDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserCustomDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserProfileDTO.cs" />

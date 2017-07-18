@@ -300,6 +300,22 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Profiles.Include("Theme").Include("SubscriptionType").Include("ProfileType") where w.ProfileID == ProfileID select w).FirstOrDefault();
         }
 
+        public IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent()
+        {
+            //int currentDay = DateTime.UtcNow.Day;
+            var result = (from w in context.Profiles where w.SubscriptionTypeID != 4 select
+                          new Business.DataTransferObjects.Report.ProfileReport {
+                              ProfileID = w.ProfileID,
+                              ProfileView = w.ProfileView,
+                              AlbumView = w.Albums.Sum(av=> av.AlbumView),
+                              AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv=> cv.Comments.Count)),
+                              AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
+                              Subscription = w.Connections.Where(sv=> sv.RequestTypeID == 1).Count(),
+                              StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
+                          }).ToList();
+            return result;
+        }
+
         public Business.DataTransferObjects.Web.AdminMiniProfile GetMiniProfile(int ProfileID)
         {
             return (from w in context.Profiles.Include("Addresses").Include("Industries") where w.ProfileID == ProfileID select new Business.DataTransferObjects.Web.AdminMiniProfile { ProfileTypeName = w.ProfileType.ProfileTypeName, CountryName = w.Addresses.FirstOrDefault().City.Country.CountryName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileFullname = w.ProfileFullname, ProfileID = w.ProfileID, ProfileImage = w.ProfileImage }).FirstOrDefault();

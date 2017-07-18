@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Web.Http;
 using Gorgias.Infrastruture.Core;
 using Gorgias.Business.DataTransferObjects.Helper;
-
+using Gorgias.Business.DataTransferObjects.Report;
 
 namespace Gorgias.Controllers
 {   
@@ -35,6 +35,66 @@ namespace Gorgias.Controllers
                 }
                 return response;
             });           
+        }
+
+        [Route("FBActivity/Current", Name = "GetFBActivityCurrent")]
+        [HttpGet]
+        public HttpResponseMessage GetFBActivityCurrent(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                FBReport result = BusinessLayer.Facades.Facade.FBActivityFacade().GetFBReportCurrent();
+                if (result == null)
+                {
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<FBReport>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("FBActivity/Current/Month", Name = "GetFBActivityCurrentMonth")]
+        [HttpGet]
+        public HttpResponseMessage GetFBActivityCurrentMonth(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                FBReport result = BusinessLayer.Facades.Facade.FBActivityFacade().GetFBReportCurrentMonth();
+                if (result == null)
+                {
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<FBReport>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("FBActivity/Current/Overall", Name = "GetFBActivityCurrentOverall")]
+        [HttpGet]
+        public HttpResponseMessage GetFBActivityCurrentOverall(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                FBReport result = BusinessLayer.Facades.Facade.FBActivityFacade().GetFBReportCurrentOverall();
+                if (result == null)
+                {
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<FBReport>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
         }
 
         [Route("FBActivities/data", Name = "GetFBActivitiesDataTables")]

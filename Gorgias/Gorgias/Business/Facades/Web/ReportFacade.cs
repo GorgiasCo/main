@@ -10,6 +10,19 @@ namespace Gorgias.Business.Facades.Web
 {
     public class ReportFacade
     {
+
+        public IEnumerable<DataTransferObjects.Report.ProfileReport> getCurrentProfileReport()
+        {
+            IEnumerable <DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent();
+
+            foreach(DataTransferObjects.Report.ProfileReport obj in result)
+            {
+                var previousResults = new BusinessLayer.Facades.ProfileReportFacade().GetProfileReportsByProfileID(obj.ProfileID);
+            }
+
+            return result;
+        }
+
         public IEnumerable<AlbumResult> AlbumResults(int UserID, int Availability, int OrderType)
         {
             int[] arrayProfileID = new BusinessLayer.Facades.UserProfileFacade().GetAdministrationUserProfileReport(UserID);

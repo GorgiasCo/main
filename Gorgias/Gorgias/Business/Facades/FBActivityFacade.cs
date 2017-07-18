@@ -24,6 +24,24 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public Business.DataTransferObjects.Report.FBReport GetFBReportCurrent()
+        {
+            Business.DataTransferObjects.Report.FBReport result = DataLayer.DataLayerFacade.FBActivityRepository().GetFBActivitiesAllCurrent();
+            return result;
+        }
+
+        public Business.DataTransferObjects.Report.FBReport GetFBReportCurrentMonth()
+        {
+            Business.DataTransferObjects.Report.FBReport result = DataLayer.DataLayerFacade.FBActivityRepository().GetFBActivitiesAllCurrentMonth();
+            return result;
+        }
+
+        public Business.DataTransferObjects.Report.FBReport GetFBReportCurrentOverall()
+        {
+            Business.DataTransferObjects.Report.FBReport result = DataLayer.DataLayerFacade.FBActivityRepository().GetFBActivitiesAllCurrentOverall();
+            return result;
+        }
+
         public DTResult<FBActivityDTO> FilterResult(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param)
         {
             var basequery = DataLayer.DataLayerFacade.FBActivityRepository().GetFBActivitiesAllAsQueryable();
