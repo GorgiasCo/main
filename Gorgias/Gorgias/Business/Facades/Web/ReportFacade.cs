@@ -27,7 +27,8 @@ namespace Gorgias.Business.Facades.Web
             if (isCountry)
             {
                 result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrentByCountry(paramID);
-            } else
+            }
+            else
             {
                 result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent(paramID);
             }
@@ -35,7 +36,10 @@ namespace Gorgias.Business.Facades.Web
             int actualView = 0;
             int actualSubscription = 0;
             int actualEngagement = 0;
+
             double? overallRevenue = 0;
+            double overallShareCommission = 0;
+
             int overallView = 0;
             int overallSubscription = 0;
             int overallEngagement = 0;
@@ -43,6 +47,10 @@ namespace Gorgias.Business.Facades.Web
             int overallTotalView = 0;
             int overallTotalSubscription = 0;
             int overallTotalEngagement = 0;
+
+            FullProfileReport resultFullProfileReport = new FullProfileReport();
+            resultFullProfileReport.TotalView = resultRevenue.RevenueTotalViews;
+            resultFullProfileReport.RevenueAmount = resultRevenue.RevenueAmount;
 
             foreach (DataTransferObjects.Report.ProfileReport obj in result)
             {
@@ -57,6 +65,11 @@ namespace Gorgias.Business.Facades.Web
                     obj.StayOnConnection = compareValues(setNullableInt(obj.StayOnConnection), previousResults.Where(m => m.ReportTypeID == 5).First().ProfileReportActivityCount);
                     obj.Subscription = compareValues(setNullableInt(obj.Subscription), previousResults.Where(m => m.ReportTypeID == 6).First().ProfileReportActivityCount);
 
+                    obj.ConnectedUserShare = setNullableDouble(obj.ConnectedUserShare);
+                    obj.UserCommission = setNullableDouble(obj.UserCommission);
+
+                    obj.EstimatedRPM = resultFullProfileReport.EstimatedRPM;
+
                     actualView = actualView + setNullableInt(obj.TotalView);
                     actualSubscription = actualSubscription + setNullableInt(obj.TotalSubscription);
                     actualEngagement = actualEngagement + setNullableInt(obj.TotalEngagement);
@@ -69,13 +82,13 @@ namespace Gorgias.Business.Facades.Web
                     overallTotalView = overallTotalView + setNullableInt(obj.OverAllTotalView);
                     overallTotalSubscription = overallTotalSubscription + setNullableInt(obj.OverAllTotalSubscription);
                     overallTotalEngagement = overallTotalEngagement + setNullableInt(obj.OverAllTotalEngagement);
+
+                    overallShareCommission = overallShareCommission + setNullableDouble(obj.UserCommission);
                 }
             }
 
-            FullProfileReport resultFullProfileReport = new FullProfileReport();
             resultFullProfileReport.ProfileReports = result;
-            resultFullProfileReport.TotalView = resultRevenue.RevenueTotalViews;
-            resultFullProfileReport.RevenueAmount = resultRevenue.RevenueAmount;
+
             resultFullProfileReport.ActualEngagement = actualEngagement;
             resultFullProfileReport.ActualSubscription = actualSubscription;
             resultFullProfileReport.ActualView = actualView;
@@ -88,6 +101,8 @@ namespace Gorgias.Business.Facades.Web
             resultFullProfileReport.OverAllTotalEngagement = overallTotalEngagement;
             resultFullProfileReport.OverAllTotalSubscription = overallTotalSubscription;
             resultFullProfileReport.OverAllTotalView = overallTotalView;
+
+            resultFullProfileReport.UserShareCommission = overallShareCommission;
 
             return resultFullProfileReport;
         }

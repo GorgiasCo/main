@@ -15,11 +15,95 @@ namespace Gorgias.Business.DataTransferObjects.Report
         public int? AlbumComments { get; set; }
         public int? StayOnConnection { get; set; }
         public int? Subscription { get; set; }
+        public double? ConnectedUserShare { get; set; }
+        public double? UserCommission { get; set; }
 
         public double? OverAllRevenue { get; set; }
         public int? OverAllView { get; set; }
         public int? OverAllEngagement { get; set; }
         public int? OverAllSubscription { get; set; }
+
+        public double EstimatedRPM { get; set; }
+
+        public double? UserShareEstimateAmount
+        {
+            get
+            {
+                double result = 0;
+                if (UserCommission.HasValue)
+                {
+                    result = UserCommission.Value;
+                    if (EstimatedRevenue.HasValue)
+                    {
+                        result = ((EstimatedRevenue.Value * UserCommission.Value) / 100);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                return result;
+            }
+        }
+
+        public double? UserShareAmount
+        {
+            get
+            {
+                double result = 0;
+                if (UserCommission.HasValue)
+                {
+                    result = UserCommission.Value;
+                    if (OverAllRevenue.HasValue)
+                    {
+                        result = ((OverAllRevenue.Value * UserCommission.Value) / 100);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                return result;
+            }
+        }
+
+        public double? ConnectedUserShareAmount
+        {
+            get
+            {
+                double result = 0;
+                if (ConnectedUserShare.HasValue)
+                {
+                    result = ConnectedUserShare.Value;
+                    if (OverAllRevenue.HasValue)
+                    {
+                        result = ((OverAllRevenue.Value * ConnectedUserShare.Value) / 100);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                return result;
+            }
+        }
+
+        public double? ProfileNetAmount
+        {
+            get
+            {
+                double result = 0;
+                if (OverAllRevenue.HasValue)
+                {
+                    result = OverAllRevenue.Value;
+                    if (ConnectedUserShare.HasValue)
+                    {
+                        result = OverAllRevenue.Value - ((OverAllRevenue.Value * ConnectedUserShare.Value) / 100);
+                    }
+                }
+                return result;
+            }
+        }
 
         public int? OverAllTotalView
         {
@@ -82,6 +166,21 @@ namespace Gorgias.Business.DataTransferObjects.Report
                 } else
                 {
                     return ProfileView;
+                }
+            }
+        }
+
+        public double? EstimatedRevenue
+        {
+            get
+            {
+                if (AlbumView.HasValue)
+                {
+                    return ((ProfileView + AlbumView.Value) / 1000) * EstimatedRPM;
+                }
+                else
+                {
+                    return (ProfileView / 1000) * EstimatedRPM;
                 }
             }
         }

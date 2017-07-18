@@ -23,12 +23,41 @@ namespace Gorgias.Business.DataTransferObjects.Report
         public int OverAllTotalView { get; set; }
         public int OverAllTotalSubscription { get; set; }
         public int OverAllTotalEngagement { get; set; }
+        public double UserShareCommission { get; set; }
 
         public double EstimatedRPM
         {
             get
             {
                 return (RevenueAmount / TotalView) * 1000;
+            }
+        }
+
+        public double EstimatedRevenue
+        {
+            get
+            {
+                return (ActualView / 1000) * EstimatedRPM;
+            }
+        }
+
+        public double EstimatedUserRevenue
+        {
+            get
+            {
+                return (EstimatedRevenue * (UserShareCommission % ProfileReports.Count)) / 100;
+            }
+        }
+
+        public double OverAllUserRevenue
+        {
+            get
+            {
+                if (OverAllRevenue.HasValue)
+                {
+                    return (OverAllRevenue.Value * (UserShareCommission % ProfileReports.Count)) / 100;
+                }
+                return 0;
             }
         }
 

@@ -343,6 +343,8 @@ namespace Gorgias.DataLayer.Repository.SQL
                                 OverAllView = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportActivityCount),
                                 OverAllEngagement = w.ProfileReports.Where(pp => pp.ReportTypeID == 3 || pp.ReportTypeID == 4).Sum(pps => pps.ProfileReportActivityCount),
                                 OverAllSubscription = w.ProfileReports.Where(pp => pp.ReportTypeID == 5 || pp.ReportTypeID == 6).Sum(pps => pps.ProfileReportActivityCount),
+                                ConnectedUserShare = w.ProfileCommissions.Where(pc => pc.UserRoleID != 1).Sum(spc => spc.ProfileCommissionRate),
+                                UserCommission = w.ProfileCommissions.Where(pc => pc.UserID == UserID).FirstOrDefault().ProfileCommissionRate
                             }).ToList();
             return result;
         }
@@ -367,6 +369,8 @@ namespace Gorgias.DataLayer.Repository.SQL
                                 OverAllView = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportActivityCount),
                                 OverAllEngagement = w.ProfileReports.Where(pp => pp.ReportTypeID == 3 || pp.ReportTypeID == 4).Sum(pps => pps.ProfileReportActivityCount),
                                 OverAllSubscription = w.ProfileReports.Where(pp => pp.ReportTypeID == 5 || pp.ReportTypeID == 6).Sum(pps => pps.ProfileReportActivityCount),
+                                ConnectedUserShare = w.ProfileCommissions.Where(pc => pc.UserRoleID != 1).Sum(spc => spc.ProfileCommissionRate),
+                                UserCommission = w.ProfileCommissions.Where(pc => pc.User.CountryID == CountryID && pc.UserRoleID == 4).FirstOrDefault().ProfileCommissionRate
                             }).ToList();
             return result;
         }
