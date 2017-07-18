@@ -150,7 +150,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.ProfileTypeID = ProfileTypeID;
                 obj.ThemeID = ThemeID;
                 obj.SubscriptionTypeID = SubscriptionTypeID;
-                
+
                 context.Profiles.Add(obj);
                 context.SaveChanges();
                 //Update after Insert for ID ;)
@@ -181,11 +181,11 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.ProfileView = profile.ProfileView;
                 obj.ProfileLike = profile.ProfileLike;
                 obj.ProfileURL = profile.ProfileURL;
-                obj.ProfileShortDescription = profile.ProfileShortDescription;                
+                obj.ProfileShortDescription = profile.ProfileShortDescription;
                 obj.ProfileImage = "na";
                 obj.ProfileEmail = profile.ProfileEmail;
                 obj.ProfileStatus = profile.ProfileStatus;
-                obj.ProfileIsConfirmed = profile.ProfileIsConfirmed;                
+                obj.ProfileIsConfirmed = profile.ProfileIsConfirmed;
                 obj.ProfileTypeID = profile.ProfileTypeID;
                 obj.ThemeID = profile.ThemeID;
                 obj.SubscriptionTypeID = profile.SubscriptionTypeID;
@@ -242,7 +242,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                 return false;
             }
         }
-        
+
         public bool Update(int ProfileID, bool Status, int UpdateMode)
         {
             Profile obj = new Profile();
@@ -251,19 +251,23 @@ namespace Gorgias.DataLayer.Repository.SQL
             {
                 context.Profiles.Attach(obj);
 
-                if (UpdateMode == 1) {
+                if (UpdateMode == 1)
+                {
                     obj.ProfileIsConfirmed = Status;
-                } else if (UpdateMode ==2)
+                }
+                else if (UpdateMode == 2)
                 {
                     obj.ProfileIsPeople = Status;
-                } else if (UpdateMode == 3)
+                }
+                else if (UpdateMode == 3)
                 {
                     obj.ProfileStatus = Status;
-                } else
+                }
+                else
                 {
                     obj.ProfileIsDeleted = Status;
                 }
-                
+
                 context.SaveChanges();
                 return true;
             }
@@ -303,18 +307,61 @@ namespace Gorgias.DataLayer.Repository.SQL
         public IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent()
         {
             //int currentDay = DateTime.UtcNow.Day;
-            var result = (from w in context.Profiles where w.SubscriptionTypeID != 4 select
-                          new Business.DataTransferObjects.Report.ProfileReport {
-                              ProfileID = w.ProfileID,
-                              ProfileView = w.ProfileView,
-                              AlbumView = w.Albums.Sum(av=> av.AlbumView),
-                              AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv=> cv.Comments.Count)),
-                              AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
-                              Subscription = w.Connections.Where(sv=> sv.RequestTypeID == 1).Count(),
-                              StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
-                          }).ToList();
+            var result = (from w in context.Profiles
+                          where w.SubscriptionTypeID != 4
+                          select
+                            new Business.DataTransferObjects.Report.ProfileReport
+                            {
+                            ProfileID = w.ProfileID,
+                            ProfileView = w.ProfileView,
+                            AlbumView = w.Albums.Sum(av => av.AlbumView),
+                            AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
+                            AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
+                            Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
+                            StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
+                            }).ToList();
             return result;
         }
+
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID)
+        {
+            //int currentDay = DateTime.UtcNow.Day;
+            var result = (from w in context.Profiles
+                          where w.SubscriptionTypeID != 4 && w.UserProfiles.Any(up=> up.UserID == UserID)
+                          select
+                            new Business.DataTransferObjects.Report.ProfileReport
+                            {
+                                ProfileID = w.ProfileID,
+                                ProfileView = w.ProfileView,
+                                AlbumView = w.Albums.Sum(av => av.AlbumView),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
+                                AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
+                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
+                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
+                            }).ToList();
+            return result;
+        }
+
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountry(int CountryID)
+        {
+            //int currentDay = DateTime.UtcNow.Day;
+            var result = (from w in context.Profiles
+                          where w.SubscriptionTypeID != 4 && w.Addresses.Any(a => a.City.CountryID == CountryID)
+                          select
+                            new Business.DataTransferObjects.Report.ProfileReport
+                            {
+                                ProfileID = w.ProfileID,
+                                ProfileView = w.ProfileView,
+                                AlbumView = w.Albums.Sum(av => av.AlbumView),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
+                                AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
+                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
+                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
+                            }).ToList();
+            return result;
+        }
+
+
 
         public Business.DataTransferObjects.Web.AdminMiniProfile GetMiniProfile(int ProfileID)
         {
@@ -323,7 +370,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Business.DataTransferObjects.Web.LowAppProfileModel GetLowAppProfile(string ProfileURL)
         {
-            return (from w in context.Profiles where w.ProfileURL == ProfileURL select new Business.DataTransferObjects.Web.LowAppProfileModel { ProfileFullname = w.ProfileFullname, ProfileID = w.ProfileID, ProfileImage= w.ProfileImage}).FirstOrDefault();
+            return (from w in context.Profiles where w.ProfileURL == ProfileURL select new Business.DataTransferObjects.Web.LowAppProfileModel { ProfileFullname = w.ProfileFullname, ProfileID = w.ProfileID, ProfileImage = w.ProfileImage }).FirstOrDefault();
         }
 
         public Profile GetProfile(string ProfileEmail)
@@ -333,12 +380,12 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public int[] GetAdministrationProfiles(int CountryID)
         {
-            return (from w in context.Profiles where w.Addresses.Any(m=> m.City.CountryID == CountryID) select w.ProfileID).ToArray();
+            return (from w in context.Profiles where w.Addresses.Any(m => m.City.CountryID == CountryID) select w.ProfileID).ToArray();
         }
 
         public IEnumerable<Profile> GetProfiles(string ProfileEmail)
         {
-            return (from w in context.Profiles where w.UserProfiles.Any(m=> m.User.UserEmail == ProfileEmail) select w).ToList();
+            return (from w in context.Profiles where w.UserProfiles.Any(m => m.User.UserEmail == ProfileEmail) select w).ToList();
         }
 
         //public Profile GetUserProfile(string ProfileEmail)
@@ -349,7 +396,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         public IEnumerable<Profile> getListed(int ProfileID)
         {
             int[] arrayTags = new int[1];
-            return (from w in context.Profiles where w.Connections.Any(e=> e.Profile1.ProfileTags.Any(m=> arrayTags.Contains(m.TagID)) && e.Profile.ProfileID == ProfileID) orderby w.ProfileID descending select w).ToList();
+            return (from w in context.Profiles where w.Connections.Any(e => e.Profile1.ProfileTags.Any(m => arrayTags.Contains(m.TagID)) && e.Profile.ProfileID == ProfileID) orderby w.ProfileID descending select w).ToList();
         }
 
         //Lists
@@ -396,7 +443,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Profile> GetProfilesAllAsQueryable(int CountryID)
         {
-            return (from w in context.Profiles where w.Addresses.Any(a=> a.City.CountryID == CountryID) orderby w.ProfileFullname ascending select w).AsQueryable();
+            return (from w in context.Profiles where w.Addresses.Any(a => a.City.CountryID == CountryID) orderby w.ProfileFullname ascending select w).AsQueryable();
         }
 
         public IQueryable<Profile> GetProfilesAllAsQueryable(bool ProfileStatus)
@@ -438,7 +485,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         //Relationship List
         public List<Profile> GetProfilesByIndustryID(int IndustryID, bool ProfileStatus)
         {
-            return (from w in context.Profiles where w.Industries.Any(m=> m.IndustryID == IndustryID) && w.ProfileStatus == ProfileStatus orderby w.ProfileID descending select w).ToList();
+            return (from w in context.Profiles where w.Industries.Any(m => m.IndustryID == IndustryID) && w.ProfileStatus == ProfileStatus orderby w.ProfileID descending select w).ToList();
         }
         public List<Profile> GetProfilesByIndustryID(int IndustryID, int page = 1, int pageSize = 7, string filter = null)
         {

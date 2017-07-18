@@ -29,6 +29,16 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrent();            
         }
 
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrent(UserID);
+        }
+
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountry(int CountryID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrentByCountry(CountryID);
+        }
+
         public IEnumerable<ProfileDTO> GetListedProfile(int ProfileID)
         {
             IEnumerable<ProfileDTO> result = Mapper.Map<IEnumerable<ProfileDTO>>(DataLayer.DataLayerFacade.ProfileRepository().getListed(ProfileID));

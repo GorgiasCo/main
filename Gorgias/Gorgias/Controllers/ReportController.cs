@@ -33,6 +33,46 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Reports/Profiles/Current/{UserID}", Name = "GetProfilesCurrentReportByUserID")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesCurrentReport(HttpRequestMessage request, int UserID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                IList<Business.DataTransferObjects.Report.ProfileReport> result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReport(UserID);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IList<Business.DataTransferObjects.Report.ProfileReport>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Reports/Profiles/Current/Country/{CountryID}", Name = "GetProfilesCurrentReportByCountryID")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesCurrentReportByCountry(HttpRequestMessage request, int CountryID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                IList<Business.DataTransferObjects.Report.ProfileReport> result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReportByCountry(CountryID);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IList<Business.DataTransferObjects.Report.ProfileReport>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Reports/AlbumLikes/{UserID}/{Availability}/{OrderType}", Name = "GetAlbumLikes")]
         [HttpGet]
         public HttpResponseMessage GetAlbumLikes(HttpRequestMessage request, int UserID, int Availability, int OrderType)

@@ -11,12 +11,24 @@ namespace Gorgias.Business.Facades.Web
     public class ReportFacade
     {
 
+        public IList<DataTransferObjects.Report.ProfileReport> getCurrentProfileReport(int UserID)
+        {
+            IList<DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent(UserID);
+            return result;
+        }
+
+        public IList<DataTransferObjects.Report.ProfileReport> getCurrentProfileReportByCountry(int CountryID)
+        {
+            IList<DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrentByCountry(CountryID);
+            return result;
+        }
+
         public IEnumerable<DataTransferObjects.Report.ProfileReport> getCurrentProfileReport()
         {
             DataTransferObjects.RevenueDTO resultRevenue;
             try
             {
-                resultRevenue = new BusinessLayer.Facades.RevenueFacade().GetRevenueCurrent();                
+                resultRevenue = new BusinessLayer.Facades.RevenueFacade().GetRevenueCurrent();
             }
             catch (Exception ex)
             {
@@ -32,7 +44,7 @@ namespace Gorgias.Business.Facades.Web
                 //First time or no ;)
                 if (previousResults.Count() != 0)
                 {
-                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 1, ProfileReportActivityCount = compareValues(obj.ProfileView.Value, previousResults.Where(m=> m.ReportTypeID == 1).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = resultRevenue.RevenueAmount });
+                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 1, ProfileReportActivityCount = compareValues(obj.ProfileView.Value, previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = resultRevenue.RevenueAmount });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 2, ProfileReportActivityCount = compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = resultRevenue.RevenueAmount });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 3, ProfileReportActivityCount = compareValues(setNullableInt(obj.AlbumComments), previousResults.Where(m => m.ReportTypeID == 3).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 4, ProfileReportActivityCount = compareValues(setNullableInt(obj.AlbumLikes), previousResults.Where(m => m.ReportTypeID == 4).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
@@ -75,13 +87,15 @@ namespace Gorgias.Business.Facades.Web
 
         private int compareValues(int newParam, int oldParam)
         {
-            if((newParam == 0 && oldParam == 0) || newParam == 0)
+            if ((newParam == 0 && oldParam == 0) || newParam == 0)
             {
                 return 0;
-            } if(newParam != 0 && oldParam == 0)
+            }
+            if (newParam != 0 && oldParam == 0)
             {
                 return newParam;
-            } else
+            }
+            else
             {
                 return newParam - oldParam;
             }

@@ -18,6 +18,9 @@ namespace Gorgias.DataLayer.Interface
 
         Profile GetProfile(int ProfileID);
         IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();
+        IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID);
+        IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountry(int CountryID);
+
         Business.DataTransferObjects.Web.AdminMiniProfile GetMiniProfile(int ProfileID);
         Business.DataTransferObjects.Web.LowAppProfileModel GetLowAppProfile(string ProfileURL);
         Profile GetProfile(string ProfileEmail);
