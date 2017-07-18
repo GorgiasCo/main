@@ -331,13 +331,18 @@ namespace Gorgias.DataLayer.Repository.SQL
                           select
                             new Business.DataTransferObjects.Report.ProfileReport
                             {
+                                ProfileFullname = w.ProfileFullname,
                                 ProfileID = w.ProfileID,
                                 ProfileView = w.ProfileView,
                                 AlbumView = w.Albums.Sum(av => av.AlbumView),
                                 AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
                                 AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
                                 Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
-                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
+                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count(),
+                                OverAllRevenue = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportRevenue),
+                                OverAllView = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportActivityCount),
+                                OverAllEngagement = w.ProfileReports.Where(pp => pp.ReportTypeID == 3 || pp.ReportTypeID == 4).Sum(pps => pps.ProfileReportActivityCount),
+                                OverAllSubscription = w.ProfileReports.Where(pp => pp.ReportTypeID == 5 || pp.ReportTypeID == 6).Sum(pps => pps.ProfileReportActivityCount),
                             }).ToList();
             return result;
         }
@@ -350,13 +355,18 @@ namespace Gorgias.DataLayer.Repository.SQL
                           select
                             new Business.DataTransferObjects.Report.ProfileReport
                             {
+                                ProfileFullname = w.ProfileFullname,
                                 ProfileID = w.ProfileID,
                                 ProfileView = w.ProfileView,
                                 AlbumView = w.Albums.Sum(av => av.AlbumView),
                                 AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
                                 AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
                                 Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
-                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
+                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count(),
+                                OverAllRevenue = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportRevenue),
+                                OverAllView = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportActivityCount),
+                                OverAllEngagement = w.ProfileReports.Where(pp => pp.ReportTypeID == 3 || pp.ReportTypeID == 4).Sum(pps => pps.ProfileReportActivityCount),
+                                OverAllSubscription = w.ProfileReports.Where(pp => pp.ReportTypeID == 5 || pp.ReportTypeID == 6).Sum(pps => pps.ProfileReportActivityCount),
                             }).ToList();
             return result;
         }

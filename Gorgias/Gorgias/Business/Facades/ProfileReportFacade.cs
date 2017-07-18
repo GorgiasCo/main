@@ -171,6 +171,11 @@ namespace Gorgias.BusinessLayer.Facades
             return Mapper.Map<IEnumerable<ProfileReportDTO>>(DataLayer.DataLayerFacade.ProfileReportRepository().GetProfileReportsByProfileIDAsIEnumerable(ProfileID));                        
         }
 
+        public IEnumerable<ProfileReportDTO> GetProfileReportsByProfileID(int ProfileID, int RevenueID)
+        {
+            return Mapper.Map<IEnumerable<ProfileReportDTO>>(DataLayer.DataLayerFacade.ProfileReportRepository().GetProfileReportsByProfileIDAsIEnumerable(ProfileID, RevenueID));
+        }
+
         public DTResult<ProfileReportDTO> FilterResultByRevenueID(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param, int RevenueID)
         {
             var basequery = DataLayer.DataLayerFacade.ProfileReportRepository().GetProfileReportsAllAsQueryable().Where(m=> m.RevenueID==RevenueID);

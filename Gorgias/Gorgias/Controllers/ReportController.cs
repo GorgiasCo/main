@@ -33,21 +33,30 @@ namespace Gorgias.Controllers
             });
         }
 
-        [Route("Reports/Profiles/Current/{UserID}", Name = "GetProfilesCurrentReportByUserID")]
+        [Route("Reports/Profiles/Current/{paramID}/{isCountry}", Name = "GetProfilesCurrentReportByUserID")]
         [HttpGet]
-        public HttpResponseMessage GetProfilesCurrentReport(HttpRequestMessage request, int UserID)
+        public HttpResponseMessage GetProfilesCurrentReport(HttpRequestMessage request, int paramID, int isCountry)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                IList<Business.DataTransferObjects.Report.ProfileReport> result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReport(UserID);
+                FullProfileReport result;
+
+                if (isCountry == 0)
+                {
+                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReport(paramID, true);
+                }
+                else
+                {
+                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReport(paramID, false);
+                }
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IList<Business.DataTransferObjects.Report.ProfileReport>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<FullProfileReport>(HttpStatusCode.OK, result);
                 }
                 return response;
             });

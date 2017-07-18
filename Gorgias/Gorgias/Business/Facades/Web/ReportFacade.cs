@@ -10,8 +10,89 @@ namespace Gorgias.Business.Facades.Web
 {
     public class ReportFacade
     {
+        public FullProfileReport getCurrentProfileReport(int paramID, bool isCountry)
+        {
+            DataTransferObjects.RevenueDTO resultRevenue;
+            try
+            {
+                resultRevenue = new BusinessLayer.Facades.RevenueFacade().GetRevenueCurrentReport();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
-        public IList<DataTransferObjects.Report.ProfileReport> getCurrentProfileReport(int UserID)
+            IList<DataTransferObjects.Report.ProfileReport> result;
+
+            if (isCountry)
+            {
+                result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrentByCountry(paramID);
+            } else
+            {
+                result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent(paramID);
+            }
+
+            int actualView = 0;
+            int actualSubscription = 0;
+            int actualEngagement = 0;
+            double? overallRevenue = 0;
+            int overallView = 0;
+            int overallSubscription = 0;
+            int overallEngagement = 0;
+
+            int overallTotalView = 0;
+            int overallTotalSubscription = 0;
+            int overallTotalEngagement = 0;
+
+            foreach (DataTransferObjects.Report.ProfileReport obj in result)
+            {
+                var previousResults = new BusinessLayer.Facades.ProfileReportFacade().GetProfileReportsByProfileID(obj.ProfileID, resultRevenue.RevenueID);
+                //First time or no ;)
+                if (previousResults.Count() != 0)
+                {
+                    obj.ProfileView = compareValues(setNullableInt(obj.ProfileView), previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount);
+                    obj.AlbumView = compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount);
+                    obj.AlbumComments = compareValues(setNullableInt(obj.AlbumComments), previousResults.Where(m => m.ReportTypeID == 3).First().ProfileReportActivityCount);
+                    obj.AlbumLikes = compareValues(setNullableInt(obj.AlbumLikes), previousResults.Where(m => m.ReportTypeID == 4).First().ProfileReportActivityCount);
+                    obj.StayOnConnection = compareValues(setNullableInt(obj.StayOnConnection), previousResults.Where(m => m.ReportTypeID == 5).First().ProfileReportActivityCount);
+                    obj.Subscription = compareValues(setNullableInt(obj.Subscription), previousResults.Where(m => m.ReportTypeID == 6).First().ProfileReportActivityCount);
+
+                    actualView = actualView + setNullableInt(obj.TotalView);
+                    actualSubscription = actualSubscription + setNullableInt(obj.TotalSubscription);
+                    actualEngagement = actualEngagement + setNullableInt(obj.TotalEngagement);
+
+                    overallRevenue = overallRevenue + obj.OverAllRevenue;
+                    overallView = overallView + setNullableInt(obj.OverAllView);
+                    overallSubscription = overallSubscription + setNullableInt(obj.OverAllSubscription);
+                    overallEngagement = overallEngagement + setNullableInt(obj.OverAllEngagement);
+
+                    overallTotalView = overallTotalView + setNullableInt(obj.OverAllTotalView);
+                    overallTotalSubscription = overallTotalSubscription + setNullableInt(obj.OverAllTotalSubscription);
+                    overallTotalEngagement = overallTotalEngagement + setNullableInt(obj.OverAllTotalEngagement);
+                }
+            }
+
+            FullProfileReport resultFullProfileReport = new FullProfileReport();
+            resultFullProfileReport.ProfileReports = result;
+            resultFullProfileReport.TotalView = resultRevenue.RevenueTotalViews;
+            resultFullProfileReport.RevenueAmount = resultRevenue.RevenueAmount;
+            resultFullProfileReport.ActualEngagement = actualEngagement;
+            resultFullProfileReport.ActualSubscription = actualSubscription;
+            resultFullProfileReport.ActualView = actualView;
+
+            resultFullProfileReport.OverAllRevenue = setNullableDouble(overallRevenue);
+            resultFullProfileReport.OverAllEngagement = overallEngagement;
+            resultFullProfileReport.OverAllSubscription = overallSubscription;
+            resultFullProfileReport.OverAllView = overallView;
+
+            resultFullProfileReport.OverAllTotalEngagement = overallTotalEngagement;
+            resultFullProfileReport.OverAllTotalSubscription = overallTotalSubscription;
+            resultFullProfileReport.OverAllTotalView = overallTotalView;
+
+            return resultFullProfileReport;
+        }
+
+        public FullProfileReport getCurrentProfileReport(int UserID)
         {
             DataTransferObjects.RevenueDTO resultRevenue;
             try
@@ -25,9 +106,21 @@ namespace Gorgias.Business.Facades.Web
 
             IList<DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent(UserID);
 
+            int actualView = 0;
+            int actualSubscription = 0;
+            int actualEngagement = 0;
+            double? overallRevenue = 0;
+            int overallView = 0;
+            int overallSubscription = 0;
+            int overallEngagement = 0;
+
+            int overallTotalView = 0;
+            int overallTotalSubscription = 0;
+            int overallTotalEngagement = 0;
+
             foreach (DataTransferObjects.Report.ProfileReport obj in result)
             {
-                var previousResults = new BusinessLayer.Facades.ProfileReportFacade().GetProfileReportsByProfileID(obj.ProfileID);
+                var previousResults = new BusinessLayer.Facades.ProfileReportFacade().GetProfileReportsByProfileID(obj.ProfileID, resultRevenue.RevenueID);
                 //First time or no ;)
                 if (previousResults.Count() != 0)
                 {
@@ -37,10 +130,40 @@ namespace Gorgias.Business.Facades.Web
                     obj.AlbumLikes = compareValues(setNullableInt(obj.AlbumLikes), previousResults.Where(m => m.ReportTypeID == 4).First().ProfileReportActivityCount);
                     obj.StayOnConnection = compareValues(setNullableInt(obj.StayOnConnection), previousResults.Where(m => m.ReportTypeID == 5).First().ProfileReportActivityCount);
                     obj.Subscription = compareValues(setNullableInt(obj.Subscription), previousResults.Where(m => m.ReportTypeID == 6).First().ProfileReportActivityCount);
+
+                    actualView = actualView + setNullableInt(obj.TotalView);
+                    actualSubscription = actualSubscription + setNullableInt(obj.TotalSubscription);
+                    actualEngagement = actualEngagement + setNullableInt(obj.TotalEngagement);
+
+                    overallRevenue = overallRevenue + obj.OverAllRevenue;
+                    overallView = overallView + setNullableInt(obj.OverAllView);
+                    overallSubscription = overallSubscription + setNullableInt(obj.OverAllSubscription);
+                    overallEngagement = overallEngagement + setNullableInt(obj.OverAllEngagement);
+
+                    overallTotalView = overallTotalView + setNullableInt(obj.OverAllTotalView);
+                    overallTotalSubscription = overallTotalSubscription + setNullableInt(obj.OverAllTotalSubscription);
+                    overallTotalEngagement = overallTotalEngagement + setNullableInt(obj.OverAllTotalEngagement);
                 }
             }
 
-            return result;
+            FullProfileReport resultFullProfileReport = new FullProfileReport();
+            resultFullProfileReport.ProfileReports = result;
+            resultFullProfileReport.TotalView = resultRevenue.RevenueTotalViews;
+            resultFullProfileReport.RevenueAmount = resultRevenue.RevenueAmount;
+            resultFullProfileReport.ActualEngagement = actualEngagement;
+            resultFullProfileReport.ActualSubscription = actualSubscription;
+            resultFullProfileReport.ActualView = actualView;
+
+            resultFullProfileReport.OverAllRevenue = setNullableDouble(overallRevenue);
+            resultFullProfileReport.OverAllEngagement = overallEngagement;
+            resultFullProfileReport.OverAllSubscription = overallSubscription;
+            resultFullProfileReport.OverAllView = overallView;
+
+            resultFullProfileReport.OverAllTotalEngagement = overallTotalEngagement;
+            resultFullProfileReport.OverAllTotalSubscription = overallTotalSubscription;
+            resultFullProfileReport.OverAllTotalView = overallTotalView;
+
+            return resultFullProfileReport;
         }
 
         public IList<DataTransferObjects.Report.ProfileReport> getCurrentProfileReportByCountry(int CountryID)
@@ -126,6 +249,18 @@ namespace Gorgias.Business.Facades.Web
 
         //Helper Function
         private int setNullableInt(int? param)
+        {
+            if (param.HasValue)
+            {
+                return param.Value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private double setNullableDouble(double? param)
         {
             if (param.HasValue)
             {

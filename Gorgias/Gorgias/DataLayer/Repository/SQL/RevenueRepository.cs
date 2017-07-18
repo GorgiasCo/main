@@ -127,7 +127,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             int currentDay = DateTime.UtcNow.Day;
             int currentMonth = DateTime.UtcNow.Month;
             int currentYear = DateTime.UtcNow.Year;
-            var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear select w).First();
+            var result = (from w in context.Revenues.Include("ProfileReports") orderby w.RevenueID descending select w).First();
 
             return result;
         }

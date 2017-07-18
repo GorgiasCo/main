@@ -34,6 +34,7 @@ namespace Gorgias.DataLayer.Interface
         IQueryable<ProfileReport> GetProfileReportsByRevenueIDAsQueryable(int RevenueID);
         IQueryable<ProfileReport> GetProfileReportsByRevenueIDAsQueryable(int RevenueID, int page = 1, int pageSize = 7, string filter=null);
         IEnumerable<ProfileReport> GetProfileReportsByProfileIDAsIEnumerable(int ProfileID);
+        IEnumerable<ProfileReport> GetProfileReportsByProfileIDAsIEnumerable(int ProfileID, int RevenueID);
     }
 }
 

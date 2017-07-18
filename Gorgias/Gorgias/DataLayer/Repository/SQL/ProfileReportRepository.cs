@@ -167,9 +167,14 @@ namespace Gorgias.DataLayer.Repository.SQL
 		{
 			return (from w in context.ProfileReports where w.ProfileID == ProfileID orderby w.ProfileReportID descending select w).AsQueryable();
 		}
+        //Why all ;)
         public IEnumerable<ProfileReport> GetProfileReportsByProfileIDAsIEnumerable(int ProfileID)
         {
             return (from w in context.ProfileReports where w.ProfileID == ProfileID orderby w.ProfileReportID descending select w).AsEnumerable();
+        }
+        public IEnumerable<ProfileReport> GetProfileReportsByProfileIDAsIEnumerable(int ProfileID, int RevenueID)
+        {
+            return (from w in context.ProfileReports where w.ProfileID == ProfileID && w.RevenueID == RevenueID orderby w.ProfileReportID descending select w).AsEnumerable();
         }
         public IQueryable<ProfileReport> GetProfileReportsByProfileIDAsQueryable(int ProfileID, int page = 1, int pageSize = 7, string filter=null)
         {
