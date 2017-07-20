@@ -48,6 +48,9 @@ namespace Gorgias.Business.Facades.Web
             int overallTotalSubscription = 0;
             int overallTotalEngagement = 0;
 
+            int profileVisit = 0;
+            int albumVisit = 0;
+
             FullProfileReport resultFullProfileReport = new FullProfileReport();
             resultFullProfileReport.TotalView = resultRevenue.RevenueTotalViews;
             resultFullProfileReport.RevenueAmount = resultRevenue.RevenueAmount;
@@ -84,6 +87,9 @@ namespace Gorgias.Business.Facades.Web
                     overallTotalEngagement = overallTotalEngagement + setNullableInt(obj.OverAllTotalEngagement);
 
                     overallShareCommission = overallShareCommission + setNullableDouble(obj.UserCommission);
+
+                    profileVisit = profileVisit + setNullableInt(obj.ProfileView);
+                    albumVisit = albumVisit + setNullableInt(obj.AlbumView);
                 }
             }
 
@@ -103,6 +109,9 @@ namespace Gorgias.Business.Facades.Web
             resultFullProfileReport.OverAllTotalView = overallTotalView;
 
             resultFullProfileReport.UserShareCommission = overallShareCommission;
+
+            resultFullProfileReport.ProfileView = profileVisit;
+            resultFullProfileReport.AlbumView = albumVisit;
 
             return resultFullProfileReport;
         }

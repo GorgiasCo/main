@@ -101,6 +101,7 @@
     <Content Include="assets\js\controllers\headerMenuController.js" />
     <Content Include="assets\js\controllers\loginController.js" />
     <Content Include="assets\js\filter\CutString.js" />
+    <Content Include="assets\js\filter\MegaNumber.js" />
     <Content Include="assets\js\services\apiservice.js" />
     <Content Include="assets\js\services\authInterceptorService.js" />
     <Content Include="assets\js\services\authService.js" />

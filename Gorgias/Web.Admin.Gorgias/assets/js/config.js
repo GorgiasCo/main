@@ -141,6 +141,7 @@ angular.module('gorgiasapp')
                 ProfilesAccesses: 'Profiles Accesses',
                 NewUserProfile: 'New User Profile',
                 WelcometoProfileAdministration: 'Welcome to Profile Administration',
+                Administration: 'Administration',
                 SignOut: 'Sign Out',
                 Allrightsreserved: 'All rights reserved.',
                 Dashboard: 'Dashboard',
@@ -174,6 +175,7 @@ angular.module('gorgiasapp')
             })
               .translations('zh', {
                   AllMyProfile: 'Profiles',
+                  Administration: 'Administration',
                   Fullname: '标志性之名',
                   DateCreated: '创建日期',
                   Description: '详细介绍',
@@ -288,6 +290,7 @@ angular.module('gorgiasapp')
                   updateNotificationTitle: " 更新",
               })
                 .translations('my', {
+                    Administration: 'Administration',
                     AllMyProfile: 'Profiles',
                     Fullname: 'Nama Penuh',
                     DateCreated: 'Tarikh Daftar',
