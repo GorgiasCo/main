@@ -401,5 +401,74 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="GorgiasModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="ProfileCommissionID" ColumnName="ProfileCommissionID" />
+          <ScalarProperty Name="PaymentNote" ColumnName="PaymentNote" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentIsPaid" ColumnName="PaymentIsPaid" />
+          <ScalarProperty Name="PaymentDatePaid" ColumnName="PaymentDatePaid" />
+          <ScalarProperty Name="PaymentDateCreated" ColumnName="PaymentDateCreated" />
+          <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileCommissions">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileCommission">
+        <MappingFragment StoreEntitySet="ProfileCommission">
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="ProfileCommissionStatus" ColumnName="ProfileCommissionStatus" />
+          <ScalarProperty Name="ProfileCommissionDateCreated" ColumnName="ProfileCommissionDateCreated" />
+          <ScalarProperty Name="ProfileCommissionRate" ColumnName="ProfileCommissionRate" />
+          <ScalarProperty Name="ProfileCommissionID" ColumnName="ProfileCommissionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileReports">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileReport">
+        <MappingFragment StoreEntitySet="ProfileReport">
+          <ScalarProperty Name="RevenueID" ColumnName="RevenueID" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+          <ScalarProperty Name="ProfileReportRevenue" ColumnName="ProfileReportRevenue" />
+          <ScalarProperty Name="ProfileReportActivityCount" ColumnName="ProfileReportActivityCount" />
+          <ScalarProperty Name="ProfileReportID" ColumnName="ProfileReportID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportTypes">
+      <EntityTypeMapping TypeName="GorgiasModel.ReportType">
+        <MappingFragment StoreEntitySet="ReportType">
+          <ScalarProperty Name="ReportTypeStatus" ColumnName="ReportTypeStatus" />
+          <ScalarProperty Name="ReportTypeIsCountable" ColumnName="ReportTypeIsCountable" />
+          <ScalarProperty Name="ReportTypeName" ColumnName="ReportTypeName" />
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Revenues">
+      <EntityTypeMapping TypeName="GorgiasModel.Revenue">
+        <MappingFragment StoreEntitySet="Revenue">
+          <ScalarProperty Name="RevenueMemberShare" ColumnName="RevenueMemberShare" />
+          <ScalarProperty Name="RevenueTotalViews" ColumnName="RevenueTotalViews" />
+          <ScalarProperty Name="RevenueAmount" ColumnName="RevenueAmount" />
+          <ScalarProperty Name="RevenueDateCreated" ColumnName="RevenueDateCreated" />
+          <ScalarProperty Name="RevenueID" ColumnName="RevenueID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FBActivities">
+      <EntityTypeMapping TypeName="GorgiasModel.FBActivity">
+        <MappingFragment StoreEntitySet="FBActivity">
+          <ScalarProperty Name="FBActivityType" ColumnName="FBActivityType" />
+          <ScalarProperty Name="FBActivityDate" ColumnName="FBActivityDate" />
+          <ScalarProperty Name="FBActivityCount" ColumnName="FBActivityCount" />
+          <ScalarProperty Name="FBActivityID" ColumnName="FBActivityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

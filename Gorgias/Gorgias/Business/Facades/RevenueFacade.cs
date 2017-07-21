@@ -13,6 +13,7 @@ using Gorgias.Business.DataTransferObjects;
 using Gorgias.Infrastruture.Core;
 using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
+using Gorgias.Business.Helper;
 
 namespace Gorgias.BusinessLayer.Facades
 {   
@@ -30,9 +31,21 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public RevenueDTO GetRevenuePreviousDay()
+        {
+            RevenueDTO result = Mapper.Map<RevenueDTO>(DataLayer.DataLayerFacade.RevenueRepository().GetRevenuePreviousDay());
+            return result;
+        }
+
         public RevenueDTO GetRevenueCurrentReport()
         {
             RevenueDTO result = Mapper.Map<RevenueDTO>(DataLayer.DataLayerFacade.RevenueRepository().GetRevenueCurrentReport());
+            return result;
+        }
+
+        public RevenueDTO GetRevenueCurrentReportForProfileReport()
+        {
+            RevenueDTO result = Mapper.Map<RevenueDTO>(DataLayer.DataLayerFacade.RevenueRepository().GetRevenueCurrentReportForProfileReport());
             return result;
         }
 
@@ -86,7 +99,23 @@ namespace Gorgias.BusinessLayer.Facades
             return basequery.ToList();
         }
 
-        
+        public RevenueDTO Insert()
+        {
+            Int64 currentViews = new ProfileFacade().GetProfileReportCurrentProfileViews();
+            double currentRevenue = new FBActivityFacade().GetFBReportCurrentPreparation().TotalRevenue;
+
+            RevenueDTO resultRevenue;
+            try
+            {
+                resultRevenue = new RevenueFacade().GetRevenuePreviousDay();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return Insert(new RevenueDTO { RevenueAmount = currentRevenue, RevenueDateCreated = DateTime.UtcNow, RevenueMemberShare = 50, RevenueTotalViews = CompareValue.compareValuesInt64(currentViews,resultRevenue.RevenueTotalViews)});
+        }
 
         public RevenueDTO Insert(RevenueDTO objRevenue)
         {            

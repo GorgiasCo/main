@@ -1,0 +1,43 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addPaymentForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Edit Payment</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Amount<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-money"></i></span><input type="text" name="PaymentAmount" disabled ng-model="object.PaymentAmount" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Is Paid</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="ProfileCommissionStatus" ng-model="object.ProfileCommissionStatus" validate-on="blur" value="ProfileCommissionStatus" type="checkbox" name="for[]" /><label for="ProfileCommissionStatus">Yes</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="PaymentDateCreated" disabled data-plugin-datepicker ng-model="object.PaymentDateCreated" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Date Paid<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="PaymentDatePaid" disabled data-plugin-datepicker ng-model="object.PaymentDatePaid" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Note</label><div class="col-sm-9"><textarea rows="5" name="PaymentNote" ng-model="object.PaymentNote" validate-on="blur" class="form-control" placeholder="Describe Something..."></textarea></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Profile Commission</label><div class="col-sm-9"><select id="ProfileCommissionID" class="form-control" ng-model="object.ProfileCommissionID" disabled ng-options="option.ProfileCommissionID as option.ProfileCommissionDateCreated for option in ProfileCommissions" title="Please select at least one" required></select><input type="hidden" name="ProfileCommissionID" ng-value="object.ProfileCommissionID" /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <a class="btn btn-default" ng-href="/payment">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

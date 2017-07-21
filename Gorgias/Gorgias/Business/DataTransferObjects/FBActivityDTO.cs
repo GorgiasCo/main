@@ -8,7 +8,7 @@ namespace Gorgias.Business.DataTransferObjects
     public class FBActivityDTO
     {
             public int FBActivityID{get; set;}
-            public Decimal FBActivityCount{get; set;}
+            public double FBActivityCount{get; set;}
             public DateTime FBActivityDate{get; set;}
             public int FBActivityType{get; set;}
         

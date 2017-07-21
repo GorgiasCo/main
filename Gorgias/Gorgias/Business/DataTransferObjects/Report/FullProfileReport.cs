@@ -12,7 +12,7 @@ namespace Gorgias.Business.DataTransferObjects.Report
         public double RevenueAmount { get; set; }
         public double? OverAllRevenue { get; set; }
 
-        public int TotalView { get; set; }
+        public Int64 TotalView { get; set; }
         public int ActualView { get; set; }
         public int ActualSubscription { get; set; }
         public int ActualEngagement { get; set; }

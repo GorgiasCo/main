@@ -64,6 +64,34 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public bool Insert(int ProfileID, int RequestedProfileID, int RequestTypeID)
+        {
+            var currentConnection = GetConnection(ProfileID, RequestedProfileID, RequestTypeID);
+            if (currentConnection != null)
+            {
+                Delete(ProfileID, RequestedProfileID, RequestTypeID);
+                return true;
+            } else
+            {
+                try
+                {
+                    Connection obj = new Connection();
+                    obj.ProfileID = ProfileID;
+                    obj.RequestedProfileID = RequestedProfileID;
+                    obj.RequestTypeID = RequestTypeID;
+                    obj.ConnectStatus = true;
+                    obj.ConnectDateCreated = DateTime.UtcNow;
+                    context.Connections.Add(obj);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
         public bool Update(int ProfileID, int RequestedProfileID, int RequestTypeID, Boolean ConnectStatus)
         {
             Connection obj = new Connection();

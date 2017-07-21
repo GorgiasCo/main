@@ -205,16 +205,16 @@ angular.module('gorgiasapp')
                             console.log(authService.authentication.userID, 'WOWL successful login 1 Brand or Agency And Celeb Profile ;)');
                             break;
                         case "3":
-                            $location.path('/app/forms/invitie/');
-                            console.log(authService.authentication.userID, 'WOWL successful login 3 Invitie people ;)');
+                            $location.path('/app/dashboard');
+                            console.log(authService.authentication.userID, 'WOWL successful login 3 Invitie people ;)'); // forms/invitie/
                             break;
                         case "5":
-                            $location.path('/app/forms/agency/');
-                            console.log(authService.authentication.userID, 'WOWL successful login 4 Agency without Profile ;)');
+                            $location.path('/app/dashboard');
+                            console.log(authService.authentication.userID, 'WOWL successful login 4 Agency without Profile ;)'); // forms/agency/
                             break;
                         case "0":
-                            $location.path('/app/forms/administration/');
-                            console.log(authService.authentication.userID, 'WOWL successful login 0 Country Distributor ;)');
+                            $location.path('/app/dashboard');
+                            console.log(authService.authentication.userID, 'WOWL successful login 0 Country Distributor ;)'); // forms/administration/
                             break;
                     }
                     //if (authService.authentication.userRole == 1) {

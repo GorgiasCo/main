@@ -185,6 +185,27 @@
                     </li>-->
                 </ul>
             </li>
+            <li ng-class="{'open active':includes('app.forms')}" ng-if="UserRole==0">
+                <a href="javascript:;">
+                    <span class="title">Commission</span>
+                    <span class="arrow" ng-class="{'active open':$state.includes('app.forms')}"></span>
+                </a>
+                <span class="icon-thumbnail"><i class="pg-form"></i></span>
+                <ul class="sub-menu">
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.forms.commissionnew">New Commission</a>
+                        <span class="icon-thumbnail">NC</span>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.forms.commission">All Commissions</a>
+                        <span class="icon-thumbnail">AC</span>
+                    </li>
+                    <!--<li ui-sref-active="active">
+              <a ui-sref="app.forms.wizard">Form Wizard</a>
+              <span class="icon-thumbnail">fw</span>
+            </li>-->
+                </ul>
+            </li>
             <!--<li ui-sref-active="active">
                 <a ui-sref="app.portlets">
                     <span class="title">Portlets</span>

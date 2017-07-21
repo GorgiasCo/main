@@ -44,7 +44,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         #endregion
 
         //CRUD Functions
-        public FBActivity Insert(Decimal FBActivityCount, DateTime FBActivityDate, int FBActivityType)
+        public FBActivity Insert(double FBActivityCount, DateTime FBActivityDate, int FBActivityType)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(int FBActivityID, Decimal FBActivityCount, DateTime FBActivityDate, int FBActivityType)
+        public bool Update(int FBActivityID, double FBActivityCount, DateTime FBActivityDate, int FBActivityType)
         {
             FBActivity obj = new FBActivity();
             obj = (from w in context.FBActivities where w.FBActivityID == FBActivityID select w).FirstOrDefault();
@@ -113,7 +113,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Business.DataTransferObjects.Report.FBReport GetFBActivitiesAllCurrent()
         {
             int currentMonth = DateTime.UtcNow.Month;
-            int currentDay = DateTime.UtcNow.Day;
+            int currentDay = DateTime.UtcNow.Day - 1;
             return (from w in context.FBActivities where w.FBActivityDate.Month == currentMonth && w.FBActivityType == 5 && w.FBActivityDate.Day == currentDay orderby w.FBActivityDate descending select new Business.DataTransferObjects.Report.FBReport { TotalRevenue = w.FBActivityCount, CurrentDate = w.FBActivityDate}).FirstOrDefault();
         }
 

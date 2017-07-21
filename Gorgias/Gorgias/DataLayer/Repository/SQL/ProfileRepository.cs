@@ -323,6 +323,19 @@ namespace Gorgias.DataLayer.Repository.SQL
             return result;
         }
 
+        public Int64 GetProfileReportCurrentProfileViews()
+        {
+            //int currentDay = DateTime.UtcNow.Day;
+            var result = (from w in context.Profiles
+                          where w.SubscriptionTypeID != 4
+                          select
+                            new Business.DataTransferObjects.Report.ProfileVisitReport
+                            {
+                                ProfileView = w.ProfileView, AlbumView = w.Albums.Sum(av => av.AlbumView)
+                            }).ToList();
+            return result.Sum(m=>m.ProfileVisit);
+        }
+
         public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID)
         {
             //int currentDay = DateTime.UtcNow.Day;
@@ -370,7 +383,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                                 OverAllEngagement = w.ProfileReports.Where(pp => pp.ReportTypeID == 3 || pp.ReportTypeID == 4).Sum(pps => pps.ProfileReportActivityCount),
                                 OverAllSubscription = w.ProfileReports.Where(pp => pp.ReportTypeID == 5 || pp.ReportTypeID == 6).Sum(pps => pps.ProfileReportActivityCount),
                                 ConnectedUserShare = w.ProfileCommissions.Where(pc => pc.UserRoleID != 1).Sum(spc => spc.ProfileCommissionRate),
-                                UserCommission = w.ProfileCommissions.Where(pc => pc.User.CountryID == CountryID && pc.UserRoleID == 4).FirstOrDefault().ProfileCommissionRate
+                                UserCommission = w.ProfileCommissions.Where(pc => pc.User.CountryID == CountryID && pc.UserRoleID == 6).FirstOrDefault().ProfileCommissionRate
                             }).ToList();
             return result;
         }

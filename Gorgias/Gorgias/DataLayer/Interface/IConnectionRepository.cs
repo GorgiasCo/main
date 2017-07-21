@@ -11,6 +11,7 @@ namespace Gorgias.DataLayer.Interface
     
     
         Connection Insert(int ProfileID, int RequestedProfileID, int RequestTypeID, Boolean ConnectStatus, DateTime ConnectDateCreated);
+        bool Insert(int ProfileID, int RequestedProfileID, int RequestTypeID);
         bool Update(int ProfileID, int RequestedProfileID, int RequestTypeID, Boolean ConnectStatus);        
         bool Delete(int ProfileID, int RequestedProfileID, int RequestTypeID);
         bool Delete(int ProfileID, int RequestedProfileID);

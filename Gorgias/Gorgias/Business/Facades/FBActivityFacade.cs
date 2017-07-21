@@ -30,6 +30,12 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public Business.DataTransferObjects.Report.FBReport GetFBReportCurrentPreparation()
+        {
+            Business.DataTransferObjects.Report.FBReport result = DataLayer.DataLayerFacade.FBActivityRepository().GetFBActivitiesAllCurrent();
+            return result;
+        }
+
         public Business.DataTransferObjects.Report.FBReport GetFBReportCurrentMonth()
         {
             Business.DataTransferObjects.Report.FBReport result = DataLayer.DataLayerFacade.FBActivityRepository().GetFBActivitiesAllCurrentMonth();

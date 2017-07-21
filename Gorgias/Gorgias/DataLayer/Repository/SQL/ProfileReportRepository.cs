@@ -170,7 +170,9 @@ namespace Gorgias.DataLayer.Repository.SQL
         //Why all ;)
         public IEnumerable<ProfileReport> GetProfileReportsByProfileIDAsIEnumerable(int ProfileID)
         {
-            return (from w in context.ProfileReports where w.ProfileID == ProfileID orderby w.ProfileReportID descending select w).AsEnumerable();
+            int currentMonth = DateTime.UtcNow.Month;
+            int currentDay = DateTime.UtcNow.Day - 1;
+            return (from w in context.ProfileReports where w.ProfileID == ProfileID && w.Revenue.RevenueDateCreated.Day == currentDay && w.Revenue.RevenueDateCreated.Month == currentMonth orderby w.ProfileReportID descending select w).AsEnumerable();
         }
         public IEnumerable<ProfileReport> GetProfileReportsByProfileIDAsIEnumerable(int ProfileID, int RevenueID)
         {

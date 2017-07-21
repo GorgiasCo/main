@@ -69,6 +69,10 @@
     <Content Include="assets\js\controllers\admin\Profile\addProfileController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Address\listprofileAddressController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Agency\listprofileAgencyController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\Agency\ProfileCommission\addProfileCommissionController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\Agency\ProfileCommission\editProfileCommissionController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\Agency\ProfileCommission\listProfileCommissionController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\Agency\ProfileCommission\viewProfileCommissionController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Agency\UserProfile\addUserProfileController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Agency\UserProfile\editUserProfileController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Agency\UserProfile\listUserProfileController.js" />
@@ -1655,6 +1659,10 @@
     <Content Include="pages\js\pages.min.js" />
     <Content Include="pages\js\pages.social.js" />
     <Content Include="pages\js\pages.social.min.js" />
+    <Content Include="tpl\admin\ProfileCommission\addProfileCommission.html" />
+    <Content Include="tpl\admin\ProfileCommission\editProfileCommission.html" />
+    <Content Include="tpl\admin\ProfileCommission\listProfileCommission.html" />
+    <Content Include="tpl\admin\ProfileCommission\viewProfileCommission.html" />
     <Content Include="tpl\admin\Profile\addProfile.html" />
     <Content Include="tpl\admin\Profile\listProfile.html" />
     <Content Include="tpl\admin\UserProfile\addUserProfile.html" />

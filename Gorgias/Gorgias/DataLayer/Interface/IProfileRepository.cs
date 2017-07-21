@@ -18,6 +18,7 @@ namespace Gorgias.DataLayer.Interface
 
         Profile GetProfile(int ProfileID);
         IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();
+        Int64 GetProfileReportCurrentProfileViews();
         IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID);
         IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountry(int CountryID);
 

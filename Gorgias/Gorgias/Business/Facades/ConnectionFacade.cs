@@ -189,6 +189,11 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public bool InsertForMobile(ConnectionDTO objConnection)
+        {
+            return DataLayer.DataLayerFacade.ConnectionRepository().Insert(objConnection.ProfileID, objConnection.RequestedProfileID, objConnection.RequestTypeID);            
+        }
+
         public ConnectionDTO Insert(ConnectionDTO objConnection)
         {
             ConnectionDTO result = Mapper.Map<ConnectionDTO>(DataLayer.DataLayerFacade.ConnectionRepository().Insert(objConnection.ProfileID, objConnection.RequestedProfileID, objConnection.RequestTypeID, objConnection.ConnectStatus, objConnection.ConnectDateCreated));

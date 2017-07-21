@@ -23,7 +23,7 @@ namespace Gorgias
         public int RevenueID { get; set; }
         public System.DateTime RevenueDateCreated { get; set; }
         public double RevenueAmount { get; set; }
-        public int RevenueTotalViews { get; set; }
+        public long RevenueTotalViews { get; set; }
         public double RevenueMemberShare { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

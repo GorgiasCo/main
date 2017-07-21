@@ -44,7 +44,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         #endregion
 
         //CRUD Functions
-        public Revenue Insert(DateTime RevenueDateCreated, double RevenueAmount, int RevenueTotalViews, double RevenueMemberShare)
+        public Revenue Insert(DateTime RevenueDateCreated, double RevenueAmount, Int64 RevenueTotalViews, double RevenueMemberShare)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(int RevenueID, DateTime RevenueDateCreated, double RevenueAmount, int RevenueTotalViews, double RevenueMemberShare)
+        public bool Update(int RevenueID, DateTime RevenueDateCreated, double RevenueAmount, Int64 RevenueTotalViews, double RevenueMemberShare)
         {
             Revenue obj = new Revenue();
             obj = (from w in context.Revenues where w.RevenueID == RevenueID select w).FirstOrDefault();
@@ -108,7 +108,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Revenue GetRevenueCurrent()
         {
-            int currentDay = DateTime.UtcNow.Day;
+            int currentDay = DateTime.UtcNow.Day - 1;
             int currentMonth = DateTime.UtcNow.Month;
             int currentYear = DateTime.UtcNow.Year;
             var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear select w).First();
@@ -122,15 +122,37 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public Revenue GetRevenuePreviousDay()
+        {
+            int currentDay = DateTime.UtcNow.Day - 1;
+            int currentMonth = DateTime.UtcNow.Month;
+            int currentYear = DateTime.UtcNow.Year;
+            var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear select w).First();
+            return result;
+        }
+
         public Revenue GetRevenueCurrentReport()
+        {
+            int currentDay = DateTime.UtcNow.Day - 1;
+            int currentMonth = DateTime.UtcNow.Month;
+            int currentYear = DateTime.UtcNow.Year;
+            //var result = (from w in context.Revenues.Include("ProfileReports") orderby w.RevenueID descending select w).First();
+            var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear orderby w.RevenueID descending select w).First();
+
+            return result;
+        }
+
+        public Revenue GetRevenueCurrentReportForProfileReport()
         {
             int currentDay = DateTime.UtcNow.Day;
             int currentMonth = DateTime.UtcNow.Month;
             int currentYear = DateTime.UtcNow.Year;
-            var result = (from w in context.Revenues.Include("ProfileReports") orderby w.RevenueID descending select w).First();
+            //var result = (from w in context.Revenues.Include("ProfileReports") orderby w.RevenueID descending select w).First();
+            var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear orderby w.RevenueID descending select w).First();
 
             return result;
         }
+
 
         //Lists
         public List<Revenue> GetRevenuesAll()

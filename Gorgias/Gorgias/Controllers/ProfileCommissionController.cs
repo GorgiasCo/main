@@ -202,7 +202,8 @@ namespace Gorgias.Controllers
              return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-
+                objProfileCommission.ProfileCommissionDateCreated = DateTime.UtcNow;
+                objProfileCommission.ProfileCommissionStatus = true;
                 if (!ModelState.IsValid)
                 {
                     response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);

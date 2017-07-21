@@ -378,6 +378,7 @@
     <Compile Include="Business\DataTransferObjects\Report\FBReport.cs" />
     <Compile Include="Business\DataTransferObjects\Report\FullProfileReport.cs" />
     <Compile Include="Business\DataTransferObjects\Report\ProfileReport.cs" />
+    <Compile Include="Business\DataTransferObjects\Report\ProfileVisitReport.cs" />
     <Compile Include="Business\DataTransferObjects\RevenueDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserCustomDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserProfileDTO.cs" />
@@ -443,6 +444,7 @@
     <Compile Include="Business\Facades\Web\DBToolFacade.cs" />
     <Compile Include="Business\Facades\Web\ReportFacade.cs" />
     <Compile Include="Business\Facades\Web\WebFacade.cs" />
+    <Compile Include="Business\Helper\CompareValue.cs" />
     <Compile Include="Business\Helper\DataTablesViewModel.cs" />
     <Compile Include="Business\DataTransferObjects\FeaturedSponsorDTO.cs" />
     <Compile Include="Business\DataTransferObjects\FeatureDTO.cs" />
@@ -2558,12 +2560,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <None Include="Properties\PublishProfiles\apiigorgias - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\apiigorgias - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\devGorgias - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\devGorgias - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\gorgiasapi - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\gorgiasapi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\gorgiasapp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gorgiasapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

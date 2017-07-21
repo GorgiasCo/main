@@ -1,0 +1,43 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addProfileReportForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Add Profile Report</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Activity Count<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ProfileReportActivityCount" ng-model="object.ProfileReportActivityCount" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Revenue<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-money"></i></span><input type="text" name="ProfileReportRevenue" ng-model="object.ProfileReportRevenue" validate-on="blur" class="form-control" required /></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Report Type</label><div class="col-sm-9"><select id="ReportTypeID" class="form-control" ng-model="object.ReportTypeID" ng-options="option.ReportTypeID as option.ReportTypeName for option in ReportTypes" title="Please select at least one" required></select><input type="hidden" name="ReportTypeID" ng-value="object.ReportTypeID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Profile</label><div class="col-sm-9"><select id="ProfileID" class="form-control" ng-model="object.ProfileID" ng-options="option.ProfileID as option.ProfileFullname for option in Profiles" title="Please select at least one" required></select><input type="hidden" name="ProfileID" ng-value="object.ProfileID" /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Revenue</label><div class="col-sm-9"><select id="RevenueID" class="form-control" ng-model="object.RevenueID" ng-options="option.RevenueID as option.RevenueDateCreated for option in Revenues" title="Please select at least one" required></select><input type="hidden" name="RevenueID" ng-value="object.RevenueID" /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <a class="btn btn-default" ng-href="/profilereport">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

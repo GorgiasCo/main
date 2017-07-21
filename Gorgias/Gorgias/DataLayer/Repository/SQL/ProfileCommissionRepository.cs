@@ -140,7 +140,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         //IQueryable
 		public IQueryable<ProfileCommission> GetProfileCommissionsAllAsQueryable()
 		{
-			return (from w in context.ProfileCommissions.Include("Profile") orderby w.ProfileCommissionID descending select w).AsQueryable();
+			return (from w in context.ProfileCommissions.Include("Profile").Include("User").Include("UserRole") orderby w.ProfileCommissionID descending select w).AsQueryable();
 		}
 		public IQueryable<ProfileCommission> GetProfileCommissionsAllAsQueryable(bool ProfileCommissionStatus)
 		{

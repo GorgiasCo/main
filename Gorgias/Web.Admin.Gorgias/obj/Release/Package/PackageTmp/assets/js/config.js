@@ -141,6 +141,7 @@ angular.module('gorgiasapp')
                 ProfilesAccesses: 'Profiles Accesses',
                 NewUserProfile: 'New User Profile',
                 WelcometoProfileAdministration: 'Welcome to Profile Administration',
+                Administration: 'Administration',
                 SignOut: 'Sign Out',
                 Allrightsreserved: 'All rights reserved.',
                 Dashboard: 'Dashboard',
@@ -174,6 +175,7 @@ angular.module('gorgiasapp')
             })
               .translations('zh', {
                   AllMyProfile: 'Profiles',
+                  Administration: 'Administration',
                   Fullname: '标志性之名',
                   DateCreated: '创建日期',
                   Description: '详细介绍',
@@ -288,6 +290,7 @@ angular.module('gorgiasapp')
                   updateNotificationTitle: " 更新",
               })
                 .translations('my', {
+                    Administration: 'Administration',
                     AllMyProfile: 'Profiles',
                     Fullname: 'Nama Penuh',
                     DateCreated: 'Tarikh Daftar',
@@ -883,6 +886,62 @@ angular.module('gorgiasapp')
                             })
                                 .then(function () {
                                     return $ocLazyLoad.load('assets/js/controllers/admin/profile/agency/user/editUserController.js');
+                                });
+                        }]
+                    }
+                })
+                .state('app.forms.commission', {
+                    url: '/commission/list',
+                    templateUrl: 'tpl/admin/ProfileCommission/listProfileCommission.html',
+                    controller: 'listProfileCommissionController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone',
+                                    'dataTables',
+                                    'ui-grid'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/agency/ProfileCommission/listProfileCommissionController.js');
+                                });
+                        }]
+                    }
+                })
+                .state('app.forms.commissionnew', {
+                    url: '/commission/new',
+                    templateUrl: 'tpl/admin/ProfileCommission/addProfileCommission.html',
+                    controller: 'addProfileCommissionController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/agency/ProfileCommission/addProfileCommissionController.js');
+                                });
+                        }]
+                    }
+                })
+                .state('app.forms.commissionedit', {
+                    url: '/commission/:id',
+                    templateUrl: 'tpl/admin/ProfileCommission/editProfileCommission.html',
+                    controller: 'editProfileCommissionController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/agency/ProfileCommission/editProfileCommissionController.js');
                                 });
                         }]
                     }

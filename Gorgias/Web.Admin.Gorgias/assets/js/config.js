@@ -890,6 +890,62 @@ angular.module('gorgiasapp')
                         }]
                     }
                 })
+                .state('app.forms.commission', {
+                    url: '/commission/list',
+                    templateUrl: 'tpl/admin/ProfileCommission/listProfileCommission.html',
+                    controller: 'listProfileCommissionController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone',
+                                    'dataTables',
+                                    'ui-grid'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/agency/ProfileCommission/listProfileCommissionController.js');
+                                });
+                        }]
+                    }
+                })
+                .state('app.forms.commissionnew', {
+                    url: '/commission/new',
+                    templateUrl: 'tpl/admin/ProfileCommission/addProfileCommission.html',
+                    controller: 'addProfileCommissionController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/agency/ProfileCommission/addProfileCommissionController.js');
+                                });
+                        }]
+                    }
+                })
+                .state('app.forms.commissionedit', {
+                    url: '/commission/:id',
+                    templateUrl: 'tpl/admin/ProfileCommission/editProfileCommission.html',
+                    controller: 'editProfileCommissionController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/agency/ProfileCommission/editProfileCommissionController.js');
+                                });
+                        }]
+                    }
+                })
                 .state('app.forms.userprofile', {
                     url: '/user/profile/list',
                     templateUrl: 'tpl/admin/UserProfile/listUserProfile.html',

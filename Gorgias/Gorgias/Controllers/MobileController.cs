@@ -33,6 +33,27 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/Subscriber/{Mode}/{ProfileID}/{UserProfileID}", Name = "SubscriberMobile")]
+        [HttpGet]
+        public HttpResponseMessage Subscriber(HttpRequestMessage request, int Mode, int ProfileID, int UserProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.ConnectionFacade().InsertForMobile(new Business.DataTransferObjects.ConnectionDTO { ProfileID = ProfileID, RequestedProfileID = UserProfileID, RequestTypeID = Mode});
+
+                if (!result)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/Profile/Addresses/{ProfileID}", Name = "GetMobileProfileAddresses")]
         [HttpGet]
         public HttpResponseMessage GetProfileAddresses(HttpRequestMessage request, int ProfileID)

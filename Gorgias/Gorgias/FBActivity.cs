@@ -15,7 +15,7 @@ namespace Gorgias
     public partial class FBActivity
     {
         public int FBActivityID { get; set; }
-        public decimal FBActivityCount { get; set; }
+        public double FBActivityCount { get; set; }
         public System.DateTime FBActivityDate { get; set; }
         public int FBActivityType { get; set; }
     }

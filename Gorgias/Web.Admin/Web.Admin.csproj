@@ -160,6 +160,10 @@
     <Content Include="layout\ExternalLink\editExternalLink.html" />
     <Content Include="layout\ExternalLink\listExternalLink.html" />
     <Content Include="layout\ExternalLink\viewExternalLink.html" />
+    <Content Include="layout\FBActivity\addFBActivity.html" />
+    <Content Include="layout\FBActivity\editFBActivity.html" />
+    <Content Include="layout\FBActivity\listFBActivity.html" />
+    <Content Include="layout\FBActivity\viewFBActivity.html" />
     <Content Include="layout\FeaturedSponsor\addFeaturedSponsor.html" />
     <Content Include="layout\FeaturedSponsor\editFeaturedSponsor.html" />
     <Content Include="layout\FeaturedSponsor\listFeaturedSponsor.html" />
@@ -2075,6 +2079,10 @@
     <Content Include="scripts\SPA\ExternalLink\editExternalLinkController.js" />
     <Content Include="scripts\SPA\ExternalLink\listExternalLinkController.js" />
     <Content Include="scripts\SPA\ExternalLink\viewExternalLinkController.js" />
+    <Content Include="scripts\SPA\FBActivity\addFBActivityController.js" />
+    <Content Include="scripts\SPA\FBActivity\editFBActivityController.js" />
+    <Content Include="scripts\SPA\FBActivity\listFBActivityController.js" />
+    <Content Include="scripts\SPA\FBActivity\viewFBActivityController.js" />
     <Content Include="scripts\SPA\FeaturedSponsor\addFeaturedSponsorController.js" />
     <Content Include="scripts\SPA\FeaturedSponsor\editFeaturedSponsorController.js" />
     <Content Include="scripts\SPA\FeaturedSponsor\listFeaturedSponsorController.js" />

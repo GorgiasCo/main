@@ -20,6 +20,102 @@
                 templateUrl: "/layout/DBTool/dbtoolAdd.html",
                 controller: "addBulkController"
             })
+            .when("/reporttype", {
+                templateUrl: "/layout/ReportType/listReportType.html",
+                controller: "listReportTypeController"
+            })
+            .when("/reporttype/add", {
+                templateUrl: "/layout/ReportType/addReportType.html",
+                controller: "addReportTypeController"
+            })
+            .when("/reporttype/:reporttypeid", {
+                templateUrl: "/layout/ReportType/viewReportType.html",
+                controller: "viewReportTypeController"
+            })
+            .when("/reporttype/edit/:reporttypeid", {
+                templateUrl: "/layout/ReportType/editReportType.html",
+                controller: "editReportTypeController"
+            })
+            .when("/revenue", {
+                templateUrl: "/layout/Revenue/listRevenue.html",
+                controller: "listRevenueController"
+            })
+            .when("/revenue/add", {
+                templateUrl: "/layout/Revenue/addRevenue.html",
+                controller: "addRevenueController"
+            })
+            .when("/revenue/:revenueid", {
+                templateUrl: "/layout/Revenue/viewRevenue.html",
+                controller: "viewRevenueController"
+            })
+            .when("/revenue/edit/:revenueid", {
+                templateUrl: "/layout/Revenue/editRevenue.html",
+                controller: "editRevenueController"
+            })
+            .when("/profilereport", {
+                templateUrl: "/layout/ProfileReport/listProfileReport.html",
+                controller: "listProfileReportController"
+            })
+            .when("/profilereport/add", {
+                templateUrl: "/layout/ProfileReport/addProfileReport.html",
+                controller: "addProfileReportController"
+            })
+            .when("/profilereport/:profilereportid", {
+                templateUrl: "/layout/ProfileReport/viewProfileReport.html",
+                controller: "viewProfileReportController"
+            })
+            .when("/profilereport/edit/:profilereportid", {
+                templateUrl: "/layout/ProfileReport/editProfileReport.html",
+                controller: "editProfileReportController"
+            })
+            .when("/profilecommission", {
+                templateUrl: "/layout/ProfileCommission/listProfileCommission.html",
+                controller: "listProfileCommissionController"
+            })
+            .when("/profilecommission/add", {
+                templateUrl: "/layout/ProfileCommission/addProfileCommission.html",
+                controller: "addProfileCommissionController"
+            })
+            .when("/profilecommission/:profilecommissionid", {
+                templateUrl: "/layout/ProfileCommission/viewProfileCommission.html",
+                controller: "viewProfileCommissionController"
+            })
+            .when("/profilecommission/edit/:profilecommissionid", {
+                templateUrl: "/layout/ProfileCommission/editProfileCommission.html",
+                controller: "editProfileCommissionController"
+            })
+            .when("/payment", {
+                templateUrl: "/layout/Payment/listPayment.html",
+                controller: "listPaymentController"
+            })
+            .when("/payment/add", {
+                templateUrl: "/layout/Payment/addPayment.html",
+                controller: "addPaymentController"
+            })
+            .when("/payment/:paymentid", {
+                templateUrl: "/layout/Payment/viewPayment.html",
+                controller: "viewPaymentController"
+            })
+            .when("/payment/edit/:paymentid", {
+                templateUrl: "/layout/Payment/editPayment.html",
+                controller: "editPaymentController"
+            })
+            .when("/fbactivity", {
+                templateUrl: "/layout/FBActivity/listFBActivity.html",
+                controller: "listFBActivityController"
+            })
+            .when("/fbactivity/add", {
+                templateUrl: "/layout/FBActivity/addFBActivity.html",
+                controller: "addFBActivityController"
+            })
+            .when("/fbactivity/:fbactivityid", {
+                templateUrl: "/layout/FBActivity/viewFBActivity.html",
+                controller: "viewFBActivityController"
+            })
+            .when("/fbactivity/edit/:fbactivityid", {
+                templateUrl: "/layout/FBActivity/editFBActivity.html",
+                controller: "editFBActivityController"
+            })
             .when("/newsletter/add", {
                 templateUrl: "/layout/Newsletter/addNewsletter.html",
                 controller: "addNewsletterController"

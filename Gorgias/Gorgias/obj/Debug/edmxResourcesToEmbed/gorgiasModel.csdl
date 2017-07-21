@@ -1126,7 +1126,7 @@
     <Property Name="RevenueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RevenueDateCreated" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="RevenueAmount" Type="Double" Nullable="false" />
-    <Property Name="RevenueTotalViews" Type="Int32" Nullable="false" />
+    <Property Name="RevenueTotalViews" Type="Int64" Nullable="false" />
     <Property Name="RevenueMemberShare" Type="Double" Nullable="false" />
     <NavigationProperty Name="ProfileReports" Relationship="GorgiasModel.FK_ProfileReport_Revenue" FromRole="Revenue" ToRole="ProfileReport" />
   </EntityType>
@@ -1233,7 +1233,7 @@
       <PropertyRef Name="FBActivityID" />
     </Key>
     <Property Name="FBActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FBActivityCount" Type="Decimal" Nullable="false" Precision="18" Scale="12" />
+    <Property Name="FBActivityCount" Type="Double" Nullable="false" />
     <Property Name="FBActivityDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FBActivityType" Type="Int32" Nullable="false" />
   </EntityType>

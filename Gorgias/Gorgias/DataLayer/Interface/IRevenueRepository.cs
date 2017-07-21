@@ -8,13 +8,15 @@ namespace Gorgias.DataLayer.Interface
 {
     public interface IRevenueRepository
     {
-        Revenue Insert(DateTime RevenueDateCreated, double RevenueAmount, int RevenueTotalViews, double RevenueMemberShare);
-        bool Update(int RevenueID, DateTime RevenueDateCreated, double RevenueAmount, int RevenueTotalViews, double RevenueMemberShare);
+        Revenue Insert(DateTime RevenueDateCreated, double RevenueAmount, Int64 RevenueTotalViews, double RevenueMemberShare);
+        bool Update(int RevenueID, DateTime RevenueDateCreated, double RevenueAmount, Int64 RevenueTotalViews, double RevenueMemberShare);
         bool Delete(int RevenueID);
 
         Revenue GetRevenue(int RevenueID);
         Revenue GetRevenueCurrent();
+        Revenue GetRevenuePreviousDay();
         Revenue GetRevenueCurrentReport();
+        Revenue GetRevenueCurrentReportForProfileReport();
 
         //List
         List<Revenue> GetRevenuesAll();

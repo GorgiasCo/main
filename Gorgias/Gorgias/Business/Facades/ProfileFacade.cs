@@ -29,6 +29,11 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrent();            
         }
 
+        public Int64 GetProfileReportCurrentProfileViews()
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrentProfileViews();
+        }
+
         public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID)
         {
             return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrent(UserID);

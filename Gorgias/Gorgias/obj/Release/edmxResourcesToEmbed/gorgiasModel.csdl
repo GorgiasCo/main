@@ -167,6 +167,40 @@
       <End Role="Profile" EntitySet="Profiles" />
       <End Role="Comment" EntitySet="Comments" />
     </AssociationSet>
+    <EntitySet Name="Payments" EntityType="GorgiasModel.Payment" />
+    <EntitySet Name="ProfileCommissions" EntityType="GorgiasModel.ProfileCommission" />
+    <EntitySet Name="ProfileReports" EntityType="GorgiasModel.ProfileReport" />
+    <EntitySet Name="ReportTypes" EntityType="GorgiasModel.ReportType" />
+    <EntitySet Name="Revenues" EntityType="GorgiasModel.Revenue" />
+    <AssociationSet Name="FK_Payment_Payment" Association="GorgiasModel.FK_Payment_Payment">
+      <End Role="ProfileCommission" EntitySet="ProfileCommissions" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommission_Profile" Association="GorgiasModel.FK_ProfileCommission_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileCommission" EntitySet="ProfileCommissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileReport_Profile" Association="GorgiasModel.FK_ProfileReport_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileReport" EntitySet="ProfileReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommission_User" Association="GorgiasModel.FK_ProfileCommission_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ProfileCommission" EntitySet="ProfileCommissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileCommission_UserRole" Association="GorgiasModel.FK_ProfileCommission_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="ProfileCommission" EntitySet="ProfileCommissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileReport_ReportType" Association="GorgiasModel.FK_ProfileReport_ReportType">
+      <End Role="ReportType" EntitySet="ReportTypes" />
+      <End Role="ProfileReport" EntitySet="ProfileReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileReport_Revenue" Association="GorgiasModel.FK_ProfileReport_Revenue">
+      <End Role="Revenue" EntitySet="Revenues" />
+      <End Role="ProfileReport" EntitySet="ProfileReports" />
+    </AssociationSet>
+    <EntitySet Name="FBActivities" EntityType="GorgiasModel.FBActivity" />
   </EntityContainer>
   <EntityType Name="Address">
     <Key>
@@ -421,6 +455,8 @@
     <NavigationProperty Name="Industries" Relationship="GorgiasModel.ProfileIndustry" FromRole="Profile" ToRole="Industry" />
     <Property Name="ProfileFullnameEnglish" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Comments" Relationship="GorgiasModel.FK_Comment_Profile" FromRole="Profile" ToRole="Comment" />
+    <NavigationProperty Name="ProfileCommissions" Relationship="GorgiasModel.FK_ProfileCommission_Profile" FromRole="Profile" ToRole="ProfileCommission" />
+    <NavigationProperty Name="ProfileReports" Relationship="GorgiasModel.FK_ProfileReport_Profile" FromRole="Profile" ToRole="ProfileReport" />
   </EntityType>
   <EntityType Name="ProfileAttribute">
     <Key>
@@ -536,6 +572,7 @@
     <NavigationProperty Name="UserProfiles" Relationship="GorgiasModel.FK_UserProfile_User" FromRole="User" ToRole="UserProfile" />
     <Property Name="CountryID" Type="Int32" />
     <NavigationProperty Name="Country" Relationship="GorgiasModel.FK_User_Country" FromRole="User" ToRole="Country" />
+    <NavigationProperty Name="ProfileCommissions" Relationship="GorgiasModel.FK_ProfileCommission_User" FromRole="User" ToRole="ProfileCommission" />
   </EntityType>
   <EntityType Name="UserProfile">
     <Key>
@@ -560,6 +597,7 @@
     <Property Name="UserRoleImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="UserRoleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="UserProfiles" Relationship="GorgiasModel.FK_UserProfile_UserRole" FromRole="UserRole" ToRole="UserProfile" />
+    <NavigationProperty Name="ProfileCommissions" Relationship="GorgiasModel.FK_ProfileCommission_UserRole" FromRole="UserRole" ToRole="ProfileCommission" />
   </EntityType>
   <Association Name="FK_Address_AddressType">
     <End Type="GorgiasModel.AddressType" Role="AddressType" Multiplicity="1" />
@@ -1028,4 +1066,175 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaymentDatePaid" Type="DateTime" Precision="3" />
+    <Property Name="PaymentIsPaid" Type="Boolean" Nullable="false" />
+    <Property Name="PaymentAmount" Type="Double" Nullable="false" />
+    <Property Name="PaymentNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileCommissionID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProfileCommission" Relationship="GorgiasModel.FK_Payment_Payment" FromRole="Payment" ToRole="ProfileCommission" />
+  </EntityType>
+  <EntityType Name="ProfileCommission">
+    <Key>
+      <PropertyRef Name="ProfileCommissionID" />
+    </Key>
+    <Property Name="ProfileCommissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfileCommissionRate" Type="Double" Nullable="false" />
+    <Property Name="ProfileCommissionDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProfileCommissionStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Payments" Relationship="GorgiasModel.FK_Payment_Payment" FromRole="ProfileCommission" ToRole="Payment" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileCommission_Profile" FromRole="ProfileCommission" ToRole="Profile" />
+    <NavigationProperty Name="User" Relationship="GorgiasModel.FK_ProfileCommission_User" FromRole="ProfileCommission" ToRole="User" />
+    <NavigationProperty Name="UserRole" Relationship="GorgiasModel.FK_ProfileCommission_UserRole" FromRole="ProfileCommission" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="ProfileReport">
+    <Key>
+      <PropertyRef Name="ProfileReportID" />
+    </Key>
+    <Property Name="ProfileReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfileReportActivityCount" Type="Int32" Nullable="false" />
+    <Property Name="ProfileReportRevenue" Type="Double" Nullable="false" />
+    <Property Name="ReportTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="RevenueID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileReport_Profile" FromRole="ProfileReport" ToRole="Profile" />
+    <NavigationProperty Name="ReportType" Relationship="GorgiasModel.FK_ProfileReport_ReportType" FromRole="ProfileReport" ToRole="ReportType" />
+    <NavigationProperty Name="Revenue" Relationship="GorgiasModel.FK_ProfileReport_Revenue" FromRole="ProfileReport" ToRole="Revenue" />
+  </EntityType>
+  <EntityType Name="ReportType">
+    <Key>
+      <PropertyRef Name="ReportTypeID" />
+    </Key>
+    <Property Name="ReportTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ReportTypeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ReportTypeIsCountable" Type="Boolean" Nullable="false" />
+    <Property Name="ReportTypeStatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ProfileReports" Relationship="GorgiasModel.FK_ProfileReport_ReportType" FromRole="ReportType" ToRole="ProfileReport" />
+  </EntityType>
+  <EntityType Name="Revenue">
+    <Key>
+      <PropertyRef Name="RevenueID" />
+    </Key>
+    <Property Name="RevenueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RevenueDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RevenueAmount" Type="Double" Nullable="false" />
+    <Property Name="RevenueTotalViews" Type="Int64" Nullable="false" />
+    <Property Name="RevenueMemberShare" Type="Double" Nullable="false" />
+    <NavigationProperty Name="ProfileReports" Relationship="GorgiasModel.FK_ProfileReport_Revenue" FromRole="Revenue" ToRole="ProfileReport" />
+  </EntityType>
+  <Association Name="FK_Payment_Payment">
+    <End Type="GorgiasModel.ProfileCommission" Role="ProfileCommission" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileCommission">
+        <PropertyRef Name="ProfileCommissionID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="ProfileCommissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileCommission_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileCommission" Role="ProfileCommission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileCommission">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileReport_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileReport" Role="ProfileReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileReport">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileCommission_User">
+    <End Type="GorgiasModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileCommission" Role="ProfileCommission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProfileCommission">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileCommission_UserRole">
+    <End Type="GorgiasModel.UserRole" Role="UserRole" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileCommission" Role="ProfileCommission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="ProfileCommission">
+        <PropertyRef Name="UserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileReport_ReportType">
+    <End Type="GorgiasModel.ReportType" Role="ReportType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileReport" Role="ProfileReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReportType">
+        <PropertyRef Name="ReportTypeID" />
+      </Principal>
+      <Dependent Role="ProfileReport">
+        <PropertyRef Name="ReportTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileReport_Revenue">
+    <End Type="GorgiasModel.Revenue" Role="Revenue" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileReport" Role="ProfileReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Revenue">
+        <PropertyRef Name="RevenueID" />
+      </Principal>
+      <Dependent Role="ProfileReport">
+        <PropertyRef Name="RevenueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FBActivity">
+    <Key>
+      <PropertyRef Name="FBActivityID" />
+    </Key>
+    <Property Name="FBActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FBActivityCount" Type="Double" Nullable="false" />
+    <Property Name="FBActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FBActivityType" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

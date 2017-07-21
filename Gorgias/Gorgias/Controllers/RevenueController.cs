@@ -14,7 +14,7 @@ using Gorgias.Business.DataTransferObjects.Helper;
 
 
 namespace Gorgias.Controllers
-{   
+{
     [RoutePrefix("api")]
     public class RevenueController : ApiControllerBase
     {
@@ -25,16 +25,17 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                RevenueDTO result = BusinessLayer.Facades.Facade.RevenueFacade().GetRevenue(RevenueID); 
+                RevenueDTO result = BusinessLayer.Facades.Facade.RevenueFacade().GetRevenue(RevenueID);
                 if (result == null)
                 {
-                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);                
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
                 }
-                else {
+                else
+                {
                     response = request.CreateResponse<RevenueDTO>(HttpStatusCode.OK, result);
                 }
                 return response;
-            });           
+            });
         }
 
         [Route("Revenues/data", Name = "GetRevenuesDataTables")]
@@ -62,15 +63,16 @@ namespace Gorgias.Controllers
                 List<RevenueDTO> result = BusinessLayer.Facades.Facade.RevenueFacade().GetRevenues();
                 if (result == null)
                 {
-                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);                
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
                 }
-                else {
+                else
+                {
                     response = request.CreateResponse<List<RevenueDTO>>(HttpStatusCode.OK, result);
                 }
                 return response;
-            });                        
+            });
         }
-        
+
         [Route("Revenues/{page}/{pagesize}", Name = "GetRevenues")]
         [HttpGet]
         public HttpResponseMessage GetRevenues(HttpRequestMessage request, int page, int pagesize)
@@ -78,26 +80,53 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                PaginationSet<RevenueDTO> result = BusinessLayer.Facades.Facade.RevenueFacade().GetRevenues(page,pagesize);
+                PaginationSet<RevenueDTO> result = BusinessLayer.Facades.Facade.RevenueFacade().GetRevenues(page, pagesize);
                 if (result == null)
                 {
-                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);                
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
                 }
-                else {
+                else
+                {
                     response = request.CreateResponse<PaginationSet<RevenueDTO>>(HttpStatusCode.OK, result);
                 }
                 return response;
-            });                        
+            });
         }
-        
-        
-        
-        
-        [Route("Revenue", Name = "RevenueInsert")]        
+
+        [Route("Revenue", Name = "RevenueInsert")]
         [HttpPost]
         public HttpResponseMessage Post(HttpRequestMessage request, Business.DataTransferObjects.RevenueDTO objRevenue)
         {
-             return CreateHttpResponse(request, () =>
+            return CreateHttpResponse(request, () =>
+           {
+               HttpResponseMessage response = null;
+
+               if (!ModelState.IsValid)
+               {
+                   response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+               }
+               else
+               {
+                   RevenueDTO result = BusinessLayer.Facades.Facade.RevenueFacade().Insert(objRevenue);
+                   if (result != null)
+                   {
+                       response = request.CreateResponse<Business.DataTransferObjects.RevenueDTO>(HttpStatusCode.Created, result);
+                   }
+                   else
+                   {
+                       response = request.CreateResponse<String>(HttpStatusCode.Found, null);
+                   }
+               }
+               return response;
+           });
+        }
+
+        //Must Run First for Generating Revenue and Profile Reports ;) FIRST
+        [Route("Revenue/Auto", Name = "RevenueInsertAuto")]
+        [HttpGet]
+        public HttpResponseMessage RevenueInsertAuto(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
 
@@ -107,7 +136,7 @@ namespace Gorgias.Controllers
                 }
                 else
                 {
-                    RevenueDTO result = BusinessLayer.Facades.Facade.RevenueFacade().Insert(objRevenue);
+                    RevenueDTO result = BusinessLayer.Facades.Facade.RevenueFacade().Insert();
                     if (result != null)
                     {
                         response = request.CreateResponse<Business.DataTransferObjects.RevenueDTO>(HttpStatusCode.Created, result);
@@ -118,11 +147,11 @@ namespace Gorgias.Controllers
                     }
                 }
                 return response;
-            });           
+            });
         }
-        
 
-        [Route("Revenue/RevenueID/{RevenueID}", Name = "DeleteRevenue")]        
+
+        [Route("Revenue/RevenueID/{RevenueID}", Name = "DeleteRevenue")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int RevenueID)
         {
             return CreateHttpResponse(request, () =>
@@ -143,10 +172,10 @@ namespace Gorgias.Controllers
                     else
                     {
                         response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
-                    }                    
+                    }
                 }
                 return response;
-            });            
+            });
         }
 
 
@@ -164,7 +193,7 @@ namespace Gorgias.Controllers
                 }
                 else
                 {
-                    bool result = BusinessLayer.Facades.Facade.RevenueFacade().Update(RevenueID,objRevenue);
+                    bool result = BusinessLayer.Facades.Facade.RevenueFacade().Update(RevenueID, objRevenue);
                     if (result)
                     {
                         response = request.CreateResponse<Business.DataTransferObjects.RevenueDTO>(HttpStatusCode.OK, objRevenue);
@@ -172,10 +201,10 @@ namespace Gorgias.Controllers
                     else
                     {
                         response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
-                    }                             
+                    }
                 }
                 return response;
-            });                        
+            });
         }
     }
 }

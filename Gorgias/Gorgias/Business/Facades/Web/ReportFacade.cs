@@ -222,18 +222,19 @@ namespace Gorgias.Business.Facades.Web
             return result;
         }
 
+
+        //Generating Current Profile Report after Fist Step ;) MUST RUN SECONDE ;)
         public IEnumerable<DataTransferObjects.Report.ProfileReport> getCurrentProfileReport()
         {
             DataTransferObjects.RevenueDTO resultRevenue;
             try
             {
-                resultRevenue = new BusinessLayer.Facades.RevenueFacade().GetRevenueCurrent();
+                resultRevenue = new BusinessLayer.Facades.RevenueFacade().GetRevenueCurrentReportForProfileReport();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
 
             IEnumerable<DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent();
 
@@ -243,8 +244,18 @@ namespace Gorgias.Business.Facades.Web
                 //First time or no ;)
                 if (previousResults.Count() != 0)
                 {
-                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 1, ProfileReportActivityCount = compareValues(obj.ProfileView.Value, previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = resultRevenue.RevenueAmount });
-                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 2, ProfileReportActivityCount = compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = resultRevenue.RevenueAmount });
+                    Int64 profileVisit = compareValues(obj.ProfileView.Value, previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount) + compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount);
+
+                    double profileRevenue = setProfileRevenue(profileVisit, resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare);
+
+                    //double profileViewRevenue = calculateViewRevenue(setProfileRevenue(profileVisit, resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare), compareValues(obj.ProfileView.Value, previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount));
+                    //double albumViewRevenue = calculateViewRevenue(setProfileRevenue(profileVisit, resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare), compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount));
+
+                    double profileViewRevenue = setProfileRevenue(compareValues(obj.ProfileView.Value, previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount), resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare);                        
+                    double albumViewRevenue = setProfileRevenue(compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount), resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare);                    
+
+                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 1, ProfileReportActivityCount = compareValues(obj.ProfileView.Value, previousResults.Where(m => m.ReportTypeID == 1).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = profileViewRevenue });
+                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 2, ProfileReportActivityCount = compareValues(setNullableInt(obj.AlbumView), previousResults.Where(m => m.ReportTypeID == 2).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = albumViewRevenue });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 3, ProfileReportActivityCount = compareValues(setNullableInt(obj.AlbumComments), previousResults.Where(m => m.ReportTypeID == 3).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 4, ProfileReportActivityCount = compareValues(setNullableInt(obj.AlbumLikes), previousResults.Where(m => m.ReportTypeID == 4).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 5, ProfileReportActivityCount = compareValues(setNullableInt(obj.StayOnConnection), previousResults.Where(m => m.ReportTypeID == 5).First().ProfileReportActivityCount), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
@@ -258,8 +269,17 @@ namespace Gorgias.Business.Facades.Web
                     //}
                     //catch (Exception ex)
                     //{
-                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 1, ProfileReportActivityCount = obj.ProfileView.Value, RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = resultRevenue.RevenueAmount });
-                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 2, ProfileReportActivityCount = setNullableInt(obj.AlbumView), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = resultRevenue.RevenueAmount });
+                    Int64 profileVisit = obj.ProfileView.Value + setNullableInt(obj.AlbumView);
+                    double profileRevenue = setProfileRevenue(profileVisit, resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare);
+
+                    //double profileViewRevenue = calculateViewRevenue(profileRevenue, obj.ProfileView.Value);
+                    //double albumViewRevenue = calculateViewRevenue(profileRevenue, setNullableInt(obj.AlbumView));
+
+                    double profileViewRevenue = setProfileRevenue(obj.ProfileView.Value, resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare);
+                    double albumViewRevenue = setProfileRevenue(setNullableInt(obj.AlbumView), resultRevenue.RevenueTotalViews, resultRevenue.ProfileShare);
+
+                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 1, ProfileReportActivityCount = obj.ProfileView.Value, RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = profileViewRevenue });
+                    new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 2, ProfileReportActivityCount = setNullableInt(obj.AlbumView), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = albumViewRevenue });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 3, ProfileReportActivityCount = setNullableInt(obj.AlbumComments), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 4, ProfileReportActivityCount = setNullableInt(obj.AlbumLikes), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
                     new BusinessLayer.Facades.ProfileReportFacade().Insert(new DataTransferObjects.ProfileReportDTO { ProfileID = obj.ProfileID, ReportTypeID = 5, ProfileReportActivityCount = setNullableInt(obj.StayOnConnection), RevenueID = resultRevenue.RevenueID, ProfileReportRevenue = 0 });
@@ -272,6 +292,20 @@ namespace Gorgias.Business.Facades.Web
         }
 
         //Helper Function
+
+        //Calculate Profile Revenue Based on Charles Request ;)
+
+        private double calculateViewRevenue(double revenue, Int64 view)
+        {
+            return revenue * view;
+        }
+        private double setProfileRevenue(Int64 profileView, Int64 totalView, double revenue)
+        {
+            double baseResult = ((double)profileView / (double)totalView) * revenue;
+            float result = ((float)baseResult * 20) / 100;
+            return baseResult + result;
+        }
+
         private int setNullableInt(int? param)
         {
             if (param.HasValue)

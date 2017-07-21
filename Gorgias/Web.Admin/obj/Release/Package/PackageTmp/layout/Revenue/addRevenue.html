@@ -1,0 +1,64 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addRevenueForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Add Revenue</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Date Created<span class="required">*</span></label><div class="col-sm-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <div uib-dropdown>
+                                            <div uib-dropdown-toggle class="input-group">
+                                                <input type="text" class="form-control" data-ng-model="object.RevenueDateCreated" />
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" uib-tooltip="Open Calendar">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                        <span class="sr-only">Calendar</span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div uib-dropdown-menu role="menu" auto-close="outsideClick">
+                                                <datetimepicker data-ng-model="object.RevenueDateCreated">
+                                                </datetimepicker>
+                                            </div>
+                                        </div>
+                                        <!--<input type="text" name="RevenueDateCreated" data-plugin-datepicker ng-model="object.RevenueDateCreated" validate-on="blur" class="form-control" required />-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Revenue Amount<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="RevenueAmount" ng-model="object.RevenueAmount" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Revenue Member Share<span class="required">* (%)</span></label><div class="col-sm-9"><input type="text" name="RevenueMemberShare" ng-model="object.RevenueMemberShare" validate-on="blur" class="form-control" placeholder="eg.: 10" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Total Views<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="RevenueTotalViews" ng-model="object.RevenueTotalViews" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <a class="btn btn-default" ng-href="/revenue">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

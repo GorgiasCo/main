@@ -154,7 +154,7 @@
       <PropertyRef Name="FBActivityID" />
     </Key>
     <Property Name="FBActivityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FBActivityCount" Type="decimal" Precision="18" Scale="12" Nullable="false" />
+    <Property Name="FBActivityCount" Type="float" Nullable="false" />
     <Property Name="FBActivityDate" Type="datetime" Nullable="false" />
     <Property Name="FBActivityType" Type="int" Nullable="false" />
   </EntityType>
@@ -361,7 +361,7 @@
     <Property Name="RevenueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RevenueDateCreated" Type="datetime" Nullable="false" />
     <Property Name="RevenueAmount" Type="float" Nullable="false" />
-    <Property Name="RevenueTotalViews" Type="int" Nullable="false" />
+    <Property Name="RevenueTotalViews" Type="bigint" Nullable="false" />
     <Property Name="RevenueMemberShare" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="SocialNetwork">
