@@ -7,6 +7,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile
     public class AlbumMobileModel
     {
         public int AlbumID { get; set; }
+        public int ProfileID { get; set; }
         public string AlbumName { get; set; }
         public int AlbumContents { get; set; }
         public string AlbumAvailabilityName { get; set; }

@@ -422,6 +422,19 @@ namespace Gorgias.BusinessLayer.Facades
             }
         }
 
+        public bool Update(Business.DataTransferObjects.Mobile.ProfileUpdateModel profileUpdateModel)
+        {
+            bool result = DataLayer.DataLayerFacade.ProfileRepository().Update(profileUpdateModel.ProfileID, profileUpdateModel.ProfileFullname);
+            if (result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Update(int ProfileID, bool Status, int UpdateMode)
         {
             bool result = DataLayer.DataLayerFacade.ProfileRepository().Update(ProfileID, Status, UpdateMode);

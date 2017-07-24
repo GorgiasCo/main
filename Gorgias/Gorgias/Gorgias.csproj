@@ -363,6 +363,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\ContentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ContentUploadMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ProfileSliderModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\ProfileUpdateModel.cs" />
     <Compile Include="Business\DataTransferObjects\NewsletterDTO.cs" />
     <Compile Include="Business\DataTransferObjects\PaymentDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileAttributeDTO.cs" />

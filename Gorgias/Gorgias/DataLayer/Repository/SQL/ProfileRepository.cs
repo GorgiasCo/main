@@ -243,6 +243,24 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public bool Update(int ProfileID, string ProfileFullname)
+        {
+            Profile obj = new Profile();
+            obj = (from w in context.Profiles where w.ProfileID == ProfileID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Profiles.Attach(obj);
+
+                obj.ProfileFullname = ProfileFullname;
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Update(int ProfileID, bool Status, int UpdateMode)
         {
             Profile obj = new Profile();

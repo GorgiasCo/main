@@ -224,7 +224,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Business.DataTransferObjects.Mobile.CommentModel> GetCommentsByContentIDForMobileAsQueryable(int ContentID)
         {
-            return (from w in context.Comments where w.ContentID == ContentID && w.CommentStatus == true orderby w.CommentID descending select new Business.DataTransferObjects.Mobile.CommentModel { CommentDateTime=w.CommentDateTime, CommentLike = w.CommentLike, CommentNote = w.CommentNote, ProfileFullname = w.Profile.ProfileFullname }).AsQueryable();
+            return (from w in context.Comments where w.ContentID == ContentID && w.CommentStatus == true orderby w.CommentID descending select new Business.DataTransferObjects.Mobile.CommentModel { CommentDateTime=w.CommentDateTime, CommentLike = w.CommentLike, CommentNote = w.CommentNote, ProfileFullname = w.Profile.ProfileFullname, ProfileIsConfirmed = w.Profile.ProfileIsConfirmed, ProfileID = w.ProfileID }).AsQueryable();
         }
 
         public IQueryable<Comment> GetCommentsByContentIDAsQueryable(int ContentID, bool CommentStatus)

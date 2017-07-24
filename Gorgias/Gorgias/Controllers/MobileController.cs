@@ -357,6 +357,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/Profile/Update/", Name = "UpdateProfileModel")]
+        [HttpPost]
+        public HttpResponseMessage UpdateProfileModel(HttpRequestMessage request, ProfileUpdateModel profileUpdateModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var result = BusinessLayer.Facades.Facade.ProfileFacade().Update(profileUpdateModel);
+                if (!result)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/Profiles/", Name = "GetMobileAllProfilesAvailable")]
         [HttpGet]
         public HttpResponseMessage GetAllProfiles(HttpRequestMessage request)
@@ -372,6 +392,26 @@ namespace Gorgias.Controllers
                 else
                 {
                     response = request.CreateResponse<IEnumerable<ProfileMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/Profiles/{PageSize}/{PageNumber}", Name = "GetMobileAllProfilesAvailableByPaging")]
+        [HttpGet]
+        public HttpResponseMessage GetAllProfilesByPaging(HttpRequestMessage request, int PageSize, int PageNumber)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var result = BusinessLayer.Facades.Facade.WebFacade().getAllProfiles(PageSize,PageNumber);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<Infrastruture.Core.PaginationSet<ProfileMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });

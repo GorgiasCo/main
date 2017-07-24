@@ -10,6 +10,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile
         public DateTime CommentDateTime { get; set; }
         public Boolean CommentStatus { get; set; }
         public int ProfileID { get; set; }
+        public bool ProfileIsConfirmed { get; set; }
         public int ContentID { get; set; }
 
         public string ProfileFullname { get; set; }

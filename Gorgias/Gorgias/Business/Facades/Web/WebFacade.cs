@@ -846,6 +846,44 @@ namespace Gorgias.Business.Facades.Web
             return (IEnumerable<ProfileMobileModel>)r;
         }
 
+        public Infrastruture.Core.PaginationSet<ProfileMobileModel> getAllProfiles(int PageSize, int PageNumber)
+        {
+            int intTotalNumber = 0;
+            if(PageNumber == 1)
+            {
+                intTotalNumber = getAllProfiles().Count();
+            }
+
+            IList<SqlParameter> param = new List<SqlParameter>();
+
+            SqlParameter paramPageNumber = new SqlParameter();
+            paramPageNumber.DbType = System.Data.DbType.Int16;
+            paramPageNumber.Value = PageNumber;
+            paramPageNumber.ParameterName = "@PageNumber";
+            paramPageNumber.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramPageSize = new SqlParameter();
+            paramPageSize.DbType = System.Data.DbType.Int16;
+            paramPageSize.Value = PageSize;
+            paramPageSize.ParameterName = "@PageSize";
+            paramPageSize.Direction = System.Data.ParameterDirection.Input;
+
+            param.Add(paramPageSize);
+            param.Add(paramPageNumber);
+
+            var r = new WebRepository().getStoredProcedure<ProfileMobileModel>("[dbo].[getAllProfilesByPaging]", param).FirstOrDefault();
+
+            Infrastruture.Core.PaginationSet<ProfileMobileModel> result = new Infrastruture.Core.PaginationSet<ProfileMobileModel>()
+            {
+                Page = PageNumber,
+                TotalCount = intTotalNumber,
+                TotalPages = (int)Math.Ceiling((decimal)intTotalNumber / PageSize),
+                Items = (List<ProfileMobileModel>)((IEnumerable<ProfileMobileModel>)r)
+            };
+
+            return result;
+        }
+
         public IEnumerable<ProfileMobileModel> getAllMyConnectedProfiles(int ProfileID)
         {
             IList<SqlParameter> param = new List<SqlParameter>();
