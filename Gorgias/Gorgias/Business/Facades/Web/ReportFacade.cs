@@ -93,7 +93,7 @@ namespace Gorgias.Business.Facades.Web
                 }
             }
 
-            resultFullProfileReport.ProfileReports = result;
+            resultFullProfileReport.ProfileReports = result.OrderByDescending(m=>m.TotalView).ToList();
 
             resultFullProfileReport.ActualEngagement = actualEngagement;
             resultFullProfileReport.ActualSubscription = actualSubscription;

@@ -108,9 +108,13 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Revenue GetRevenueCurrent()
         {
-            int currentDay = DateTime.UtcNow.Day - 1;
-            int currentMonth = DateTime.UtcNow.Month;
-            int currentYear = DateTime.UtcNow.Year;
+            //int currentDay = DateTime.UtcNow.Day - 1;
+            //int currentMonth = DateTime.UtcNow.Month;
+            //int currentYear = DateTime.UtcNow.Year;
+            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
+            int currentDay = currentDate.Day - 1;
+            int currentMonth = currentDate.Month;
+            int currentYear = currentDate.Year;
             var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear select w).First();
             if (result.ProfileReports.Count != 0)
             {
@@ -124,18 +128,23 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Revenue GetRevenuePreviousDay()
         {
-            int currentDay = DateTime.UtcNow.Day - 1;
-            int currentMonth = DateTime.UtcNow.Month;
-            int currentYear = DateTime.UtcNow.Year;
+            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
+            int currentDay = currentDate.AddDays(-1).Day;
+            int currentMonth = currentDate.Month;
+            int currentYear = currentDate.Year;
             var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear select w).First();
             return result;
         }
 
         public Revenue GetRevenueCurrentReport()
         {
-            int currentDay = DateTime.UtcNow.Day - 1;
-            int currentMonth = DateTime.UtcNow.Month;
-            int currentYear = DateTime.UtcNow.Year;
+            //int currentDay = DateTime.UtcNow.Day - 1;
+            //int currentMonth = DateTime.UtcNow.Month;
+            //int currentYear = DateTime.UtcNow.Year;
+            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
+            int currentDay = currentDate.Day - 1;
+            int currentMonth = currentDate.Month;
+            int currentYear = currentDate.Year;
             //var result = (from w in context.Revenues.Include("ProfileReports") orderby w.RevenueID descending select w).First();
             var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear orderby w.RevenueID descending select w).First();
 
@@ -144,9 +153,14 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Revenue GetRevenueCurrentReportForProfileReport()
         {
-            int currentDay = DateTime.UtcNow.Day;
-            int currentMonth = DateTime.UtcNow.Month;
-            int currentYear = DateTime.UtcNow.Year;
+            //it must be yesterday for current report
+            //int currentDay = DateTime.UtcNow.Day;
+            //int currentMonth = DateTime.UtcNow.Month;
+            //int currentYear = DateTime.UtcNow.Year;
+            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
+            int currentDay = currentDate.Day;
+            int currentMonth = currentDate.Month;
+            int currentYear = currentDate.Year;
             //var result = (from w in context.Revenues.Include("ProfileReports") orderby w.RevenueID descending select w).First();
             var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear orderby w.RevenueID descending select w).First();
 

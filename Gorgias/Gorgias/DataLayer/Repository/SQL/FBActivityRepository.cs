@@ -112,8 +112,9 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Business.DataTransferObjects.Report.FBReport GetFBActivitiesAllCurrent()
         {
-            int currentMonth = DateTime.UtcNow.Month;
-            int currentDay = DateTime.UtcNow.Day - 1;
+            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
+            int currentMonth = currentDate.Month;
+            int currentDay = currentDate.Day - 1;
             return (from w in context.FBActivities where w.FBActivityDate.Month == currentMonth && w.FBActivityType == 5 && w.FBActivityDate.Day == currentDay orderby w.FBActivityDate descending select new Business.DataTransferObjects.Report.FBReport { TotalRevenue = w.FBActivityCount, CurrentDate = w.FBActivityDate}).FirstOrDefault();
         }
 
