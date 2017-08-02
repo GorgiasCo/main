@@ -128,8 +128,9 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Revenue GetRevenuePreviousDay()
         {
-            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
-            int currentDay = currentDate.AddDays(-1).Day;
+            //it was -1 ;)
+            DateTime currentDate = DateTime.UtcNow.AddDays(-2);
+            int currentDay = currentDate.Day;
             int currentMonth = currentDate.Month;
             int currentYear = currentDate.Year;
             var result = (from w in context.Revenues.Include("ProfileReports") where w.RevenueDateCreated.Day == currentDay && w.RevenueDateCreated.Month == currentMonth && w.RevenueDateCreated.Year == currentYear select w).First();
@@ -141,8 +142,8 @@ namespace Gorgias.DataLayer.Repository.SQL
             //int currentDay = DateTime.UtcNow.Day - 1;
             //int currentMonth = DateTime.UtcNow.Month;
             //int currentYear = DateTime.UtcNow.Year;
-            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
-            int currentDay = currentDate.Day - 1;
+            DateTime currentDate = DateTime.UtcNow.AddDays(-2);
+            int currentDay = currentDate.Day;
             int currentMonth = currentDate.Month;
             int currentYear = currentDate.Year;
             //var result = (from w in context.Revenues.Include("ProfileReports") orderby w.RevenueID descending select w).First();
