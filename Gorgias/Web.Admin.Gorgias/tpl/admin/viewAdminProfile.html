@@ -587,6 +587,68 @@
                                     </div>
                                 </section>
                             </div>-->
+                            <div uib-accordion-group class="panel-default" heading="{{'ProfileCommission' | translate}}">
+                                <div ng-controller="listprofileProfileCommissionController as vm">
+                                    <div ng-show="isList">
+                                        <h3 class="admin box-title m-b-0"><button class="btn btn-success" ng-click="addNew()">+ {{'NewProfileShare' | translate}}</button></h3>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="basicTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:20%">{{'Actions' | translate}}</th>
+                                                        <th style="width:5%">{{'Share' | translate}}</th>
+                                                        <th style="width:29%">{{'Fullname' | translate}}</th>
+                                                        <th style="width:29%">{{'Role' | translate}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="obj in items">
+                                                        <td class="v-align-middle">
+                                                            <div class="checkbox ">
+                                                                <!--<button class="btn btn-warning" ng-click="edit(obj)"><span class="button_icon"><i class="fa fa-pencil"></i></span></button>-->
+                                                                <button class="btn btn-danger" ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></button>
+                                                            </div>
+                                                        </td>
+                                                        <td class="v-align-middle ">
+                                                            <p>{{obj.ProfileCommissionRate}} %</p>
+                                                        </td>
+                                                        <td class="v-align-middle ">
+                                                            <p>{{obj.User.UserFullname}}</p>
+                                                        </td>
+                                                        <td class="v-align-middle ">
+                                                            <p>{{obj.UserRole.UserRoleName}}</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div ng-show="isAdd">
+                                        <form id="form" role="form" novalidate angular-validator name="addAddressForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                                            <h4 class="mb-xlg">{{'SocialNetworkInformation' | translate}}</h4>
+                                            <h4 class="mb-xlg" ng-if="isShareError">{{ShareError}}</h4>
+                                            <div class="panel-body">
+                                                <div class="form-group"><label class="col-sm-3 control-label">Commission Rate<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-money"></i></span><input type="text" name="ProfileCommissionRate" ng-model="object.ProfileCommissionRate" validate-on="blur" class="form-control" required /></div></div></div>                                                
+                                                <div class="form-group"><label class="col-sm-3 control-label">User</label><div class="col-sm-9"><select id="UserID" class="form-control" ng-model="object.UserID" ng-options="option.UserID as option.UserFullname for option in Users" title="Please select at least one" required></select><input type="hidden" name="UserID" ng-value="object.UserID" /></div></div>
+                                                <div class="form-group"><label class="col-sm-3 control-label">User Role</label><div class="col-sm-9"><select id="UserRoleID" class="form-control" ng-model="object.UserRoleID" ng-options="option.UserRoleID as option.UserRoleName for option in UserRoles" title="Please select at least one" required></select><input type="hidden" name="UserRoleID" ng-value="object.UserRoleID" /></div></div>
+
+                                                <!--<div ng-show="isAdd && !isEdit" class="form-group"><label class="col-sm-3 control-label">{{'SocialNetwork' | translate}}</label><div class="col-sm-9"><select id="SocialNetworkID" class="form-control" ng-model="object.SocialNetworkID" ng-options="option.SocialNetworkID as option.SocialNetworkName for option in SocialNetworks" title="Please select at least one" required></select><input type="hidden" name="SocialNetworkID" ng-value="object.SocialNetworkID" /></div></div>
+                                                <div ng-show="isAdd && isEdit" class="form-group"><label class="col-sm-3 control-label">{{'SocialNetwork' | translate}}</label><div class="col-sm-9"><select disabled id="SocialNetworkID" class="form-control" ng-model="object.SocialNetworkID" ng-options="option.SocialNetworkID as option.SocialNetworkName for option in SocialNetworks" title="Please select at least one" required></select><input type="hidden" name="SocialNetworkID" ng-value="object.SocialNetworkID" /></div></div>
+                                                <div class="form-group"><label class="col-sm-3 control-label">{{'Link' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ProfileSocialNetworkURL" ng-model="object.ProfileSocialNetworkURL" validate-on="blur" class="form-control" placeholder="eg.: http://www.website.com" required /></div></div>-->
+                                            </div>
+                                            <footer class="panel-footer">
+                                                <div class="row">
+                                                    <div class="col-sm-9 col-sm-offset-3">
+                                                        <button class="btn btn-primary">{{'Submit' | translate}}</button>
+                                                        <button type="reset" class="btn btn-warning button_left button_js kill_the_icon resetbtn">{{'Reset' | translate}}</button>
+                                                        <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <div uib-accordion-group class="panel-default" heading="{{'MyWebImages' | translate}}">
                                 <section class="panel" ng-controller="editAdminProfileUploadController as vm">
                                     <div>

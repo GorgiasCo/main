@@ -158,7 +158,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             //int currentDay = DateTime.UtcNow.Day;
             //int currentMonth = DateTime.UtcNow.Month;
             //int currentYear = DateTime.UtcNow.Year;
-            DateTime currentDate = DateTime.UtcNow.AddDays(-1);
+            DateTime currentDate = DateTime.UtcNow.AddDays(-2);
             int currentDay = currentDate.Day;
             int currentMonth = currentDate.Month;
             int currentYear = currentDate.Year;

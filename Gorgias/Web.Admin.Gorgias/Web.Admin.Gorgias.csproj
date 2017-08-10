@@ -91,6 +91,7 @@
     <Content Include="assets\js\controllers\admin\Profile\listProfileController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Message\listprofileMessageController.js" />
     <Content Include="assets\js\controllers\admin\Profile\ProfileAttribute\listprofileProfileAttributeController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\ProfileCommission\listprofileProfileCommissionController.js" />
     <Content Include="assets\js\controllers\admin\Profile\ProfileIndustry\listprofileProfileIndustryController.js" />
     <Content Include="assets\js\controllers\admin\Profile\ProfileSocialNetwork\listprofileProfileSocialNetworkController.js" />
     <Content Include="assets\js\controllers\admin\Profile\ProfileTag\listprofileProfileTagController.js" />

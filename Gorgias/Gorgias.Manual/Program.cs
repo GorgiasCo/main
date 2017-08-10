@@ -42,7 +42,7 @@ namespace Gorgias.Manual
 
             try
             {
-               // ex.SaveChanges();
+               ex.SaveChanges();
             }
             catch (Exception exception)
             {
