@@ -119,7 +119,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public List<UserDTO> GetUsers(int CountryID)
         {
-            var basequery = Mapper.Map<List<UserDTO>>(DataLayer.DataLayerFacade.UserRepository().GetUsersAllAsQueryable(CountryID));
+            var basequery = Mapper.Map<List<UserDTO>>(DataLayer.DataLayerFacade.UserRepository().GetUsersAllAsQueryable(CountryID).OrderBy(m=> m.UserFullname));
             return basequery.ToList();
         }
 

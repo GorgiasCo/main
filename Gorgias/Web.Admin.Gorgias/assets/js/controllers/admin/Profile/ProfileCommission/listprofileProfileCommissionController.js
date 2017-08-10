@@ -60,6 +60,7 @@
             }
 
             function redirect() {
+                $scope.isShareError = false;
                 $scope.isList = true;
                 $scope.isAdd = false;
             }
@@ -101,12 +102,20 @@
             function objectSucceded(result) {
                 console.log("Success" + result.data.Result);
                 loadItems();
-                $scope.object = { ProfileID: $stateParams.id};//$route.current.params.id 
+                $scope.object = { ProfileID: $stateParams.id };//$route.current.params.id                 
                 redirect();
             }
 
             function objectFailed(response) {
-                console.log("Fail");
+                console.log("Fail", response);
+                if ($scope.object.UserRoleID == 4 || $scope.object.UserRoleID == 6) {
+                    $scope.ShareError = "User Role is already exist";
+                } else {
+                    $scope.ShareError = "Total share is more than 100% ;)";
+                }
+
+                $scope.ShareError = response.data.Result;
+
                 $scope.isShareError = true;
                 $scope.error = response.data.Errors;
                 notificationService.displayError(response.statusText);
@@ -116,7 +125,7 @@
             //Delete Item
             function deleteRow(item) {
                 if (confirm($filter('translate')('DeleteNote'))) {
-                    apiService.deleteItem($scope.baseURL + 'api/ProfileSocialNetwork/SocialNetworkID/ProfileID/' + item.SocialNetworkID + '/' + item.ProfileID, null,
+                    apiService.deleteItem($scope.baseURL + 'api/ProfileCommission/DeleteOnly/ProfileCommissionID/' + item.ProfileCommissionID, null,
                     updateExternalLinkSucceded,
                     updateExternalLinkFailed);
                     console.log('Deleted');

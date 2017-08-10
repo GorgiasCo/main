@@ -13,7 +13,7 @@ namespace Gorgias.DataLayer.Interface
         ProfileCommission Insert(double ProfileCommissionRate, DateTime ProfileCommissionDateCreated, bool ProfileCommissionStatus, int ProfileID, int UserID, int UserRoleID);
         bool Update(int ProfileCommissionID, double ProfileCommissionRate, DateTime ProfileCommissionDateCreated, bool ProfileCommissionStatus, int ProfileID, int UserID, int UserRoleID);        
         bool Delete(int ProfileCommissionID);
-
+        bool DeleteOnly(int ProfileCommissionID);
         ProfileCommission GetProfileCommission(int ProfileCommissionID);
 
         //List

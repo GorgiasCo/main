@@ -46,8 +46,13 @@ namespace Gorgias.DataLayer.Repository.SQL
         //CRUD Functions
         public ProfileCommission Insert(double ProfileCommissionRate, DateTime ProfileCommissionDateCreated, Boolean ProfileCommissionStatus, int ProfileID, int UserID, int UserRoleID)
         {
-            var previousResult = GetProfileCommissionsByProfileID(ProfileID);
+            var previousResult = GetProfileCommissionsByProfileID(ProfileID, true);
             double totalCommission = previousResult.Sum(m => m.ProfileCommissionRate);
+
+            if(previousResult.Any(m=> m.UserRoleID == UserRoleID && m.ProfileID == ProfileID && m.ProfileCommissionStatus == true && m.UserID == UserID))
+            {
+                throw new Exception("Inviti is exist, cant have more than one invite");
+            }
 
             if (totalCommission + ProfileCommissionRate > 100)
             {
@@ -62,7 +67,16 @@ namespace Gorgias.DataLayer.Repository.SQL
                     throw new Exception("Inviti is exist, cant have more than one invite");
                 }
             }
-            
+
+            if (UserRoleID == 6)
+            {
+                var userInviti = previousResult.Where(m => m.UserRoleID == 6).FirstOrDefault();
+                if (userInviti != null)
+                {
+                    throw new Exception("Country Distributer is exist, cant have more than one invite");
+                }
+            }
+
             try
             {
                 ProfileCommission obj = new ProfileCommission();
@@ -113,6 +127,23 @@ namespace Gorgias.DataLayer.Repository.SQL
             {
                 context.ProfileCommissions.Attach(obj);
                 context.ProfileCommissions.Remove(obj);
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteOnly(int ProfileCommissionID)
+        {
+            ProfileCommission obj = new ProfileCommission();
+            obj = (from w in context.ProfileCommissions where w.ProfileCommissionID == ProfileCommissionID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.ProfileCommissions.Attach(obj);                
+                obj.ProfileCommissionStatus = false;                
                 context.SaveChanges();
                 return true;
             }

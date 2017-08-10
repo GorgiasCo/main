@@ -252,6 +252,33 @@ namespace Gorgias.Controllers
             });            
         }
 
+        [Route("ProfileCommission/DeleteOnly/ProfileCommissionID/{ProfileCommissionID}", Name = "DeleteOnlyProfileCommission")]
+        public HttpResponseMessage DeleteOnly(HttpRequestMessage request, int ProfileCommissionID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateErrorResponse(HttpStatusCode.NotFound, ModelState);
+                }
+                else
+                {
+                    bool result = BusinessLayer.Facades.Facade.ProfileCommissionFacade().DeleteOnly(ProfileCommissionID);
+                    if (result)
+                    {
+                        response = request.CreateResponse<String>(HttpStatusCode.OK, "Done");
+                    }
+                    else
+                    {
+                        response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
+                    }
+                }
+                return response;
+            });
+        }
+
 
         [Route("ProfileCommission/ProfileCommissionID/{ProfileCommissionID}", Name = "UpdateProfileCommission")]
         [HttpPost]

@@ -595,10 +595,11 @@
                                             <table class="table table-hover" id="basicTable">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width:20%">{{'Actions' | translate}}</th>
-                                                        <th style="width:5%">{{'Share' | translate}}</th>
+                                                        <th style="width:17%">{{'Actions' | translate}}</th>
+                                                        <th style="width:10%">{{'Share' | translate}}</th>
                                                         <th style="width:29%">{{'Fullname' | translate}}</th>
-                                                        <th style="width:29%">{{'Role' | translate}}</th>
+                                                        <th style="width:25%">{{'UserRole' | translate}}</th>
+                                                        <th style="width:29%">{{'DateCreated' | translate}}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -606,7 +607,8 @@
                                                         <td class="v-align-middle">
                                                             <div class="checkbox ">
                                                                 <!--<button class="btn btn-warning" ng-click="edit(obj)"><span class="button_icon"><i class="fa fa-pencil"></i></span></button>-->
-                                                                <button class="btn btn-danger" ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></button>
+                                                                <button ng-if="obj.ProfileCommissionStatus" class="btn btn-danger" ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></button>
+                                                                <i style="color:red" ng-if="!obj.ProfileCommissionStatus">{{'deleted' | translate}}</i>
                                                             </div>
                                                         </td>
                                                         <td class="v-align-middle ">
@@ -617,6 +619,9 @@
                                                         </td>
                                                         <td class="v-align-middle ">
                                                             <p>{{obj.UserRole.UserRoleName}}</p>
+                                                        </td>
+                                                        <td class="v-align-middle ">
+                                                            <p>{{obj.ProfileCommissionDateCreated | date:'medium'}}</p>
                                                         </td>
                                                     </tr>
                                                 </tbody>

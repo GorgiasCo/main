@@ -185,19 +185,19 @@
                     </li>-->
                 </ul>
             </li>
-            <li ng-class="{'open active':includes('app.forms')}" ng-if="UserRole==0">
+            <li ng-class="{'open active':includes('app.forms.commission')}" ng-if="UserRole==0">
                 <a href="javascript:;">
-                    <span class="title">Commission</span>
-                    <span class="arrow" ng-class="{'active open':$state.includes('app.forms')}"></span>
+                    <span class="title">{{'Commission' | translate}}</span>
+                    <span class="arrow" ng-class="{'active open':$state.includes('app.forms.commission')}"></span>
                 </a>
                 <span class="icon-thumbnail"><i class="pg-form"></i></span>
                 <ul class="sub-menu">
                     <li ui-sref-active="active">
-                        <a ui-sref="app.forms.commissionnew">New Commission</a>
+                        <a ui-sref="app.forms.commissionnew">{{'NewCommission' | translate}}</a>
                         <span class="icon-thumbnail">NC</span>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="app.forms.commission">All Commissions</a>
+                        <a ui-sref="app.forms.commission">{{'AllCommissions' | translate}}</a>
                         <span class="icon-thumbnail">AC</span>
                     </li>
                     <!--<li ui-sref-active="active">

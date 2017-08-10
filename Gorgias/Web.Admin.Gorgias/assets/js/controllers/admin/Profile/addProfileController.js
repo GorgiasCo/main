@@ -15,6 +15,7 @@
 
             $scope.ProfileID = 0;
             $scope.hasFile = false;
+            $state.go('app.forms.masteradministrator', { id: $scope.ProfileID });
 
             checkValidity();
             //|| $scope.ProfileID != authService.authentication.userID
@@ -57,7 +58,8 @@
 
 
             function redirectBack() {
-                $state.go('app.forms.country', {});
+                //$state.go('app.forms.country', {});
+                $state.go('app.forms.administrator', {id:$scope.ProfileID});
                 console.log('redirect wow');
                 //$location.url('/profile');
             }

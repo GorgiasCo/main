@@ -242,6 +242,19 @@ namespace Gorgias.BusinessLayer.Facades
             }
         }
 
+        public bool DeleteOnly(int ProfileCommissionID)
+        {
+            bool result = DataLayer.DataLayerFacade.ProfileCommissionRepository().DeleteOnly(ProfileCommissionID);
+            if (result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Update(int ProfileCommissionID, ProfileCommissionDTO objProfileCommission)
         {
             bool result = DataLayer.DataLayerFacade.ProfileCommissionRepository().Update(objProfileCommission.ProfileCommissionID, objProfileCommission.ProfileCommissionRate, objProfileCommission.ProfileCommissionDateCreated, objProfileCommission.ProfileCommissionStatus, objProfileCommission.ProfileID, objProfileCommission.UserID, objProfileCommission.UserRoleID);
