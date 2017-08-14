@@ -13,21 +13,21 @@ namespace Gorgias.Business.DataTransferObjects.Report
         public double? OverAllRevenue { get; set; }
 
         public Int64 TotalView { get; set; }
-        public int ActualView { get; set; }
-        public int ActualSubscription { get; set; }
-        public int ActualEngagement { get; set; }
-        public int OverAllView { get; set; }
-        public int OverAllSubscription { get; set; }
-        public int OverAllEngagement { get; set; }
-        public int ProfileView { get; set; }
-        public int AlbumView { get; set; }
+        public long ActualView { get; set; }
+        public long ActualSubscription { get; set; }
+        public long ActualEngagement { get; set; }
+        public long OverAllView { get; set; }
+        public long OverAllSubscription { get; set; }
+        public long OverAllEngagement { get; set; }
+        public long ProfileView { get; set; }
+        public long AlbumView { get; set; }
 
-        public int OverAllTotalView { get; set; }
-        public int OverAllTotalSubscription { get; set; }
-        public int OverAllTotalEngagement { get; set; }
+        public long OverAllTotalView { get; set; }
+        public long OverAllTotalSubscription { get; set; }
+        public long OverAllTotalEngagement { get; set; }
         public double UserShareCommission { get; set; }
 
-        public int TotalProfileVisit
+        public long TotalProfileVisit
         {
             get
             {

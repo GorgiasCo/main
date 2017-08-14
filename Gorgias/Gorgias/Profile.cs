@@ -41,7 +41,7 @@ namespace Gorgias
         public bool ProfileIsDeleted { get; set; }
         public System.DateTime ProfileDateCreated { get; set; }
         public string ProfileDescription { get; set; }
-        public int ProfileView { get; set; }
+        public long ProfileView { get; set; }
         public int ProfileLike { get; set; }
         public string ProfileURL { get; set; }
         public string ProfileShortDescription { get; set; }

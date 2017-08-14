@@ -33,23 +33,23 @@ namespace Gorgias.Business.Facades.Web
                 result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent(paramID);
             }
 
-            int actualView = 0;
-            int actualSubscription = 0;
-            int actualEngagement = 0;
+            long actualView = 0;
+            long actualSubscription = 0;
+            long actualEngagement = 0;
 
             double? overallRevenue = 0;
             double overallShareCommission = 0;
 
-            int overallView = 0;
-            int overallSubscription = 0;
-            int overallEngagement = 0;
+            long overallView = 0;
+            long overallSubscription = 0;
+            long overallEngagement = 0;
 
-            int overallTotalView = 0;
-            int overallTotalSubscription = 0;
-            int overallTotalEngagement = 0;
+            long overallTotalView = 0;
+            long overallTotalSubscription = 0;
+            long overallTotalEngagement = 0;
 
-            int profileVisit = 0;
-            int albumVisit = 0;
+            long profileVisit = 0;
+            long albumVisit = 0;
 
             FullProfileReport resultFullProfileReport = new FullProfileReport();
             resultFullProfileReport.TotalView = resultRevenue.RevenueTotalViews;
@@ -130,17 +130,17 @@ namespace Gorgias.Business.Facades.Web
 
             IList<DataTransferObjects.Report.ProfileReport> result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrent(UserID);
 
-            int actualView = 0;
-            int actualSubscription = 0;
-            int actualEngagement = 0;
+            long actualView = 0;
+            long actualSubscription = 0;
+            long actualEngagement = 0;
             double? overallRevenue = 0;
-            int overallView = 0;
-            int overallSubscription = 0;
-            int overallEngagement = 0;
+            long overallView = 0;
+            long overallSubscription = 0;
+            long overallEngagement = 0;
 
-            int overallTotalView = 0;
-            int overallTotalSubscription = 0;
-            int overallTotalEngagement = 0;
+            long overallTotalView = 0;
+            long overallTotalSubscription = 0;
+            long overallTotalEngagement = 0;
 
             foreach (DataTransferObjects.Report.ProfileReport obj in result)
             {
@@ -318,6 +318,18 @@ namespace Gorgias.Business.Facades.Web
             }
         }
 
+        private long setNullableInt(long? param)
+        {
+            if (param.HasValue)
+            {
+                return param.Value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         private double setNullableDouble(double? param)
         {
             if (param.HasValue)
@@ -330,7 +342,23 @@ namespace Gorgias.Business.Facades.Web
             }
         }
 
-        private int compareValues(int newParam, int oldParam)
+        private long compareValues(int newParam, long oldParam)
+        {
+            if ((newParam == 0 && oldParam == 0) || newParam == 0)
+            {
+                return 0;
+            }
+            if (newParam != 0 && oldParam == 0)
+            {
+                return newParam;
+            }
+            else
+            {
+                return newParam - oldParam;
+            }
+        }
+
+        private long compareValues(long newParam, long oldParam)
         {
             if ((newParam == 0 && oldParam == 0) || newParam == 0)
             {

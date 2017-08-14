@@ -6247,11 +6247,11 @@ C:\Yasser\YAP\main\Gorgias\Gorgias\obj\Debug\Gorgias.Migrations.Initial.resource
 C:\Yasser\YAP\main\Gorgias\Gorgias\obj\Debug\Gorgias.csproj.GenerateResource.Cache
 C:\Yasser\YAP\main\Gorgias\Gorgias\obj\Debug\Gorgias.dll
 C:\Yasser\YAP\main\Gorgias\Gorgias\obj\Debug\Gorgias.pdb
-E:\Yasser\main\Gorgias\Gorgias\bin\ApplicationInsights.config
 E:\Yasser\main\Gorgias\Gorgias\bin\SqlServerTypes\x64\msvcr100.dll
 E:\Yasser\main\Gorgias\Gorgias\bin\SqlServerTypes\x64\SqlServerSpatial110.dll
 E:\Yasser\main\Gorgias\Gorgias\bin\SqlServerTypes\x86\msvcr100.dll
 E:\Yasser\main\Gorgias\Gorgias\bin\SqlServerTypes\x86\SqlServerSpatial110.dll
+E:\Yasser\main\Gorgias\Gorgias\bin\ApplicationInsights.config
 E:\Yasser\main\Gorgias\Gorgias\bin\roslyn\csc.exe
 E:\Yasser\main\Gorgias\Gorgias\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 E:\Yasser\main\Gorgias\Gorgias\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -6423,8 +6423,8 @@ E:\Yasser\main\Gorgias\Gorgias\bin\ko\System.Spatial.resources.dll
 E:\Yasser\main\Gorgias\Gorgias\bin\ru\System.Spatial.resources.dll
 E:\Yasser\main\Gorgias\Gorgias\bin\zh-Hans\System.Spatial.resources.dll
 E:\Yasser\main\Gorgias\Gorgias\bin\zh-Hant\System.Spatial.resources.dll
-E:\Yasser\main\Gorgias\Gorgias\obj\Debug\Gorgias.csprojResolveAssemblyReference.cache
 E:\Yasser\main\Gorgias\Gorgias\obj\Debug\Gorgias.Migrations.Initial.resources
 E:\Yasser\main\Gorgias\Gorgias\obj\Debug\Gorgias.csproj.GenerateResource.Cache
 E:\Yasser\main\Gorgias\Gorgias\obj\Debug\Gorgias.dll
 E:\Yasser\main\Gorgias\Gorgias\obj\Debug\Gorgias.pdb
+E:\Yasser\main\Gorgias\Gorgias\obj\Debug\Gorgias.csprojResolveAssemblyReference.cache

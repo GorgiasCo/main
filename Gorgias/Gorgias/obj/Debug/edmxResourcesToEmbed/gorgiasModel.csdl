@@ -425,7 +425,7 @@
     <Property Name="ProfileIsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="ProfileDateCreated" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ProfileDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ProfileView" Type="Int32" Nullable="false" />
+    <Property Name="ProfileView" Type="Int64" Nullable="false" />
     <Property Name="ProfileLike" Type="Int32" Nullable="false" />
     <Property Name="ProfileURL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="ProfileShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -1100,7 +1100,7 @@
       <PropertyRef Name="ProfileReportID" />
     </Key>
     <Property Name="ProfileReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProfileReportActivityCount" Type="Int32" Nullable="false" />
+    <Property Name="ProfileReportActivityCount" Type="Int64" Nullable="false" />
     <Property Name="ProfileReportRevenue" Type="Double" Nullable="false" />
     <Property Name="ReportTypeID" Type="Int32" Nullable="false" />
     <Property Name="ProfileID" Type="Int32" Nullable="false" />

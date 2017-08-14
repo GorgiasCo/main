@@ -10,8 +10,8 @@ namespace Gorgias.DataLayer.Interface
     {
     
     
-        ProfileReport Insert(int ProfileReportActivityCount, double ProfileReportRevenue, int ReportTypeID, int ProfileID, int RevenueID);
-        bool Update(int ProfileReportID, int ProfileReportActivityCount, double ProfileReportRevenue, int ReportTypeID, int ProfileID, int RevenueID);        
+        ProfileReport Insert(long ProfileReportActivityCount, double ProfileReportRevenue, int ReportTypeID, int ProfileID, int RevenueID);
+        bool Update(int ProfileReportID, long ProfileReportActivityCount, double ProfileReportRevenue, int ReportTypeID, int ProfileID, int RevenueID);        
         bool Delete(int ProfileReportID);
 
         ProfileReport GetProfileReport(int ProfileReportID);

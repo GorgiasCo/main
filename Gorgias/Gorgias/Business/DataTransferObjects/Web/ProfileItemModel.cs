@@ -12,7 +12,7 @@ namespace Gorgias.Business.DataTransferObjects.Web
         public string ProfileFullname { get; set; }
         public string ProfileURL { get; set; }
         public int ProfileLike { get; set; }
-        public int ProfileView { get; set; }
+        public long ProfileView { get; set; }
         public double? Distance { get; set; }
         public int SubscriptionTypeID { get; set; }
     }

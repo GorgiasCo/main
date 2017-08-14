@@ -8,7 +8,7 @@ namespace Gorgias.Business.DataTransferObjects
     public class ProfileReportDTO
     {
             public int ProfileReportID{get; set;}
-            public int ProfileReportActivityCount{get; set;}
+            public long ProfileReportActivityCount{get; set;}
             public double ProfileReportRevenue{get; set;}
             public int ReportTypeID{get; set;}
             public int ProfileID{get; set;}

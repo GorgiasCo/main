@@ -9,19 +9,19 @@ namespace Gorgias.Business.DataTransferObjects.Report
     {
         public int ProfileID { get; set; }
         public string ProfileFullname { get; set; }
-        public int? ProfileView { get; set; }
-        public int? AlbumView { get; set; }
-        public int? AlbumLikes { get; set; }
-        public int? AlbumComments { get; set; }
-        public int? StayOnConnection { get; set; }
-        public int? Subscription { get; set; }
+        public long? ProfileView { get; set; }
+        public long? AlbumView { get; set; }
+        public long? AlbumLikes { get; set; }
+        public long? AlbumComments { get; set; }
+        public long? StayOnConnection { get; set; }
+        public long? Subscription { get; set; }
         public double? ConnectedUserShare { get; set; }
         public double? UserCommission { get; set; }
 
         public double? OverAllRevenue { get; set; }
-        public int? OverAllView { get; set; }
-        public int? OverAllEngagement { get; set; }
-        public int? OverAllSubscription { get; set; }
+        public long? OverAllView { get; set; }
+        public long? OverAllEngagement { get; set; }
+        public long? OverAllSubscription { get; set; }
 
         public double EstimatedRPM { get; set; }
 
@@ -105,11 +105,11 @@ namespace Gorgias.Business.DataTransferObjects.Report
             }
         }
 
-        public int? OverAllTotalView
+        public long? OverAllTotalView
         {
             get
             {
-                int result = 0;
+                long result = 0;
                 if (TotalView.HasValue)
                 {
                     result = TotalView.Value;
@@ -122,11 +122,11 @@ namespace Gorgias.Business.DataTransferObjects.Report
             }
         }
 
-        public int? OverAllTotalEngagement
+        public long? OverAllTotalEngagement
         {
             get
             {
-                int result = 0;
+                long result = 0;
                 if (TotalEngagement.HasValue)
                 {
                     result = TotalEngagement.Value;
@@ -139,11 +139,11 @@ namespace Gorgias.Business.DataTransferObjects.Report
             }
         }
 
-        public int? OverAllTotalSubscription
+        public long? OverAllTotalSubscription
         {
             get
             {
-                int result = 0;
+                long result = 0;
                 if (TotalSubscription.HasValue)
                 {
                     result = TotalSubscription.Value;
@@ -156,7 +156,7 @@ namespace Gorgias.Business.DataTransferObjects.Report
             }
         }
 
-        public int? TotalView
+        public long? TotalView
         {
             get
             {
@@ -185,11 +185,11 @@ namespace Gorgias.Business.DataTransferObjects.Report
             }
         }
 
-        public int? TotalEngagement
+        public long? TotalEngagement
         {
             get
             {
-                int result = 0;
+                long result = 0;
                 if (AlbumLikes.HasValue)
                 {
                     result = AlbumLikes.Value;
@@ -202,11 +202,11 @@ namespace Gorgias.Business.DataTransferObjects.Report
             }
         }
 
-        public int? TotalSubscription
+        public long? TotalSubscription
         {
             get
             {
-                int result = 0;
+                long result = 0;
                 if (Subscription.HasValue)
                 {
                     result = Subscription.Value;
