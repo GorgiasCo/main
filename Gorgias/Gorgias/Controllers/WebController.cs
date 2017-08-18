@@ -177,6 +177,7 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
+                var header = request.Headers.AcceptLanguage;
                 IEnumerable<CategoryModel> result = BusinessLayer.Facades.Facade.WebFacade().getCategories();
                 if (result == null)
                 {
