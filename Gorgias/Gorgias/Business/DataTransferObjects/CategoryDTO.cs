@@ -1,6 +1,9 @@
 ﻿using System;
 using FluentValidation.Attributes;
 using Gorgias.Business.Validators;
+using System.Linq;
+using System.Collections.Generic;
+
 namespace Gorgias.Business.DataTransferObjects
 {
 
@@ -13,7 +16,7 @@ namespace Gorgias.Business.DataTransferObjects
         {
             get
             {
-                if (Multilanguage == null)
+                if (Multilanguage != null)
                 {
                     return Multilanguage;
                 }
@@ -26,16 +29,29 @@ namespace Gorgias.Business.DataTransferObjects
         }
         public Boolean CategoryStatus { get; set; }
         public String CategoryImage { get; set; }
-        public String CategoryDescription { get; set; }
+        public string CategoryDescription { get; set; }
         public int CategoryParentID { get; set; }
 
-        public string Multilanguage
-        {
-            get
-            {
-                return "Hello World ;)";
-            }
-        }
+        [Newtonsoft.Json.JsonIgnore]
+        public virtual ICollection<CategoryDTO> ChildCategory { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
+        public virtual CategoryDTO ParentCategory { get; set; }
+
+        //[Newtonsoft.Json.JsonIgnore]
+        //public string Multilanguage
+        //{
+        //    get
+        //    {
+        //        if(ChildCategory.Count > 0)
+        //        {
+        //            return ChildCategory.First().CategoryName;
+        //        }
+        //        return null;
+        //    }
+        //}
+
+        [Newtonsoft.Json.JsonIgnore]
+        public string Multilanguage { get;set;}
 
 
     }

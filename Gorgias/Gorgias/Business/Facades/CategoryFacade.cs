@@ -15,12 +15,12 @@ using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
 
 namespace Gorgias.BusinessLayer.Facades
-{   
+{
     public class CategoryFacade
-    {                
+    {
         public CategoryDTO GetCategory(int CategoryID)
         {
-            CategoryDTO result = Mapper.Map<CategoryDTO>(DataLayer.DataLayerFacade.CategoryRepository().GetCategory(CategoryID));             
+            CategoryDTO result = Mapper.Map<CategoryDTO>(DataLayer.DataLayerFacade.CategoryRepository().GetCategory(CategoryID));
             return result;
         }
 
@@ -28,7 +28,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             var basequery = DataLayer.DataLayerFacade.CategoryRepository().GetCategoriesAllAsQueryable();
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.CategoryName.ToLower().Contains(search.ToLower())));
             }
 
@@ -46,10 +47,10 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }       
+        }
 
         public PaginationSet<CategoryDTO> GetCategories(int page, int pagesize)
-        {           
+        {
             var basequery = DataLayer.DataLayerFacade.CategoryRepository().GetCategoriesAllAsQueryable();
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<Category>(page, pagesize, basequery).Future();
@@ -65,37 +66,42 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<CategoryDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
-        
+
         public List<CategoryDTO> GetCategories()
-        {           
-            var basequery = Mapper.Map <List<CategoryDTO>>(DataLayer.DataLayerFacade.CategoryRepository().GetCategoriesAllAsQueryable());
+        {
+            var basequery = Mapper.Map<List<CategoryDTO>>(DataLayer.DataLayerFacade.CategoryRepository().GetCategoriesAllAsQueryable());
             return basequery.ToList();
         }
 
-        
+        public List<CategoryDTO> GetCategories(string languageCode)
+        {
+            //var basequery = Mapper.Map<IQueryable<CategoryDTO>>(DataLayer.DataLayerFacade.CategoryRepository().GetCategoriesAllAsQueryableX(languageCode));
+            var basequery = DataLayer.DataLayerFacade.CategoryRepository().GetCategoriesAllAsQueryable(languageCode);
+            return basequery.ToList();
+        }
 
         public CategoryDTO Insert(CategoryDTO objCategory)
-        {            
+        {
             CategoryDTO result = Mapper.Map<CategoryDTO>(DataLayer.DataLayerFacade.CategoryRepository().Insert(objCategory.CategoryName, objCategory.CategoryStatus, objCategory.CategoryImage, objCategory.CategoryDescription, objCategory.CategoryParentID));
 
-            if (result!=null)
+            if (result != null)
             {
-                return result;            
+                return result;
             }
             else
             {
                 return new CategoryDTO();
             }
         }
-               
+
         public bool Delete(int CategoryID)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.CategoryRepository().Delete(CategoryID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {
@@ -104,11 +110,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Update(int CategoryID, CategoryDTO objCategory)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.CategoryRepository().Update(objCategory.CategoryID, objCategory.CategoryName, objCategory.CategoryStatus, objCategory.CategoryImage, objCategory.CategoryDescription, objCategory.CategoryParentID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {

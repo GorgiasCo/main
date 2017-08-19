@@ -7,6 +7,8 @@ using Gorgias;
 using Gorgias.DataLayer.Interface;
 using Gorgias.Infrastruture.EntityFramework;
 using System.Linq;
+using Gorgias.Business.DataTransferObjects;
+
 namespace Gorgias.DataLayer.Repository.SQL
 {   
 	public class CategoryRepository : ICategoryRepository, IDisposable
@@ -138,8 +140,25 @@ namespace Gorgias.DataLayer.Repository.SQL
         //IQueryable
 		public IQueryable<Category> GetCategoriesAllAsQueryable()
 		{
-			return (from w in context.Categories orderby w.CategoryID descending select w).AsQueryable();
-		}
+            //var xTest = (from w in context.Categories.Include("ChildCategory") where w.CategoryParentID == null orderby w.CategoryID descending select w).AsQueryable();
+            //return (from w in context.Categories orderby w.CategoryID descending select w).AsQueryable();
+            return (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select w).AsQueryable();
+        }
+
+        public IQueryable<CategoryDTO> GetCategoriesAllAsQueryable(string languageCode)
+        {
+            var xTest = (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new { ChildCategory = w.ChildCategory.Where(m=> m.CategoryDescription == languageCode), CategoryID = w.CategoryID, CategoryName = w.CategoryName}).AsQueryable();
+            //return (from w in context.Categories orderby w.CategoryID descending select w).AsQueryable();
+            return (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new CategoryDTO { Multilanguage = w.ChildCategory.Where(m=> m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryImage = w.CategoryImage, CategoryDescription = w.CategoryDescription, CategoryStatus = w.CategoryStatus}).AsQueryable();
+        }
+
+        public IQueryable<Category> GetCategoriesAllAsQueryableX(string languageCode)
+        {
+            var xTest = (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new { ChildCategory = w.ChildCategory.Where(m => m.CategoryDescription == languageCode), CategoryID = w.CategoryID, CategoryName = w.CategoryName }).AsQueryable();
+            //return (from w in context.Categories orderby w.CategoryID descending select w).AsQueryable();
+            return (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new Category { ChildCategory = (ICollection<Category>)w.ChildCategory.Where(m => m.CategoryDescription == languageCode), CategoryID = w.CategoryID, CategoryName = w.CategoryName }).AsQueryable();// (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new CategoryDTO { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryImage = w.CategoryImage, CategoryDescription = w.CategoryDescription, CategoryStatus = w.CategoryStatus }).AsQueryable();
+        }
+
         public IQueryable<Business.DataTransferObjects.Mobile.CategoryMobileModel> GetCategoriesAllAsQueryable(int ProfileID)
         {
             return (from w in context.Categories where w.Albums.Any(m=> m.ProfileID == ProfileID & m.AlbumStatus == true & m.AlbumIsDeleted == false) && w.CategoryStatus == true orderby w.CategoryID descending select new Business.DataTransferObjects.Mobile.CategoryMobileModel { CategoryID = w.CategoryID, CategoryName = w.CategoryName }).AsQueryable();

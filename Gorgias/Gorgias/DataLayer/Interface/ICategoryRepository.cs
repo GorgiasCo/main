@@ -25,6 +25,8 @@ namespace Gorgias.DataLayer.Interface
         
         //IQueryable
         IQueryable<Category> GetCategoriesAllAsQueryable();
+        IQueryable<Business.DataTransferObjects.CategoryDTO> GetCategoriesAllAsQueryable(string languageCode);
+        IQueryable<Category> GetCategoriesAllAsQueryableX(string languageCode);
         IQueryable<Business.DataTransferObjects.Mobile.CategoryMobileModel> GetCategoriesAllAsQueryable(int ProfileID);
         IQueryable<Category> GetCategoriesAllAsQueryable(bool CategoryStatus);
         IQueryable<Category> GetCategoriesAllAsQueryable(int page = 1, int pageSize = 7, string filter=null);

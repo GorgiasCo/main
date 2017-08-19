@@ -59,7 +59,15 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                List<CategoryDTO> result = BusinessLayer.Facades.Facade.CategoryFacade().GetCategories();
+                List<CategoryDTO> result = null;
+                if (request.Headers.AcceptLanguage != null)
+                {
+                    result = BusinessLayer.Facades.Facade.CategoryFacade().GetCategories(request.Headers.AcceptLanguage.First().ToString());
+                } else
+                {
+                    result = BusinessLayer.Facades.Facade.CategoryFacade().GetCategories();
+                }
+                
                 if (result == null)
                 {
                     response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);                
