@@ -201,6 +201,10 @@
       <End Role="ProfileReport" EntitySet="ProfileReports" />
     </AssociationSet>
     <EntitySet Name="FBActivities" EntityType="GorgiasModel.FBActivity" />
+    <AssociationSet Name="FK_Category_Category" Association="GorgiasModel.FK_Category_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Category1" EntitySet="Categories" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Address">
     <Key>
@@ -278,9 +282,11 @@
     <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="CategoryStatus" Type="Boolean" Nullable="false" />
     <Property Name="CategoryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="CategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryDescription" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="CategoryParentID" Type="Int32" />
     <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_Category" FromRole="Category" ToRole="Album" />
+    <NavigationProperty Name="ChildCategory" Relationship="GorgiasModel.FK_Category_Category" FromRole="Category" ToRole="Category1" />
+    <NavigationProperty Name="ParentCategory" Relationship="GorgiasModel.FK_Category_Category" FromRole="Category1" ToRole="Category" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -1237,4 +1243,16 @@
     <Property Name="FBActivityDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FBActivityType" Type="Int32" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Category_Category">
+    <End Type="GorgiasModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="GorgiasModel.Category" Role="Category1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="CategoryParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

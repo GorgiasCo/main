@@ -915,6 +915,11 @@ namespace Gorgias.Business.Facades.Web
             return DataLayer.DataLayerFacade.AlbumRepository().GetAlbumContentsAsQueryable(ProfileID, PageSize, PageNumber, ContentSize);
         }
 
+        public IList<DataTransferObjects.Mobile.AlbumMobileModel> getLatestV2MomentAlbums(int PageSize, int PageNumber, int ContentSize)
+        {
+            return DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumContentsAsQueryable(PageSize, PageNumber, ContentSize);
+        }
+
         public IList<DataTransferObjects.Mobile.AlbumMobileAdminModel> getLatestMomentAdminAlbums(int ProfileID, int PageSize, int PageNumber, int ContentSize)
         {
             return DataLayer.DataLayerFacade.AlbumRepository().GetAdminAlbumContentsAsQueryable(ProfileID, PageSize, PageNumber, ContentSize);

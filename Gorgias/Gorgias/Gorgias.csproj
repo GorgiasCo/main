@@ -2563,6 +2563,8 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\gorgiasapp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gorgiasapp - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\gorgiasapp-v2 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gorgiasapp-v2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatables\angular-datatables.directive.js" />
     <Content Include="Scripts\datatables\angular-datatables.factory.js" />
@@ -2631,6 +2633,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Business\DataTransferObjects\Mobile\V2\" />
     <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>

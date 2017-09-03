@@ -26,7 +26,7 @@ If you don't see the email after a few minutes, check your spam folder.-->
             <form name="userForgetForm" ng-submit="submitForgetForm(userForgetForm.$valid)" novalidate>
                 <img src="/content/images/gorgias_logo.png" width="50" height="50" class="login-gorgias-logo">
                 <div style="float:none;">
-                    <label class="login-label" style="float:left;">Email:</label><label class="login-label forget-password" style="float:right;"><a ng-click="toggleLayout(1)">Sign In</a></label>
+                    <label class="login-label" style="float:left;">Email:</label><!--<label class="login-label forget-password" style="float:right;"><a ng-click="toggleLayout(1)">Sign In</a></label>-->
                 </div>
                 <input type="email" style="text-align:left;" ng-model="forget.forgetusername" placeholder="Email Address" required />
                 <button class="btn btn-default" ng-disabled="userForgetForm.$invalid" type="submit">Reset</button>

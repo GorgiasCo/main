@@ -76,7 +76,7 @@
     <Property Name="CategoryName" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="CategoryStatus" Type="bit" Nullable="false" />
     <Property Name="CategoryImage" Type="nvarchar" MaxLength="150" />
-    <Property Name="CategoryDescription" Type="ntext" />
+    <Property Name="CategoryDescription" Type="nvarchar" MaxLength="50" />
     <Property Name="CategoryParentID" Type="int" />
   </EntityType>
   <EntityType Name="City">
@@ -517,6 +517,18 @@
       </Principal>
       <Dependent Role="Album">
         <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="CategoryParentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1080,6 +1092,10 @@
     <AssociationSet Name="FK_Album_Profile" Association="Self.FK_Album_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="Album" EntitySet="Album" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Category1" EntitySet="Category" />
     </AssociationSet>
     <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
       <End Role="Country" EntitySet="Country" />

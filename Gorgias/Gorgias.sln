@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Admin.Gorgias", "Web.Ad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gorgias.Manual", "Gorgias.Manual\Gorgias.Manual.csproj", "{89A6CB7D-E66A-4C9C-9FD6-4CBC362B8872}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gorgias.Image.Resizer", "Gorgias.Image.Resizer\Gorgias.Image.Resizer.csproj", "{518F261B-E20D-42AE-8F78-6A0741369D97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{89A6CB7D-E66A-4C9C-9FD6-4CBC362B8872}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89A6CB7D-E66A-4C9C-9FD6-4CBC362B8872}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89A6CB7D-E66A-4C9C-9FD6-4CBC362B8872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{518F261B-E20D-42AE-8F78-6A0741369D97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{518F261B-E20D-42AE-8F78-6A0741369D97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{518F261B-E20D-42AE-8F78-6A0741369D97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{518F261B-E20D-42AE-8F78-6A0741369D97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

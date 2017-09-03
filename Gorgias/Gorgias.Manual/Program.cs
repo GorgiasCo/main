@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace Gorgias.Manual
 {
@@ -10,6 +14,25 @@ namespace Gorgias.Manual
     {
         static void Main(string[] args)
         {
+
+            string image = @"https://gorgiasasia.blob.core.windows.net/albums/album-6e998edc-9601-46f7-ae98-db9eb39b634f.jpg?timestamp=522";
+            byte[] imageData = new WebClient().DownloadData(image);
+            MemoryStream imgStream = new MemoryStream(imageData);
+            Image img = Image.FromStream(imgStream);
+
+            //HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(@"http://img.khoahoc.tv/photos/image/2015/05/14/hang_13.jpg";);
+
+            //HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+
+            //Stream stream = response.GetResponseStream();
+
+            //Image img = Image.FromStream(stream);
+
+            //stream.Close();
+
+            int wSize = img.Width;
+            int hSize = img.Height;
+
             SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
             GorgiasEntities ex = new GorgiasEntities();
@@ -42,7 +65,7 @@ namespace Gorgias.Manual
 
             try
             {
-               ex.SaveChanges();
+               //ex.SaveChanges();
             }
             catch (Exception exception)
             {
@@ -51,7 +74,10 @@ namespace Gorgias.Manual
             
 
             Console.WriteLine("******************------------"+list.Count);
+            Console.WriteLine("******************------------" + wSize + "--" + hSize);
+
             Console.ReadLine();
+
         }
     }
 }

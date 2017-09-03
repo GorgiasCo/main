@@ -82,6 +82,7 @@
         <AssociationConnector Association="GorgiasModel.FK_ProfileReport_ReportType" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileReport_Revenue" />
         <EntityTypeShape EntityType="GorgiasModel.FBActivity" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="GorgiasModel.FK_Category_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

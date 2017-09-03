@@ -9,7 +9,7 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <ProjectView>ShowAllFiles</ProjectView>
-    <NameOfLastUsedPublishProfile>gorgiasapp - Web Deploy</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>gorgiasapp-v2 - Web Deploy</NameOfLastUsedPublishProfile>
     <IISExpressSSLPort>44356</IISExpressSSLPort>
   </PropertyGroup>
   <ProjectExtensions>

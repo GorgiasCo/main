@@ -337,7 +337,7 @@
             $scope.dzOptions = {
                 url: $scope.baseURL + 'api/images/name?ImageName=' + $scope.filename,
                 paramName: 'photo',
-                maxFilesize: '10',
+                maxFilesize: 10,
                 acceptedFiles: 'image/jpeg, images/jpg, image/png',
                 addRemoveLinks: true,
                 maxFiles: 1,

@@ -16,7 +16,7 @@
             'ProfileTypeID': 0
         };
 
-        $scope.loginmode = 1;
+        $scope.loginmode = 2;
 
         $scope.toggleLayout = function (item) {
             if (item == 3) {

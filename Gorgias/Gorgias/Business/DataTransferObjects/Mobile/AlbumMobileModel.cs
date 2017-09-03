@@ -28,6 +28,15 @@ namespace Gorgias.Business.DataTransferObjects.Mobile
 
         public int? AlbumComments { get; set; }
 
+        public string cdnAlbumCover
+        {
+            get
+            {                
+                return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiascdn.azureedge.net/");
+                //return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiasresizer.azurewebsites.net/");
+            }
+        }
+
         public string blurAlbumCover
         {
             get
@@ -35,7 +44,8 @@ namespace Gorgias.Business.DataTransferObjects.Mobile
                 if (isValidate)
                 {
                     return AlbumCover;
-                } else
+                }
+                else
                 {
                     return AlbumCover.Replace("hottest-album-", "blur-hottest-album-");
                 }

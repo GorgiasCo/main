@@ -260,6 +260,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Latest/Moments/{contentsize}/{pagesize}/{pagenumber}", Name = "GetMobileV2LatestMomentsByProfileID")]
+        [HttpGet]
+        public HttpResponseMessage GetV2LatestMoments(HttpRequestMessage request, int pagesize, int pagenumber, int contentsize)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var result = BusinessLayer.Facades.Facade.WebFacade().getLatestV2MomentAlbums(pagenumber, pagesize, contentsize);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<Business.DataTransferObjects.Mobile.AlbumMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/Latest/Moments/Admin/{ProfileID}/{contentsize}/{pagesize}/{pagenumber}", Name = "GetMobileAdminLatestMomentsByProfileID")]
         [HttpGet]
         public HttpResponseMessage GetAdminLatestMoments(HttpRequestMessage request, int ProfileID, int pagesize, int pagenumber, int contentsize)
