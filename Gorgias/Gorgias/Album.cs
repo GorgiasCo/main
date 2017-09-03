@@ -18,6 +18,7 @@ namespace Gorgias
         public Album()
         {
             this.Contents = new HashSet<Content>();
+            this.ProfileActivities = new HashSet<ProfileActivity>();
         }
     
         public int AlbumID { get; set; }
@@ -33,11 +34,22 @@ namespace Gorgias
         public System.DateTime AlbumDateExpire { get; set; }
         public int AlbumAvailability { get; set; }
         public Nullable<bool> AlbumHasComment { get; set; }
+        public string AlbumReadingLanguageCode { get; set; }
+        public Nullable<int> AlbumRepostValue { get; set; }
+        public Nullable<int> AlbumRepostRequest { get; set; }
+        public Nullable<int> AlbumRepostAttempt { get; set; }
+        public Nullable<decimal> AlbumPrice { get; set; }
+        public Nullable<bool> AlbumIsTokenAvailable { get; set; }
+        public Nullable<int> AlbumPriceToken { get; set; }
+        public Nullable<int> ContentRatingID { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Profile Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Content> Contents { get; set; }
         public virtual AlbumType AlbumType { get; set; }
+        public virtual ContentRating ContentRating { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProfileActivity> ProfileActivities { get; set; }
     }
 }

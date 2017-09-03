@@ -12,6 +12,54 @@
                 templateUrl: "/layout/Profile/listProfile.html",
                 controller: "listProfileController"
             })
+             .when("/contenttype", {
+                 templateUrl: "/layout/ContentType/listContentType.html",
+                 controller: "listContentTypeController"
+             })
+            .when("/contenttype/add", {
+                templateUrl: "/layout/ContentType/addContentType.html",
+                controller: "addContentTypeController"
+            })
+            .when("/contenttype/:contenttypeid", {
+                templateUrl: "/layout/ContentType/viewContentType.html",
+                controller: "viewContentTypeController"
+            })
+            .when("/contenttype/edit/:contenttypeid", {
+                templateUrl: "/layout/ContentType/editContentType.html",
+                controller: "editContentTypeController"
+            })
+            .when("/contentrating", {
+                templateUrl: "/layout/ContentRating/listContentRating.html",
+                controller: "listContentRatingController"
+            })
+            .when("/contentrating/add", {
+                templateUrl: "/layout/ContentRating/addContentRating.html",
+                controller: "addContentRatingController"
+            })
+            .when("/contentrating/:contentratingid", {
+                templateUrl: "/layout/ContentRating/viewContentRating.html",
+                controller: "viewContentRatingController"
+            })
+            .when("/contentrating/edit/:contentratingid", {
+                templateUrl: "/layout/ContentRating/editContentRating.html",
+                controller: "editContentRatingController"
+            })
+            .when("/activitytype", {
+                templateUrl: "/layout/ActivityType/listActivityType.html",
+                controller: "listActivityTypeController"
+            })
+            .when("/activitytype/add", {
+                templateUrl: "/layout/ActivityType/addActivityType.html",
+                controller: "addActivityTypeController"
+            })
+            .when("/activitytype/:activitytypeid", {
+                templateUrl: "/layout/ActivityType/viewActivityType.html",
+                controller: "viewActivityTypeController"
+            })
+            .when("/activitytype/edit/:activitytypeid", {
+                templateUrl: "/layout/ActivityType/editActivityType.html",
+                controller: "editActivityTypeController"
+            })
             .when("/newsletter", {
                 templateUrl: "/layout/Newsletter/listNewsletter.html",
                 controller: "listNewsletterController"

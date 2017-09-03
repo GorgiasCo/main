@@ -1,0 +1,68 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addContentRatingForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Add Content Rating</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ContentRatingName" ng-model="object.ContentRatingName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Age<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ContentRatingAge" ng-model="object.ContentRatingAge" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="ContentRatingStatus" ng-model="object.ContentRatingStatus" validate-on="blur" value="ContentRatingStatus" type="checkbox" name="for[]" /><label for="ContentRatingStatus">Status</label></div></div></div>
+
+                            <div class="form-group"><label class="col-sm-3 control-label">Description</label><div class="col-sm-9"><textarea rows="5" name="ContentRatingDescription" ng-model="object.ContentRatingDescription" validate-on="blur" class="form-control" placeholder="Describe Something..."></textarea></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Order<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ContentRatingOrder" ng-model="object.ContentRatingOrder" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Language Code<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ContentRatingLanguageCode" ng-model="object.ContentRatingLanguageCode" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Content Rating Parent</label><div class="col-sm-9">
+                                    <select id="ContentRatingParentID" class="form-control" ng-model="object.ContentRatingParentID" ng-options="option.ContentRatingID as option.ContentRatingName for option in ContentRatingParents" title="Please select at least one">
+                                        <option value="">Parent</option>
+                                    </select>
+                                    <input type="hidden" name="ContentRatingParentID" ng-value="object.ContentRatingParentID" />
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <a class="btn btn-default" ng-href="/contentrating">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                            <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                        </div>
+                        <h2 class="panel-title">File Upload Drag'n Drop</h2>
+                    </header>
+                    <div class="panel-body">
+                        <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

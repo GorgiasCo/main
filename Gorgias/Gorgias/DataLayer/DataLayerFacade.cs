@@ -5,6 +5,18 @@ namespace Gorgias.DataLayer
 {       	     
     public static class DataLayerFacade
     {
+        public static Interface.IContentTypeRepository ContentTypeRepository()
+        {
+            return new Repository.SQL.ContentTypeRepository();
+        }
+        public static Interface.IContentRatingRepository ContentRatingRepository()
+        {
+            return new Repository.SQL.ContentRatingRepository();
+        }
+        public static Interface.IActivityTypeRepository ActivityTypeRepository()
+        {
+            return new Repository.SQL.ActivityTypeRepository();
+        }
         public static IFBActivityRepository FBActivityRepository()
         {
             return new Repository.SQL.FBActivityRepository();

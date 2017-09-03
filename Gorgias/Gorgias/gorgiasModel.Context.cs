@@ -65,6 +65,13 @@ namespace Gorgias
         public virtual DbSet<ReportType> ReportTypes { get; set; }
         public virtual DbSet<Revenue> Revenues { get; set; }
         public virtual DbSet<FBActivity> FBActivities { get; set; }
+        public virtual DbSet<ActivityType> ActivityTypes { get; set; }
+        public virtual DbSet<ContentRating> ContentRatings { get; set; }
+        public virtual DbSet<ContentType> ContentTypes { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<ProfileActivity> ProfileActivities { get; set; }
+        public virtual DbSet<ProfileSetting> ProfileSettings { get; set; }
+        public virtual DbSet<ProfileToken> ProfileTokens { get; set; }
     
         public virtual int updateProfileLike(Nullable<int> profileID)
         {

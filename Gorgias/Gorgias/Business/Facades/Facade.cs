@@ -3,6 +3,18 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public static class Facade
     {
+        public static ContentTypeFacade ContentTypeFacade()
+        {
+            return new ContentTypeFacade();
+        }
+        public static ContentRatingFacade ContentRatingFacade()
+        {
+            return new ContentRatingFacade();
+        }
+        public static ActivityTypeFacade ActivityTypeFacade()
+        {
+            return new ActivityTypeFacade();
+        }
         public static FBActivityFacade FBActivityFacade()
         {
             return new FBActivityFacade();

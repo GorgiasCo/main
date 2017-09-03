@@ -50,6 +50,9 @@ namespace Gorgias
                 cfg.CreateMap<ProfileCommission, Business.DataTransferObjects.ProfileCommissionDTO>();
                 cfg.CreateMap<Payment, Business.DataTransferObjects.PaymentDTO>();
                 cfg.CreateMap<FBActivity, Business.DataTransferObjects.FBActivityDTO>();
+                cfg.CreateMap<ActivityType, Business.DataTransferObjects.ActivityTypeDTO>();
+                cfg.CreateMap<ContentRating, Business.DataTransferObjects.ContentRatingDTO>();
+                cfg.CreateMap<ContentType, Business.DataTransferObjects.ContentTypeDTO>();
             });   
         }
     }

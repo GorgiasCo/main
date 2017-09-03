@@ -33,6 +33,14 @@
     <EntitySetMapping Name="Albums">
       <EntityTypeMapping TypeName="GorgiasModel.Album">
         <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="ContentRatingID" ColumnName="ContentRatingID" />
+          <ScalarProperty Name="AlbumPriceToken" ColumnName="AlbumPriceToken" />
+          <ScalarProperty Name="AlbumIsTokenAvailable" ColumnName="AlbumIsTokenAvailable" />
+          <ScalarProperty Name="AlbumPrice" ColumnName="AlbumPrice" />
+          <ScalarProperty Name="AlbumRepostAttempt" ColumnName="AlbumRepostAttempt" />
+          <ScalarProperty Name="AlbumRepostRequest" ColumnName="AlbumRepostRequest" />
+          <ScalarProperty Name="AlbumRepostValue" ColumnName="AlbumRepostValue" />
+          <ScalarProperty Name="AlbumReadingLanguageCode" ColumnName="AlbumReadingLanguageCode" />
           <ScalarProperty Name="AlbumHasComment" ColumnName="AlbumHasComment" />
           <ScalarProperty Name="AlbumAvailability" ColumnName="AlbumAvailability" />
           <ScalarProperty Name="AlbumDateExpire" ColumnName="AlbumDateExpire" />
@@ -67,6 +75,8 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="GorgiasModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryOrder" ColumnName="CategoryOrder" />
+          <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
           <ScalarProperty Name="CategoryParentID" ColumnName="CategoryParentID" />
           <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
           <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
@@ -101,6 +111,7 @@
     <EntitySetMapping Name="Contents">
       <EntityTypeMapping TypeName="GorgiasModel.Content">
         <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ContentDimension" ColumnName="ContentDimension" />
           <ScalarProperty Name="ContentGeoLocation" ColumnName="ContentGeoLocation" />
           <ScalarProperty Name="ContentLike" ColumnName="ContentLike" />
           <ScalarProperty Name="ContentCreatedDate" ColumnName="ContentCreatedDate" />
@@ -467,6 +478,85 @@
           <ScalarProperty Name="FBActivityDate" ColumnName="FBActivityDate" />
           <ScalarProperty Name="FBActivityCount" ColumnName="FBActivityCount" />
           <ScalarProperty Name="FBActivityID" ColumnName="FBActivityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityTypes">
+      <EntityTypeMapping TypeName="GorgiasModel.ActivityType">
+        <MappingFragment StoreEntitySet="ActivityType">
+          <ScalarProperty Name="ActivityTypeParentID" ColumnName="ActivityTypeParentID" />
+          <ScalarProperty Name="ActivityTypeStatus" ColumnName="ActivityTypeStatus" />
+          <ScalarProperty Name="ActivityTypeLanguageCode" ColumnName="ActivityTypeLanguageCode" />
+          <ScalarProperty Name="ActivityTypeName" ColumnName="ActivityTypeName" />
+          <ScalarProperty Name="ActivityTypeID" ColumnName="ActivityTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentRatings">
+      <EntityTypeMapping TypeName="GorgiasModel.ContentRating">
+        <MappingFragment StoreEntitySet="ContentRating">
+          <ScalarProperty Name="ContentRatingParentID" ColumnName="ContentRatingParentID" />
+          <ScalarProperty Name="ContentRatingLanguageCode" ColumnName="ContentRatingLanguageCode" />
+          <ScalarProperty Name="ContentRatingOrder" ColumnName="ContentRatingOrder" />
+          <ScalarProperty Name="ContentRatingDescription" ColumnName="ContentRatingDescription" />
+          <ScalarProperty Name="ContentRatingImage" ColumnName="ContentRatingImage" />
+          <ScalarProperty Name="ContentRatingStatus" ColumnName="ContentRatingStatus" />
+          <ScalarProperty Name="ContentRatingAge" ColumnName="ContentRatingAge" />
+          <ScalarProperty Name="ContentRatingName" ColumnName="ContentRatingName" />
+          <ScalarProperty Name="ContentRatingID" ColumnName="ContentRatingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentTypes">
+      <EntityTypeMapping TypeName="GorgiasModel.ContentType">
+        <MappingFragment StoreEntitySet="ContentType">
+          <ScalarProperty Name="ContentTypeParentID" ColumnName="ContentTypeParentID" />
+          <ScalarProperty Name="ContentTypeExpression" ColumnName="ContentTypeExpression" />
+          <ScalarProperty Name="ContentTypeLanguageCode" ColumnName="ContentTypeLanguageCode" />
+          <ScalarProperty Name="ContentTypeStatus" ColumnName="ContentTypeStatus" />
+          <ScalarProperty Name="ContentTypeOrder" ColumnName="ContentTypeOrder" />
+          <ScalarProperty Name="ContentTypeName" ColumnName="ContentTypeName" />
+          <ScalarProperty Name="ContentTypeID" ColumnName="ContentTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="GorgiasModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="LanguageStatus" ColumnName="LanguageStatus" />
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+          <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileActivities">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileActivity">
+        <MappingFragment StoreEntitySet="ProfileActivity">
+          <ScalarProperty Name="ProfileActivityDateTime" ColumnName="ProfileActivityDateTime" />
+          <ScalarProperty Name="ProfileActivityCount" ColumnName="ProfileActivityCount" />
+          <ScalarProperty Name="ActivityTypeID" ColumnName="ActivityTypeID" />
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileSettings">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileSetting">
+        <MappingFragment StoreEntitySet="ProfileSetting">
+          <ScalarProperty Name="ProfileBirthday" ColumnName="ProfileBirthday" />
+          <ScalarProperty Name="ProfileCityID" ColumnName="ProfileCityID" />
+          <ScalarProperty Name="ProfileLanguageApp" ColumnName="ProfileLanguageApp" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileTokens">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileToken">
+        <MappingFragment StoreEntitySet="ProfileToken">
+          <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
+          <ScalarProperty Name="ProfileToken1" ColumnName="ProfileToken" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

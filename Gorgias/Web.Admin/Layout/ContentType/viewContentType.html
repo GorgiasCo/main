@@ -1,0 +1,49 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addContentTypeForm" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">View Content Type</h2>
+                            <p class="panel-subtitle">
+
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ContentTypeName" ng-model="object.ContentTypeName" validate-on="blur" class="form-control" disabled placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Order<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ContentTypeOrder" ng-model="object.ContentTypeOrder" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="ContentTypeStatus" ng-model="object.ContentTypeStatus" validate-on="blur" value="ContentTypeStatus" disabled type="checkbox" name="for[]" /><label for="ContentTypeStatus">Status</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Language Code<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ContentTypeLanguageCode" ng-model="object.ContentTypeLanguageCode" validate-on="blur" class="form-control" disabled placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Expression</label><div class="col-sm-9"><input type="text" name="ContentTypeExpression" ng-model="object.ContentTypeExpression" validate-on="blur" class="form-control" disabled placeholder="eg.: John Doe" /></div></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Content Type Parent</label><div class="col-sm-9">
+                                    <select id="ContentTypeParentID" class="form-control" ng-model="object.ContentTypeParentID" ng-options="option.ContentTypeID as option.ContentTypeName for option in ContentTypeParents" title="Please select at least one" disabled>
+                                        <option value="">Parent</option>
+                                    </select>
+                                    <input type="hidden" name="ContentTypeParentID" ng-value="object.ContentTypeParentID" />
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <a class="btn btn-default" ng-href="/contenttype">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

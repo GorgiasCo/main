@@ -30,9 +30,11 @@ namespace Gorgias
         public Nullable<System.DateTime> ContentCreatedDate { get; set; }
         public int ContentLike { get; set; }
         public System.Data.Entity.Spatial.DbGeography ContentGeoLocation { get; set; }
+        public string ContentDimension { get; set; }
     
         public virtual Album Album { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ContentType ContentType1 { get; set; }
     }
 }

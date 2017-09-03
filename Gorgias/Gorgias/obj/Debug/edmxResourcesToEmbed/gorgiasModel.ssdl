@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GorgiasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ActivityType">
+    <Key>
+      <PropertyRef Name="ActivityTypeID" />
+    </Key>
+    <Property Name="ActivityTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActivityTypeName" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="ActivityTypeLanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ActivityTypeStatus" Type="bit" Nullable="false" />
+    <Property Name="ActivityTypeParentID" Type="int" />
+  </EntityType>
   <EntityType Name="Address">
     <Key>
       <PropertyRef Name="AddressID" />
@@ -44,6 +54,14 @@
     <Property Name="AlbumDateExpire" Type="datetime" Nullable="false" />
     <Property Name="AlbumAvailability" Type="int" Nullable="false" />
     <Property Name="AlbumHasComment" Type="bit" />
+    <Property Name="AlbumReadingLanguageCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="AlbumRepostValue" Type="int" />
+    <Property Name="AlbumRepostRequest" Type="int" />
+    <Property Name="AlbumRepostAttempt" Type="int" />
+    <Property Name="AlbumPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AlbumIsTokenAvailable" Type="bit" />
+    <Property Name="AlbumPriceToken" Type="int" />
+    <Property Name="ContentRatingID" Type="int" />
   </EntityType>
   <EntityType Name="AlbumType">
     <Key>
@@ -78,6 +96,8 @@
     <Property Name="CategoryImage" Type="nvarchar" MaxLength="150" />
     <Property Name="CategoryDescription" Type="nvarchar" MaxLength="50" />
     <Property Name="CategoryParentID" Type="int" />
+    <Property Name="CategoryType" Type="int" />
+    <Property Name="CategoryOrder" Type="int" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -127,6 +147,33 @@
     <Property Name="AlbumID" Type="int" Nullable="false" />
     <Property Name="ContentLike" Type="int" Nullable="false" />
     <Property Name="ContentGeoLocation" Type="geography" />
+    <Property Name="ContentDimension" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="ContentRating">
+    <Key>
+      <PropertyRef Name="ContentRatingID" />
+    </Key>
+    <Property Name="ContentRatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContentRatingName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContentRatingAge" Type="int" Nullable="false" />
+    <Property Name="ContentRatingStatus" Type="bit" Nullable="false" />
+    <Property Name="ContentRatingImage" Type="nvarchar" MaxLength="150" />
+    <Property Name="ContentRatingDescription" Type="ntext" />
+    <Property Name="ContentRatingOrder" Type="int" Nullable="false" />
+    <Property Name="ContentRatingLanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ContentRatingParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="ContentType">
+    <Key>
+      <PropertyRef Name="ContentTypeID" />
+    </Key>
+    <Property Name="ContentTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContentTypeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContentTypeOrder" Type="int" Nullable="false" />
+    <Property Name="ContentTypeStatus" Type="bit" Nullable="false" />
+    <Property Name="ContentTypeLanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ContentTypeExpression" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContentTypeParentID" Type="int" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
@@ -192,6 +239,15 @@
     <Property Name="IndustryParentID" Type="int" />
     <Property Name="IndustryImage" Type="nvarchar" MaxLength="150" />
     <Property Name="IndustryDescription" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LanguageName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="LanguageStatus" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="LinkType">
     <Key>
@@ -260,6 +316,17 @@
     <Property Name="ThemeID" Type="int" Nullable="false" />
     <Property Name="SubscriptionTypeID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ProfileActivity">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+      <PropertyRef Name="AlbumID" />
+    </Key>
+    <Property Name="ProfileID" Type="int" Nullable="false" />
+    <Property Name="AlbumID" Type="int" Nullable="false" />
+    <Property Name="ActivityTypeID" Type="int" Nullable="false" />
+    <Property Name="ProfileActivityCount" Type="int" Nullable="false" />
+    <Property Name="ProfileActivityDateTime" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProfileAttribute">
     <Key>
       <PropertyRef Name="AttributeID" />
@@ -300,6 +367,15 @@
     <Property Name="ProfileID" Type="int" Nullable="false" />
     <Property Name="RevenueID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ProfileSetting">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="ProfileID" Type="int" Nullable="false" />
+    <Property Name="ProfileLanguageApp" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ProfileCityID" Type="int" Nullable="false" />
+    <Property Name="ProfileBirthday" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProfileSocialNetwork">
     <Key>
       <PropertyRef Name="SocialNetworkID" />
@@ -317,6 +393,14 @@
     <Property Name="TagID" Type="int" Nullable="false" />
     <Property Name="ProfileID" Type="int" Nullable="false" />
     <Property Name="ProfileTagStatus" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProfileToken">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="ProfileID" Type="int" Nullable="false" />
+    <Property Name="ProfileToken" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProfileTokenRegistration" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ProfileType">
     <Key>
@@ -438,6 +522,18 @@
     <Property Name="UserRoleImage" Type="nvarchar" MaxLength="150" />
     <Property Name="UserRoleDescription" Type="ntext" />
   </EntityType>
+  <Association Name="FK_ActivityType_ActivityType">
+    <End Role="ActivityType" Type="Self.ActivityType" Multiplicity="0..1" />
+    <End Role="ActivityType1" Type="Self.ActivityType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityType">
+        <PropertyRef Name="ActivityTypeID" />
+      </Principal>
+      <Dependent Role="ActivityType1">
+        <PropertyRef Name="ActivityTypeParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Address_AddressType">
     <End Role="AddressType" Type="Self.AddressType" Multiplicity="1" />
     <End Role="Address" Type="Self.Address" Multiplicity="*" />
@@ -503,6 +599,20 @@
       </Principal>
       <Dependent Role="Album">
         <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Album_ContentRating">
+    <End Role="ContentRating" Type="Self.ContentRating" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Album" Type="Self.Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentRating">
+        <PropertyRef Name="ContentRatingID" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="ContentRatingID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -623,6 +733,44 @@
       </Principal>
       <Dependent Role="Content">
         <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Content_ContentType">
+    <End Role="ContentType" Type="Self.ContentType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Content" Type="Self.Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="ContentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentRating_ContentRating">
+    <End Role="ContentRating" Type="Self.ContentRating" Multiplicity="0..1" />
+    <End Role="ContentRating1" Type="Self.ContentRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentRating">
+        <PropertyRef Name="ContentRatingID" />
+      </Principal>
+      <Dependent Role="ContentRating1">
+        <PropertyRef Name="ContentRatingParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentType_ContentType">
+    <End Role="ContentType" Type="Self.ContentType" Multiplicity="0..1" />
+    <End Role="ContentType1" Type="Self.ContentType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="ContentType1">
+        <PropertyRef Name="ContentTypeParentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -749,6 +897,44 @@
       </Principal>
       <Dependent Role="Profile">
         <PropertyRef Name="ThemeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_ActivityType">
+    <End Role="ActivityType" Type="Self.ActivityType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileActivity" Type="Self.ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityType">
+        <PropertyRef Name="ActivityTypeID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="ActivityTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="1" />
+    <End Role="ProfileActivity" Type="Self.ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+    <End Role="ProfileActivity" Type="Self.ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="ProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -890,6 +1076,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProfileSetting_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileSetting" Type="Self.ProfileSetting" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileSetting">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProfileSocialNetwork_Profile">
     <End Role="Profile" Type="Self.Profile" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -943,6 +1143,20 @@
       </Principal>
       <Dependent Role="ProfileTag">
         <PropertyRef Name="TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileToken_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileToken" Type="Self.ProfileToken" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileToken">
+        <PropertyRef Name="ProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1030,6 +1244,7 @@
     <Parameter Name="ProfileID" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="GorgiasModelStoreContainer">
+    <EntitySet Name="ActivityType" EntityType="Self.ActivityType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AddressType" EntityType="Self.AddressType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
@@ -1040,23 +1255,29 @@
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Connection" EntityType="Self.Connection" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContentRating" EntityType="Self.ContentRating" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContentType" EntityType="Self.ContentType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ExternalLink" EntityType="Self.ExternalLink" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FBActivity" EntityType="Self.FBActivity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeaturedSponsor" EntityType="Self.FeaturedSponsor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LinkType" EntityType="Self.LinkType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Newsletter" EntityType="Self.Newsletter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfileActivity" EntityType="Self.ProfileActivity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileAttribute" EntityType="Self.ProfileAttribute" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileCommission" EntityType="Self.ProfileCommission" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileIndustry" EntityType="Self.ProfileIndustry" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileReport" EntityType="Self.ProfileReport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfileSetting" EntityType="Self.ProfileSetting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileSocialNetwork" EntityType="Self.ProfileSocialNetwork" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileTag" EntityType="Self.ProfileTag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfileToken" EntityType="Self.ProfileToken" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileType" EntityType="Self.ProfileType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReportType" EntityType="Self.ReportType" Schema="dbo" store:Type="Tables" />
@@ -1069,6 +1290,10 @@
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ActivityType_ActivityType" Association="Self.FK_ActivityType_ActivityType">
+      <End Role="ActivityType" EntitySet="ActivityType" />
+      <End Role="ActivityType1" EntitySet="ActivityType" />
+    </AssociationSet>
     <AssociationSet Name="FK_Address_AddressType" Association="Self.FK_Address_AddressType">
       <End Role="AddressType" EntitySet="AddressType" />
       <End Role="Address" EntitySet="Address" />
@@ -1087,6 +1312,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Album_Category" Association="Self.FK_Album_Category">
       <End Role="Category" EntitySet="Category" />
+      <End Role="Album" EntitySet="Album" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Album_ContentRating" Association="Self.FK_Album_ContentRating">
+      <End Role="ContentRating" EntitySet="ContentRating" />
       <End Role="Album" EntitySet="Album" />
     </AssociationSet>
     <AssociationSet Name="FK_Album_Profile" Association="Self.FK_Album_Profile">
@@ -1125,6 +1354,18 @@
       <End Role="Album" EntitySet="Album" />
       <End Role="Content" EntitySet="Content" />
     </AssociationSet>
+    <AssociationSet Name="FK_Content_ContentType" Association="Self.FK_Content_ContentType">
+      <End Role="ContentType" EntitySet="ContentType" />
+      <End Role="Content" EntitySet="Content" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentRating_ContentRating" Association="Self.FK_ContentRating_ContentRating">
+      <End Role="ContentRating" EntitySet="ContentRating" />
+      <End Role="ContentRating1" EntitySet="ContentRating" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentType_ContentType" Association="Self.FK_ContentType_ContentType">
+      <End Role="ContentType" EntitySet="ContentType" />
+      <End Role="ContentType1" EntitySet="ContentType" />
+    </AssociationSet>
     <AssociationSet Name="FK_ExternalLink_LinkType" Association="Self.FK_ExternalLink_LinkType">
       <End Role="LinkType" EntitySet="LinkType" />
       <End Role="ExternalLink" EntitySet="ExternalLink" />
@@ -1160,6 +1401,18 @@
     <AssociationSet Name="FK_Profile_Theme" Association="Self.FK_Profile_Theme">
       <End Role="Theme" EntitySet="Theme" />
       <End Role="Profile" EntitySet="Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_ActivityType" Association="Self.FK_ProfileActivity_ActivityType">
+      <End Role="ActivityType" EntitySet="ActivityType" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_Album" Association="Self.FK_ProfileActivity_Album">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_Profile" Association="Self.FK_ProfileActivity_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivity" />
     </AssociationSet>
     <AssociationSet Name="FK_ProfileAttribute_Attribute" Association="Self.FK_ProfileAttribute_Attribute">
       <End Role="Attribute" EntitySet="Attribute" />
@@ -1201,6 +1454,10 @@
       <End Role="Revenue" EntitySet="Revenue" />
       <End Role="ProfileReport" EntitySet="ProfileReport" />
     </AssociationSet>
+    <AssociationSet Name="FK_ProfileSetting_Profile" Association="Self.FK_ProfileSetting_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="ProfileSetting" EntitySet="ProfileSetting" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProfileSocialNetwork_Profile" Association="Self.FK_ProfileSocialNetwork_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="ProfileSocialNetwork" EntitySet="ProfileSocialNetwork" />
@@ -1216,6 +1473,10 @@
     <AssociationSet Name="FK_ProfileTag_Tag" Association="Self.FK_ProfileTag_Tag">
       <End Role="Tag" EntitySet="Tag" />
       <End Role="ProfileTag" EntitySet="ProfileTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileToken_Profile" Association="Self.FK_ProfileToken_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="ProfileToken" EntitySet="ProfileToken" />
     </AssociationSet>
     <AssociationSet Name="FK_Recipient_Message" Association="Self.FK_Recipient_Message">
       <End Role="Message" EntitySet="Message" />

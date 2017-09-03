@@ -83,6 +83,23 @@
         <AssociationConnector Association="GorgiasModel.FK_ProfileReport_Revenue" />
         <EntityTypeShape EntityType="GorgiasModel.FBActivity" Width="1.5" PointX="8.375" PointY="0.75" />
         <AssociationConnector Association="GorgiasModel.FK_Category_Category" />
+        <EntityTypeShape EntityType="GorgiasModel.ActivityType" Width="1.5" PointX="11.25" PointY="9.75" />
+        <EntityTypeShape EntityType="GorgiasModel.ContentRating" Width="1.5" PointX="6" PointY="37.25" />
+        <EntityTypeShape EntityType="GorgiasModel.ContentType" Width="1.5" PointX="8.25" PointY="33.5" />
+        <EntityTypeShape EntityType="GorgiasModel.Language" Width="1.5" PointX="10.375" PointY="1" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileActivity" Width="1.5" PointX="13.5" PointY="14.75" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileSetting" Width="1.5" PointX="5.25" PointY="34.25" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileToken" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="GorgiasModel.FK_ActivityType_ActivityType" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ActivityType" />
+        <AssociationConnector Association="GorgiasModel.FK_Album_ContentRating" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Album" />
+        <AssociationConnector Association="GorgiasModel.FK_Content_ContentType" />
+        <AssociationConnector Association="GorgiasModel.FK_ContentRating_ContentRating" />
+        <AssociationConnector Association="GorgiasModel.FK_ContentType_ContentType" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Profile" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileSetting_Profile" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileToken_Profile" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

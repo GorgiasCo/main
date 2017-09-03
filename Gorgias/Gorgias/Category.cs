@@ -27,6 +27,8 @@ namespace Gorgias
         public string CategoryImage { get; set; }
         public string CategoryDescription { get; set; }
         public Nullable<int> CategoryParentID { get; set; }
+        public Nullable<int> CategoryType { get; set; }
+        public Nullable<int> CategoryOrder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Albums { get; set; }

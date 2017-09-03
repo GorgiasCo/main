@@ -278,6 +278,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityType.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Address.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
@@ -329,6 +332,7 @@
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="BusinessLayer\Facades\CountryFacade.cs" />
+    <Compile Include="Business\DataTransferObjects\ActivityTypeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\AddressDTO.cs" />
     <Compile Include="Business\DataTransferObjects\AddressTypeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\AlbumContentDTO.cs" />
@@ -347,6 +351,8 @@
     <Compile Include="Business\DataTransferObjects\CommentDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ConnectionDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ContentDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ContentRatingDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ContentTypeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\CountryDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Email\EmailDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ExternalLinkDTO.cs" />
@@ -426,9 +432,12 @@
     <Compile Include="Business\DataTransferObjects\Web\SocialNetworkModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\SponsoredFeatureModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\TagModel.cs" />
+    <Compile Include="Business\Facades\ActivityTypeFacade.cs" />
     <Compile Include="Business\Facades\AddressTypeFacade.cs" />
     <Compile Include="Business\Facades\AlbumTypeFacade.cs" />
     <Compile Include="Business\Facades\CommentFacade.cs" />
+    <Compile Include="Business\Facades\ContentRatingFacade.cs" />
+    <Compile Include="Business\Facades\ContentTypeFacade.cs" />
     <Compile Include="Business\Facades\ExternalLinkFacade.cs" />
     <Compile Include="Business\Facades\FBActivityFacade.cs" />
     <Compile Include="Business\Facades\NewsletterFacade.cs" />
@@ -484,6 +493,7 @@
     <Compile Include="Business\Facades\ThemeFacade.cs" />
     <Compile Include="Business\Facades\UserFacade.cs" />
     <Compile Include="Business\Facades\UserRoleFacade.cs" />
+    <Compile Include="Business\Validators\ActivityTypeValidator.cs" />
     <Compile Include="Business\Validators\AddressTypeValidator.cs" />
     <Compile Include="Business\Validators\AddressValidator.cs" />
     <Compile Include="Business\Validators\AlbumTypeValidator.cs" />
@@ -493,6 +503,8 @@
     <Compile Include="Business\Validators\CityValidator.cs" />
     <Compile Include="Business\Validators\CommentValidator.cs" />
     <Compile Include="Business\Validators\ConnectionValidator.cs" />
+    <Compile Include="Business\Validators\ContentRatingValidator.cs" />
+    <Compile Include="Business\Validators\ContentTypeValidator.cs" />
     <Compile Include="Business\Validators\ContentValidator.cs" />
     <Compile Include="Business\Validators\CountryValidator.cs" />
     <Compile Include="Business\Validators\ExternalLinkValidator.cs" />
@@ -537,10 +549,19 @@
     <Compile Include="Content.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContentRating.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentType.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivityTypeController.cs" />
     <Compile Include="Controllers\AddressTypeController.cs" />
     <Compile Include="Controllers\AlbumTypeController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\ContentRatingController.cs" />
+    <Compile Include="Controllers\ContentTypeController.cs" />
     <Compile Include="Controllers\DBToolController.cs" />
     <Compile Include="Controllers\DefaultAccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
@@ -591,6 +612,7 @@
     <Compile Include="DataLayer\Authentication\AuthContext.cs" />
     <Compile Include="DataLayer\Authentication\AuthRepository.cs" />
     <Compile Include="DataLayer\DataLayerFacade.cs" />
+    <Compile Include="DataLayer\Interface\IActivityTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IAddressRepository.cs" />
     <Compile Include="DataLayer\Interface\IAddressTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IAlbumRepository.cs" />
@@ -599,7 +621,9 @@
     <Compile Include="DataLayer\Interface\ICityRepository.cs" />
     <Compile Include="DataLayer\Interface\ICommentRepository.cs" />
     <Compile Include="DataLayer\Interface\IConnectionRepository.cs" />
+    <Compile Include="DataLayer\Interface\IContentRatingRepository.cs" />
     <Compile Include="DataLayer\Interface\IContentRepository.cs" />
+    <Compile Include="DataLayer\Interface\IContentTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\ICountryRepository.cs" />
     <Compile Include="DataLayer\Interface\IExternalLinkRepository.cs" />
     <Compile Include="DataLayer\Interface\IFBActivityRepository.cs" />
@@ -628,6 +652,7 @@
     <Compile Include="DataLayer\Interface\IUserProfileRepository.cs" />
     <Compile Include="DataLayer\Interface\IUserRepository.cs" />
     <Compile Include="DataLayer\Interface\IUserRoleRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ActivityTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\RepositoryHelper.cs" />
     <Compile Include="DataLayer\Repository\SQL\AddressRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\AddressTypeRepository.cs" />
@@ -639,7 +664,9 @@
     <Compile Include="DataLayer\Repository\SQL\CityRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\CommentRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ConnectionRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ContentRatingRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ContentRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ContentTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\CountryRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ExternalLinkRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\FBActivityRepository.cs" />
@@ -729,6 +756,9 @@
     <Compile Include="Infrastruture\Filters\ValidateModelStateFilter.cs" />
     <Compile Include="Infrastruture\Handlers\ResponseWrappingHandler.cs" />
     <Compile Include="Infrastruture\Validators\GenreValidatior.cs" />
+    <Compile Include="Language.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LinkType.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
@@ -756,6 +786,9 @@
     <Compile Include="Profile.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProfileActivity.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProfileAttribute.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
@@ -765,10 +798,16 @@
     <Compile Include="ProfileReport.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProfileSetting.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProfileSocialNetwork.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfileTag.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileToken.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfileType.cs">

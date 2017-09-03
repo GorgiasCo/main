@@ -205,6 +205,53 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="Category1" EntitySet="Categories" />
     </AssociationSet>
+    <EntitySet Name="ActivityTypes" EntityType="GorgiasModel.ActivityType" />
+    <EntitySet Name="ContentRatings" EntityType="GorgiasModel.ContentRating" />
+    <EntitySet Name="ContentTypes" EntityType="GorgiasModel.ContentType" />
+    <EntitySet Name="Languages" EntityType="GorgiasModel.Language" />
+    <EntitySet Name="ProfileActivities" EntityType="GorgiasModel.ProfileActivity" />
+    <EntitySet Name="ProfileSettings" EntityType="GorgiasModel.ProfileSetting" />
+    <EntitySet Name="ProfileTokens" EntityType="GorgiasModel.ProfileToken" />
+    <AssociationSet Name="FK_ActivityType_ActivityType" Association="GorgiasModel.FK_ActivityType_ActivityType">
+      <End Role="ActivityType" EntitySet="ActivityTypes" />
+      <End Role="ActivityType1" EntitySet="ActivityTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_ActivityType" Association="GorgiasModel.FK_ProfileActivity_ActivityType">
+      <End Role="ActivityType" EntitySet="ActivityTypes" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Album_ContentRating" Association="GorgiasModel.FK_Album_ContentRating">
+      <End Role="ContentRating" EntitySet="ContentRatings" />
+      <End Role="Album" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_Album" Association="GorgiasModel.FK_ProfileActivity_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Content_ContentType" Association="GorgiasModel.FK_Content_ContentType">
+      <End Role="ContentType" EntitySet="ContentTypes" />
+      <End Role="Content" EntitySet="Contents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentRating_ContentRating" Association="GorgiasModel.FK_ContentRating_ContentRating">
+      <End Role="ContentRating" EntitySet="ContentRatings" />
+      <End Role="ContentRating1" EntitySet="ContentRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentType_ContentType" Association="GorgiasModel.FK_ContentType_ContentType">
+      <End Role="ContentType" EntitySet="ContentTypes" />
+      <End Role="ContentType1" EntitySet="ContentTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_Profile" Association="GorgiasModel.FK_ProfileActivity_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileSetting_Profile" Association="GorgiasModel.FK_ProfileSetting_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileSetting" EntitySet="ProfileSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileToken_Profile" Association="GorgiasModel.FK_ProfileToken_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileToken" EntitySet="ProfileTokens" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Address">
     <Key>
@@ -258,6 +305,16 @@
     <Property Name="AlbumAvailability" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AlbumType" Relationship="GorgiasModel.FK_Album_AlbumType" FromRole="Album" ToRole="AlbumType" />
     <Property Name="AlbumHasComment" Type="Boolean" />
+    <Property Name="AlbumReadingLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AlbumRepostValue" Type="Int32" />
+    <Property Name="AlbumRepostRequest" Type="Int32" />
+    <Property Name="AlbumRepostAttempt" Type="Int32" />
+    <Property Name="AlbumPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AlbumIsTokenAvailable" Type="Boolean" />
+    <Property Name="AlbumPriceToken" Type="Int32" />
+    <Property Name="ContentRatingID" Type="Int32" />
+    <NavigationProperty Name="ContentRating" Relationship="GorgiasModel.FK_Album_ContentRating" FromRole="Album" ToRole="ContentRating" />
+    <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_Album" FromRole="Album" ToRole="ProfileActivity" />
   </EntityType>
   <EntityType Name="Attribute">
     <Key>
@@ -287,6 +344,8 @@
     <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_Category" FromRole="Category" ToRole="Album" />
     <NavigationProperty Name="ChildCategory" Relationship="GorgiasModel.FK_Category_Category" FromRole="Category" ToRole="Category1" />
     <NavigationProperty Name="ParentCategory" Relationship="GorgiasModel.FK_Category_Category" FromRole="Category1" ToRole="Category" />
+    <Property Name="CategoryType" Type="Int32" />
+    <Property Name="CategoryOrder" Type="Int32" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -331,6 +390,8 @@
     <Property Name="ContentLike" Type="Int32" Nullable="false" />
     <Property Name="ContentGeoLocation" Type="Geography" />
     <NavigationProperty Name="Comments" Relationship="GorgiasModel.FK_Comment_Content" FromRole="Content" ToRole="Comment" />
+    <Property Name="ContentDimension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ContentType1" Relationship="GorgiasModel.FK_Content_ContentType" FromRole="Content" ToRole="ContentType" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
@@ -463,6 +524,9 @@
     <NavigationProperty Name="Comments" Relationship="GorgiasModel.FK_Comment_Profile" FromRole="Profile" ToRole="Comment" />
     <NavigationProperty Name="ProfileCommissions" Relationship="GorgiasModel.FK_ProfileCommission_Profile" FromRole="Profile" ToRole="ProfileCommission" />
     <NavigationProperty Name="ProfileReports" Relationship="GorgiasModel.FK_ProfileReport_Profile" FromRole="Profile" ToRole="ProfileReport" />
+    <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="Profile" ToRole="ProfileActivity" />
+    <NavigationProperty Name="ProfileSetting" Relationship="GorgiasModel.FK_ProfileSetting_Profile" FromRole="Profile" ToRole="ProfileSetting" />
+    <NavigationProperty Name="ProfileToken" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="Profile" ToRole="ProfileToken" />
   </EntityType>
   <EntityType Name="ProfileAttribute">
     <Key>
@@ -1252,6 +1316,223 @@
       </Principal>
       <Dependent Role="Category1">
         <PropertyRef Name="CategoryParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ActivityType">
+    <Key>
+      <PropertyRef Name="ActivityTypeID" />
+    </Key>
+    <Property Name="ActivityTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActivityTypeName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="ActivityTypeLanguageCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ActivityTypeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ActivityTypeParentID" Type="Int32" />
+    <NavigationProperty Name="ActivityTypeChilds" Relationship="GorgiasModel.FK_ActivityType_ActivityType" FromRole="ActivityType" ToRole="ActivityType1" />
+    <NavigationProperty Name="ActivityTypeParent" Relationship="GorgiasModel.FK_ActivityType_ActivityType" FromRole="ActivityType1" ToRole="ActivityType" />
+    <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_ActivityType" FromRole="ActivityType" ToRole="ProfileActivity" />
+  </EntityType>
+  <EntityType Name="ContentRating">
+    <Key>
+      <PropertyRef Name="ContentRatingID" />
+    </Key>
+    <Property Name="ContentRatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContentRatingName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContentRatingAge" Type="Int32" Nullable="false" />
+    <Property Name="ContentRatingStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ContentRatingImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContentRatingDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContentRatingOrder" Type="Int32" Nullable="false" />
+    <Property Name="ContentRatingLanguageCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ContentRatingParentID" Type="Int32" />
+    <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_ContentRating" FromRole="ContentRating" ToRole="Album" />
+    <NavigationProperty Name="ContentRating1" Relationship="GorgiasModel.FK_ContentRating_ContentRating" FromRole="ContentRating" ToRole="ContentRating1" />
+    <NavigationProperty Name="ContentRating2" Relationship="GorgiasModel.FK_ContentRating_ContentRating" FromRole="ContentRating1" ToRole="ContentRating" />
+  </EntityType>
+  <EntityType Name="ContentType">
+    <Key>
+      <PropertyRef Name="ContentTypeID" />
+    </Key>
+    <Property Name="ContentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContentTypeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContentTypeOrder" Type="Int32" Nullable="false" />
+    <Property Name="ContentTypeStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ContentTypeLanguageCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ContentTypeExpression" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContentTypeParentID" Type="Int32" />
+    <NavigationProperty Name="Contents" Relationship="GorgiasModel.FK_Content_ContentType" FromRole="ContentType" ToRole="Content" />
+    <NavigationProperty Name="ContentType1" Relationship="GorgiasModel.FK_ContentType_ContentType" FromRole="ContentType" ToRole="ContentType1" />
+    <NavigationProperty Name="ContentType2" Relationship="GorgiasModel.FK_ContentType_ContentType" FromRole="ContentType1" ToRole="ContentType" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LanguageName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LanguageCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LanguageStatus" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProfileActivity">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+      <PropertyRef Name="AlbumID" />
+    </Key>
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="AlbumID" Type="Int32" Nullable="false" />
+    <Property Name="ActivityTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileActivityCount" Type="Int32" Nullable="false" />
+    <Property Name="ProfileActivityDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ActivityType" Relationship="GorgiasModel.FK_ProfileActivity_ActivityType" FromRole="ProfileActivity" ToRole="ActivityType" />
+    <NavigationProperty Name="Album" Relationship="GorgiasModel.FK_ProfileActivity_Album" FromRole="ProfileActivity" ToRole="Album" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="ProfileActivity" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="ProfileSetting">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileLanguageApp" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileCityID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileBirthday" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileSetting_Profile" FromRole="ProfileSetting" ToRole="Profile" />
+  </EntityType>
+  <EntityType Name="ProfileToken">
+    <Key>
+      <PropertyRef Name="ProfileID" />
+    </Key>
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileToken1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileTokenRegistration" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="ProfileToken" ToRole="Profile" />
+  </EntityType>
+  <Association Name="FK_ActivityType_ActivityType">
+    <End Type="GorgiasModel.ActivityType" Role="ActivityType" Multiplicity="0..1" />
+    <End Type="GorgiasModel.ActivityType" Role="ActivityType1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityType">
+        <PropertyRef Name="ActivityTypeID" />
+      </Principal>
+      <Dependent Role="ActivityType1">
+        <PropertyRef Name="ActivityTypeParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_ActivityType">
+    <End Type="GorgiasModel.ActivityType" Role="ActivityType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityType">
+        <PropertyRef Name="ActivityTypeID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="ActivityTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Album_ContentRating">
+    <End Type="GorgiasModel.ContentRating" Role="ContentRating" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentRating">
+        <PropertyRef Name="ContentRatingID" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="ContentRatingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_Album">
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="1" />
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Content_ContentType">
+    <End Type="GorgiasModel.ContentType" Role="ContentType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Content" Role="Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="ContentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentRating_ContentRating">
+    <End Type="GorgiasModel.ContentRating" Role="ContentRating" Multiplicity="0..1" />
+    <End Type="GorgiasModel.ContentRating" Role="ContentRating1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentRating">
+        <PropertyRef Name="ContentRatingID" />
+      </Principal>
+      <Dependent Role="ContentRating1">
+        <PropertyRef Name="ContentRatingParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentType_ContentType">
+    <End Type="GorgiasModel.ContentType" Role="ContentType" Multiplicity="0..1" />
+    <End Type="GorgiasModel.ContentType" Role="ContentType1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="ContentType1">
+        <PropertyRef Name="ContentTypeParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileSetting_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileSetting" Role="ProfileSetting" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileSetting">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileToken_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileToken" Role="ProfileToken" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileToken">
+        <PropertyRef Name="ProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
