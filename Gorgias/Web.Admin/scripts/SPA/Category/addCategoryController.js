@@ -41,7 +41,23 @@
             $location.url('/category');
         }
         
+        loadCategoryParents();
 
+        function loadCategoryParents() {
+            apiService.get($scope.baseURL + 'api/Categories', null,
+            contentRatingParentsLoadCompleted,
+            contentRatingParentsLoadFailed);
+        }
+
+        function contentRatingParentsLoadCompleted(response) {
+            console.log(response.data.Result);
+            $scope.CategoryParents = response.data.Result;
+            notificationService.displaySuccess("ContentRatingParents Loaded");
+        }
+
+        function contentRatingParentsLoadFailed(response) {
+            notificationService.displayError(response.data.Errors);
+        }
 
         
         $scope.masterFileName = "category";

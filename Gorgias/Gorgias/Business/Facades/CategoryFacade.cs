@@ -84,7 +84,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public CategoryDTO Insert(CategoryDTO objCategory)
         {
-            CategoryDTO result = Mapper.Map<CategoryDTO>(DataLayer.DataLayerFacade.CategoryRepository().Insert(objCategory.CategoryName, objCategory.CategoryStatus, objCategory.CategoryImage, objCategory.CategoryDescription, objCategory.CategoryParentID));
+            CategoryDTO result = Mapper.Map<CategoryDTO>(DataLayer.DataLayerFacade.CategoryRepository().Insert(objCategory.CategoryName, objCategory.CategoryStatus, objCategory.CategoryImage, objCategory.CategoryDescription, objCategory.CategoryParentID, objCategory.CategoryOrder, objCategory.CategoryType));
 
             if (result != null)
             {
@@ -111,7 +111,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public bool Update(int CategoryID, CategoryDTO objCategory)
         {
-            bool result = DataLayer.DataLayerFacade.CategoryRepository().Update(objCategory.CategoryID, objCategory.CategoryName, objCategory.CategoryStatus, objCategory.CategoryImage, objCategory.CategoryDescription, objCategory.CategoryParentID);
+            bool result = DataLayer.DataLayerFacade.CategoryRepository().Update(objCategory.CategoryID, objCategory.CategoryName, objCategory.CategoryStatus, objCategory.CategoryImage, objCategory.CategoryDescription, objCategory.CategoryParentID, objCategory.CategoryOrder, objCategory.CategoryType);
             if (result)
             {
                 return true;

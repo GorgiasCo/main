@@ -31,6 +31,8 @@ namespace Gorgias.Business.DataTransferObjects
         public String CategoryImage { get; set; }
         public string CategoryDescription { get; set; }
         public int CategoryParentID { get; set; }
+        public int? CategoryOrder { get; set; }
+        public int CategoryType { get; set; }
 
         [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<CategoryDTO> ChildCategory { get; set; }

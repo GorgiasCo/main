@@ -357,6 +357,7 @@
     <Compile Include="Business\DataTransferObjects\Email\EmailDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ExternalLinkDTO.cs" />
     <Compile Include="Business\DataTransferObjects\FBActivityDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\LanguageDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AddressModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AddressModelV2.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AlbumAvailabilityModel.cs" />
@@ -440,6 +441,7 @@
     <Compile Include="Business\Facades\ContentTypeFacade.cs" />
     <Compile Include="Business\Facades\ExternalLinkFacade.cs" />
     <Compile Include="Business\Facades\FBActivityFacade.cs" />
+    <Compile Include="Business\Facades\LanguageFacade.cs" />
     <Compile Include="Business\Facades\NewsletterFacade.cs" />
     <Compile Include="Business\Facades\PaymentFacade.cs" />
     <Compile Include="Business\Facades\ProfileAttributeFacade.cs" />
@@ -512,6 +514,7 @@
     <Compile Include="Business\Validators\FeaturedSponsorValidator.cs" />
     <Compile Include="Business\Validators\FeatureValidator.cs" />
     <Compile Include="Business\Validators\IndustryValidator.cs" />
+    <Compile Include="Business\Validators\LanguageValidator.cs" />
     <Compile Include="Business\Validators\LinkTypeValidator.cs" />
     <Compile Include="Business\Validators\MessageValidator.cs" />
     <Compile Include="Business\Validators\NewsletterValidator.cs" />
@@ -579,6 +582,7 @@
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndustryController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\LinkTypeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MobileController.cs" />
@@ -630,6 +634,7 @@
     <Compile Include="DataLayer\Interface\IFeaturedSponsorRepository.cs" />
     <Compile Include="DataLayer\Interface\IFeatureRepository.cs" />
     <Compile Include="DataLayer\Interface\IIndustryRepository.cs" />
+    <Compile Include="DataLayer\Interface\ILanguageRepository.cs" />
     <Compile Include="DataLayer\Interface\ILinkTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IMessageRepository.cs" />
     <Compile Include="DataLayer\Interface\INewsletterRepository.cs" />
@@ -674,6 +679,7 @@
     <Compile Include="DataLayer\Repository\SQL\FeatureRepository.cs" />
     <Compile Include="DataLayer\Interface\IAlbumTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\IndustryRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\LanguageRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\LinkTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\MessageRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\NewsletterRepository.cs" />

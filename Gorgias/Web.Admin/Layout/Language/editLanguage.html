@@ -1,0 +1,40 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addLanguageForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Edit Language</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="LanguageName" ng-model="object.LanguageName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Code<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="LanguageCode" ng-model="object.LanguageCode" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="LanguageStatus" ng-model="object.LanguageStatus" validate-on="blur" value="LanguageStatus" type="checkbox" name="for[]" /><label for="LanguageStatus">Status</label></div></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <a class="btn btn-default" ng-href="/language">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

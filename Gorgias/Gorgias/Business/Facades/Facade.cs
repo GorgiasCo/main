@@ -3,6 +3,10 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public static class Facade
     {
+        public static LanguageFacade LanguageFacade()
+        {
+            return new LanguageFacade();
+        }
         public static ContentTypeFacade ContentTypeFacade()
         {
             return new ContentTypeFacade();

@@ -12,6 +12,22 @@
                 templateUrl: "/layout/Profile/listProfile.html",
                 controller: "listProfileController"
             })
+             .when("/language", {
+                 templateUrl: "/layout/Language/listLanguage.html",
+                 controller: "listLanguageController"
+             })
+            .when("/language/add", {
+                templateUrl: "/layout/Language/addLanguage.html",
+                controller: "addLanguageController"
+            })
+            .when("/language/:languageid", {
+                templateUrl: "/layout/Language/viewLanguage.html",
+                controller: "viewLanguageController"
+            })
+            .when("/language/edit/:languageid", {
+                templateUrl: "/layout/Language/editLanguage.html",
+                controller: "editLanguageController"
+            })
              .when("/contenttype", {
                  templateUrl: "/layout/ContentType/listContentType.html",
                  controller: "listContentTypeController"

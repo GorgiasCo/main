@@ -105,6 +105,84 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int CategoryType)
+        {
+            try
+            {
+                Category obj = new Category();
+
+
+                obj.CategoryName = CategoryName;
+                obj.CategoryStatus = CategoryStatus;
+                obj.CategoryImage = CategoryImage;
+                obj.CategoryDescription = CategoryDescription;
+                if (CategoryOrder.HasValue)
+                {
+                    obj.CategoryOrder = CategoryOrder;
+                } else
+                {
+                    obj.CategoryOrder = null;
+                }
+                
+                obj.CategoryType = CategoryType;
+                if (CategoryParentID > 0)
+                {
+                    obj.CategoryParentID = CategoryParentID;
+                }
+                else
+                {
+                    obj.CategoryParentID = null;
+                }
+
+                context.Categories.Add(obj);
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new Category();
+            }
+        }
+
+        public bool Update(int CategoryID, String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int CategoryType)
+        {
+            Category obj = new Category();
+            obj = (from w in context.Categories where w.CategoryID == CategoryID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Categories.Attach(obj);
+
+                obj.CategoryName = CategoryName;
+                obj.CategoryStatus = CategoryStatus;
+                obj.CategoryImage = CategoryImage;
+                obj.CategoryDescription = CategoryDescription;
+                if (CategoryOrder.HasValue)
+                {
+                    obj.CategoryOrder = CategoryOrder;
+                }
+                else
+                {
+                    obj.CategoryOrder = null;
+                }
+
+                obj.CategoryType = CategoryType;
+                if (CategoryParentID > 0)
+                {
+                    obj.CategoryParentID = CategoryParentID;
+                }
+                else
+                {
+                    obj.CategoryParentID = null;
+                }
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Delete(int CategoryID)
         {
             Category obj = new Category();

@@ -188,6 +188,10 @@
     <Content Include="layout\Industry\editIndustry.html" />
     <Content Include="layout\Industry\listIndustry.html" />
     <Content Include="layout\Industry\viewIndustry.html" />
+    <Content Include="layout\Language\addLanguage.html" />
+    <Content Include="layout\Language\editLanguage.html" />
+    <Content Include="layout\Language\listLanguage.html" />
+    <Content Include="layout\Language\viewLanguage.html" />
     <Content Include="layout\LinkType\addLinkType.html" />
     <Content Include="layout\LinkType\editLinkType.html" />
     <Content Include="layout\LinkType\listLinkType.html" />
@@ -2120,6 +2124,10 @@
     <Content Include="scripts\SPA\Industry\editIndustryController.js" />
     <Content Include="scripts\SPA\Industry\listIndustryController.js" />
     <Content Include="scripts\SPA\Industry\viewIndustryController.js" />
+    <Content Include="scripts\SPA\Language\addLanguageController.js" />
+    <Content Include="scripts\SPA\Language\editLanguageController.js" />
+    <Content Include="scripts\SPA\Language\listLanguageController.js" />
+    <Content Include="scripts\SPA\Language\viewLanguageController.js" />
     <Content Include="scripts\SPA\LinkType\addLinkTypeController.js" />
     <Content Include="scripts\SPA\LinkType\editLinkTypeController.js" />
     <Content Include="scripts\SPA\LinkType\listLinkTypeController.js" />

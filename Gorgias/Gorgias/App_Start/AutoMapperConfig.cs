@@ -53,6 +53,7 @@ namespace Gorgias
                 cfg.CreateMap<ActivityType, Business.DataTransferObjects.ActivityTypeDTO>();
                 cfg.CreateMap<ContentRating, Business.DataTransferObjects.ContentRatingDTO>();
                 cfg.CreateMap<ContentType, Business.DataTransferObjects.ContentTypeDTO>();
+                cfg.CreateMap<Language, Business.DataTransferObjects.LanguageDTO>();
             });   
         }
     }
