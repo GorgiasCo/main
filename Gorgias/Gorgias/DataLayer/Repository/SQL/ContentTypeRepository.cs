@@ -173,6 +173,11 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.ContentTypes where w.ContentTypeStatus == ContentTypeStatus orderby w.ContentTypeID descending select w).AsQueryable();
         }
+        //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ContentTypeMobileModel> GetContentTypesAsQueryable(int ContentTypeID, string languageCode)
+        {
+            return (from w in context.ContentTypes where w.ContentTypeStatus == true && w.ContentTypeParentID == ContentTypeID orderby w.ContentTypeOrder ascending select new Business.DataTransferObjects.Mobile.V2.ContentTypeMobileModel { ContentTypeExpression = w.ContentTypeExpression, ContentTypeID = w.ContentTypeID, ContentTypeName = w.ContentTypeName, Multilanguage = w.ContentTypeChilds.Where(m=> m.ContentTypeLanguageCode == languageCode).FirstOrDefault().ContentTypeName }).AsQueryable();
+        }
         //IQueryable Pagings
         public IQueryable<ContentType> GetContentTypesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)
         {

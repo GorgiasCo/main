@@ -18,7 +18,7 @@ namespace Gorgias
         public ContentType()
         {
             this.Contents = new HashSet<Content>();
-            this.ContentType1 = new HashSet<ContentType>();
+            this.ContentTypeChilds = new HashSet<ContentType>();
         }
     
         public int ContentTypeID { get; set; }
@@ -32,7 +32,7 @@ namespace Gorgias
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Content> Contents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentType> ContentType1 { get; set; }
-        public virtual ContentType ContentType2 { get; set; }
+        public virtual ICollection<ContentType> ContentTypeChilds { get; set; }
+        public virtual ContentType ContentTypeParent { get; set; }
     }
 }

@@ -553,15 +553,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProfileTokens">
-      <EntityTypeMapping TypeName="GorgiasModel.ProfileToken">
-        <MappingFragment StoreEntitySet="ProfileToken">
-          <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
-          <ScalarProperty Name="ProfileToken1" ColumnName="ProfileToken" />
-          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Quotes">
       <EntityTypeMapping TypeName="GorgiasModel.Quote">
         <MappingFragment StoreEntitySet="Quote">
@@ -571,6 +562,26 @@
           <ScalarProperty Name="QuoteStatus" ColumnName="QuoteStatus" />
           <ScalarProperty Name="QuoteName" ColumnName="QuoteName" />
           <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileReadings">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileReading">
+        <MappingFragment StoreEntitySet="ProfileReading">
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="ProfileReadingDatetime" ColumnName="ProfileReadingDatetime" />
+          <ScalarProperty Name="ProfileReadingLanguageCode" ColumnName="ProfileReadingLanguageCode" />
+          <ScalarProperty Name="ProfileReadingID" ColumnName="ProfileReadingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileTokens">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileToken">
+        <MappingFragment StoreEntitySet="ProfileToken">
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
+          <ScalarProperty Name="ProfileTokenString" ColumnName="ProfileTokenString" />
+          <ScalarProperty Name="ProfileTokenID" ColumnName="ProfileTokenID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

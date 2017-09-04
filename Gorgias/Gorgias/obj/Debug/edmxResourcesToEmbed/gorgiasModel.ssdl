@@ -358,6 +358,15 @@
     <Property Name="IndustryID" Type="int" Nullable="false" />
     <Property Name="ProfileID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ProfileReading">
+    <Key>
+      <PropertyRef Name="ProfileReadingID" />
+    </Key>
+    <Property Name="ProfileReadingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfileReadingLanguageCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="ProfileReadingDatetime" Type="datetime" Nullable="false" />
+    <Property Name="ProfileID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProfileReport">
     <Key>
       <PropertyRef Name="ProfileReportID" />
@@ -375,8 +384,8 @@
     </Key>
     <Property Name="ProfileID" Type="int" Nullable="false" />
     <Property Name="ProfileLanguageApp" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="ProfileCityID" Type="int" Nullable="false" />
-    <Property Name="ProfileBirthday" Type="date" Nullable="false" />
+    <Property Name="ProfileCityID" Type="int" />
+    <Property Name="ProfileBirthday" Type="date" />
   </EntityType>
   <EntityType Name="ProfileSocialNetwork">
     <Key>
@@ -398,11 +407,12 @@
   </EntityType>
   <EntityType Name="ProfileToken">
     <Key>
-      <PropertyRef Name="ProfileID" />
+      <PropertyRef Name="ProfileTokenID" />
     </Key>
-    <Property Name="ProfileID" Type="int" Nullable="false" />
-    <Property Name="ProfileToken" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProfileTokenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfileTokenString" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="ProfileTokenRegistration" Type="datetime" Nullable="false" />
+    <Property Name="ProfileID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProfileType">
     <Key>
@@ -1047,6 +1057,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProfileReading_ProfileReading">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProfileReading" Type="Self.ProfileReading" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileReading">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProfileReport_Profile">
     <End Role="Profile" Type="Self.Profile" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1163,7 +1187,7 @@
     <End Role="Profile" Type="Self.Profile" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="ProfileToken" Type="Self.ProfileToken" Multiplicity="0..1" />
+    <End Role="ProfileToken" Type="Self.ProfileToken" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Profile">
         <PropertyRef Name="ProfileID" />
@@ -1300,6 +1324,7 @@
     <EntitySet Name="ProfileAttribute" EntityType="Self.ProfileAttribute" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileCommission" EntityType="Self.ProfileCommission" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileIndustry" EntityType="Self.ProfileIndustry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfileReading" EntityType="Self.ProfileReading" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileReport" EntityType="Self.ProfileReport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileSetting" EntityType="Self.ProfileSetting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileSocialNetwork" EntityType="Self.ProfileSocialNetwork" Schema="dbo" store:Type="Tables" />
@@ -1469,6 +1494,10 @@
     <AssociationSet Name="FK_ProfileIndustry_Profile" Association="Self.FK_ProfileIndustry_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="ProfileIndustry" EntitySet="ProfileIndustry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileReading_ProfileReading" Association="Self.FK_ProfileReading_ProfileReading">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="ProfileReading" EntitySet="ProfileReading" />
     </AssociationSet>
     <AssociationSet Name="FK_ProfileReport_Profile" Association="Self.FK_ProfileReport_Profile">
       <End Role="Profile" EntitySet="Profile" />

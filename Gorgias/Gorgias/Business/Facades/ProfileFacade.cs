@@ -18,6 +18,12 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class ProfileFacade
     {
+        //V2 Begin
+        public Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().getLoginAttempt(ProfileEmail, ProfileID);
+        }
+        //V2 End
         public ProfileDTO GetProfile(int ProfileID)
         {
             ProfileDTO result = Mapper.Map<ProfileDTO>(DataLayer.DataLayerFacade.ProfileRepository().GetProfile(ProfileID));
@@ -26,7 +32,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent()
         {
-            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrent();            
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrent();
         }
 
         public Int64 GetProfileReportCurrentProfileViews()
@@ -75,7 +81,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public DTResult<ProfileDTO> FilterResult(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param)
         {
-            var basequery = DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable().Where(m=> m.SubscriptionTypeID != 4);
+            var basequery = DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable().Where(m => m.SubscriptionTypeID != 4);
 
             if (search.Length > 0)
             {

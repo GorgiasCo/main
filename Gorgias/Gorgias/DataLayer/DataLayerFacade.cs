@@ -2,9 +2,21 @@
 using Gorgias.DataLayer.Repository.SQL.Web;
 
 namespace Gorgias.DataLayer
-{       	     
+{
     public static class DataLayerFacade
     {
+        public static Interface.IProfileSettingRepository ProfileSettingRepository()
+        {
+            return new Repository.SQL.ProfileSettingRepository();
+        }
+        public static Interface.IProfileReadingRepository ProfileReadingRepository()
+        {
+            return new Repository.SQL.ProfileReadingRepository();
+        }
+        public static Interface.IProfileTokenRepository ProfileTokenRepository()
+        {
+            return new Repository.SQL.ProfileTokenRepository();
+        }
         public static Interface.IQuoteRepository QuoteRepository()
         {
             return new Repository.SQL.QuoteRepository();
@@ -182,5 +194,5 @@ namespace Gorgias.DataLayer
             return new Repository.SQL.UserRoleRepository();
         }
     }
-}   
+}
 

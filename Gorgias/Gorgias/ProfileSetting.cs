@@ -16,8 +16,8 @@ namespace Gorgias
     {
         public int ProfileID { get; set; }
         public string ProfileLanguageApp { get; set; }
-        public int ProfileCityID { get; set; }
-        public System.DateTime ProfileBirthday { get; set; }
+        public Nullable<int> ProfileCityID { get; set; }
+        public Nullable<System.DateTime> ProfileBirthday { get; set; }
     
         public virtual Profile Profile { get; set; }
     }

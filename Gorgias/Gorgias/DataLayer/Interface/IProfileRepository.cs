@@ -25,6 +25,7 @@ namespace Gorgias.DataLayer.Interface
 
         Business.DataTransferObjects.Web.AdminMiniProfile GetMiniProfile(int ProfileID);
         Business.DataTransferObjects.Web.LowAppProfileModel GetLowAppProfile(string ProfileURL);
+        Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID);
         Profile GetProfile(string ProfileEmail);
         int[] GetAdministrationProfiles(int CountryID);
         IEnumerable<Profile> GetProfiles(string ProfileEmail);

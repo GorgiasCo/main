@@ -422,6 +422,11 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.Profiles where w.ProfileEmail == ProfileEmail select w).FirstOrDefault();
         }
+        //V2
+        public Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID)
+        {
+            return (from w in context.Profiles where w.ProfileEmail == ProfileEmail || w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.LoginAttempt { ProfileEmail = w.ProfileEmail, ProfileID = w.ProfileID }).FirstOrDefault();
+        }
 
         public int[] GetAdministrationProfiles(int CountryID)
         {

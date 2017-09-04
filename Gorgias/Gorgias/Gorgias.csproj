@@ -374,16 +374,24 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ActivityTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentRatingMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LanguageMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginAttempt.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSettingMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileTokenMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\QuoteMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\NewsletterDTO.cs" />
     <Compile Include="Business\DataTransferObjects\PaymentDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileAttributeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileCommissionDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileIndustryDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ProfileReadingDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileReportDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ProfileSettingDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileSocialNetworkDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileTagDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ProfileTokenDTO.cs" />
     <Compile Include="Business\DataTransferObjects\QuoteDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ReportTypeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumInformation.cs" />
@@ -453,9 +461,12 @@
     <Compile Include="Business\Facades\ProfileAttributeFacade.cs" />
     <Compile Include="Business\Facades\ProfileCommissionFacade.cs" />
     <Compile Include="Business\Facades\ProfileIndustryFacade.cs" />
+    <Compile Include="Business\Facades\ProfileReadingFacade.cs" />
     <Compile Include="Business\Facades\ProfileReportFacade.cs" />
+    <Compile Include="Business\Facades\ProfileSettingFacade.cs" />
     <Compile Include="Business\Facades\ProfileSocialNetworkFacade.cs" />
     <Compile Include="Business\Facades\ProfileTagFacade.cs" />
+    <Compile Include="Business\Facades\ProfileTokenFacade.cs" />
     <Compile Include="Business\Facades\QuoteFacade.cs" />
     <Compile Include="Business\Facades\ReportTypeFacade.cs" />
     <Compile Include="Business\Facades\RevenueFacade.cs" />
@@ -529,9 +540,12 @@
     <Compile Include="Business\Validators\ProfileAttributeValidator.cs" />
     <Compile Include="Business\Validators\ProfileCommissionValidator.cs" />
     <Compile Include="Business\Validators\ProfileIndustryValidator.cs" />
+    <Compile Include="Business\Validators\ProfileReadingValidator.cs" />
     <Compile Include="Business\Validators\ProfileReportValidator.cs" />
+    <Compile Include="Business\Validators\ProfileSettingValidator.cs" />
     <Compile Include="Business\Validators\ProfileSocialNetworkValidator.cs" />
     <Compile Include="Business\Validators\ProfileTagValidator.cs" />
+    <Compile Include="Business\Validators\ProfileTokenValidator.cs" />
     <Compile Include="Business\Validators\ProfileTypeValidator.cs" />
     <Compile Include="Business\Validators\ProfileValidator.cs" />
     <Compile Include="Business\Validators\QuoteValidator.cs" />
@@ -601,9 +615,12 @@
     <Compile Include="Controllers\ProfileCommissionController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ProfileIndustryController.cs" />
+    <Compile Include="Controllers\ProfileReadingController.cs" />
     <Compile Include="Controllers\ProfileReportController.cs" />
+    <Compile Include="Controllers\ProfileSettingController.cs" />
     <Compile Include="Controllers\ProfileSocialNetworkController.cs" />
     <Compile Include="Controllers\ProfileTagController.cs" />
+    <Compile Include="Controllers\ProfileTokenController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -652,10 +669,13 @@
     <Compile Include="DataLayer\Interface\IProfileAttributeRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileCommissionRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileIndustryRepository.cs" />
+    <Compile Include="DataLayer\Interface\IProfileReadingRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileReportRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileRepository.cs" />
+    <Compile Include="DataLayer\Interface\IProfileSettingRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileSocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileTagRepository.cs" />
+    <Compile Include="DataLayer\Interface\IProfileTokenRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IQuoteRepository.cs" />
     <Compile Include="DataLayer\Interface\IReportTypeRepository.cs" />
@@ -698,10 +718,13 @@
     <Compile Include="DataLayer\Repository\SQL\ProfileAttributeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileCommissionRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileIndustryRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ProfileReadingRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileReportRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ProfileSettingRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileSocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileTagRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ProfileTokenRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\QuoteRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ReportTypeRepository.cs" />
@@ -811,6 +834,9 @@
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfileCommission.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileReading.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfileReport.cs">

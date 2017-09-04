@@ -25,6 +25,7 @@ namespace Gorgias.DataLayer.Interface
         List<ContentType> GetContentTypesByContentTypeParentID(int ContentTypeParentID, bool ContentTypeStatus, int page = 1, int pageSize = 7, string filter = null);
 
         //IQueryable
+        IQueryable<Business.DataTransferObjects.Mobile.V2.ContentTypeMobileModel> GetContentTypesAsQueryable(int ContentTypeID, string languageCode);
         IQueryable<ContentType> GetContentTypesAllAsQueryable();
         IQueryable<ContentType> GetContentTypesAllAsQueryable(bool ContentTypeStatus);
         IQueryable<ContentType> GetContentTypesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);

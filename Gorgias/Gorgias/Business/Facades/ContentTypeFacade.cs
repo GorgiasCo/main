@@ -15,12 +15,18 @@ using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
 
 namespace Gorgias.BusinessLayer.Facades
-{   
+{
     public class ContentTypeFacade
-    {                
+    {
+        //V2 Begin
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ContentTypeMobileModel> getContentTypes(int ContentTypeID, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesAsQueryable(ContentTypeID, languageCode);
+        }
+        //V2 End
         public ContentTypeDTO GetContentType(int ContentTypeID)
         {
-            ContentTypeDTO result = Mapper.Map<ContentTypeDTO>(DataLayer.DataLayerFacade.ContentTypeRepository().GetContentType(ContentTypeID));             
+            ContentTypeDTO result = Mapper.Map<ContentTypeDTO>(DataLayer.DataLayerFacade.ContentTypeRepository().GetContentType(ContentTypeID));
             return result;
         }
 
@@ -28,7 +34,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             var basequery = DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesAllAsQueryable();
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.ContentTypeName.ToLower().Contains(search.ToLower())));
             }
 
@@ -46,10 +53,10 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }       
+        }
 
         public PaginationSet<ContentTypeDTO> GetContentTypes(int page, int pagesize)
-        {           
+        {
             var basequery = DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesAllAsQueryable();
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<ContentType>(page, pagesize, basequery).Future();
@@ -65,21 +72,22 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<ContentTypeDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
-        
+
         public List<ContentTypeDTO> GetContentTypes()
-        {           
-            var basequery = Mapper.Map <List<ContentTypeDTO>>(DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesAllAsQueryable());
+        {
+            var basequery = Mapper.Map<List<ContentTypeDTO>>(DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesAllAsQueryable());
             return basequery.ToList();
         }
 
-        
+
         public DTResult<ContentTypeDTO> FilterResultByContentTypeParentID(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param, int ContentTypeParentID)
         {
-            var basequery = DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesAllAsQueryable().Where(m=> m.ContentTypeParentID==ContentTypeParentID);
+            var basequery = DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesAllAsQueryable().Where(m => m.ContentTypeParentID == ContentTypeParentID);
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.ContentTypeName.ToLower().Contains(search.ToLower())));
             }
 
@@ -97,12 +105,12 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }               
-        
-        
+        }
+
+
         public PaginationSet<ContentTypeDTO> GetContentTypesByContentTypeParentID(int ContentTypeParentID, int page, int pagesize)
         {
-            
+
             var basequery = DataLayer.DataLayerFacade.ContentTypeRepository().GetContentTypesByContentTypeParentIDAsQueryable(ContentTypeParentID);
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<ContentType>(page, pagesize, basequery).Future();
@@ -118,29 +126,29 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<ContentTypeDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
 
         public ContentTypeDTO Insert(ContentTypeDTO objContentType)
-        {            
+        {
             ContentTypeDTO result = Mapper.Map<ContentTypeDTO>(DataLayer.DataLayerFacade.ContentTypeRepository().Insert(objContentType.ContentTypeName, objContentType.ContentTypeOrder, objContentType.ContentTypeStatus, objContentType.ContentTypeLanguageCode, objContentType.ContentTypeExpression, objContentType.ContentTypeParentID));
 
-            if (result!=null)
+            if (result != null)
             {
-                return result;            
+                return result;
             }
             else
             {
                 return new ContentTypeDTO();
             }
         }
-               
+
         public bool Delete(int ContentTypeID)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.ContentTypeRepository().Delete(ContentTypeID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {
@@ -149,11 +157,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Update(int ContentTypeID, ContentTypeDTO objContentType)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.ContentTypeRepository().Update(objContentType.ContentTypeID, objContentType.ContentTypeName, objContentType.ContentTypeOrder, objContentType.ContentTypeStatus, objContentType.ContentTypeLanguageCode, objContentType.ContentTypeExpression, objContentType.ContentTypeParentID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {

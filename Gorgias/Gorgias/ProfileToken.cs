@@ -14,9 +14,10 @@ namespace Gorgias
     
     public partial class ProfileToken
     {
-        public int ProfileID { get; set; }
-        public string ProfileToken1 { get; set; }
+        public int ProfileTokenID { get; set; }
+        public string ProfileTokenString { get; set; }
         public System.DateTime ProfileTokenRegistration { get; set; }
+        public int ProfileID { get; set; }
     
         public virtual Profile Profile { get; set; }
     }

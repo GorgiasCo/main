@@ -89,7 +89,6 @@
         <EntityTypeShape EntityType="GorgiasModel.Language" Width="1.5" PointX="10.375" PointY="1" />
         <EntityTypeShape EntityType="GorgiasModel.ProfileActivity" Width="1.5" PointX="13.5" PointY="14.75" />
         <EntityTypeShape EntityType="GorgiasModel.ProfileSetting" Width="1.5" PointX="5.25" PointY="34.25" />
-        <EntityTypeShape EntityType="GorgiasModel.ProfileToken" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="GorgiasModel.FK_ActivityType_ActivityType" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ActivityType" />
         <AssociationConnector Association="GorgiasModel.FK_Album_ContentRating" />
@@ -99,9 +98,12 @@
         <AssociationConnector Association="GorgiasModel.FK_ContentType_ContentType" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Profile" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileSetting_Profile" />
-        <AssociationConnector Association="GorgiasModel.FK_ProfileToken_Profile" />
         <EntityTypeShape EntityType="GorgiasModel.Quote" Width="1.5" PointX="8.25" PointY="37.375" />
         <AssociationConnector Association="GorgiasModel.FK_Quote_Category" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileReading" Width="1.5" PointX="5.25" PointY="43.5" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileToken" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileReading_ProfileReading" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileToken_Profile" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -71,8 +71,9 @@ namespace Gorgias
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<ProfileActivity> ProfileActivities { get; set; }
         public virtual DbSet<ProfileSetting> ProfileSettings { get; set; }
-        public virtual DbSet<ProfileToken> ProfileTokens { get; set; }
         public virtual DbSet<Quote> Quotes { get; set; }
+        public virtual DbSet<ProfileReading> ProfileReadings { get; set; }
+        public virtual DbSet<ProfileToken> ProfileTokens { get; set; }
     
         public virtual int updateProfileLike(Nullable<int> profileID)
         {

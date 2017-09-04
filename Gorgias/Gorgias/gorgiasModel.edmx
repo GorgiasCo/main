@@ -363,6 +363,15 @@
           <Property Name="IndustryID" Type="int" Nullable="false" />
           <Property Name="ProfileID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProfileReading">
+          <Key>
+            <PropertyRef Name="ProfileReadingID" />
+          </Key>
+          <Property Name="ProfileReadingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileReadingLanguageCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="ProfileReadingDatetime" Type="datetime" Nullable="false" />
+          <Property Name="ProfileID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProfileReport">
           <Key>
             <PropertyRef Name="ProfileReportID" />
@@ -380,8 +389,8 @@
           </Key>
           <Property Name="ProfileID" Type="int" Nullable="false" />
           <Property Name="ProfileLanguageApp" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="ProfileCityID" Type="int" Nullable="false" />
-          <Property Name="ProfileBirthday" Type="date" Nullable="false" />
+          <Property Name="ProfileCityID" Type="int" />
+          <Property Name="ProfileBirthday" Type="date" />
         </EntityType>
         <EntityType Name="ProfileSocialNetwork">
           <Key>
@@ -403,11 +412,12 @@
         </EntityType>
         <EntityType Name="ProfileToken">
           <Key>
-            <PropertyRef Name="ProfileID" />
+            <PropertyRef Name="ProfileTokenID" />
           </Key>
-          <Property Name="ProfileID" Type="int" Nullable="false" />
-          <Property Name="ProfileToken" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProfileTokenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileTokenString" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ProfileTokenRegistration" Type="datetime" Nullable="false" />
+          <Property Name="ProfileID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProfileType">
           <Key>
@@ -1052,6 +1062,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfileReading_ProfileReading">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProfileReading" Type="Self.ProfileReading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="ProfileReading">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProfileReport_Profile">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1168,7 +1192,7 @@
           <End Role="Profile" Type="Self.Profile" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ProfileToken" Type="Self.ProfileToken" Multiplicity="0..1" />
+          <End Role="ProfileToken" Type="Self.ProfileToken" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Profile">
               <PropertyRef Name="ProfileID" />
@@ -1305,6 +1329,7 @@
           <EntitySet Name="ProfileAttribute" EntityType="Self.ProfileAttribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileCommission" EntityType="Self.ProfileCommission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileIndustry" EntityType="Self.ProfileIndustry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileReading" EntityType="Self.ProfileReading" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileReport" EntityType="Self.ProfileReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileSetting" EntityType="Self.ProfileSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileSocialNetwork" EntityType="Self.ProfileSocialNetwork" Schema="dbo" store:Type="Tables" />
@@ -1474,6 +1499,10 @@
           <AssociationSet Name="FK_ProfileIndustry_Profile" Association="Self.FK_ProfileIndustry_Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="ProfileIndustry" EntitySet="ProfileIndustry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileReading_ProfileReading" Association="Self.FK_ProfileReading_ProfileReading">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="ProfileReading" EntitySet="ProfileReading" />
           </AssociationSet>
           <AssociationSet Name="FK_ProfileReport_Profile" Association="Self.FK_ProfileReport_Profile">
             <End Role="Profile" EntitySet="Profile" />
@@ -1755,7 +1784,6 @@
           <EntitySet Name="Languages" EntityType="GorgiasModel.Language" />
           <EntitySet Name="ProfileActivities" EntityType="GorgiasModel.ProfileActivity" />
           <EntitySet Name="ProfileSettings" EntityType="GorgiasModel.ProfileSetting" />
-          <EntitySet Name="ProfileTokens" EntityType="GorgiasModel.ProfileToken" />
           <AssociationSet Name="FK_ActivityType_ActivityType" Association="GorgiasModel.FK_ActivityType_ActivityType">
             <End Role="ActivityType" EntitySet="ActivityTypes" />
             <End Role="ActivityType1" EntitySet="ActivityTypes" />
@@ -1792,14 +1820,20 @@
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="ProfileSetting" EntitySet="ProfileSettings" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProfileToken_Profile" Association="GorgiasModel.FK_ProfileToken_Profile">
-            <End Role="Profile" EntitySet="Profiles" />
-            <End Role="ProfileToken" EntitySet="ProfileTokens" />
-          </AssociationSet>
           <EntitySet Name="Quotes" EntityType="GorgiasModel.Quote" />
           <AssociationSet Name="FK_Quote_Category" Association="GorgiasModel.FK_Quote_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
+          <EntitySet Name="ProfileReadings" EntityType="GorgiasModel.ProfileReading" />
+          <EntitySet Name="ProfileTokens" EntityType="GorgiasModel.ProfileToken" />
+          <AssociationSet Name="FK_ProfileReading_ProfileReading" Association="GorgiasModel.FK_ProfileReading_ProfileReading">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="ProfileReading" EntitySet="ProfileReadings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileToken_Profile" Association="GorgiasModel.FK_ProfileToken_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="ProfileToken" EntitySet="ProfileTokens" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
@@ -2076,7 +2110,8 @@
           <NavigationProperty Name="ProfileReports" Relationship="GorgiasModel.FK_ProfileReport_Profile" FromRole="Profile" ToRole="ProfileReport" />
           <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="Profile" ToRole="ProfileActivity" />
           <NavigationProperty Name="ProfileSetting" Relationship="GorgiasModel.FK_ProfileSetting_Profile" FromRole="Profile" ToRole="ProfileSetting" />
-          <NavigationProperty Name="ProfileToken" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="Profile" ToRole="ProfileToken" />
+          <NavigationProperty Name="ProfileReadings" Relationship="GorgiasModel.FK_ProfileReading_ProfileReading" FromRole="Profile" ToRole="ProfileReading" />
+          <NavigationProperty Name="ProfileTokens" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="Profile" ToRole="ProfileToken" />
         </EntityType>
         <EntityType Name="ProfileAttribute">
           <Key>
@@ -2912,8 +2947,8 @@
           <Property Name="ContentTypeExpression" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ContentTypeParentID" Type="Int32" />
           <NavigationProperty Name="Contents" Relationship="GorgiasModel.FK_Content_ContentType" FromRole="ContentType" ToRole="Content" />
-          <NavigationProperty Name="ContentType1" Relationship="GorgiasModel.FK_ContentType_ContentType" FromRole="ContentType" ToRole="ContentType1" />
-          <NavigationProperty Name="ContentType2" Relationship="GorgiasModel.FK_ContentType_ContentType" FromRole="ContentType1" ToRole="ContentType" />
+          <NavigationProperty Name="ContentTypeChilds" Relationship="GorgiasModel.FK_ContentType_ContentType" FromRole="ContentType" ToRole="ContentType1" />
+          <NavigationProperty Name="ContentTypeParent" Relationship="GorgiasModel.FK_ContentType_ContentType" FromRole="ContentType1" ToRole="ContentType" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -2945,18 +2980,9 @@
           </Key>
           <Property Name="ProfileID" Type="Int32" Nullable="false" />
           <Property Name="ProfileLanguageApp" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ProfileCityID" Type="Int32" Nullable="false" />
-          <Property Name="ProfileBirthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProfileCityID" Type="Int32" />
+          <Property Name="ProfileBirthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileSetting_Profile" FromRole="ProfileSetting" ToRole="Profile" />
-        </EntityType>
-        <EntityType Name="ProfileToken">
-          <Key>
-            <PropertyRef Name="ProfileID" />
-          </Key>
-          <Property Name="ProfileID" Type="Int32" Nullable="false" />
-          <Property Name="ProfileToken1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProfileTokenRegistration" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="ProfileToken" ToRole="Profile" />
         </EntityType>
         <Association Name="FK_ActivityType_ActivityType">
           <End Type="GorgiasModel.ActivityType" Role="ActivityType" Multiplicity="0..1" />
@@ -3074,20 +3100,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProfileToken_Profile">
-          <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GorgiasModel.ProfileToken" Role="ProfileToken" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="ProfileID" />
-            </Principal>
-            <Dependent Role="ProfileToken">
-              <PropertyRef Name="ProfileID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Quote">
           <Key>
             <PropertyRef Name="QuoteID" />
@@ -3111,6 +3123,54 @@
             </Principal>
             <Dependent Role="Quote">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProfileReading">
+          <Key>
+            <PropertyRef Name="ProfileReadingID" />
+          </Key>
+          <Property Name="ProfileReadingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileReadingLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileReadingDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileReading_ProfileReading" FromRole="ProfileReading" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="ProfileToken">
+          <Key>
+            <PropertyRef Name="ProfileTokenID" />
+          </Key>
+          <Property Name="ProfileTokenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileTokenString" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileTokenRegistration" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="ProfileToken" ToRole="Profile" />
+        </EntityType>
+        <Association Name="FK_ProfileReading_ProfileReading">
+          <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GorgiasModel.ProfileReading" Role="ProfileReading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="ProfileReading">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileToken_Profile">
+          <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GorgiasModel.ProfileToken" Role="ProfileToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="ProfileToken">
+              <PropertyRef Name="ProfileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3672,15 +3732,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProfileTokens">
-            <EntityTypeMapping TypeName="GorgiasModel.ProfileToken">
-              <MappingFragment StoreEntitySet="ProfileToken">
-                <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
-                <ScalarProperty Name="ProfileToken1" ColumnName="ProfileToken" />
-                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Quotes">
             <EntityTypeMapping TypeName="GorgiasModel.Quote">
               <MappingFragment StoreEntitySet="Quote">
@@ -3690,6 +3741,26 @@
                 <ScalarProperty Name="QuoteStatus" ColumnName="QuoteStatus" />
                 <ScalarProperty Name="QuoteName" ColumnName="QuoteName" />
                 <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileReadings">
+            <EntityTypeMapping TypeName="GorgiasModel.ProfileReading">
+              <MappingFragment StoreEntitySet="ProfileReading">
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="ProfileReadingDatetime" ColumnName="ProfileReadingDatetime" />
+                <ScalarProperty Name="ProfileReadingLanguageCode" ColumnName="ProfileReadingLanguageCode" />
+                <ScalarProperty Name="ProfileReadingID" ColumnName="ProfileReadingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileTokens">
+            <EntityTypeMapping TypeName="GorgiasModel.ProfileToken">
+              <MappingFragment StoreEntitySet="ProfileToken">
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
+                <ScalarProperty Name="ProfileTokenString" ColumnName="ProfileTokenString" />
+                <ScalarProperty Name="ProfileTokenID" ColumnName="ProfileTokenID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
