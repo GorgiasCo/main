@@ -9,6 +9,7 @@
     <Property Name="ActivityTypeLanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="ActivityTypeStatus" Type="bit" Nullable="false" />
     <Property Name="ActivityTypeParentID" Type="int" />
+    <Property Name="ActivityTypeOrder" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Address">
     <Key>
@@ -248,6 +249,7 @@
     <Property Name="LanguageName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="LanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="LanguageStatus" Type="bit" Nullable="false" />
+    <Property Name="LanguageOrder" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="LinkType">
     <Key>
@@ -412,6 +414,17 @@
     <Property Name="ProfileTypeImage" Type="nvarchar" MaxLength="150" />
     <Property Name="ProfileTypeDescription" Type="ntext" />
     <Property Name="ProfileTypeParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Quote">
+    <Key>
+      <PropertyRef Name="QuoteID" />
+    </Key>
+    <Property Name="QuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuoteName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="QuoteStatus" Type="bit" Nullable="false" />
+    <Property Name="QuoteLanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="QuoteProbability" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Recipient">
     <Key>
@@ -1160,6 +1173,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Quote_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Quote">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Recipient_Message">
     <End Role="Message" Type="Self.Message" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1279,6 +1306,7 @@
     <EntitySet Name="ProfileTag" EntityType="Self.ProfileTag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileToken" EntityType="Self.ProfileToken" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfileType" EntityType="Self.ProfileType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReportType" EntityType="Self.ReportType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RequestType" EntityType="Self.RequestType" Schema="dbo" store:Type="Tables" />
@@ -1477,6 +1505,10 @@
     <AssociationSet Name="FK_ProfileToken_Profile" Association="Self.FK_ProfileToken_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="ProfileToken" EntitySet="ProfileToken" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quote_Category" Association="Self.FK_Quote_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Quote" EntitySet="Quote" />
     </AssociationSet>
     <AssociationSet Name="FK_Recipient_Message" Association="Self.FK_Recipient_Message">
       <End Role="Message" EntitySet="Message" />

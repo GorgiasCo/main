@@ -18,7 +18,7 @@ namespace Gorgias
         public ContentRating()
         {
             this.Albums = new HashSet<Album>();
-            this.ContentRating1 = new HashSet<ContentRating>();
+            this.ContentRatingChilds = new HashSet<ContentRating>();
         }
     
         public int ContentRatingID { get; set; }
@@ -34,7 +34,7 @@ namespace Gorgias
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Albums { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContentRating> ContentRating1 { get; set; }
-        public virtual ContentRating ContentRating2 { get; set; }
+        public virtual ICollection<ContentRating> ContentRatingChilds { get; set; }
+        public virtual ContentRating ContentRatingParent { get; set; }
     }
 }

@@ -5,6 +5,10 @@ namespace Gorgias.DataLayer
 {       	     
     public static class DataLayerFacade
     {
+        public static Interface.IQuoteRepository QuoteRepository()
+        {
+            return new Repository.SQL.QuoteRepository();
+        }
         public static Interface.ILanguageRepository LanguageRepository()
         {
             return new Repository.SQL.LanguageRepository();

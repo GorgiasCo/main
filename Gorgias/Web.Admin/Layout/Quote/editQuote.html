@@ -1,0 +1,42 @@
+﻿<div class="inner-wrapper">
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Administration Panel</h2>
+        </header>
+        <!-- start: page -->
+        <div class="row">
+            <div class="col-md-6">
+                <form id="form" role="form" novalidate angular-validator name="addQuoteForm" angular-validator-submit="AddObject()" class="form-horizontal">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                            </div>
+                            <h2 class="panel-title">Edit Quote</h2>
+                            <p class="panel-subtitle">
+                                Please fill required information.
+                            </p>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group"><label class="col-sm-3 control-label">Name<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="QuoteName" ng-model="object.QuoteName" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Status</label><div class="col-sm-9"><div class="checkbox-custom chekbox-primary"><input id="QuoteStatus" ng-model="object.QuoteStatus" validate-on="blur" value="QuoteStatus" type="checkbox" name="for[]" /><label for="QuoteStatus">Status</label></div></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Language Code<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="QuoteLanguageCode" ng-model="object.QuoteLanguageCode" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Probability<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="QuoteProbability" ng-model="object.QuoteProbability" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required /></div></div>
+                            <div class="form-group"><label class="col-sm-3 control-label">Category</label><div class="col-sm-9"><select id="CategoryID" class="form-control" ng-model="object.CategoryID" ng-options="option.CategoryID as option.CategoryName for option in Categories" title="Please select at least one" required></select><input type="hidden" name="CategoryID" ng-value="object.CategoryID" /></div></div>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                    <a class="btn btn-default" ng-href="/quote">Cancel</a>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </form>
+            </div>
+        </div>
+        <!-- end: page -->
+    </section>
+</div>

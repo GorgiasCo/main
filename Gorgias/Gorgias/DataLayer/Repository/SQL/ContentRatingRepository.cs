@@ -178,6 +178,12 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.ContentRatings where w.ContentRatingStatus == ContentRatingStatus orderby w.ContentRatingID descending select w).AsQueryable();
         }
+
+        //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ContentRatingMobileModel> GetContentRatingsAllAsQueryable(string languageCode)
+        {
+            return (from w in context.ContentRatings where w.ContentRatingStatus == true && w.ContentRatingParentID == null orderby w.ContentRatingOrder ascending select new Business.DataTransferObjects.Mobile.V2.ContentRatingMobileModel { ContentRatingID = w.ContentRatingID, ContentRatingName = w.ContentRatingName, Multilanguage = w.ContentRatingChilds.Where(m=> m.ContentRatingLanguageCode == languageCode).FirstOrDefault().ContentRatingName }).AsQueryable();
+        }
         //IQueryable Pagings
         public IQueryable<ContentRating> GetContentRatingsAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)
         {

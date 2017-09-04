@@ -3,6 +3,10 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public static class Facade
     {
+        public static QuoteFacade QuoteFacade()
+        {
+            return new QuoteFacade();
+        }
         public static LanguageFacade LanguageFacade()
         {
             return new LanguageFacade();

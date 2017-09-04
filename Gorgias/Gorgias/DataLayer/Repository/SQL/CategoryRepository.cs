@@ -105,7 +105,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int CategoryType)
+        public Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int? CategoryType)
         {
             try
             {
@@ -144,7 +144,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(int CategoryID, String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int CategoryType)
+        public bool Update(int CategoryID, String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int? CategoryType)
         {
             Category obj = new Category();
             obj = (from w in context.Categories where w.CategoryID == CategoryID select w).FirstOrDefault();
@@ -254,6 +254,12 @@ namespace Gorgias.DataLayer.Repository.SQL
             var xTest = (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new { ChildCategory = w.ChildCategory.Where(m => m.CategoryDescription == languageCode), CategoryID = w.CategoryID, CategoryName = w.CategoryName }).AsQueryable();
             //return (from w in context.Categories orderby w.CategoryID descending select w).AsQueryable();
             return (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new CategoryDTO { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryImage = w.CategoryImage, CategoryDescription = w.CategoryDescription, CategoryStatus = w.CategoryStatus }).AsQueryable();
+        }
+
+        //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAllAsQueryable(string languageCode)
+        {
+            return (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType}).AsQueryable();
         }
 
         public IQueryable<Category> GetCategoriesAllAsQueryableX(string languageCode)

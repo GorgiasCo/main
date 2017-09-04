@@ -28,6 +28,9 @@ namespace Gorgias.DataLayer.Interface
         IQueryable<ActivityType> GetActivityTypesAllAsQueryable();
         IQueryable<Business.DataTransferObjects.ActivityTypeDTO> GetActivityTypesAllAsQueryable(string languageCode);
         IQueryable<ActivityType> GetActivityTypesAllAsQueryable(bool ActivityTypeStatus);
+        //V2
+        IQueryable<Business.DataTransferObjects.Mobile.V2.ActivityTypeMobileModel> GetActivityTypesFeltAsQueryable(string languageCode, int ActivityTypeParentID);
+        //End V2
         IQueryable<ActivityType> GetActivityTypesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);
         IQueryable<ActivityType> GetActivityTypesAllAsQueryable(bool ActivityTypeStatus, int page = 1, int pageSize = 7, string filter = null);
         IQueryable<ActivityType> GetActivityTypesByActivityTypeParentIDAsQueryable(int ActivityTypeParentID);

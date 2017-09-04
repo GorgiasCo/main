@@ -371,6 +371,11 @@
     <Compile Include="Business\DataTransferObjects\Mobile\ContentUploadMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ProfileSliderModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ProfileUpdateModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ActivityTypeMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentRatingMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\LanguageMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\QuoteMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\NewsletterDTO.cs" />
     <Compile Include="Business\DataTransferObjects\PaymentDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileAttributeDTO.cs" />
@@ -379,6 +384,7 @@
     <Compile Include="Business\DataTransferObjects\ProfileReportDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileSocialNetworkDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileTagDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\QuoteDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ReportTypeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumInformation.cs" />
     <Compile Include="Business\DataTransferObjects\Report\AlbumLike.cs" />
@@ -450,6 +456,7 @@
     <Compile Include="Business\Facades\ProfileReportFacade.cs" />
     <Compile Include="Business\Facades\ProfileSocialNetworkFacade.cs" />
     <Compile Include="Business\Facades\ProfileTagFacade.cs" />
+    <Compile Include="Business\Facades\QuoteFacade.cs" />
     <Compile Include="Business\Facades\ReportTypeFacade.cs" />
     <Compile Include="Business\Facades\RevenueFacade.cs" />
     <Compile Include="Business\Facades\UserProfileFacade.cs" />
@@ -527,6 +534,7 @@
     <Compile Include="Business\Validators\ProfileTagValidator.cs" />
     <Compile Include="Business\Validators\ProfileTypeValidator.cs" />
     <Compile Include="Business\Validators\ProfileValidator.cs" />
+    <Compile Include="Business\Validators\QuoteValidator.cs" />
     <Compile Include="Business\Validators\ReportTypeValidator.cs" />
     <Compile Include="Business\Validators\RequestTypeValidator.cs" />
     <Compile Include="Business\Validators\RevenueValidator.cs" />
@@ -586,6 +594,7 @@
     <Compile Include="Controllers\LinkTypeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MobileController.cs" />
+    <Compile Include="Controllers\MobileV2Controller.cs" />
     <Compile Include="Controllers\NewsletterController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProfileAttributeController.cs" />
@@ -596,6 +605,7 @@
     <Compile Include="Controllers\ProfileSocialNetworkController.cs" />
     <Compile Include="Controllers\ProfileTagController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
+    <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReportTypeController.cs" />
     <Compile Include="Controllers\RequestTypeController.cs" />
@@ -647,6 +657,7 @@
     <Compile Include="DataLayer\Interface\IProfileSocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileTagRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileTypeRepository.cs" />
+    <Compile Include="DataLayer\Interface\IQuoteRepository.cs" />
     <Compile Include="DataLayer\Interface\IReportTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IRequestTypeRepository.cs" />
     <Compile Include="DataLayer\Interface\IRevenueRepository.cs" />
@@ -692,6 +703,7 @@
     <Compile Include="DataLayer\Repository\SQL\ProfileSocialNetworkRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileTagRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileTypeRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\QuoteRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ReportTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\RequestTypeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\RevenueRepository.cs" />
@@ -825,6 +837,9 @@
     <Compile Include="Providers\GoogleAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
+    <Compile Include="Quote.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReportType.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
@@ -2678,7 +2693,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Business\DataTransferObjects\Mobile\V2\" />
     <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>

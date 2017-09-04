@@ -26,6 +26,7 @@ namespace Gorgias
         public string ActivityTypeLanguageCode { get; set; }
         public bool ActivityTypeStatus { get; set; }
         public Nullable<int> ActivityTypeParentID { get; set; }
+        public int ActivityTypeOrder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityType> ActivityTypeChilds { get; set; }

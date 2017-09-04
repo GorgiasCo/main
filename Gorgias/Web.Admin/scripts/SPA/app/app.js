@@ -12,6 +12,22 @@
                 templateUrl: "/layout/Profile/listProfile.html",
                 controller: "listProfileController"
             })
+            .when("/quote", {
+                templateUrl: "/layout/Quote/listQuote.html",
+                controller: "listQuoteController"
+            })
+            .when("/quote/add", {
+                templateUrl: "/layout/Quote/addQuote.html",
+                controller: "addQuoteController"
+            })
+            .when("/quote/:quoteid", {
+                templateUrl: "/layout/Quote/viewQuote.html",
+                controller: "viewQuoteController"
+            })
+            .when("/quote/edit/:quoteid", {
+                templateUrl: "/layout/Quote/editQuote.html",
+                controller: "editQuoteController"
+            })
              .when("/language", {
                  templateUrl: "/layout/Language/listLanguage.html",
                  controller: "listLanguageController"

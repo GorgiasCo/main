@@ -18,5 +18,6 @@ namespace Gorgias
         public string LanguageName { get; set; }
         public string LanguageCode { get; set; }
         public bool LanguageStatus { get; set; }
+        public int LanguageOrder { get; set; }
     }
 }

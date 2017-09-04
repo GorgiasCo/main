@@ -484,6 +484,7 @@
     <EntitySetMapping Name="ActivityTypes">
       <EntityTypeMapping TypeName="GorgiasModel.ActivityType">
         <MappingFragment StoreEntitySet="ActivityType">
+          <ScalarProperty Name="ActivityTypeOrder" ColumnName="ActivityTypeOrder" />
           <ScalarProperty Name="ActivityTypeParentID" ColumnName="ActivityTypeParentID" />
           <ScalarProperty Name="ActivityTypeStatus" ColumnName="ActivityTypeStatus" />
           <ScalarProperty Name="ActivityTypeLanguageCode" ColumnName="ActivityTypeLanguageCode" />
@@ -523,6 +524,7 @@
     <EntitySetMapping Name="Languages">
       <EntityTypeMapping TypeName="GorgiasModel.Language">
         <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="LanguageOrder" ColumnName="LanguageOrder" />
           <ScalarProperty Name="LanguageStatus" ColumnName="LanguageStatus" />
           <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
           <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
@@ -557,6 +559,18 @@
           <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
           <ScalarProperty Name="ProfileToken1" ColumnName="ProfileToken" />
           <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quotes">
+      <EntityTypeMapping TypeName="GorgiasModel.Quote">
+        <MappingFragment StoreEntitySet="Quote">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="QuoteProbability" ColumnName="QuoteProbability" />
+          <ScalarProperty Name="QuoteLanguageCode" ColumnName="QuoteLanguageCode" />
+          <ScalarProperty Name="QuoteStatus" ColumnName="QuoteStatus" />
+          <ScalarProperty Name="QuoteName" ColumnName="QuoteName" />
+          <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

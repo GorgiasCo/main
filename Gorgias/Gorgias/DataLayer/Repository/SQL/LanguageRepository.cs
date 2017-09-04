@@ -44,16 +44,15 @@ namespace Gorgias.DataLayer.Repository.SQL
         #endregion
 
         //CRUD Functions
-        public Language Insert(String LanguageName, String LanguageCode, Boolean LanguageStatus)
+        public Language Insert(String LanguageName, String LanguageCode, Boolean LanguageStatus, int LanguageOrder)
         {
             try
             {
                 Language obj = new Language();
-
-
                 obj.LanguageName = LanguageName;
                 obj.LanguageCode = LanguageCode;
                 obj.LanguageStatus = LanguageStatus;
+                obj.LanguageOrder = LanguageOrder;
                 context.Languages.Add(obj);
                 context.SaveChanges();
                 return obj;
@@ -64,7 +63,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(int LanguageID, String LanguageName, String LanguageCode, Boolean LanguageStatus)
+        public bool Update(int LanguageID, String LanguageName, String LanguageCode, Boolean LanguageStatus, int LanguageOrder)
         {
             Language obj = new Language();
             obj = (from w in context.Languages where w.LanguageID == LanguageID select w).FirstOrDefault();
@@ -75,6 +74,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.LanguageName = LanguageName;
                 obj.LanguageCode = LanguageCode;
                 obj.LanguageStatus = LanguageStatus;
+                obj.LanguageOrder = LanguageOrder;
                 context.SaveChanges();
                 return true;
             }
@@ -150,6 +150,12 @@ namespace Gorgias.DataLayer.Repository.SQL
         public IQueryable<Language> GetLanguagesAllAsQueryable(bool LanguageStatus)
         {
             return (from w in context.Languages where w.LanguageStatus == LanguageStatus orderby w.LanguageID descending select w).AsQueryable();
+        }
+
+        //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.LanguageMobileModel> GetLanguagesAsQueryable()
+        {
+            return (from w in context.Languages where w.LanguageStatus == true orderby w.LanguageOrder ascending, w.LanguageName ascending select new Business.DataTransferObjects.Mobile.V2.LanguageMobileModel { LanguageCode = w.LanguageCode, LanguageID = w.LanguageID, LanguageName = w.LanguageName }).AsQueryable();
         }
         //IQueryable Pagings
         public IQueryable<Language> GetLanguagesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)

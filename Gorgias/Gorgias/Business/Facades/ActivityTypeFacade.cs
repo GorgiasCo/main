@@ -15,12 +15,21 @@ using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
 
 namespace Gorgias.BusinessLayer.Facades
-{   
+{
     public class ActivityTypeFacade
-    {                
+    {
+        //V2 Begin
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ActivityTypeMobileModel> getActivityTypes(string languageCode, int ActivityTypeParentID)
+        {
+            return DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesFeltAsQueryable(languageCode, ActivityTypeParentID);
+        }
+
+        //V2 End
+
         public ActivityTypeDTO GetActivityType(int ActivityTypeID)
         {
-            ActivityTypeDTO result = Mapper.Map<ActivityTypeDTO>(DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityType(ActivityTypeID));             
+            ActivityTypeDTO result = Mapper.Map<ActivityTypeDTO>(DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityType(ActivityTypeID));
             return result;
         }
 
@@ -28,7 +37,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             var basequery = DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesAllAsQueryable();
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.ActivityTypeName.ToLower().Contains(search.ToLower())));
             }
 
@@ -46,10 +56,10 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }       
+        }
 
         public PaginationSet<ActivityTypeDTO> GetActivityTypes(int page, int pagesize)
-        {           
+        {
             var basequery = DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesAllAsQueryable();
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<ActivityType>(page, pagesize, basequery).Future();
@@ -65,21 +75,22 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<ActivityTypeDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
-        
+
         public List<ActivityTypeDTO> GetActivityTypes()
-        {           
-            var basequery = Mapper.Map <List<ActivityTypeDTO>>(DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesAllAsQueryable());
+        {
+            var basequery = Mapper.Map<List<ActivityTypeDTO>>(DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesAllAsQueryable());
             return basequery.ToList();
         }
 
-        
+
         public DTResult<ActivityTypeDTO> FilterResultByActivityTypeParentID(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param, int ActivityTypeParentID)
         {
-            var basequery = DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesAllAsQueryable().Where(m=> m.ActivityTypeParentID==ActivityTypeParentID);
+            var basequery = DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesAllAsQueryable().Where(m => m.ActivityTypeParentID == ActivityTypeParentID);
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.ActivityTypeName.ToLower().Contains(search.ToLower())));
             }
 
@@ -97,12 +108,12 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }               
-        
-        
+        }
+
+
         public PaginationSet<ActivityTypeDTO> GetActivityTypesByActivityTypeParentID(int ActivityTypeParentID, int page, int pagesize)
         {
-            
+
             var basequery = DataLayer.DataLayerFacade.ActivityTypeRepository().GetActivityTypesByActivityTypeParentIDAsQueryable(ActivityTypeParentID);
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<ActivityType>(page, pagesize, basequery).Future();
@@ -118,29 +129,29 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<ActivityTypeDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
 
         public ActivityTypeDTO Insert(ActivityTypeDTO objActivityType)
-        {            
+        {
             ActivityTypeDTO result = Mapper.Map<ActivityTypeDTO>(DataLayer.DataLayerFacade.ActivityTypeRepository().Insert(objActivityType.ActivityTypeName, objActivityType.ActivityTypeLanguageCode, objActivityType.ActivityTypeStatus, objActivityType.ActivityTypeParentID));
 
-            if (result!=null)
+            if (result != null)
             {
-                return result;            
+                return result;
             }
             else
             {
                 return new ActivityTypeDTO();
             }
         }
-               
+
         public bool Delete(int ActivityTypeID)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.ActivityTypeRepository().Delete(ActivityTypeID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {
@@ -149,11 +160,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Update(int ActivityTypeID, ActivityTypeDTO objActivityType)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.ActivityTypeRepository().Update(objActivityType.ActivityTypeID, objActivityType.ActivityTypeName, objActivityType.ActivityTypeLanguageCode, objActivityType.ActivityTypeStatus, objActivityType.ActivityTypeParentID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {

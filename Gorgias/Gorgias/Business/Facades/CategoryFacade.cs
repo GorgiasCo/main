@@ -18,6 +18,15 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class CategoryFacade
     {
+        //V2 Begin ;)
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> getCategories(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesAllAsQueryable(languageCode);
+        }
+
+
+
+        //V2 End
         public CategoryDTO GetCategory(int CategoryID)
         {
             CategoryDTO result = Mapper.Map<CategoryDTO>(DataLayer.DataLayerFacade.CategoryRepository().GetCategory(CategoryID));

@@ -174,6 +174,12 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.ActivityTypes where w.ActivityTypeStatus == ActivityTypeStatus orderby w.ActivityTypeID descending select w).AsQueryable();
         }
+
+        //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ActivityTypeMobileModel> GetActivityTypesFeltAsQueryable(string languageCode, int ActivityTypeParentID)
+        {
+            return (from w in context.ActivityTypes where w.ActivityTypeStatus == true && w.ActivityTypeParentID == ActivityTypeParentID orderby w.ActivityTypeOrder ascending select new Business.DataTransferObjects.Mobile.V2.ActivityTypeMobileModel { ActivityTypeID = w.ActivityTypeID, ActivityTypeName = w.ActivityTypeName, Multilanguage = w.ActivityTypeChilds.Where(m=> m.ActivityTypeLanguageCode == languageCode).FirstOrDefault().ActivityTypeName }).AsQueryable();
+        }
         //IQueryable Pagings
         public IQueryable<ActivityType> GetActivityTypesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)
         {

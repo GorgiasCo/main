@@ -14,8 +14,8 @@
         <EntityTypeShape EntityType="GorgiasModel.Connection" Width="1.5" PointX="5.25" PointY="13.75" />
         <EntityTypeShape EntityType="GorgiasModel.Content" Width="1.5" PointX="10.5" PointY="20.75" />
         <EntityTypeShape EntityType="GorgiasModel.Country" Width="1.5" PointX="3.75" PointY="3.125" />
-        <EntityTypeShape EntityType="GorgiasModel.ExternalLink" Width="1.5" PointX="8.25" PointY="21.125" />
-        <EntityTypeShape EntityType="GorgiasModel.Feature" Width="1.5" PointX="9" PointY="24.625" />
+        <EntityTypeShape EntityType="GorgiasModel.ExternalLink" Width="1.5" PointX="8.125" PointY="23.25" />
+        <EntityTypeShape EntityType="GorgiasModel.Feature" Width="1.5" PointX="10" PointY="25.125" />
         <EntityTypeShape EntityType="GorgiasModel.FeaturedSponsor" Width="1.5" PointX="11.25" PointY="17" />
         <EntityTypeShape EntityType="GorgiasModel.Industry" Width="1.5" PointX="0.5" PointY="12.875" />
         <EntityTypeShape EntityType="GorgiasModel.LinkType" Width="1.5" PointX="6" PointY="31" />
@@ -100,6 +100,8 @@
         <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Profile" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileSetting_Profile" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileToken_Profile" />
+        <EntityTypeShape EntityType="GorgiasModel.Quote" Width="1.5" PointX="8.25" PointY="37.375" />
+        <AssociationConnector Association="GorgiasModel.FK_Quote_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

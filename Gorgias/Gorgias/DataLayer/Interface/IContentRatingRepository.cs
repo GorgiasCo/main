@@ -29,6 +29,8 @@ namespace Gorgias.DataLayer.Interface
         //IQueryable
         IQueryable<ContentRating> GetContentRatingsAllAsQueryable();
         IQueryable<ContentRating> GetContentRatingsAllAsQueryable(bool ContentRatingStatus);
+        //V2
+        IQueryable<Business.DataTransferObjects.Mobile.V2.ContentRatingMobileModel> GetContentRatingsAllAsQueryable(string languageCode);
         IQueryable<ContentRating> GetContentRatingsAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);
         IQueryable<ContentRating> GetContentRatingsAllAsQueryable(bool ContentRatingStatus, int page = 1, int pageSize = 7, string filter = null);
         IQueryable<ContentRating> GetContentRatingsByContentRatingParentIDAsQueryable(int ContentRatingParentID);

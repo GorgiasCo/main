@@ -8,6 +8,6 @@ namespace Gorgias.Business.DataTransferObjects.Mobile
     public class CategoryMobileModel
     {
         public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
+        public string CategoryName { get; set; }        
     }
 }

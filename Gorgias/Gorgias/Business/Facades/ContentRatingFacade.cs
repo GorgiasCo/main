@@ -15,12 +15,16 @@ using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
 
 namespace Gorgias.BusinessLayer.Facades
-{   
+{
     public class ContentRatingFacade
-    {                
+    {
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ContentRatingMobileModel> getContentRatings(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable(languageCode);
+        }
         public ContentRatingDTO GetContentRating(int ContentRatingID)
         {
-            ContentRatingDTO result = Mapper.Map<ContentRatingDTO>(DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRating(ContentRatingID));             
+            ContentRatingDTO result = Mapper.Map<ContentRatingDTO>(DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRating(ContentRatingID));
             return result;
         }
 
@@ -28,7 +32,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             var basequery = DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable();
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.ContentRatingName.ToLower().Contains(search.ToLower())));
             }
 
@@ -46,10 +51,10 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }       
+        }
 
         public PaginationSet<ContentRatingDTO> GetContentRatings(int page, int pagesize)
-        {           
+        {
             var basequery = DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable();
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<ContentRating>(page, pagesize, basequery).Future();
@@ -65,21 +70,22 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<ContentRatingDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
-        
+
         public List<ContentRatingDTO> GetContentRatings()
-        {           
-            var basequery = Mapper.Map <List<ContentRatingDTO>>(DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable());
+        {
+            var basequery = Mapper.Map<List<ContentRatingDTO>>(DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable());
             return basequery.ToList();
         }
 
-        
+
         public DTResult<ContentRatingDTO> FilterResultByContentRatingParentID(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param, int ContentRatingParentID)
         {
-            var basequery = DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable().Where(m=> m.ContentRatingParentID==ContentRatingParentID);
+            var basequery = DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable().Where(m => m.ContentRatingParentID == ContentRatingParentID);
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.ContentRatingName.ToLower().Contains(search.ToLower())));
             }
 
@@ -97,12 +103,12 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }               
-        
-        
+        }
+
+
         public PaginationSet<ContentRatingDTO> GetContentRatingsByContentRatingParentID(int ContentRatingParentID, int page, int pagesize)
         {
-            
+
             var basequery = DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsByContentRatingParentIDAsQueryable(ContentRatingParentID);
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<ContentRating>(page, pagesize, basequery).Future();
@@ -118,29 +124,29 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<ContentRatingDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
 
         public ContentRatingDTO Insert(ContentRatingDTO objContentRating)
-        {            
+        {
             ContentRatingDTO result = Mapper.Map<ContentRatingDTO>(DataLayer.DataLayerFacade.ContentRatingRepository().Insert(objContentRating.ContentRatingName, objContentRating.ContentRatingAge, objContentRating.ContentRatingStatus, objContentRating.ContentRatingImage, objContentRating.ContentRatingDescription, objContentRating.ContentRatingOrder, objContentRating.ContentRatingLanguageCode, objContentRating.ContentRatingParentID));
 
-            if (result!=null)
+            if (result != null)
             {
-                return result;            
+                return result;
             }
             else
             {
                 return new ContentRatingDTO();
             }
         }
-               
+
         public bool Delete(int ContentRatingID)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.ContentRatingRepository().Delete(ContentRatingID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {
@@ -149,11 +155,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Update(int ContentRatingID, ContentRatingDTO objContentRating)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.ContentRatingRepository().Update(objContentRating.ContentRatingID, objContentRating.ContentRatingName, objContentRating.ContentRatingAge, objContentRating.ContentRatingStatus, objContentRating.ContentRatingImage, objContentRating.ContentRatingDescription, objContentRating.ContentRatingOrder, objContentRating.ContentRatingLanguageCode, objContentRating.ContentRatingParentID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {

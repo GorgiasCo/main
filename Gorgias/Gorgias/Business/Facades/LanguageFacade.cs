@@ -15,12 +15,17 @@ using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
 
 namespace Gorgias.BusinessLayer.Facades
-{   
+{
     public class LanguageFacade
-    {                
+    {
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.LanguageMobileModel> getLanguages()
+        {
+            return DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAsQueryable();
+        }
+
         public LanguageDTO GetLanguage(int LanguageID)
         {
-            LanguageDTO result = Mapper.Map<LanguageDTO>(DataLayer.DataLayerFacade.LanguageRepository().GetLanguage(LanguageID));             
+            LanguageDTO result = Mapper.Map<LanguageDTO>(DataLayer.DataLayerFacade.LanguageRepository().GetLanguage(LanguageID));
             return result;
         }
 
@@ -28,7 +33,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             var basequery = DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAllAsQueryable();
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.LanguageName.ToLower().Contains(search.ToLower())));
             }
 
@@ -46,10 +52,10 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }       
+        }
 
         public PaginationSet<LanguageDTO> GetLanguages(int page, int pagesize)
-        {           
+        {
             var basequery = DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAllAsQueryable();
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<Language>(page, pagesize, basequery).Future();
@@ -65,37 +71,37 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<LanguageDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
-        
+
         public List<LanguageDTO> GetLanguages()
-        {           
-            var basequery = Mapper.Map <List<LanguageDTO>>(DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAllAsQueryable());
+        {
+            var basequery = Mapper.Map<List<LanguageDTO>>(DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAllAsQueryable());
             return basequery.ToList();
         }
 
-        
+
 
         public LanguageDTO Insert(LanguageDTO objLanguage)
-        {            
-            LanguageDTO result = Mapper.Map<LanguageDTO>(DataLayer.DataLayerFacade.LanguageRepository().Insert(objLanguage.LanguageName, objLanguage.LanguageCode, objLanguage.LanguageStatus));
+        {
+            LanguageDTO result = Mapper.Map<LanguageDTO>(DataLayer.DataLayerFacade.LanguageRepository().Insert(objLanguage.LanguageName, objLanguage.LanguageCode, objLanguage.LanguageStatus, objLanguage.LanguageOrder));
 
-            if (result!=null)
+            if (result != null)
             {
-                return result;            
+                return result;
             }
             else
             {
                 return new LanguageDTO();
             }
         }
-               
+
         public bool Delete(int LanguageID)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.LanguageRepository().Delete(LanguageID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {
@@ -104,11 +110,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Update(int LanguageID, LanguageDTO objLanguage)
-        {            
-            bool result = DataLayer.DataLayerFacade.LanguageRepository().Update(objLanguage.LanguageID, objLanguage.LanguageName, objLanguage.LanguageCode, objLanguage.LanguageStatus);
+        {
+            bool result = DataLayer.DataLayerFacade.LanguageRepository().Update(objLanguage.LanguageID, objLanguage.LanguageName, objLanguage.LanguageCode, objLanguage.LanguageStatus, objLanguage.LanguageOrder);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {

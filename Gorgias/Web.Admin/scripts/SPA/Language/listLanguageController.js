@@ -22,8 +22,9 @@
         //datatables
         $scope.dtColumns = [
             //here We will add .withOption('name','column_name') for send column name to the server
-                    DTColumnBuilder.newColumn("LanguageName", "Name").withOption('name', 'LanguageName').renderWith(viewHtml),                
+            DTColumnBuilder.newColumn("LanguageName", "Name").withOption('name', 'LanguageName').renderWith(viewHtml),                
             DTColumnBuilder.newColumn("LanguageCode", "Code").withOption('name', 'LanguageCode'),
+            DTColumnBuilder.newColumn("LanguageOrder", "Order").withOption('name', 'LanguageOrder'),
             DTColumnBuilder.newColumn("LanguageStatus", "Status").withOption('name', 'LanguageStatus'),
             DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().renderWith(actionsHtml)
         ]

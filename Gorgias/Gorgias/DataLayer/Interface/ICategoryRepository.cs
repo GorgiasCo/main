@@ -12,8 +12,8 @@ namespace Gorgias.DataLayer.Interface
         Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID);
         bool Update(int CategoryID, String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID);
 
-        Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int CategoryType);
-        bool Update(int CategoryID, String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int CategoryType);
+        Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int? CategoryType);
+        bool Update(int CategoryID, String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int? CategoryType);
 
         bool Delete(int CategoryID);
 
@@ -29,6 +29,7 @@ namespace Gorgias.DataLayer.Interface
         //IQueryable
         IQueryable<Category> GetCategoriesAllAsQueryable();
         IQueryable<Business.DataTransferObjects.CategoryDTO> GetCategoriesAllAsQueryable(string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAllAsQueryable(string languageCode);
         IQueryable<Category> GetCategoriesAllAsQueryableX(string languageCode);
         IQueryable<Business.DataTransferObjects.Mobile.CategoryMobileModel> GetCategoriesAllAsQueryable(int ProfileID);
         IQueryable<Category> GetCategoriesAllAsQueryable(bool CategoryStatus);

@@ -14,6 +14,7 @@
           <Property Name="ActivityTypeLanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ActivityTypeStatus" Type="bit" Nullable="false" />
           <Property Name="ActivityTypeParentID" Type="int" />
+          <Property Name="ActivityTypeOrder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
@@ -253,6 +254,7 @@
           <Property Name="LanguageName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="LanguageStatus" Type="bit" Nullable="false" />
+          <Property Name="LanguageOrder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LinkType">
           <Key>
@@ -417,6 +419,17 @@
           <Property Name="ProfileTypeImage" Type="nvarchar" MaxLength="150" />
           <Property Name="ProfileTypeDescription" Type="ntext" />
           <Property Name="ProfileTypeParentID" Type="int" />
+        </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuoteName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="QuoteStatus" Type="bit" Nullable="false" />
+          <Property Name="QuoteLanguageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="QuoteProbability" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Recipient">
           <Key>
@@ -1165,6 +1178,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Quote_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Recipient_Message">
           <End Role="Message" Type="Self.Message" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1284,6 +1311,7 @@
           <EntitySet Name="ProfileTag" EntityType="Self.ProfileTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileToken" EntityType="Self.ProfileToken" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileType" EntityType="Self.ProfileType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportType" EntityType="Self.ReportType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequestType" EntityType="Self.RequestType" Schema="dbo" store:Type="Tables" />
@@ -1482,6 +1510,10 @@
           <AssociationSet Name="FK_ProfileToken_Profile" Association="Self.FK_ProfileToken_Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="ProfileToken" EntitySet="ProfileToken" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_Category" Association="Self.FK_Quote_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Quote" EntitySet="Quote" />
           </AssociationSet>
           <AssociationSet Name="FK_Recipient_Message" Association="Self.FK_Recipient_Message">
             <End Role="Message" EntitySet="Message" />
@@ -1764,6 +1796,11 @@
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="ProfileToken" EntitySet="ProfileTokens" />
           </AssociationSet>
+          <EntitySet Name="Quotes" EntityType="GorgiasModel.Quote" />
+          <AssociationSet Name="FK_Quote_Category" Association="GorgiasModel.FK_Quote_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -1858,6 +1895,7 @@
           <NavigationProperty Name="ParentCategory" Relationship="GorgiasModel.FK_Category_Category" FromRole="Category1" ToRole="Category" />
           <Property Name="CategoryType" Type="Int32" />
           <Property Name="CategoryOrder" Type="Int32" />
+          <NavigationProperty Name="Quotes" Relationship="GorgiasModel.FK_Quote_Category" FromRole="Category" ToRole="Quote" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -2843,6 +2881,7 @@
           <NavigationProperty Name="ActivityTypeChilds" Relationship="GorgiasModel.FK_ActivityType_ActivityType" FromRole="ActivityType" ToRole="ActivityType1" />
           <NavigationProperty Name="ActivityTypeParent" Relationship="GorgiasModel.FK_ActivityType_ActivityType" FromRole="ActivityType1" ToRole="ActivityType" />
           <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_ActivityType" FromRole="ActivityType" ToRole="ProfileActivity" />
+          <Property Name="ActivityTypeOrder" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ContentRating">
           <Key>
@@ -2858,8 +2897,8 @@
           <Property Name="ContentRatingLanguageCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ContentRatingParentID" Type="Int32" />
           <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_ContentRating" FromRole="ContentRating" ToRole="Album" />
-          <NavigationProperty Name="ContentRating1" Relationship="GorgiasModel.FK_ContentRating_ContentRating" FromRole="ContentRating" ToRole="ContentRating1" />
-          <NavigationProperty Name="ContentRating2" Relationship="GorgiasModel.FK_ContentRating_ContentRating" FromRole="ContentRating1" ToRole="ContentRating" />
+          <NavigationProperty Name="ContentRatingChilds" Relationship="GorgiasModel.FK_ContentRating_ContentRating" FromRole="ContentRating" ToRole="ContentRating1" />
+          <NavigationProperty Name="ContentRatingParent" Relationship="GorgiasModel.FK_ContentRating_ContentRating" FromRole="ContentRating1" ToRole="ContentRating" />
         </EntityType>
         <EntityType Name="ContentType">
           <Key>
@@ -2884,6 +2923,7 @@
           <Property Name="LanguageName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LanguageCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="LanguageStatus" Type="Boolean" Nullable="false" />
+          <Property Name="LanguageOrder" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ProfileActivity">
           <Key>
@@ -3045,6 +3085,32 @@
             </Principal>
             <Dependent Role="ProfileToken">
               <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="QuoteStatus" Type="Boolean" Nullable="false" />
+          <Property Name="QuoteLanguageCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="QuoteProbability" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="GorgiasModel.FK_Quote_Category" FromRole="Quote" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Quote_Category">
+          <End Type="GorgiasModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GorgiasModel.Quote" Role="Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3537,6 +3603,7 @@
           <EntitySetMapping Name="ActivityTypes">
             <EntityTypeMapping TypeName="GorgiasModel.ActivityType">
               <MappingFragment StoreEntitySet="ActivityType">
+                <ScalarProperty Name="ActivityTypeOrder" ColumnName="ActivityTypeOrder" />
                 <ScalarProperty Name="ActivityTypeParentID" ColumnName="ActivityTypeParentID" />
                 <ScalarProperty Name="ActivityTypeStatus" ColumnName="ActivityTypeStatus" />
                 <ScalarProperty Name="ActivityTypeLanguageCode" ColumnName="ActivityTypeLanguageCode" />
@@ -3576,6 +3643,7 @@
           <EntitySetMapping Name="Languages">
             <EntityTypeMapping TypeName="GorgiasModel.Language">
               <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageOrder" ColumnName="LanguageOrder" />
                 <ScalarProperty Name="LanguageStatus" ColumnName="LanguageStatus" />
                 <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
                 <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
@@ -3610,6 +3678,18 @@
                 <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
                 <ScalarProperty Name="ProfileToken1" ColumnName="ProfileToken" />
                 <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quotes">
+            <EntityTypeMapping TypeName="GorgiasModel.Quote">
+              <MappingFragment StoreEntitySet="Quote">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="QuoteProbability" ColumnName="QuoteProbability" />
+                <ScalarProperty Name="QuoteLanguageCode" ColumnName="QuoteLanguageCode" />
+                <ScalarProperty Name="QuoteStatus" ColumnName="QuoteStatus" />
+                <ScalarProperty Name="QuoteName" ColumnName="QuoteName" />
+                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

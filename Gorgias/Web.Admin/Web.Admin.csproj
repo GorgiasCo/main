@@ -253,6 +253,10 @@
     <Content Include="layout\Profile\UserProfile\listprofileUserProfile.html" />
     <Content Include="layout\Profile\viewAdminProfile.html" />
     <Content Include="layout\Profile\viewProfile.html" />
+    <Content Include="layout\Quote\addQuote.html" />
+    <Content Include="layout\Quote\editQuote.html" />
+    <Content Include="layout\Quote\listQuote.html" />
+    <Content Include="layout\Quote\viewQuote.html" />
     <Content Include="layout\ReportType\addReportType.html" />
     <Content Include="layout\ReportType\editReportType.html" />
     <Content Include="layout\ReportType\listReportType.html" />
@@ -2191,6 +2195,10 @@
     <Content Include="scripts\SPA\Profile\UserProfile\listprofileUserProfileController.js" />
     <Content Include="scripts\SPA\Profile\viewAdminProfileController.js" />
     <Content Include="scripts\SPA\Profile\viewProfileController.js" />
+    <Content Include="scripts\SPA\Quote\addQuoteController.js" />
+    <Content Include="scripts\SPA\Quote\editQuoteController.js" />
+    <Content Include="scripts\SPA\Quote\listQuoteController.js" />
+    <Content Include="scripts\SPA\Quote\viewQuoteController.js" />
     <Content Include="scripts\SPA\ReportType\addReportTypeController.js" />
     <Content Include="scripts\SPA\ReportType\editReportTypeController.js" />
     <Content Include="scripts\SPA\ReportType\listReportTypeController.js" />
