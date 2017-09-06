@@ -3,6 +3,10 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public static class Facade
     {
+        public static ProfileActivityFacade ProfileActivityFacade()
+        {
+            return new ProfileActivityFacade();
+        }
         public static ProfileSettingFacade ProfileSettingFacade()
         {
             return new ProfileSettingFacade();

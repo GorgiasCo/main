@@ -389,5 +389,73 @@ namespace Gorgias.Controllers
                 return response;
             });
         }
+
+        [Route("Mobile/V2/Profile/Register", Name = "GetV2MobileRegisterNewUser")]
+        [HttpPost]
+        public HttpResponseMessage ProfileRegister(HttpRequestMessage request, ProfileRegisterMobileModel profileRegisterMobileModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.ProfileFacade().registerProfile(profileRegisterMobileModel);
+                if (!result)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {                    
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Albums/Filter", Name = "GetV2MobileAlbumFilter")]
+        [HttpPost]
+        public HttpResponseMessage AlbumFilter(HttpRequestMessage request, AlbumFilterMobileModel albumFilterMobileModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                PaginationSet<AlbumMobileModel> result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbums(albumFilterMobileModel);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<PaginationSet<AlbumMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/Activity", Name = "MobileV2ProfileActivityInsert")]
+        [HttpPost]
+        public HttpResponseMessage Post(HttpRequestMessage request, Business.DataTransferObjects.ProfileActivityDTO objProfileActivity)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    Business.DataTransferObjects.ProfileActivityDTO result = BusinessLayer.Facades.Facade.ProfileActivityFacade().Insert(objProfileActivity);
+                    if (result != null)
+                    {
+                        response = request.CreateResponse<Business.DataTransferObjects.ProfileActivityDTO>(HttpStatusCode.Created, result);
+                    }
+                    else
+                    {
+                        response = request.CreateResponse<String>(HttpStatusCode.Found, null);
+                    }
+                }
+                return response;
+            });
+        }
     }
 }

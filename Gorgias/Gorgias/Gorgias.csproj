@@ -372,17 +372,22 @@
     <Compile Include="Business\DataTransferObjects\Mobile\ProfileSliderModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\ProfileUpdateModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ActivityTypeMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumFilterMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentRatingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LanguageMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginAttempt.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSettingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileTokenMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\QuoteMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\NewsletterDTO.cs" />
     <Compile Include="Business\DataTransferObjects\PaymentDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ProfileActivityDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileAttributeDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileCommissionDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileIndustryDTO.cs" />
@@ -458,6 +463,7 @@
     <Compile Include="Business\Facades\LanguageFacade.cs" />
     <Compile Include="Business\Facades\NewsletterFacade.cs" />
     <Compile Include="Business\Facades\PaymentFacade.cs" />
+    <Compile Include="Business\Facades\ProfileActivityFacade.cs" />
     <Compile Include="Business\Facades\ProfileAttributeFacade.cs" />
     <Compile Include="Business\Facades\ProfileCommissionFacade.cs" />
     <Compile Include="Business\Facades\ProfileIndustryFacade.cs" />
@@ -537,6 +543,7 @@
     <Compile Include="Business\Validators\MessageValidator.cs" />
     <Compile Include="Business\Validators\NewsletterValidator.cs" />
     <Compile Include="Business\Validators\PaymentValidator.cs" />
+    <Compile Include="Business\Validators\ProfileActivityValidator.cs" />
     <Compile Include="Business\Validators\ProfileAttributeValidator.cs" />
     <Compile Include="Business\Validators\ProfileCommissionValidator.cs" />
     <Compile Include="Business\Validators\ProfileIndustryValidator.cs" />
@@ -611,6 +618,7 @@
     <Compile Include="Controllers\MobileV2Controller.cs" />
     <Compile Include="Controllers\NewsletterController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ProfileActivityController.cs" />
     <Compile Include="Controllers\ProfileAttributeController.cs" />
     <Compile Include="Controllers\ProfileCommissionController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -666,6 +674,7 @@
     <Compile Include="DataLayer\Interface\IMessageRepository.cs" />
     <Compile Include="DataLayer\Interface\INewsletterRepository.cs" />
     <Compile Include="DataLayer\Interface\IPaymentRepository.cs" />
+    <Compile Include="DataLayer\Interface\IProfileActivityRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileAttributeRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileCommissionRepository.cs" />
     <Compile Include="DataLayer\Interface\IProfileIndustryRepository.cs" />
@@ -715,6 +724,7 @@
     <Compile Include="DataLayer\Repository\SQL\MessageRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\NewsletterRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\PaymentRepository.cs" />
+    <Compile Include="DataLayer\Repository\SQL\ProfileActivityRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileAttributeRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileCommissionRepository.cs" />
     <Compile Include="DataLayer\Repository\SQL\ProfileIndustryRepository.cs" />

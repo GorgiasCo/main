@@ -7,7 +7,7 @@
       <Diagram DiagramId="2497eb49a50e4cbbb988d8847fb93182" Name="Diagram1">
         <EntityTypeShape EntityType="GorgiasModel.Address" Width="1.5" PointX="8.25" PointY="11.125" />
         <EntityTypeShape EntityType="GorgiasModel.AddressType" Width="1.5" PointX="6" PointY="7.375" />
-        <EntityTypeShape EntityType="GorgiasModel.Album" Width="1.5" PointX="8.25" PointY="16.5" />
+        <EntityTypeShape EntityType="GorgiasModel.Album" Width="1.75" PointX="8.25" PointY="16.5" />
         <EntityTypeShape EntityType="GorgiasModel.Attribute" Width="1.5" PointX="3" PointY="22.625" />
         <EntityTypeShape EntityType="GorgiasModel.Category" Width="1.5" PointX="6" PointY="26.875" />
         <EntityTypeShape EntityType="GorgiasModel.City" Width="1.5" PointX="6" PointY="3.25" />

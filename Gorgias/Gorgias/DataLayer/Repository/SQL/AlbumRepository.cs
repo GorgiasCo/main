@@ -325,6 +325,18 @@ namespace Gorgias.DataLayer.Repository.SQL
             return result.ToList();
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> GetV2AlbumContentsByCategoryAsQueryable(int CategoryID)
+        {
+            var result = (from w in context.Albums.Include("Contents") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID orderby w.AlbumDatePublish descending select new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel { ProfileID = w.ProfileID, AlbumID = w.AlbumID, AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability = w.AlbumAvailability, AlbumDateExpire = w.AlbumDateExpire, AlbumDatePublish = w.AlbumDatePublish, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m => m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m => m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel() { ContentLike = c.ContentLike, ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count, ContentDimension = c.ContentDimension, ContentTypeExpression = c.ContentType1.ContentTypeExpression}).ToList() }).AsQueryable();
+            return result;
+        }
+
+        public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID)
+        {
+            var result = (from w in context.Albums.Include("Contents.Comments").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID orderby w.AlbumDatePublish descending select w).AsQueryable();
+            return result;
+        }
+
         public IList<Business.DataTransferObjects.Mobile.AlbumMobileAdminModel> GetAdminAlbumContentsAsQueryable(int ProfileID, int page = 1, int pageSize = 7, int contentSize = 6)
         {
             var result = (from w in context.Albums.Include("Contents") where w.AlbumStatus == true && w.ProfileID == ProfileID && w.AlbumIsDeleted == false orderby w.AlbumDateCreated descending select new Business.DataTransferObjects.Mobile.AlbumMobileAdminModel { AlbumID = w.AlbumID, AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability = w.AlbumAvailability, AlbumDateExpire = w.AlbumDateExpire, AlbumDatePublish = w.AlbumDatePublish, AlbumCategoryName = w.Category.CategoryName, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m => m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m => m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.ContentMobileModel() { ContentLike = c.ContentLike, ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count }).Take(contentSize).ToList() }).Skip(pageSize * (page - 1)).Take(pageSize).AsQueryable();

@@ -15,6 +15,7 @@ namespace Gorgias.DataLayer.Interface
         bool Update(int ProfileID, String ProfileFullname, string ProfileFullnameEnglish, Boolean ProfileIsPeople, Boolean ProfileIsDeleted, DateTime ProfileDateCreated, String ProfileDescription, int ProfileView, int ProfileLike, String ProfileURL, String ProfileShortDescription, String ProfileImage, String ProfileEmail, Boolean ProfileStatus, Boolean ProfileIsConfirmed, int ProfileTypeID, int ThemeID, int SubscriptionTypeID);
         bool Update(int ProfileID, bool Status, int UpdateMode);
         bool Update(int ProfileID, string ProfileFullname);
+        bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID);
         bool Delete(int ProfileID);
 
         Profile GetProfile(int ProfileID);

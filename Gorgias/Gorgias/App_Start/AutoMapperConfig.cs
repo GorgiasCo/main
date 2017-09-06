@@ -58,6 +58,7 @@ namespace Gorgias
                 cfg.CreateMap<ProfileToken, Business.DataTransferObjects.ProfileTokenDTO>();
                 cfg.CreateMap<ProfileReading, Business.DataTransferObjects.ProfileReadingDTO>();
                 cfg.CreateMap<ProfileSetting, Business.DataTransferObjects.ProfileSettingDTO>();
+                cfg.CreateMap<ProfileActivity, Business.DataTransferObjects.ProfileActivityDTO>();
             });   
         }
     }

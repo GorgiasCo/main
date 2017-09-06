@@ -5,6 +5,10 @@ namespace Gorgias.DataLayer
 {
     public static class DataLayerFacade
     {
+        public static Interface.IProfileActivityRepository ProfileActivityRepository()
+        {
+            return new Repository.SQL.ProfileActivityRepository();
+        }
         public static Interface.IProfileSettingRepository ProfileSettingRepository()
         {
             return new Repository.SQL.ProfileSettingRepository();

@@ -23,6 +23,11 @@ namespace Gorgias.BusinessLayer.Facades
         {
             return DataLayer.DataLayerFacade.ProfileRepository().getLoginAttempt(ProfileEmail, ProfileID);
         }
+
+        public bool registerProfile(Business.DataTransferObjects.Mobile.V2.ProfileRegisterMobileModel registerProfileMobileModel)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID);            
+        }
         //V2 End
         public ProfileDTO GetProfile(int ProfileID)
         {

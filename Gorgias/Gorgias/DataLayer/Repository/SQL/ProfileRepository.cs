@@ -243,6 +243,40 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID)
+        {
+            Profile obj = new Profile();
+            obj = (from w in context.Profiles where w.ProfileID == ProfileID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                //Check Email is in system for registration ;)
+                string emailProfile = ProfileEmail.ToLower();
+                Profile resultEmailChecking = (from em in context.Profiles where em.ProfileEmail.ToLower().Equals(emailProfile) select em).FirstOrDefault();
+                if(resultEmailChecking != null)
+                {
+                    return false;
+                }
+
+                context.Profiles.Attach(obj);
+
+                obj.ProfileFullname = ProfileFullname;
+                obj.ProfileFullnameEnglish = ProfileFullnameEnglish;
+                obj.ProfileShortDescription = ProfileShortDescription;
+                obj.ProfileEmail = ProfileEmail;
+                //obj.IndustryID = IndustryID;
+                obj.ProfileTypeID = ProfileTypeID;
+
+                obj.Industries.Add((from x in context.Industries where x.IndustryID == IndustryID select x).First());                
+                obj.Addresses.Add(new Address { AddressAddress = "NA", AddressEmail = ProfileEmail, AddressName = ProfileFullname, AddressStatus = true, AddressTypeID = 1, CityID = CityID, AddressTel = "NA" });                
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Update(int ProfileID, string ProfileFullname)
         {
             Profile obj = new Profile();
