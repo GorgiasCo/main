@@ -137,6 +137,47 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Album/{AlbumID}/{ProfileID}", Name = "GetV2MobileAlbumDetail")]
+        [HttpGet]
+        public HttpResponseMessage GetAlbum(HttpRequestMessage request, int AlbumID, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;                
+                AlbumMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbum(AlbumID,ProfileID);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<AlbumMobileModel>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/Mini/{ProfileID}/{RequestedProfileID}", Name = "GetV2MobileMiniProfile")]
+        [HttpGet]
+        public HttpResponseMessage GetMiniProfile(HttpRequestMessage request, int ProfileID, int RequestedProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                MiniProfileMobileModel result = BusinessLayer.Facades.Facade.ProfileFacade().GetV2MiniMobileProfile(ProfileID, RequestedProfileID, headerLanguage.First().Value);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<MiniProfileMobileModel>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Profile/Readings", Name = "GetV2MobileProfileReadings")]
         [HttpPost]
         public HttpResponseMessage UpdateProfileReadings(HttpRequestMessage request, Business.DataTransferObjects.Mobile.V2.ProfileReadingMobileModel profileReadingMobileModel)

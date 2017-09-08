@@ -30,7 +30,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public int? ContentLike { get; set; }
         public int? ContentComments { get; set; }
 
-        public virtual IList<CommentDTO> TopComments { get; set; }
+        public virtual IList<ContentCommentMobileModel> TopComments { get; set; }
 
         //Content GeoLocation info
         public DbGeography ContentGeoLocation { get; set; }

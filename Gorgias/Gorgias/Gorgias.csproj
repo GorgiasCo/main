@@ -375,11 +375,13 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumFilterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentCommentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentRatingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LanguageMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginAttempt.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\MiniProfileMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSettingMobileModel.cs" />

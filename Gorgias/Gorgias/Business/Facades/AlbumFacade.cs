@@ -55,7 +55,7 @@ namespace Gorgias.BusinessLayer.Facades
                 {
                     ContentLike = c.ContentLike,
                     ContentComments = c.Comments.Count,
-                    TopComments = c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new CommentDTO { CommentNote = m.CommentNote, ProfileID = m.ProfileID }).ToList(),
+                    TopComments = c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname }).ToList(),
                     ContentURL = c.ContentURL,
                     ContentID = c.ContentID,
                     ContentTitle = c.ContentTitle,
@@ -101,13 +101,13 @@ namespace Gorgias.BusinessLayer.Facades
                 case 2:
                     basequery = basequery.OrderByDescending(m => m.AlbumID);
                     break;
-                default:                    
+                default:
                     break;
             }
 
 
 
-            return basequery;           
+            return basequery;
         }
 
         public IQueryable<Album> getAlbumsByCategoryContent(Business.DataTransferObjects.Mobile.V2.AlbumFilterMobileModel albumFilterMobileModel)
@@ -128,6 +128,44 @@ namespace Gorgias.BusinessLayer.Facades
             }
 
             return basequery;
+        }
+
+        public Business.DataTransferObjects.Mobile.V2.AlbumMobileModel getAlbum(int AlbumID, int ProfileID)
+        {
+            Album w = DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2Mobile(AlbumID,ProfileID);
+
+            Business.DataTransferObjects.Mobile.V2.AlbumMobileModel result = new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
+            {
+                ProfileID = w.ProfileID,
+                AlbumID = w.AlbumID,
+                AlbumCover = w.AlbumCover,
+                AlbumDateCreated = w.AlbumDateCreated,
+                AlbumName = w.AlbumName,
+                AlbumAvailability = w.AlbumAvailability,
+                AlbumDateExpire = w.AlbumDateExpire,
+                AlbumDatePublish = w.AlbumDatePublish,
+                CategoryName = w.Category.CategoryName,
+                CategoryID = w.CategoryID,
+                //AlbumAvailabilityName = w.AlbumType.AlbumTypeName,
+                AlbumLike = w.Contents.Sum(m => m.ContentLike),
+                AlbumContents = w.Contents.Count,
+                AlbumComments = w.Contents.Sum(m => m.Comments.Count),
+                AlbumHasComment = w.AlbumHasComment,
+                Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
+                {
+                    ContentLike = c.ContentLike,
+                    ContentComments = c.Comments.Count,
+                    TopComments = c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname}).ToList(),
+                    ContentURL = c.ContentURL,
+                    ContentID = c.ContentID,
+                    ContentTitle = c.ContentTitle,
+                    ContentDimension = c.ContentDimension,
+                    ContentTypeID = c.ContentType,
+                    ContentTypeExpression = c.ContentType1.ContentTypeExpression
+                }).ToList()
+            };            
+
+            return result;
         }
 
         //V2 End

@@ -19,6 +19,10 @@ namespace Gorgias.BusinessLayer.Facades
     public class ProfileFacade
     {
         //V2 Begin
+        public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetV2MiniMobileProfile(ProfileID, RequestedProfileID, languageCode); 
+        }
         public Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID)
         {
             return DataLayer.DataLayerFacade.ProfileRepository().getLoginAttempt(ProfileEmail, ProfileID);

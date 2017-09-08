@@ -17,6 +17,7 @@ namespace Gorgias.DataLayer.Interface
         bool Delete(int AlbumID);
 
         Album GetAlbum(int AlbumID);
+        Album GetAlbumV2Mobile(int AlbumID, int ProfileID);
 
         //List
         List<Album> GetAlbumsAll();

@@ -251,6 +251,11 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Albums where w.AlbumID == AlbumID select w).FirstOrDefault();
         }
 
+        public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
+        {
+            return (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
+        }
+
         //Lists
         public List<Album> GetAlbumsAll()
         {
