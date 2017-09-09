@@ -24,10 +24,10 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         [Newtonsoft.Json.JsonIgnore]
         public DateTime AlbumDateCreated { get; set; }
         
-        [Newtonsoft.Json.JsonIgnore]
+        //[Newtonsoft.Json.JsonIgnore]
         public DateTime AlbumDatePublish { get; set; }
 
-        [Newtonsoft.Json.JsonIgnore]
+        //[Newtonsoft.Json.JsonIgnore]
         public DateTime AlbumDateExpire { get; set; }
         public int AlbumAvailability { get; set; }
 
@@ -55,11 +55,21 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
 
+        public double ExpiringTime
+        {
+            get
+            {
+                TimeSpan v = AlbumDateExpire - AlbumDatePublish;
+                return v.TotalMinutes;
+            }
+        }
+
         public string cdnAlbumCover
         {
             get
             {
-                return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiascdn.azureedge.net/");
+                return "ddd";
+                //return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiascdn.azureedge.net/");
                 //return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiasresizer.azurewebsites.net/");
             }
         }
@@ -74,7 +84,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
                 }
                 else
                 {
-                    return AlbumCover.Replace("hottest-album-", "blur-hottest-album-");
+                    return "Eshgham Thanks Allah";//AlbumCover.Replace("hottest-album-", "blur-hottest-album-");
                 }
             }
         }

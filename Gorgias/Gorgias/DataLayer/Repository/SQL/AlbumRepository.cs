@@ -92,7 +92,8 @@ namespace Gorgias.DataLayer.Repository.SQL
                 if (AlbumHasComment.HasValue)
                 {
                     obj.AlbumHasComment = AlbumHasComment.Value;
-                } else
+                }
+                else
                 {
                     obj.AlbumHasComment = false;
                 }
@@ -154,7 +155,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             {
                 context.Albums.Attach(obj);
 
-                obj.AlbumView = obj.AlbumView + 1;                
+                obj.AlbumView = obj.AlbumView + 1;
                 context.SaveChanges();
                 return true;
             }
@@ -246,9 +247,231 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        //V2 Begin ;)
+        public bool UpdatePublishAlbum(int AlbumID)
+        {
+            Album obj = new Album();
+            obj = (from w in context.Albums where w.AlbumID == AlbumID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Albums.Attach(obj);
+
+                obj.AlbumStatus = true;
+                obj.AlbumDatePublish = DateTime.UtcNow;
+                obj.AlbumDateExpire = obj.AlbumDatePublish.AddMinutes(obj.AlbumAvailability);
+
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateRepostAlbum(int AlbumID)
+        {
+            Album obj = new Album();
+            obj = (from w in context.Albums where w.AlbumID == AlbumID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Albums.Attach(obj);
+
+                obj.AlbumStatus = true;
+                obj.AlbumDatePublish = DateTime.UtcNow;
+                obj.AlbumDateExpire = obj.AlbumDatePublish.AddMinutes(obj.AlbumAvailability);
+                obj.AlbumRepostAttempt = obj.AlbumRepostAttempt + 1;
+                obj.AlbumRepostRequest = 0; 
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents)
+        {
+            try
+            {
+                Album obj = new Album();
+                obj.AlbumName = AlbumName;
+                obj.AlbumDateCreated = DateTime.UtcNow;
+                obj.AlbumStatus = AlbumStatus;
+                obj.AlbumCover = AlbumCover;
+                obj.AlbumIsDeleted = false;
+                obj.CategoryID = CategoryID;
+                obj.ProfileID = ProfileID;
+
+                if (AlbumStatus)
+                {
+                    obj.AlbumDatePublish = obj.AlbumDateCreated;
+                } else
+                {
+                    obj.AlbumDatePublish = AlbumDatePublish;
+                }
+                
+
+                if (AlbumHasComment.HasValue)
+                {
+                    obj.AlbumHasComment = AlbumHasComment.Value;
+                }
+                else
+                {
+                    obj.AlbumHasComment = false;
+                }
+
+                //Add for Hottest
+                if (AlbumAvailability > 0)
+                {
+                    obj.AlbumDateExpire = obj.AlbumDatePublish.AddMinutes(AlbumAvailability);
+                }
+                else
+                {
+                    //4 years to expire
+                    obj.AlbumDateExpire = obj.AlbumDateCreated.AddMonths(48);
+                }
+
+                //obj.AlbumDatePublish = obj.AlbumDateCreated;
+                obj.AlbumAvailability = AlbumAvailability;
+
+                //obj.AlbumHasComment = AlbumHasComment;
+                obj.AlbumReadingLanguageCode = AlbumReadingLanguageCode;
+                obj.AlbumRepostValue = AlbumRepostValue.HasValue ? AlbumRepostValue.Value : 500;
+                obj.AlbumRepostRequest = AlbumRepostRequest.HasValue ? AlbumRepostRequest.Value : 0;
+                obj.AlbumRepostAttempt = AlbumRepostAttempt.HasValue ? AlbumRepostAttempt.Value : 0;
+                obj.AlbumPrice = AlbumPrice.HasValue ? AlbumPrice.Value : 0;
+                obj.AlbumIsTokenAvailable = AlbumIsTokenAvailable.HasValue ? AlbumIsTokenAvailable.Value : false;
+                obj.AlbumPriceToken = AlbumPriceToken.HasValue ? AlbumPriceToken.Value : 0;
+
+                if (ContentRatingID.HasValue)
+                {
+                    obj.ContentRatingID = ContentRatingID.Value;
+                }
+                else
+                {
+                    obj.ContentRatingID = null;
+                }
+
+                foreach (Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel objContent in Contents)
+                {
+                    obj.Contents.Add(new Content
+                    {
+                        ContentCreatedDate = obj.AlbumDateCreated,
+                        ContentDimension = objContent.ContentDimension,
+                        ContentIsDeleted = false,
+                        ContentLike = 0,
+                        ContentTitle = objContent.ContentTitle,
+                        ContentStatus = true,
+                        ContentURL = objContent.ContentTitle,
+                        ContentType = objContent.ContentTypeID,
+                        ContentGeoLocation = objContent.ContentGeoLocation,
+                    });
+                }
+
+                context.Albums.Add(obj);
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool Update(int AlbumID, String AlbumName, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, int AlbumView, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID)
+        {
+            Album obj = new Album();
+            obj = (from w in context.Albums where w.AlbumID == AlbumID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Albums.Attach(obj);
+
+                obj.AlbumName = AlbumName;
+                obj.AlbumStatus = AlbumStatus;
+                obj.AlbumCover = AlbumCover;
+                obj.AlbumIsDeleted = AlbumIsDeleted;
+                obj.CategoryID = CategoryID;
+                obj.ProfileID = ProfileID;
+                obj.AlbumView = AlbumView;
+                obj.AlbumDatePublish = AlbumDatePublish;
+
+                if (AlbumHasComment.HasValue)
+                {
+                    obj.AlbumHasComment = AlbumHasComment.Value;
+                }
+                else
+                {
+                    obj.AlbumHasComment = false;
+                }
+
+                // >> !!!! How ;)
+                //obj.AlbumDateExpire = AlbumDateExpire;
+
+                obj.AlbumAvailability = AlbumAvailability;
+                obj.AlbumReadingLanguageCode = AlbumReadingLanguageCode;
+                obj.AlbumRepostValue = AlbumRepostValue.HasValue ? AlbumRepostValue.Value : 500;
+                obj.AlbumRepostRequest = AlbumRepostRequest.HasValue ? AlbumRepostRequest.Value : 0;
+                obj.AlbumRepostAttempt = AlbumRepostAttempt.HasValue ? AlbumRepostAttempt.Value : 0;
+                obj.AlbumPrice = AlbumPrice.HasValue ? AlbumPrice.Value : 0;
+                obj.AlbumIsTokenAvailable = AlbumIsTokenAvailable.HasValue ? AlbumIsTokenAvailable.Value : false;
+                obj.AlbumPriceToken = AlbumPriceToken.HasValue ? AlbumPriceToken.Value : 0;
+
+                if (ContentRatingID.HasValue)
+                {
+                    obj.ContentRatingID = ContentRatingID.Value;
+                }
+                else
+                {
+                    obj.ContentRatingID = null;
+                }
+
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //V2 End ;)
+
         public Album GetAlbum(int AlbumID)
         {
             return (from w in context.Albums where w.AlbumID == AlbumID select w).FirstOrDefault();
+        }
+
+        public Business.DataTransferObjects.Mobile.V2.AlbumUpdateMobileModel GetAlbumV2(int AlbumID)
+        {
+            return (from w in context.Albums
+                    where w.AlbumID == AlbumID
+                    select new Business.DataTransferObjects.Mobile.V2.AlbumUpdateMobileModel
+                    {
+                        AlbumCover = w.AlbumCover,
+                        AlbumAvailability = w.AlbumAvailability,
+                        AlbumDateCreated = w.AlbumDateCreated,
+                        AlbumDateExpires = w.AlbumDateExpire,
+                        AlbumDatePublish = w.AlbumDatePublish,
+                        AlbumHasComment = w.AlbumHasComment,
+                        AlbumIsTokenAvailable = w.AlbumIsTokenAvailable,
+                        AlbumName = w.AlbumName,
+                        AlbumPrice = w.AlbumPrice,
+                        AlbumPriceToken = w.AlbumPriceToken,
+                        AlbumReadingLanguageCode = w.AlbumReadingLanguageCode,
+                        AlbumRepostAttempt = w.AlbumRepostAttempt,
+                        AlbumRepostRequest = w.AlbumRepostRequest,
+                        AlbumRepostValue = w.AlbumRepostValue,
+                        CategoryID = w.CategoryID,
+                        ContentRatingID = w.ContentRatingID,
+                        Contents = w.Contents.Select(c => new Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel
+                        {
+                            ContentDimension = c.ContentDimension,
+                            ContentGeoLocation = c.ContentGeoLocation,
+                            ContentTitle = c.ContentTitle,
+                            ContentURL = c.ContentURL,
+                            ContentTypeID = c.ContentType
+                        }).ToList()
+                    }).FirstOrDefault();
         }
 
         public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
@@ -315,12 +538,12 @@ namespace Gorgias.DataLayer.Repository.SQL
                 var result = (from w in context.Albums.Include("Contents") where w.AlbumID == AlbumID && w.AlbumStatus == true && w.AlbumIsDeleted == false select new Business.DataTransferObjects.Mobile.AlbumMobileModel { ProfileID = w.ProfileID, AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability = w.AlbumAvailability, AlbumDateExpire = w.AlbumDateExpire, AlbumDatePublish = w.AlbumDatePublish, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m => m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m => m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.Select(c => new Business.DataTransferObjects.Mobile.ContentMobileModel() { ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count }).ToList() }).FirstOrDefault();
                 return result;
             }
-            return null;            
+            return null;
         }
 
         public IList<Business.DataTransferObjects.Mobile.AlbumMobileModel> GetAlbumContentsAsQueryable(int ProfileID, int page = 1, int pageSize = 7, int contentSize = 6)
         {
-            var result =  (from w in context.Albums.Include("Contents") where w.AlbumStatus == true && w.ProfileID == ProfileID && w.AlbumIsDeleted == false orderby w.AlbumDateCreated descending select new Business.DataTransferObjects.Mobile.AlbumMobileModel { ProfileID = w.ProfileID, AlbumID = w.AlbumID , AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability= w.AlbumAvailability, AlbumDateExpire=w.AlbumDateExpire, AlbumDatePublish=w.AlbumDatePublish, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m=> m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m=> m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c=> new Business.DataTransferObjects.Mobile.ContentMobileModel(){ ContentLike = c.ContentLike, ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count}).Take(contentSize).ToList()}).Skip(pageSize * (page - 1)).Take(pageSize).AsQueryable();            
+            var result = (from w in context.Albums.Include("Contents") where w.AlbumStatus == true && w.ProfileID == ProfileID && w.AlbumIsDeleted == false orderby w.AlbumDateCreated descending select new Business.DataTransferObjects.Mobile.AlbumMobileModel { ProfileID = w.ProfileID, AlbumID = w.AlbumID, AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability = w.AlbumAvailability, AlbumDateExpire = w.AlbumDateExpire, AlbumDatePublish = w.AlbumDatePublish, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m => m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m => m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.ContentMobileModel() { ContentLike = c.ContentLike, ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count }).Take(contentSize).ToList() }).Skip(pageSize * (page - 1)).Take(pageSize).AsQueryable();
             return result.ToList();
         }
 
@@ -332,13 +555,14 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> GetV2AlbumContentsByCategoryAsQueryable(int CategoryID)
         {
-            var result = (from w in context.Albums.Include("Contents") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID orderby w.AlbumDatePublish descending select new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel { ProfileID = w.ProfileID, AlbumID = w.AlbumID, AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability = w.AlbumAvailability, AlbumDateExpire = w.AlbumDateExpire, AlbumDatePublish = w.AlbumDatePublish, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m => m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m => m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel() { ContentLike = c.ContentLike, ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count, ContentDimension = c.ContentDimension, ContentTypeExpression = c.ContentType1.ContentTypeExpression}).ToList() }).AsQueryable();
+            var result = (from w in context.Albums.Include("Contents") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID orderby w.AlbumDatePublish descending select new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel { ProfileID = w.ProfileID, AlbumID = w.AlbumID, AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability = w.AlbumAvailability, AlbumDateExpire = w.AlbumDateExpire, AlbumDatePublish = w.AlbumDatePublish, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m => m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m => m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel() { ContentLike = c.ContentLike, ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count, ContentDimension = c.ContentDimension, ContentTypeExpression = c.ContentType1.ContentTypeExpression }).ToList() }).AsQueryable();
             return result;
         }
 
         public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID)
         {
-            var result = (from w in context.Albums.Include("Contents.Comments").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID orderby w.AlbumDatePublish descending select w).AsQueryable();
+            //var currentDate = DateTime.UtcNow;
+            var result = (from w in context.Albums.Include("Contents.Comments").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID select w).AsQueryable();
             return result;
         }
 

@@ -374,12 +374,14 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ActivityTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumFilterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumUpdateMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CityMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentCommentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentRatingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentTypeMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentUpdateMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CountryMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\IndustryMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LanguageMobileModel.cs" />

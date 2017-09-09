@@ -12,6 +12,66 @@ namespace Gorgias.Controllers
     [RoutePrefix("api")]
     public class MobileV2Controller : ApiControllerBase
     {
+        [Route("Mobile/V2/Album/Story/{AlbumID}", Name = "GetV2MobileAlbumStory")]
+        [HttpGet]
+        public HttpResponseMessage GetAlbumStory(HttpRequestMessage request, int AlbumID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;                
+                AlbumUpdateMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().GetAlbumV2(AlbumID);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<AlbumUpdateMobileModel>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Album/Repost/{AlbumID}", Name = "GetV2MobileAlbumRepost")]
+        [HttpGet]
+        public HttpResponseMessage RepostAlbum(HttpRequestMessage request, int AlbumID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.AlbumFacade().RepostAlbum(AlbumID);
+                if (!result)
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotFound, false);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Album/Publish/Upcoming/{AlbumID}", Name = "GetV2MobileAlbumPublishUpcoming")]
+        [HttpGet]
+        public HttpResponseMessage PublishAlbum(HttpRequestMessage request, int AlbumID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.AlbumFacade().PublishAlbum(AlbumID);
+                if (!result)
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotFound, false);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Categories", Name = "GetV2MobileCategories")]
         [HttpGet]
         public HttpResponseMessage GetCategories(HttpRequestMessage request)
@@ -557,7 +617,7 @@ namespace Gorgias.Controllers
 
         [Route("Mobile/V2/Profile/Activity", Name = "MobileV2ProfileActivityInsert")]
         [HttpPost]
-        public HttpResponseMessage Post(HttpRequestMessage request, Business.DataTransferObjects.ProfileActivityDTO objProfileActivity)
+        public HttpResponseMessage ProfileActivityInsert(HttpRequestMessage request, Business.DataTransferObjects.ProfileActivityDTO objProfileActivity)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -578,6 +638,27 @@ namespace Gorgias.Controllers
                     {
                         response = request.CreateResponse<String>(HttpStatusCode.Found, null);
                     }
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Album/New", Name = "MobileV2AlbumInsert")]
+        [HttpPost]
+        public HttpResponseMessage AlbumInsert(HttpRequestMessage request, AlbumUpdateMobileModel objAlbum)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                Business.DataTransferObjects.AlbumDTO result = BusinessLayer.Facades.Facade.AlbumFacade().InsertV2(objAlbum);
+                if (result != null)
+                {
+                    response = request.CreateResponse<Business.DataTransferObjects.AlbumDTO>(HttpStatusCode.Created, result);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotAcceptable, false);
                 }
                 return response;
             });
