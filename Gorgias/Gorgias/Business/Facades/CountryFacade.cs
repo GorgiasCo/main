@@ -15,12 +15,23 @@ using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
 
 namespace Gorgias.BusinessLayer.Facades
-{   
+{
     public class CountryFacade
-    {                
+    {
+        //V2 Begin ;)
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.CountryMobileModel> getCountries(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.CountryRepository().GetCountriesAsQueryable(languageCode);
+        }
+
+        public IQueryable<CountryDTO> getCountriesByLanguageCode(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.CountryRepository().GetCountriesAllAsQueryable(languageCode);
+        }
+        //V2 End ;)
         public CountryDTO GetCountry(int CountryID)
         {
-            CountryDTO result = Mapper.Map<CountryDTO>(DataLayer.DataLayerFacade.CountryRepository().GetCountry(CountryID));             
+            CountryDTO result = Mapper.Map<CountryDTO>(DataLayer.DataLayerFacade.CountryRepository().GetCountry(CountryID));
             return result;
         }
 
@@ -28,7 +39,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             var basequery = DataLayer.DataLayerFacade.CountryRepository().GetCountriesAllAsQueryable();
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.CountryName.ToLower().Contains(search.ToLower())));
             }
 
@@ -46,10 +58,10 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }       
+        }
 
         public PaginationSet<CountryDTO> GetCountries(int page, int pagesize)
-        {           
+        {
             var basequery = DataLayer.DataLayerFacade.CountryRepository().GetCountriesAllAsQueryable();
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<Country>(page, pagesize, basequery).Future();
@@ -65,37 +77,37 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<CountryDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
-        
+
         public List<CountryDTO> GetCountries()
-        {           
-            var basequery = Mapper.Map <List<CountryDTO>>(DataLayer.DataLayerFacade.CountryRepository().GetCountriesAllAsQueryable());
+        {
+            var basequery = Mapper.Map<List<CountryDTO>>(DataLayer.DataLayerFacade.CountryRepository().GetCountriesAllAsQueryable().Where(m=> m.CountryParentID == null));
             return basequery.ToList();
         }
 
-        
+
 
         public CountryDTO Insert(CountryDTO objCountry)
-        {            
-            CountryDTO result = Mapper.Map<CountryDTO>(DataLayer.DataLayerFacade.CountryRepository().Insert(objCountry.CountryName, objCountry.CountryShortName, objCountry.CountryStatus, objCountry.CountryPhoneCode, objCountry.CountryImage, objCountry.CountryDescription));
+        {
+            CountryDTO result = Mapper.Map<CountryDTO>(DataLayer.DataLayerFacade.CountryRepository().Insert(objCountry.CountryName, objCountry.CountryShortName, objCountry.CountryStatus, objCountry.CountryPhoneCode, objCountry.CountryImage, objCountry.CountryDescription, objCountry.CountryParentID, objCountry.CountryLanguageCode));
 
-            if (result!=null)
+            if (result != null)
             {
-                return result;            
+                return result;
             }
             else
             {
                 return new CountryDTO();
             }
         }
-               
+
         public bool Delete(int CountryID)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.CountryRepository().Delete(CountryID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {
@@ -104,11 +116,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Update(int CountryID, CountryDTO objCountry)
-        {            
-            bool result = DataLayer.DataLayerFacade.CountryRepository().Update(objCountry.CountryID, objCountry.CountryName, objCountry.CountryShortName, objCountry.CountryStatus, objCountry.CountryPhoneCode, objCountry.CountryImage, objCountry.CountryDescription);
+        {
+            bool result = DataLayer.DataLayerFacade.CountryRepository().Update(objCountry.CountryID, objCountry.CountryName, objCountry.CountryShortName, objCountry.CountryStatus, objCountry.CountryPhoneCode, objCountry.CountryImage, objCountry.CountryDescription, objCountry.CountryParentID, objCountry.CountryLanguageCode);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {

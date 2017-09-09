@@ -18,6 +18,7 @@ namespace Gorgias
         public City()
         {
             this.Addresses = new HashSet<Address>();
+            this.CityChilds = new HashSet<City>();
         }
     
         public int CityID { get; set; }
@@ -25,9 +26,14 @@ namespace Gorgias
         public bool CityStatus { get; set; }
         public int CountryID { get; set; }
         public byte[] CityUpdateDate { get; set; }
+        public string CityLanguageCode { get; set; }
+        public Nullable<int> CityParentID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual Country Country { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<City> CityChilds { get; set; }
+        public virtual City CityParent { get; set; }
     }
 }

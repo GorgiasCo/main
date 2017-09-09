@@ -104,6 +104,10 @@
         <EntityTypeShape EntityType="GorgiasModel.ProfileToken" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileReading_ProfileReading" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileToken_Profile" />
+        <AssociationConnector Association="GorgiasModel.FK_City_City" />
+        <AssociationConnector Association="GorgiasModel.FK_Country_Country" />
+        <AssociationConnector Association="GorgiasModel.FK_Industry_Industry" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileType_ProfileType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

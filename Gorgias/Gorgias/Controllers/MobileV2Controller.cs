@@ -33,6 +33,90 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/ProfileTypes", Name = "GetV2MobileProfileTypes")]
+        [HttpGet]
+        public HttpResponseMessage GetProfileTypes(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<ProfileTypeMobileModel> result = BusinessLayer.Facades.Facade.ProfileTypeFacade().getProfileTypesByLanguageCode(headerLanguage.First().Value);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<ProfileTypeMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Industries", Name = "GetV2MobileIndustries")]
+        [HttpGet]
+        public HttpResponseMessage GetIndustries(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<IndustryMobileModel> result = BusinessLayer.Facades.Facade.IndustryFacade().getIndustries(headerLanguage.First().Value);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<IndustryMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Cities/{CountryID}", Name = "GetV2MobileCitiesByCountryID")]
+        [HttpGet]
+        public HttpResponseMessage GetCities(HttpRequestMessage request, int CountryID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<CityMobileModel> result = BusinessLayer.Facades.Facade.CityFacade().getCities(CountryID, headerLanguage.First().Value);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<CityMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Countries/", Name = "GetV2MobileCountries")]
+        [HttpGet]
+        public HttpResponseMessage GetCountries(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<CountryMobileModel> result = BusinessLayer.Facades.Facade.CountryFacade().getCountries(headerLanguage.First().Value);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<CountryMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Felts/{ActivityTypeParentID}", Name = "GetV2MobileActivities")]
         [HttpGet]
         public HttpResponseMessage GetActivityTypes(HttpRequestMessage request, int ActivityTypeParentID)

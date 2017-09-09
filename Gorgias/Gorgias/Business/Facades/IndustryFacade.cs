@@ -15,12 +15,24 @@ using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
 
 namespace Gorgias.BusinessLayer.Facades
-{   
+{
     public class IndustryFacade
-    {                
+    {
+        //V2 Begin ;)
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.IndustryMobileModel> getIndustries(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAsQueryable(languageCode);
+        }
+
+        public IQueryable<IndustryDTO> getIndustriesByLanguageCode(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAllAsQueryable(languageCode);
+        }
+
+        //V2 End ;)
         public IndustryDTO GetIndustry(int IndustryID)
         {
-            IndustryDTO result = Mapper.Map<IndustryDTO>(DataLayer.DataLayerFacade.IndustryRepository().GetIndustry(IndustryID));             
+            IndustryDTO result = Mapper.Map<IndustryDTO>(DataLayer.DataLayerFacade.IndustryRepository().GetIndustry(IndustryID));
             return result;
         }
 
@@ -28,7 +40,8 @@ namespace Gorgias.BusinessLayer.Facades
         {
             var basequery = DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAllAsQueryable();
 
-            if (search.Length>0) {
+            if (search.Length > 0)
+            {
                 basequery = basequery.Where(p => (p.IndustryName.ToLower().Contains(search.ToLower())));
             }
 
@@ -46,10 +59,10 @@ namespace Gorgias.BusinessLayer.Facades
                 data = resultList
             };
             return result;
-        }       
+        }
 
         public PaginationSet<IndustryDTO> GetIndustries(int page, int pagesize)
-        {           
+        {
             var basequery = DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAllAsQueryable();
 
             var queryList = DataLayer.Repository.RepositoryHelper.Pagination<Industry>(page, pagesize, basequery).Future();
@@ -65,24 +78,24 @@ namespace Gorgias.BusinessLayer.Facades
                 Items = Mapper.Map<List<IndustryDTO>>(queryList.ToList())
             };
 
-            return result;            
+            return result;
         }
-        
+
         public List<IndustryDTO> GetIndustries()
-        {           
-            var basequery = Mapper.Map <List<IndustryDTO>>(DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAllAsQueryable());
+        {
+            var basequery = Mapper.Map<List<IndustryDTO>>(DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAllAsQueryable().Where(m=> m.IndustryParentID == null));
             return basequery.ToList();
         }
 
-        
+
 
         public IndustryDTO Insert(IndustryDTO objIndustry)
-        {            
+        {
             IndustryDTO result = Mapper.Map<IndustryDTO>(DataLayer.DataLayerFacade.IndustryRepository().Insert(objIndustry.IndustryName, objIndustry.IndustryStatus, objIndustry.IndustryParentID, objIndustry.IndustryImage, objIndustry.IndustryDescription));
 
-            if (result!=null)
+            if (result != null)
             {
-                return result;            
+                return result;
             }
             else
             {
@@ -105,11 +118,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Delete(int IndustryID)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.IndustryRepository().Delete(IndustryID);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {
@@ -118,11 +131,11 @@ namespace Gorgias.BusinessLayer.Facades
         }
 
         public bool Update(int IndustryID, IndustryDTO objIndustry)
-        {            
+        {
             bool result = DataLayer.DataLayerFacade.IndustryRepository().Update(objIndustry.IndustryID, objIndustry.IndustryName, objIndustry.IndustryStatus, objIndustry.IndustryParentID, objIndustry.IndustryImage, objIndustry.IndustryDescription);
             if (result)
             {
-                return true;            
+                return true;
             }
             else
             {

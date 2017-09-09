@@ -44,7 +44,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         #endregion
 
         //CRUD Functions
-        public Industry Insert(String IndustryName, Boolean IndustryStatus, int IndustryParentID, String IndustryImage, String IndustryDescription)
+        public Industry Insert(String IndustryName, Boolean IndustryStatus, int? IndustryParentID, String IndustryImage, String IndustryDescription)
         {
             try
             {
@@ -69,10 +69,11 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Industry Insert(Industry objIndustry)
         {
             Industry result = (from x in context.Industries where x.IndustryName == objIndustry.IndustryName select x).FirstOrDefault();
-            if(result != null)
+            if (result != null)
             {
                 return result;
-            } else
+            }
+            else
             {
                 try
                 {
@@ -84,11 +85,11 @@ namespace Gorgias.DataLayer.Repository.SQL
                 {
                     return new Industry();
                 }
-            }            
+            }
         }
 
 
-        public bool Update(int IndustryID, String IndustryName, Boolean IndustryStatus, int IndustryParentID, String IndustryImage, String IndustryDescription)
+        public bool Update(int IndustryID, String IndustryName, Boolean IndustryStatus, int? IndustryParentID, String IndustryImage, String IndustryDescription)
         {
             Industry obj = new Industry();
             obj = (from w in context.Industries where w.IndustryID == IndustryID select w).FirstOrDefault();
@@ -173,6 +174,33 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.Industries orderby w.IndustryID descending select w).AsQueryable();
         }
+
+        public IQueryable<Business.DataTransferObjects.IndustryDTO> GetIndustriesAllAsQueryable(string languageCode)
+        {
+            return (from w in context.Industries
+                    where w.IndustryStatus == true && w.IndustryParentID == null
+                    orderby w.IndustryName ascending
+                    select new Business.DataTransferObjects.IndustryDTO
+                    {
+                        IndustryName = w.IndustryName,
+                        IndustryID = w.IndustryID,
+                        Multilanguage = w.IndustryChilds.Where(m => m.IndustryLanguageCode == languageCode).FirstOrDefault().IndustryName
+                    }).AsQueryable();
+        }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.IndustryMobileModel> GetIndustriesAsQueryable(string languageCode)
+        {
+            return (from w in context.Industries
+                    where w.IndustryStatus == true && w.IndustryParentID == null
+                    orderby w.IndustryName ascending
+                    select new Business.DataTransferObjects.Mobile.V2.IndustryMobileModel
+                    {
+                        IndustryName = w.IndustryName,
+                        IndustryID = w.IndustryID,
+                        Multilanguage = w.IndustryChilds.Where(m => m.IndustryLanguageCode == languageCode).FirstOrDefault().IndustryName
+                    }).AsQueryable();
+        }
+
         public IQueryable<Industry> GetIndustriesAllAsQueryable(bool IndustryStatus)
         {
             return (from w in context.Industries where w.IndustryStatus == IndustryStatus orderby w.IndustryID descending select w).AsQueryable();

@@ -18,6 +18,7 @@ namespace Gorgias
         public Industry()
         {
             this.Profiles = new HashSet<Profile>();
+            this.IndustryChilds = new HashSet<Industry>();
         }
     
         public int IndustryID { get; set; }
@@ -26,8 +27,12 @@ namespace Gorgias
         public Nullable<int> IndustryParentID { get; set; }
         public string IndustryImage { get; set; }
         public string IndustryDescription { get; set; }
+        public string IndustryLanguageCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profile> Profiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Industry> IndustryChilds { get; set; }
+        public virtual Industry IndustryParent { get; set; }
     }
 }

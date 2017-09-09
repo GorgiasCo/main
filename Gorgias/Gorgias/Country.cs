@@ -19,6 +19,7 @@ namespace Gorgias
         {
             this.Cities = new HashSet<City>();
             this.Users = new HashSet<User>();
+            this.CountryChilds = new HashSet<Country>();
         }
     
         public int CountryID { get; set; }
@@ -28,10 +29,15 @@ namespace Gorgias
         public string CountryPhoneCode { get; set; }
         public string CountryImage { get; set; }
         public string CountryDescription { get; set; }
+        public string CountryLanguageCode { get; set; }
+        public Nullable<int> CountryParentID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<City> Cities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Country> CountryChilds { get; set; }
+        public virtual Country CountryParent { get; set; }
     }
 }

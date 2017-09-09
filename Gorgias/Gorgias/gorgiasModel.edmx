@@ -114,6 +114,8 @@
           <Property Name="CityStatus" Type="bit" Nullable="false" />
           <Property Name="CountryID" Type="int" Nullable="false" />
           <Property Name="CityUpdateDate" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CityLanguageCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CityParentID" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -192,6 +194,8 @@
           <Property Name="CountryPhoneCode" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="CountryImage" Type="nvarchar" MaxLength="150" />
           <Property Name="CountryDescription" Type="ntext" />
+          <Property Name="CountryLanguageCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CountryParentID" Type="int" />
         </EntityType>
         <EntityType Name="ExternalLink">
           <Key>
@@ -245,6 +249,7 @@
           <Property Name="IndustryParentID" Type="int" />
           <Property Name="IndustryImage" Type="nvarchar" MaxLength="150" />
           <Property Name="IndustryDescription" Type="ntext" />
+          <Property Name="IndustryLanguageCode" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -429,6 +434,7 @@
           <Property Name="ProfileTypeImage" Type="nvarchar" MaxLength="150" />
           <Property Name="ProfileTypeDescription" Type="ntext" />
           <Property Name="ProfileTypeParentID" Type="int" />
+          <Property Name="ProfileTypeLanguageCode" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Quote">
           <Key>
@@ -670,6 +676,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_City_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="City1" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="City1">
+              <PropertyRef Name="CityParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_City_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -802,6 +820,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Country_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Country1" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Country1">
+              <PropertyRef Name="CountryParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ExternalLink_LinkType">
           <End Role="LinkType" Type="Self.LinkType" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -855,6 +885,18 @@
             </Principal>
             <Dependent Role="FeaturedSponsor">
               <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Industry_Industry">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="0..1" />
+          <End Role="Industry1" Type="Self.Industry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="IndustryID" />
+            </Principal>
+            <Dependent Role="Industry1">
+              <PropertyRef Name="IndustryParentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1202,6 +1244,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfileType_ProfileType">
+          <End Role="ProfileType" Type="Self.ProfileType" Multiplicity="0..1" />
+          <End Role="ProfileType1" Type="Self.ProfileType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileType">
+              <PropertyRef Name="ProfileTypeID" />
+            </Principal>
+            <Dependent Role="ProfileType1">
+              <PropertyRef Name="ProfileTypeParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Quote_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1384,6 +1438,10 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Category1" EntitySet="Category" />
           </AssociationSet>
+          <AssociationSet Name="FK_City_City" Association="Self.FK_City_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="City1" EntitySet="City" />
+          </AssociationSet>
           <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="City" EntitySet="City" />
@@ -1424,6 +1482,10 @@
             <End Role="ContentType" EntitySet="ContentType" />
             <End Role="ContentType1" EntitySet="ContentType" />
           </AssociationSet>
+          <AssociationSet Name="FK_Country_Country" Association="Self.FK_Country_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Country1" EntitySet="Country" />
+          </AssociationSet>
           <AssociationSet Name="FK_ExternalLink_LinkType" Association="Self.FK_ExternalLink_LinkType">
             <End Role="LinkType" EntitySet="LinkType" />
             <End Role="ExternalLink" EntitySet="ExternalLink" />
@@ -1439,6 +1501,10 @@
           <AssociationSet Name="FK_FeaturedSponsor_Profile" Association="Self.FK_FeaturedSponsor_Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="FeaturedSponsor" EntitySet="FeaturedSponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Industry_Industry" Association="Self.FK_Industry_Industry">
+            <End Role="Industry" EntitySet="Industry" />
+            <End Role="Industry1" EntitySet="Industry" />
           </AssociationSet>
           <AssociationSet Name="FK_Message_Profile" Association="Self.FK_Message_Profile">
             <End Role="Profile" EntitySet="Profile" />
@@ -1539,6 +1605,10 @@
           <AssociationSet Name="FK_ProfileToken_Profile" Association="Self.FK_ProfileToken_Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="ProfileToken" EntitySet="ProfileToken" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileType_ProfileType" Association="Self.FK_ProfileType_ProfileType">
+            <End Role="ProfileType" EntitySet="ProfileType" />
+            <End Role="ProfileType1" EntitySet="ProfileType" />
           </AssociationSet>
           <AssociationSet Name="FK_Quote_Category" Association="Self.FK_Quote_Category">
             <End Role="Category" EntitySet="Category" />
@@ -1835,6 +1905,22 @@
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="ProfileToken" EntitySet="ProfileTokens" />
           </AssociationSet>
+          <AssociationSet Name="FK_City_City" Association="GorgiasModel.FK_City_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="City1" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Country_Country" Association="GorgiasModel.FK_Country_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Country1" EntitySet="Countries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Industry_Industry" Association="GorgiasModel.FK_Industry_Industry">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="Industry1" EntitySet="Industries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileType_ProfileType" Association="GorgiasModel.FK_ProfileType_ProfileType">
+            <End Role="ProfileType" EntitySet="ProfileTypes" />
+            <End Role="ProfileType1" EntitySet="ProfileTypes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -1942,6 +2028,10 @@
           <Property Name="CityUpdateDate" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Addresses" Relationship="GorgiasModel.FK_Address_City" FromRole="City" ToRole="Address" />
           <NavigationProperty Name="Country" Relationship="GorgiasModel.FK_City_Country" FromRole="City" ToRole="Country" />
+          <Property Name="CityLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CityParentID" Type="Int32" />
+          <NavigationProperty Name="CityChilds" Relationship="GorgiasModel.FK_City_City" FromRole="City" ToRole="City1" />
+          <NavigationProperty Name="CityParent" Relationship="GorgiasModel.FK_City_City" FromRole="City1" ToRole="City" />
         </EntityType>
         <EntityType Name="Connection">
           <Key>
@@ -1990,6 +2080,10 @@
           <Property Name="CountryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cities" Relationship="GorgiasModel.FK_City_Country" FromRole="Country" ToRole="City" />
           <NavigationProperty Name="Users" Relationship="GorgiasModel.FK_User_Country" FromRole="Country" ToRole="User" />
+          <Property Name="CountryLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CountryParentID" Type="Int32" />
+          <NavigationProperty Name="CountryChilds" Relationship="GorgiasModel.FK_Country_Country" FromRole="Country" ToRole="Country1" />
+          <NavigationProperty Name="CountryParent" Relationship="GorgiasModel.FK_Country_Country" FromRole="Country1" ToRole="Country" />
         </EntityType>
         <EntityType Name="ExternalLink">
           <Key>
@@ -2040,6 +2134,9 @@
           <Property Name="IndustryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="IndustryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Profiles" Relationship="GorgiasModel.ProfileIndustry" FromRole="Industry" ToRole="Profile" />
+          <Property Name="IndustryLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IndustryChilds" Relationship="GorgiasModel.FK_Industry_Industry" FromRole="Industry" ToRole="Industry1" />
+          <NavigationProperty Name="IndustryParent" Relationship="GorgiasModel.FK_Industry_Industry" FromRole="Industry1" ToRole="Industry" />
         </EntityType>
         <EntityType Name="LinkType">
           <Key>
@@ -2157,6 +2254,9 @@
           <Property Name="ProfileTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProfileTypeParentID" Type="Int32" />
           <NavigationProperty Name="Profiles" Relationship="GorgiasModel.FK_Profile_ProfileType" FromRole="ProfileType" ToRole="Profile" />
+          <Property Name="ProfileTypeLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProfileTypeChilds" Relationship="GorgiasModel.FK_ProfileType_ProfileType" FromRole="ProfileType" ToRole="ProfileType1" />
+          <NavigationProperty Name="ProfileTypeParent" Relationship="GorgiasModel.FK_ProfileType_ProfileType" FromRole="ProfileType1" ToRole="ProfileType" />
         </EntityType>
         <EntityType Name="RequestType">
           <Key>
@@ -3174,6 +3274,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_City_City">
+          <End Type="GorgiasModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="GorgiasModel.City" Role="City1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="City1">
+              <PropertyRef Name="CityParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Country_Country">
+          <End Type="GorgiasModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="GorgiasModel.Country" Role="Country1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Country1">
+              <PropertyRef Name="CountryParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Industry_Industry">
+          <End Type="GorgiasModel.Industry" Role="Industry" Multiplicity="0..1" />
+          <End Type="GorgiasModel.Industry" Role="Industry1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="IndustryID" />
+            </Principal>
+            <Dependent Role="Industry1">
+              <PropertyRef Name="IndustryParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileType_ProfileType">
+          <End Type="GorgiasModel.ProfileType" Role="ProfileType" Multiplicity="0..1" />
+          <End Type="GorgiasModel.ProfileType" Role="ProfileType1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileType">
+              <PropertyRef Name="ProfileTypeID" />
+            </Principal>
+            <Dependent Role="ProfileType1">
+              <PropertyRef Name="ProfileTypeParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3268,6 +3416,8 @@
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="GorgiasModel.City">
               <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CityParentID" ColumnName="CityParentID" />
+                <ScalarProperty Name="CityLanguageCode" ColumnName="CityLanguageCode" />
                 <ScalarProperty Name="CityUpdateDate" ColumnName="CityUpdateDate" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="CityStatus" ColumnName="CityStatus" />
@@ -3307,6 +3457,8 @@
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="GorgiasModel.Country">
               <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryParentID" ColumnName="CountryParentID" />
+                <ScalarProperty Name="CountryLanguageCode" ColumnName="CountryLanguageCode" />
                 <ScalarProperty Name="CountryDescription" ColumnName="CountryDescription" />
                 <ScalarProperty Name="CountryImage" ColumnName="CountryImage" />
                 <ScalarProperty Name="CountryPhoneCode" ColumnName="CountryPhoneCode" />
@@ -3354,6 +3506,7 @@
           <EntitySetMapping Name="Industries">
             <EntityTypeMapping TypeName="GorgiasModel.Industry">
               <MappingFragment StoreEntitySet="Industry">
+                <ScalarProperty Name="IndustryLanguageCode" ColumnName="IndustryLanguageCode" />
                 <ScalarProperty Name="IndustryDescription" ColumnName="IndustryDescription" />
                 <ScalarProperty Name="IndustryImage" ColumnName="IndustryImage" />
                 <ScalarProperty Name="IndustryParentID" ColumnName="IndustryParentID" />
@@ -3442,6 +3595,7 @@
           <EntitySetMapping Name="ProfileTypes">
             <EntityTypeMapping TypeName="GorgiasModel.ProfileType">
               <MappingFragment StoreEntitySet="ProfileType">
+                <ScalarProperty Name="ProfileTypeLanguageCode" ColumnName="ProfileTypeLanguageCode" />
                 <ScalarProperty Name="ProfileTypeParentID" ColumnName="ProfileTypeParentID" />
                 <ScalarProperty Name="ProfileTypeDescription" ColumnName="ProfileTypeDescription" />
                 <ScalarProperty Name="ProfileTypeImage" ColumnName="ProfileTypeImage" />

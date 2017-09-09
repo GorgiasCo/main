@@ -18,6 +18,7 @@ namespace Gorgias
         public ProfileType()
         {
             this.Profiles = new HashSet<Profile>();
+            this.ProfileTypeChilds = new HashSet<ProfileType>();
         }
     
         public int ProfileTypeID { get; set; }
@@ -26,8 +27,12 @@ namespace Gorgias
         public string ProfileTypeImage { get; set; }
         public string ProfileTypeDescription { get; set; }
         public Nullable<int> ProfileTypeParentID { get; set; }
+        public string ProfileTypeLanguageCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profile> Profiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProfileType> ProfileTypeChilds { get; set; }
+        public virtual ProfileType ProfileTypeParent { get; set; }
     }
 }

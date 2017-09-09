@@ -89,6 +89,8 @@
     <EntitySetMapping Name="Cities">
       <EntityTypeMapping TypeName="GorgiasModel.City">
         <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="CityParentID" ColumnName="CityParentID" />
+          <ScalarProperty Name="CityLanguageCode" ColumnName="CityLanguageCode" />
           <ScalarProperty Name="CityUpdateDate" ColumnName="CityUpdateDate" />
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
           <ScalarProperty Name="CityStatus" ColumnName="CityStatus" />
@@ -128,6 +130,8 @@
     <EntitySetMapping Name="Countries">
       <EntityTypeMapping TypeName="GorgiasModel.Country">
         <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="CountryParentID" ColumnName="CountryParentID" />
+          <ScalarProperty Name="CountryLanguageCode" ColumnName="CountryLanguageCode" />
           <ScalarProperty Name="CountryDescription" ColumnName="CountryDescription" />
           <ScalarProperty Name="CountryImage" ColumnName="CountryImage" />
           <ScalarProperty Name="CountryPhoneCode" ColumnName="CountryPhoneCode" />
@@ -175,6 +179,7 @@
     <EntitySetMapping Name="Industries">
       <EntityTypeMapping TypeName="GorgiasModel.Industry">
         <MappingFragment StoreEntitySet="Industry">
+          <ScalarProperty Name="IndustryLanguageCode" ColumnName="IndustryLanguageCode" />
           <ScalarProperty Name="IndustryDescription" ColumnName="IndustryDescription" />
           <ScalarProperty Name="IndustryImage" ColumnName="IndustryImage" />
           <ScalarProperty Name="IndustryParentID" ColumnName="IndustryParentID" />
@@ -263,6 +268,7 @@
     <EntitySetMapping Name="ProfileTypes">
       <EntityTypeMapping TypeName="GorgiasModel.ProfileType">
         <MappingFragment StoreEntitySet="ProfileType">
+          <ScalarProperty Name="ProfileTypeLanguageCode" ColumnName="ProfileTypeLanguageCode" />
           <ScalarProperty Name="ProfileTypeParentID" ColumnName="ProfileTypeParentID" />
           <ScalarProperty Name="ProfileTypeDescription" ColumnName="ProfileTypeDescription" />
           <ScalarProperty Name="ProfileTypeImage" ColumnName="ProfileTypeImage" />

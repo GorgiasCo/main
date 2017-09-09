@@ -375,10 +375,13 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumFilterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\CityMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentCommentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentRatingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentTypeMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\CountryMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\IndustryMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LanguageMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginAttempt.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\MiniProfileMobileModel.cs" />
@@ -386,6 +389,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSettingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileTokenMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\QuoteMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\NewsletterDTO.cs" />
     <Compile Include="Business\DataTransferObjects\PaymentDTO.cs" />
