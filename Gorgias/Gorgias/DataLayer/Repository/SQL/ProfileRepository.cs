@@ -354,12 +354,17 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Profile GetProfile(int ProfileID)
         {
             return (from w in context.Profiles.Include("Theme").Include("SubscriptionType").Include("ProfileType") where w.ProfileID == ProfileID select w).FirstOrDefault();
-        }
+        }       
 
         //V2 Begin
         public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)
         {
-            return (from w in context.Profiles where w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel { CityName = w.Addresses.FirstOrDefault().City.CityName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileID = w.ProfileID, ProfileFullname = w.ProfileFullname, ProfileFullnameEnglish = w.ProfileFullnameEnglish, ProfileShortDescription = w.ProfileShortDescription, ProfileTypeName = w.ProfileType.ProfileTypeName, TotalConnections = w.Connections.Count, TotalEngagements = w.Albums.Sum(a=> a.ProfileActivities.Where(ac=> ac.ActivityTypeID != 1).Count()), TotalViews = w.Albums.Sum(av=> av.AlbumView), isSubscribed = w.Connections.Any(cc=> cc.Profile1.ProfileID == RequestedProfileID) }).FirstOrDefault();
+            return (from w in context.Profiles where w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel { CityName = w.Addresses.FirstOrDefault().City.CityName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileID = w.ProfileID, ProfileFullname = w.ProfileFullname, ProfileFullnameEnglish = w.ProfileFullnameEnglish, ProfileShortDescription = w.ProfileShortDescription, ProfileTypeName = w.ProfileType.ProfileTypeName, TotalConnections = w.Connections.Count, TotalEngagements = w.Albums.Sum(a=> a.ProfileActivities.Where(ac=> ac.ActivityTypeID != 1).Count()), TotalViews = w.Albums.Sum(av=> av.AlbumView), isSubscribed = w.Connections.Any(cc=> cc.Profile1.ProfileID == RequestedProfileID), ProfileImage = w.ProfileImage}).FirstOrDefault();
+        }
+
+        public Profile GetV2Profile(int ProfileID)
+        {
+            return (from w in context.Profiles.Include("ProfileType").Include("ProfileReadings").Include("ProfileSetting") where w.ProfileID == ProfileID select w).FirstOrDefault();
         }
         //V2 Ends
 

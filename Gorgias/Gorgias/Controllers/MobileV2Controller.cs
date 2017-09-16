@@ -32,6 +32,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Profile/Preferences/{ProfileID}", Name = "GetV2MobileProfilePreferences")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilePreferences(HttpRequestMessage request, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                Business.DataTransferObjects.ProfileDTO result = BusinessLayer.Facades.Facade.ProfileFacade().GetV2Profile(ProfileID);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<Business.DataTransferObjects.ProfileDTO>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Album/Repost/{AlbumID}", Name = "GetV2MobileAlbumRepost")]
         [HttpGet]
         public HttpResponseMessage RepostAlbum(HttpRequestMessage request, int AlbumID)
@@ -413,6 +433,7 @@ namespace Gorgias.Controllers
             });
         }
 
+        //Need Review ;)
         [Route("Mobile/V2/Album/Comment/Status/{AlbumID}", Name = "UpdateV2AlbumCommentStatus")]
         [HttpGet]
         public HttpResponseMessage UpdateAlbumComment(HttpRequestMessage request, int AlbumID)
@@ -467,6 +488,7 @@ namespace Gorgias.Controllers
             });
         }
 
+        //Need to Review How ;)
         [Route("Mobile/V2/Content/Like/{ContentID}", Name = "UpdateV2ContentLike")]
         [HttpGet]
         public HttpResponseMessage UpdateContnetLike(HttpRequestMessage request, int ContentID)
@@ -480,6 +502,7 @@ namespace Gorgias.Controllers
             });
         }
 
+        //Need to Review How ;)
         [Route("Mobile/V2/Contents/Likes", Name = "UpdateV2ContentsLikes")]
         [HttpPost]
         public HttpResponseMessage UpdateContnetsLikes(HttpRequestMessage request, Business.DataTransferObjects.Mobile.ContentLikesModel[] ContentLikes)
@@ -493,6 +516,7 @@ namespace Gorgias.Controllers
             });
         }
 
+        //Need to Review How ;)
         [Route("Mobile/V2/Album/View/{AlbumID}", Name = "UpdateV2AlbumView")]
         [HttpGet]
         public HttpResponseMessage UpdateAlbumView(HttpRequestMessage request, int AlbumID)
@@ -617,7 +641,7 @@ namespace Gorgias.Controllers
 
         [Route("Mobile/V2/Profile/Activity", Name = "MobileV2ProfileActivityInsert")]
         [HttpPost]
-        public HttpResponseMessage ProfileActivityInsert(HttpRequestMessage request, Business.DataTransferObjects.ProfileActivityDTO objProfileActivity)
+        public HttpResponseMessage ProfileActivityInsert(HttpRequestMessage request, Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel objProfileActivity)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -641,7 +665,7 @@ namespace Gorgias.Controllers
                 }
                 return response;
             });
-        }
+        }        
 
         [Route("Mobile/V2/Album/New", Name = "MobileV2AlbumInsert")]
         [HttpPost]

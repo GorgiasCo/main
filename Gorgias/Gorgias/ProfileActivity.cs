@@ -14,14 +14,28 @@ namespace Gorgias
     
     public partial class ProfileActivity
     {
-        public int ProfileID { get; set; }
-        public int AlbumID { get; set; }
-        public int ActivityTypeID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProfileActivity()
+        {
+            this.ProfileActivityChilds = new HashSet<ProfileActivity>();
+        }
+    
+        public int ProfileActivityID { get; set; }
+        public System.DateTime ProfileActivityDate { get; set; }
         public int ProfileActivityCount { get; set; }
-        public System.DateTime ProfileActivityDateTime { get; set; }
+        public bool ProfileActivityIsFirst { get; set; }
+        public Nullable<int> ProfileActivityParentID { get; set; }
+        public int AlbumID { get; set; }
+        public int ProfileID { get; set; }
+        public int ActivityTypeID { get; set; }
     
         public virtual ActivityType ActivityType { get; set; }
         public virtual Album Album { get; set; }
+        public virtual Location Location { get; set; }
         public virtual Profile Profile { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProfileActivity> ProfileActivityChilds { get; set; }
+        public virtual ProfileActivity ProfileActivityParent { get; set; }
+        public virtual Share Share { get; set; }
     }
 }

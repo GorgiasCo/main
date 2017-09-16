@@ -358,6 +358,7 @@
     <Compile Include="Business\DataTransferObjects\ExternalLinkDTO.cs" />
     <Compile Include="Business\DataTransferObjects\FBActivityDTO.cs" />
     <Compile Include="Business\DataTransferObjects\LanguageDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\LocationDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AddressModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AddressModelV2.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\AlbumAvailabilityModel.cs" />
@@ -378,6 +379,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CityMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentCommentMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentLikeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentRatingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentTypeMobileModel.cs" />
@@ -387,6 +389,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LanguageMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginAttempt.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\MiniProfileMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileActivityUpdateMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSettingMobileModel.cs" />
@@ -415,6 +418,7 @@
     <Compile Include="Business\DataTransferObjects\Report\ProfileReport.cs" />
     <Compile Include="Business\DataTransferObjects\Report\ProfileVisitReport.cs" />
     <Compile Include="Business\DataTransferObjects\RevenueDTO.cs" />
+    <Compile Include="Business\DataTransferObjects\ShareDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserCustomDTO.cs" />
     <Compile Include="Business\DataTransferObjects\UserProfileDTO.cs" />
     <Compile Include="Business\DataTransferObjects\Web\AddressModel.cs" />
@@ -821,6 +825,9 @@
     <Compile Include="LinkType.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Message.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>
@@ -899,6 +906,9 @@
     <Compile Include="Services\EncryptionService.cs" />
     <Compile Include="Services\MembershipService.cs" />
     <Compile Include="Services\Utilities\MembershipContext.cs" />
+    <Compile Include="Share.cs">
+      <DependentUpon>gorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SocialNetwork.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>

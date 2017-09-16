@@ -469,14 +469,15 @@ namespace Gorgias.DataLayer.Repository.SQL
                             ContentGeoLocation = c.ContentGeoLocation,
                             ContentTitle = c.ContentTitle,
                             ContentURL = c.ContentURL,
-                            ContentTypeID = c.ContentType
+                            ContentTypeID = c.ContentType,
+                            ContentID = c.ContentID
                         }).ToList()
                     }).FirstOrDefault();
         }
 
         public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
         {
-            return (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
+            return (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
         }
 
         //Lists
@@ -562,7 +563,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID)
         {
             //var currentDate = DateTime.UtcNow;
-            var result = (from w in context.Albums.Include("Contents.Comments").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID select w).AsQueryable();
+            var result = (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID && w.Contents.Count > 0 select w).AsQueryable();
             return result;
         }
 

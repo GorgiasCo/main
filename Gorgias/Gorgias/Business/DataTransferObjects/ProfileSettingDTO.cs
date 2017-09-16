@@ -11,6 +11,7 @@ namespace Gorgias.Business.DataTransferObjects
         public String ProfileLanguageApp { get; set; }
         public int? ProfileCityID { get; set; }
         public DateTime? ProfileBirthday { get; set; }
+        //public virtual CityDTO City { get; set; }
     }
 }
 

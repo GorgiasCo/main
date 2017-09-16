@@ -55,6 +55,8 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
 
+        public bool? isFelt { get; set; }
+
         public double ExpiringTime
         {
             get
@@ -68,8 +70,8 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         {
             get
             {
-                return "ddd";
-                //return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiascdn.azureedge.net/");
+                //return "ddd";
+                return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiascdn.azureedge.net/");
                 //return AlbumCover.Replace("https://gorgiasasia.blob.core.windows.net/", "https://gorgiasresizer.azurewebsites.net/");
             }
         }
@@ -84,7 +86,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
                 }
                 else
                 {
-                    return "Eshgham Thanks Allah";//AlbumCover.Replace("hottest-album-", "blur-hottest-album-");
+                    return AlbumCover.Replace("hottest-album-", "blur-hottest-album-");
                 }
             }
         }
@@ -142,6 +144,28 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
                 //    Contents = Contents.All(t => t.ContentURL.Replace(",", ""));
                 //}
                 return Contents;
+            }
+        }
+
+        public IList<ContentLikeMobileModel> ContentLikes
+        {
+            get
+            {
+                //Because of album cover like, we added a album cover in Content table as a independent photo ;)
+                IList<ContentLikeMobileModel> result = new List<ContentLikeMobileModel>();
+                if(Images.Count > 0)
+                {
+                    foreach (ContentMobileModel obj in Images)
+                    {
+                        result.Add(new ContentLikeMobileModel { ContentID = obj.ContentID, ContentLikes = 0 });
+                    }
+                }                
+                //Contents.Insert(0, new ContentMobileModel { ContentURL = AlbumCover });
+                //if (isValidate)
+                //{
+                //    Contents = Contents.All(t => t.ContentURL.Replace(",", ""));
+                //}
+                return result;
             }
         }
     }

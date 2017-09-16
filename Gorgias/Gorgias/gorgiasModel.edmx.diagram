@@ -87,16 +87,12 @@
         <EntityTypeShape EntityType="GorgiasModel.ContentRating" Width="1.5" PointX="6" PointY="37.25" />
         <EntityTypeShape EntityType="GorgiasModel.ContentType" Width="1.5" PointX="8.25" PointY="33.5" />
         <EntityTypeShape EntityType="GorgiasModel.Language" Width="1.5" PointX="10.375" PointY="1" />
-        <EntityTypeShape EntityType="GorgiasModel.ProfileActivity" Width="1.5" PointX="13.5" PointY="14.75" />
         <EntityTypeShape EntityType="GorgiasModel.ProfileSetting" Width="1.5" PointX="5.25" PointY="34.25" />
         <AssociationConnector Association="GorgiasModel.FK_ActivityType_ActivityType" />
-        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ActivityType" />
         <AssociationConnector Association="GorgiasModel.FK_Album_ContentRating" />
-        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Album" />
         <AssociationConnector Association="GorgiasModel.FK_Content_ContentType" />
         <AssociationConnector Association="GorgiasModel.FK_ContentRating_ContentRating" />
         <AssociationConnector Association="GorgiasModel.FK_ContentType_ContentType" />
-        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Profile" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileSetting_Profile" />
         <EntityTypeShape EntityType="GorgiasModel.Quote" Width="1.5" PointX="8.25" PointY="37.375" />
         <AssociationConnector Association="GorgiasModel.FK_Quote_Category" />
@@ -108,6 +104,15 @@
         <AssociationConnector Association="GorgiasModel.FK_Country_Country" />
         <AssociationConnector Association="GorgiasModel.FK_Industry_Industry" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileType_ProfileType" />
+        <EntityTypeShape EntityType="GorgiasModel.Location" Width="1.5" PointX="15.75" PointY="14.875" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileActivity" Width="1.5" PointX="13.5" PointY="12.625" />
+        <EntityTypeShape EntityType="GorgiasModel.Share" Width="1.5" PointX="15.75" PointY="12.625" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ActivityType" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Album" />
+        <AssociationConnector Association="GorgiasModel.FK_Location_ProfileActivity" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Profile" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ProfileActivity" />
+        <AssociationConnector Association="GorgiasModel.FK_Share_ProfileActivity" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

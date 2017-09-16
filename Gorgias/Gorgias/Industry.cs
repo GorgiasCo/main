@@ -28,6 +28,7 @@ namespace Gorgias
         public string IndustryImage { get; set; }
         public string IndustryDescription { get; set; }
         public string IndustryLanguageCode { get; set; }
+        public Nullable<int> IndustryOrder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profile> Profiles { get; set; }

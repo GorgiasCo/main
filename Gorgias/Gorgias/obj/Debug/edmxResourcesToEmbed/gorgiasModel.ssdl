@@ -245,6 +245,7 @@
     <Property Name="IndustryImage" Type="nvarchar" MaxLength="150" />
     <Property Name="IndustryDescription" Type="ntext" />
     <Property Name="IndustryLanguageCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="IndustryOrder" Type="int" />
   </EntityType>
   <EntityType Name="Language">
     <Key>
@@ -265,6 +266,13 @@
     <Property Name="LinkTypeStatus" Type="bit" Nullable="false" />
     <Property Name="LinkTypeImage" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="LinkTypeDescription" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="ProfileActivityID" />
+    </Key>
+    <Property Name="ProfileActivityID" Type="int" Nullable="false" />
+    <Property Name="ProfileActivityLocation" Type="geography" Nullable="false" />
   </EntityType>
   <EntityType Name="Message">
     <Key>
@@ -325,14 +333,16 @@
   </EntityType>
   <EntityType Name="ProfileActivity">
     <Key>
-      <PropertyRef Name="ProfileID" />
-      <PropertyRef Name="AlbumID" />
+      <PropertyRef Name="ProfileActivityID" />
     </Key>
-    <Property Name="ProfileID" Type="int" Nullable="false" />
-    <Property Name="AlbumID" Type="int" Nullable="false" />
-    <Property Name="ActivityTypeID" Type="int" Nullable="false" />
+    <Property Name="ProfileActivityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfileActivityDate" Type="datetime" Nullable="false" />
     <Property Name="ProfileActivityCount" Type="int" Nullable="false" />
-    <Property Name="ProfileActivityDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ProfileActivityIsFirst" Type="bit" Nullable="false" />
+    <Property Name="ProfileActivityParentID" Type="int" />
+    <Property Name="AlbumID" Type="int" Nullable="false" />
+    <Property Name="ProfileID" Type="int" Nullable="false" />
+    <Property Name="ActivityTypeID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProfileAttribute">
     <Key>
@@ -476,6 +486,13 @@
     <Property Name="RevenueAmount" Type="float" Nullable="false" />
     <Property Name="RevenueTotalViews" Type="bigint" Nullable="false" />
     <Property Name="RevenueMemberShare" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Share">
+    <Key>
+      <PropertyRef Name="ProfileActivityID" />
+    </Key>
+    <Property Name="ProfileActivityID" Type="int" Nullable="false" />
+    <Property Name="ProfileActivityShare" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
   <EntityType Name="SocialNetwork">
     <Key>
@@ -895,6 +912,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Location_ProfileActivity">
+    <End Role="ProfileActivity" Type="Self.ProfileActivity" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileActivity">
+        <PropertyRef Name="ProfileActivityID" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="ProfileActivityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Message_Profile">
     <End Role="Profile" Type="Self.Profile" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -980,7 +1011,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProfileActivity_Album">
-    <End Role="Album" Type="Self.Album" Multiplicity="1" />
+    <End Role="Album" Type="Self.Album" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ProfileActivity" Type="Self.ProfileActivity" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Album">
@@ -1000,6 +1033,18 @@
       </Principal>
       <Dependent Role="ProfileActivity">
         <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_ProfileActivity">
+    <End Role="ProfileActivity" Type="Self.ProfileActivity" Multiplicity="0..1" />
+    <End Role="ProfileActivity1" Type="Self.ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileActivity">
+        <PropertyRef Name="ProfileActivityID" />
+      </Principal>
+      <Dependent Role="ProfileActivity1">
+        <PropertyRef Name="ProfileActivityParentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1291,6 +1336,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Share_ProfileActivity">
+    <End Role="ProfileActivity" Type="Self.ProfileActivity" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Share" Type="Self.Share" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileActivity">
+        <PropertyRef Name="ProfileActivityID" />
+      </Principal>
+      <Dependent Role="Share">
+        <PropertyRef Name="ProfileActivityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_User_Country">
     <End Role="Country" Type="Self.Country" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -1370,6 +1429,7 @@
     <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LinkType" EntityType="Self.LinkType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Newsletter" EntityType="Self.Newsletter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
@@ -1390,6 +1450,7 @@
     <EntitySet Name="ReportType" EntityType="Self.ReportType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RequestType" EntityType="Self.RequestType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Share" EntityType="Self.Share" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SocialNetwork" EntityType="Self.SocialNetwork" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubscriptionType" EntityType="Self.SubscriptionType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
@@ -1501,6 +1562,10 @@
       <End Role="Industry" EntitySet="Industry" />
       <End Role="Industry1" EntitySet="Industry" />
     </AssociationSet>
+    <AssociationSet Name="FK_Location_ProfileActivity" Association="Self.FK_Location_ProfileActivity">
+      <End Role="ProfileActivity" EntitySet="ProfileActivity" />
+      <End Role="Location" EntitySet="Location" />
+    </AssociationSet>
     <AssociationSet Name="FK_Message_Profile" Association="Self.FK_Message_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="Message" EntitySet="Message" />
@@ -1532,6 +1597,10 @@
     <AssociationSet Name="FK_ProfileActivity_Profile" Association="Self.FK_ProfileActivity_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="ProfileActivity" EntitySet="ProfileActivity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_ProfileActivity" Association="Self.FK_ProfileActivity_ProfileActivity">
+      <End Role="ProfileActivity" EntitySet="ProfileActivity" />
+      <End Role="ProfileActivity1" EntitySet="ProfileActivity" />
     </AssociationSet>
     <AssociationSet Name="FK_ProfileAttribute_Attribute" Association="Self.FK_ProfileAttribute_Attribute">
       <End Role="Attribute" EntitySet="Attribute" />
@@ -1616,6 +1685,10 @@
     <AssociationSet Name="FK_Recipient_Profile" Association="Self.FK_Recipient_Profile">
       <End Role="Profile" EntitySet="Profile" />
       <End Role="Recipient" EntitySet="Recipient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Share_ProfileActivity" Association="Self.FK_Share_ProfileActivity">
+      <End Role="ProfileActivity" EntitySet="ProfileActivity" />
+      <End Role="Share" EntitySet="Share" />
     </AssociationSet>
     <AssociationSet Name="FK_User_Country" Association="Self.FK_User_Country">
       <End Role="Country" EntitySet="Country" />

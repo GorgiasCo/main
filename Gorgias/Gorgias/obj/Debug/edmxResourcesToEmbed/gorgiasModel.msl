@@ -179,6 +179,7 @@
     <EntitySetMapping Name="Industries">
       <EntityTypeMapping TypeName="GorgiasModel.Industry">
         <MappingFragment StoreEntitySet="Industry">
+          <ScalarProperty Name="IndustryOrder" ColumnName="IndustryOrder" />
           <ScalarProperty Name="IndustryLanguageCode" ColumnName="IndustryLanguageCode" />
           <ScalarProperty Name="IndustryDescription" ColumnName="IndustryDescription" />
           <ScalarProperty Name="IndustryImage" ColumnName="IndustryImage" />
@@ -538,17 +539,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProfileActivities">
-      <EntityTypeMapping TypeName="GorgiasModel.ProfileActivity">
-        <MappingFragment StoreEntitySet="ProfileActivity">
-          <ScalarProperty Name="ProfileActivityDateTime" ColumnName="ProfileActivityDateTime" />
-          <ScalarProperty Name="ProfileActivityCount" ColumnName="ProfileActivityCount" />
-          <ScalarProperty Name="ActivityTypeID" ColumnName="ActivityTypeID" />
-          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
-          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ProfileSettings">
       <EntityTypeMapping TypeName="GorgiasModel.ProfileSetting">
         <MappingFragment StoreEntitySet="ProfileSetting">
@@ -588,6 +578,36 @@
           <ScalarProperty Name="ProfileTokenRegistration" ColumnName="ProfileTokenRegistration" />
           <ScalarProperty Name="ProfileTokenString" ColumnName="ProfileTokenString" />
           <ScalarProperty Name="ProfileTokenID" ColumnName="ProfileTokenID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="GorgiasModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="ProfileActivityLocation" ColumnName="ProfileActivityLocation" />
+          <ScalarProperty Name="ProfileActivityID" ColumnName="ProfileActivityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileActivities">
+      <EntityTypeMapping TypeName="GorgiasModel.ProfileActivity">
+        <MappingFragment StoreEntitySet="ProfileActivity">
+          <ScalarProperty Name="ActivityTypeID" ColumnName="ActivityTypeID" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="ProfileActivityParentID" ColumnName="ProfileActivityParentID" />
+          <ScalarProperty Name="ProfileActivityIsFirst" ColumnName="ProfileActivityIsFirst" />
+          <ScalarProperty Name="ProfileActivityCount" ColumnName="ProfileActivityCount" />
+          <ScalarProperty Name="ProfileActivityDate" ColumnName="ProfileActivityDate" />
+          <ScalarProperty Name="ProfileActivityID" ColumnName="ProfileActivityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shares">
+      <EntityTypeMapping TypeName="GorgiasModel.Share">
+        <MappingFragment StoreEntitySet="Share">
+          <ScalarProperty Name="ProfileActivityShare" ColumnName="ProfileActivityShare" />
+          <ScalarProperty Name="ProfileActivityID" ColumnName="ProfileActivityID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

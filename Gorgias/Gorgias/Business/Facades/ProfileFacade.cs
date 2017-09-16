@@ -32,6 +32,12 @@ namespace Gorgias.BusinessLayer.Facades
         {
             return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID);            
         }
+
+        public ProfileDTO GetV2Profile(int ProfileID)
+        {
+            ProfileDTO result = Mapper.Map<ProfileDTO>(DataLayer.DataLayerFacade.ProfileRepository().GetV2Profile(ProfileID));
+            return result;
+        }
         //V2 End
         public ProfileDTO GetProfile(int ProfileID)
         {

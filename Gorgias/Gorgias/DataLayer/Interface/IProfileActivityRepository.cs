@@ -2,14 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Spatial;
 using System.Diagnostics;
 using System.Linq;
 namespace Gorgias.DataLayer.Interface
 {
     public interface IProfileActivityRepository
     {
-        ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, DateTime ProfileActivityDateTime);
-        bool Update(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, DateTime ProfileActivityDateTime);
+        ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst);
+        ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst, DbGeography ProfileActivityLocation);
+        ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst, string ProfileActivityShare);
+        bool Update(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst);
         bool Delete(int ProfileID, int AlbumID);
 
         ProfileActivity GetProfileActivity(int ProfileID, int AlbumID);

@@ -34,6 +34,9 @@ namespace Gorgias.Business.DataTransferObjects
         public virtual ThemeDTO Theme { get; set; }
         public virtual SubscriptionTypeDTO SubscriptionType { get; set; }
 
+        public virtual ProfileSettingDTO ProfileSetting { get; set; }
+        public virtual System.Collections.Generic.ICollection<ProfileReading> ProfileReadings { get; set; }
+
     }
 }
 

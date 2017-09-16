@@ -19,6 +19,7 @@ namespace Gorgias.DataLayer.Interface
         bool Delete(int ProfileID);
 
         Profile GetProfile(int ProfileID);
+        Profile GetV2Profile(int ProfileID);
         Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode);
         IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();
         Int64 GetProfileReportCurrentProfileViews();

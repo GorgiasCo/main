@@ -7,15 +7,15 @@
       <Diagram DiagramId="2497eb49a50e4cbbb988d8847fb93182" Name="Diagram1">
         <EntityTypeShape EntityType="GorgiasModel.Address" Width="1.5" PointX="8.25" PointY="11.125" />
         <EntityTypeShape EntityType="GorgiasModel.AddressType" Width="1.5" PointX="6" PointY="7.375" />
-        <EntityTypeShape EntityType="GorgiasModel.Album" Width="1.5" PointX="8.25" PointY="16.5" />
+        <EntityTypeShape EntityType="GorgiasModel.Album" Width="1.75" PointX="8.25" PointY="16.5" />
         <EntityTypeShape EntityType="GorgiasModel.Attribute" Width="1.5" PointX="3" PointY="22.625" />
         <EntityTypeShape EntityType="GorgiasModel.Category" Width="1.5" PointX="6" PointY="26.875" />
         <EntityTypeShape EntityType="GorgiasModel.City" Width="1.5" PointX="6" PointY="3.25" />
         <EntityTypeShape EntityType="GorgiasModel.Connection" Width="1.5" PointX="5.25" PointY="13.75" />
         <EntityTypeShape EntityType="GorgiasModel.Content" Width="1.5" PointX="10.5" PointY="20.75" />
         <EntityTypeShape EntityType="GorgiasModel.Country" Width="1.5" PointX="3.75" PointY="3.125" />
-        <EntityTypeShape EntityType="GorgiasModel.ExternalLink" Width="1.5" PointX="8.25" PointY="21.125" />
-        <EntityTypeShape EntityType="GorgiasModel.Feature" Width="1.5" PointX="9" PointY="24.625" />
+        <EntityTypeShape EntityType="GorgiasModel.ExternalLink" Width="1.5" PointX="8.125" PointY="23.25" />
+        <EntityTypeShape EntityType="GorgiasModel.Feature" Width="1.5" PointX="10" PointY="25.125" />
         <EntityTypeShape EntityType="GorgiasModel.FeaturedSponsor" Width="1.5" PointX="11.25" PointY="17" />
         <EntityTypeShape EntityType="GorgiasModel.Industry" Width="1.5" PointX="0.5" PointY="12.875" />
         <EntityTypeShape EntityType="GorgiasModel.LinkType" Width="1.5" PointX="6" PointY="31" />
@@ -83,6 +83,36 @@
         <AssociationConnector Association="GorgiasModel.FK_ProfileReport_Revenue" />
         <EntityTypeShape EntityType="GorgiasModel.FBActivity" Width="1.5" PointX="8.375" PointY="0.75" />
         <AssociationConnector Association="GorgiasModel.FK_Category_Category" />
+        <EntityTypeShape EntityType="GorgiasModel.ActivityType" Width="1.5" PointX="11.25" PointY="9.75" />
+        <EntityTypeShape EntityType="GorgiasModel.ContentRating" Width="1.5" PointX="6" PointY="37.25" />
+        <EntityTypeShape EntityType="GorgiasModel.ContentType" Width="1.5" PointX="8.25" PointY="33.5" />
+        <EntityTypeShape EntityType="GorgiasModel.Language" Width="1.5" PointX="10.375" PointY="1" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileSetting" Width="1.5" PointX="5.25" PointY="34.25" />
+        <AssociationConnector Association="GorgiasModel.FK_ActivityType_ActivityType" />
+        <AssociationConnector Association="GorgiasModel.FK_Album_ContentRating" />
+        <AssociationConnector Association="GorgiasModel.FK_Content_ContentType" />
+        <AssociationConnector Association="GorgiasModel.FK_ContentRating_ContentRating" />
+        <AssociationConnector Association="GorgiasModel.FK_ContentType_ContentType" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileSetting_Profile" />
+        <EntityTypeShape EntityType="GorgiasModel.Quote" Width="1.5" PointX="8.25" PointY="37.375" />
+        <AssociationConnector Association="GorgiasModel.FK_Quote_Category" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileReading" Width="1.5" PointX="5.25" PointY="43.5" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileToken" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileReading_ProfileReading" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileToken_Profile" />
+        <AssociationConnector Association="GorgiasModel.FK_City_City" />
+        <AssociationConnector Association="GorgiasModel.FK_Country_Country" />
+        <AssociationConnector Association="GorgiasModel.FK_Industry_Industry" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileType_ProfileType" />
+        <EntityTypeShape EntityType="GorgiasModel.Location" Width="1.5" PointX="15.75" PointY="14.875" />
+        <EntityTypeShape EntityType="GorgiasModel.ProfileActivity" Width="1.5" PointX="13.5" PointY="12.625" />
+        <EntityTypeShape EntityType="GorgiasModel.Share" Width="1.5" PointX="15.75" PointY="12.625" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ActivityType" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Album" />
+        <AssociationConnector Association="GorgiasModel.FK_Location_ProfileActivity" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Profile" />
+        <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ProfileActivity" />
+        <AssociationConnector Association="GorgiasModel.FK_Share_ProfileActivity" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -38,41 +38,42 @@ namespace Gorgias.BusinessLayer.Facades
 
             int intTotal = queryTotal.Value;
 
-            //var tt = queryList.Select(w => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
-            //{
-            //    ProfileID = w.ProfileID,
-            //    AlbumID = w.AlbumID,
-            //    AlbumCover = w.AlbumCover,
-            //    AlbumDateCreated = w.AlbumDateCreated,
-            //    AlbumName = w.AlbumName,
-            //    AlbumAvailability = w.AlbumAvailability,
-            //    AlbumDateExpire = w.AlbumDateExpire,
-            //    AlbumDatePublish = w.AlbumDatePublish,
-            //    //AlbumAvailabilityName = w.AlbumType.AlbumTypeName,
-            //    AlbumLike = w.Contents.Sum(m => m.ContentLike),
-            //    AlbumContents = w.Contents.Count,
-            //    AlbumComments = w.Contents.Sum(m => m.Comments.Count),
-            //    AlbumHasComment = w.AlbumHasComment,
-            //    Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
-            //    {
-            //        ContentLike = c.ContentLike,
-            //        ContentComments = c.Comments.Count,
-            //        TopComments = c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname }).ToList(),
-            //        ContentURL = c.ContentURL,
-            //        ContentID = c.ContentID,
-            //        ContentTitle = c.ContentTitle,
-            //        ContentDimension = c.ContentDimension,
-            //        ContentTypeID = c.ContentType,
-            //        ContentTypeExpression = c.ContentType1.ContentTypeExpression
-            //    }).ToList()
-            //}).ToList();
-
             var tt = queryList.Select(w => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
-            {                
-                AlbumID = w.AlbumID,                
+            {
+                ProfileID = w.ProfileID,
+                AlbumID = w.AlbumID,
+                AlbumCover = w.AlbumCover,
+                AlbumDateCreated = w.AlbumDateCreated,
+                AlbumName = w.AlbumName,
+                AlbumAvailability = w.AlbumAvailability,
                 AlbumDateExpire = w.AlbumDateExpire,
                 AlbumDatePublish = w.AlbumDatePublish,
+                //AlbumAvailabilityName = w.AlbumType.AlbumTypeName,
+                AlbumLike = w.Contents.Sum(m => m.ContentLike),
+                AlbumContents = w.Contents.Count,
+                AlbumComments = w.Contents.Sum(m => m.Comments.Count),
+                AlbumHasComment = w.AlbumHasComment,
+                AlbumIsTokenAvailable = w.AlbumIsTokenAvailable,
+                Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
+                {
+                    ContentLike = c.ContentLike,
+                    ContentComments = c.Comments.Count,
+                    TopComments = c.Comments != null ? c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname, CommentID = m.CommentID }).ToList() : null,
+                    ContentURL = c.ContentURL,
+                    ContentID = c.ContentID,
+                    ContentTitle = c.ContentTitle,
+                    ContentDimension = c.ContentDimension,
+                    ContentTypeID = c.ContentType,
+                    ContentTypeExpression = c.ContentType1.ContentTypeExpression
+                }).ToList()
             }).ToList();
+
+            //var tt = queryList.Select(w => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
+            //{                
+            //    AlbumID = w.AlbumID,                
+            //    AlbumDateExpire = w.AlbumDateExpire,
+            //    AlbumDatePublish = w.AlbumDatePublish,
+            //}).ToList();
 
             PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> result = new PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel>()
             {
@@ -150,7 +151,7 @@ namespace Gorgias.BusinessLayer.Facades
                     break;
                 default:
                     var currentDate = DateTime.UtcNow;
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).OrderByDescending(m => m.AlbumDatePublish <= currentDate);
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).Where(wm=> wm.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
                     break;
             }
 
@@ -178,11 +179,12 @@ namespace Gorgias.BusinessLayer.Facades
                 AlbumContents = w.Contents.Count,
                 AlbumComments = w.Contents.Sum(m => m.Comments.Count),
                 AlbumHasComment = w.AlbumHasComment,
+                isFelt = w.ProfileActivities.Any(m => m.ProfileID == ProfileID),
                 Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
                 {
                     ContentLike = c.ContentLike,
                     ContentComments = c.Comments.Count,
-                    TopComments = c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname}).ToList(),
+                    TopComments = c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname, CommentID = m.CommentID }).ToList(),
                     ContentURL = c.ContentURL,
                     ContentID = c.ContentID,
                     ContentTitle = c.ContentTitle,

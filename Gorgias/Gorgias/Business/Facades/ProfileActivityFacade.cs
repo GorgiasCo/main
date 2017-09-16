@@ -13,6 +13,7 @@ using Gorgias.Business.DataTransferObjects;
 using Gorgias.Infrastruture.Core;
 using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
+using System.Data.Entity.Spatial;
 
 namespace Gorgias.BusinessLayer.Facades
 {
@@ -169,9 +170,52 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public ProfileActivityDTO Insert(Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel objProfileActivity)
+        {
+            ProfileActivityDTO result = null;
+            if (objProfileActivity.Share != "")
+            {
+                result = Mapper.Map<ProfileActivityDTO>(DataLayer.DataLayerFacade.ProfileActivityRepository().Insert(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityIsFirst, objProfileActivity.Share));
+            }
+            else if (objProfileActivity.Location != "")
+            {
+                result = Mapper.Map<ProfileActivityDTO>(DataLayer.DataLayerFacade.ProfileActivityRepository().Insert(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityIsFirst, DbGeography.FromText(objProfileActivity.Location)));
+            }
+            else if (objProfileActivity.ContentLikes != null)
+            {
+                //Update Likes
+                //Update Like Album
+            }
+            else
+            {
+                result = Mapper.Map<ProfileActivityDTO>(DataLayer.DataLayerFacade.ProfileActivityRepository().Insert(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityIsFirst));
+            }
+            
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return new ProfileActivityDTO();
+            }
+        }
+
         public ProfileActivityDTO Insert(ProfileActivityDTO objProfileActivity)
         {
-            ProfileActivityDTO result = Mapper.Map<ProfileActivityDTO>(DataLayer.DataLayerFacade.ProfileActivityRepository().Insert(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, DateTime.UtcNow));
+            ProfileActivityDTO result = null;
+            if (objProfileActivity.Share != null)
+            {
+                result = Mapper.Map<ProfileActivityDTO>(DataLayer.DataLayerFacade.ProfileActivityRepository().Insert(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityIsFirst, objProfileActivity.Share.ProfileActivityShare));
+            }
+            else if (objProfileActivity.Location != null)
+            {
+                result = Mapper.Map<ProfileActivityDTO>(DataLayer.DataLayerFacade.ProfileActivityRepository().Insert(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityIsFirst, DbGeography.FromText(objProfileActivity.Location.Location)));
+            }
+            else
+            {
+                result = Mapper.Map<ProfileActivityDTO>(DataLayer.DataLayerFacade.ProfileActivityRepository().Insert(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityIsFirst));
+            }
 
             if (result != null)
             {
@@ -198,7 +242,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public bool Update(int ProfileID, int AlbumID, ProfileActivityDTO objProfileActivity)
         {
-            bool result = DataLayer.DataLayerFacade.ProfileActivityRepository().Update(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityDateTime);
+            bool result = DataLayer.DataLayerFacade.ProfileActivityRepository().Update(objProfileActivity.ProfileID, objProfileActivity.AlbumID, objProfileActivity.ActivityTypeID, objProfileActivity.ProfileActivityCount, objProfileActivity.ProfileActivityIsFirst);
             if (result)
             {
                 return true;

@@ -209,23 +209,14 @@
     <EntitySet Name="ContentRatings" EntityType="GorgiasModel.ContentRating" />
     <EntitySet Name="ContentTypes" EntityType="GorgiasModel.ContentType" />
     <EntitySet Name="Languages" EntityType="GorgiasModel.Language" />
-    <EntitySet Name="ProfileActivities" EntityType="GorgiasModel.ProfileActivity" />
     <EntitySet Name="ProfileSettings" EntityType="GorgiasModel.ProfileSetting" />
     <AssociationSet Name="FK_ActivityType_ActivityType" Association="GorgiasModel.FK_ActivityType_ActivityType">
       <End Role="ActivityType" EntitySet="ActivityTypes" />
       <End Role="ActivityType1" EntitySet="ActivityTypes" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProfileActivity_ActivityType" Association="GorgiasModel.FK_ProfileActivity_ActivityType">
-      <End Role="ActivityType" EntitySet="ActivityTypes" />
-      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
-    </AssociationSet>
     <AssociationSet Name="FK_Album_ContentRating" Association="GorgiasModel.FK_Album_ContentRating">
       <End Role="ContentRating" EntitySet="ContentRatings" />
       <End Role="Album" EntitySet="Albums" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProfileActivity_Album" Association="GorgiasModel.FK_ProfileActivity_Album">
-      <End Role="Album" EntitySet="Albums" />
-      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
     </AssociationSet>
     <AssociationSet Name="FK_Content_ContentType" Association="GorgiasModel.FK_Content_ContentType">
       <End Role="ContentType" EntitySet="ContentTypes" />
@@ -238,10 +229,6 @@
     <AssociationSet Name="FK_ContentType_ContentType" Association="GorgiasModel.FK_ContentType_ContentType">
       <End Role="ContentType" EntitySet="ContentTypes" />
       <End Role="ContentType1" EntitySet="ContentTypes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProfileActivity_Profile" Association="GorgiasModel.FK_ProfileActivity_Profile">
-      <End Role="Profile" EntitySet="Profiles" />
-      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
     </AssociationSet>
     <AssociationSet Name="FK_ProfileSetting_Profile" Association="GorgiasModel.FK_ProfileSetting_Profile">
       <End Role="Profile" EntitySet="Profiles" />
@@ -277,6 +264,33 @@
     <AssociationSet Name="FK_ProfileType_ProfileType" Association="GorgiasModel.FK_ProfileType_ProfileType">
       <End Role="ProfileType" EntitySet="ProfileTypes" />
       <End Role="ProfileType1" EntitySet="ProfileTypes" />
+    </AssociationSet>
+    <EntitySet Name="Locations" EntityType="GorgiasModel.Location" />
+    <EntitySet Name="ProfileActivities" EntityType="GorgiasModel.ProfileActivity" />
+    <EntitySet Name="Shares" EntityType="GorgiasModel.Share" />
+    <AssociationSet Name="FK_ProfileActivity_ActivityType" Association="GorgiasModel.FK_ProfileActivity_ActivityType">
+      <End Role="ActivityType" EntitySet="ActivityTypes" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_Album" Association="GorgiasModel.FK_ProfileActivity_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_ProfileActivity" Association="GorgiasModel.FK_Location_ProfileActivity">
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_Profile" Association="GorgiasModel.FK_ProfileActivity_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProfileActivity_ProfileActivity" Association="GorgiasModel.FK_ProfileActivity_ProfileActivity">
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+      <End Role="ProfileActivity1" EntitySet="ProfileActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Share_ProfileActivity" Association="GorgiasModel.FK_Share_ProfileActivity">
+      <End Role="ProfileActivity" EntitySet="ProfileActivities" />
+      <End Role="Share" EntitySet="Shares" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Address">
@@ -494,6 +508,7 @@
     <Property Name="IndustryLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="IndustryChilds" Relationship="GorgiasModel.FK_Industry_Industry" FromRole="Industry" ToRole="Industry1" />
     <NavigationProperty Name="IndustryParent" Relationship="GorgiasModel.FK_Industry_Industry" FromRole="Industry1" ToRole="Industry" />
+    <Property Name="IndustryOrder" Type="Int32" />
   </EntityType>
   <EntityType Name="LinkType">
     <Key>
@@ -562,10 +577,10 @@
     <NavigationProperty Name="Comments" Relationship="GorgiasModel.FK_Comment_Profile" FromRole="Profile" ToRole="Comment" />
     <NavigationProperty Name="ProfileCommissions" Relationship="GorgiasModel.FK_ProfileCommission_Profile" FromRole="Profile" ToRole="ProfileCommission" />
     <NavigationProperty Name="ProfileReports" Relationship="GorgiasModel.FK_ProfileReport_Profile" FromRole="Profile" ToRole="ProfileReport" />
-    <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="Profile" ToRole="ProfileActivity" />
     <NavigationProperty Name="ProfileSetting" Relationship="GorgiasModel.FK_ProfileSetting_Profile" FromRole="Profile" ToRole="ProfileSetting" />
     <NavigationProperty Name="ProfileReadings" Relationship="GorgiasModel.FK_ProfileReading_ProfileReading" FromRole="Profile" ToRole="ProfileReading" />
     <NavigationProperty Name="ProfileTokens" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="Profile" ToRole="ProfileToken" />
+    <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="Profile" ToRole="ProfileActivity" />
   </EntityType>
   <EntityType Name="ProfileAttribute">
     <Key>
@@ -1372,8 +1387,8 @@
     <Property Name="ActivityTypeParentID" Type="Int32" />
     <NavigationProperty Name="ActivityTypeChilds" Relationship="GorgiasModel.FK_ActivityType_ActivityType" FromRole="ActivityType" ToRole="ActivityType1" />
     <NavigationProperty Name="ActivityTypeParent" Relationship="GorgiasModel.FK_ActivityType_ActivityType" FromRole="ActivityType1" ToRole="ActivityType" />
-    <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_ActivityType" FromRole="ActivityType" ToRole="ProfileActivity" />
     <Property Name="ActivityTypeOrder" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_ActivityType" FromRole="ActivityType" ToRole="ProfileActivity" />
   </EntityType>
   <EntityType Name="ContentRating">
     <Key>
@@ -1417,20 +1432,6 @@
     <Property Name="LanguageStatus" Type="Boolean" Nullable="false" />
     <Property Name="LanguageOrder" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="ProfileActivity">
-    <Key>
-      <PropertyRef Name="ProfileID" />
-      <PropertyRef Name="AlbumID" />
-    </Key>
-    <Property Name="ProfileID" Type="Int32" Nullable="false" />
-    <Property Name="AlbumID" Type="Int32" Nullable="false" />
-    <Property Name="ActivityTypeID" Type="Int32" Nullable="false" />
-    <Property Name="ProfileActivityCount" Type="Int32" Nullable="false" />
-    <Property Name="ProfileActivityDateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="ActivityType" Relationship="GorgiasModel.FK_ProfileActivity_ActivityType" FromRole="ProfileActivity" ToRole="ActivityType" />
-    <NavigationProperty Name="Album" Relationship="GorgiasModel.FK_ProfileActivity_Album" FromRole="ProfileActivity" ToRole="Album" />
-    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="ProfileActivity" ToRole="Profile" />
-  </EntityType>
   <EntityType Name="ProfileSetting">
     <Key>
       <PropertyRef Name="ProfileID" />
@@ -1453,20 +1454,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProfileActivity_ActivityType">
-    <End Type="GorgiasModel.ActivityType" Role="ActivityType" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ActivityType">
-        <PropertyRef Name="ActivityTypeID" />
-      </Principal>
-      <Dependent Role="ProfileActivity">
-        <PropertyRef Name="ActivityTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Album_ContentRating">
     <End Type="GorgiasModel.ContentRating" Role="ContentRating" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -1478,18 +1465,6 @@
       </Principal>
       <Dependent Role="Album">
         <PropertyRef Name="ContentRatingID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProfileActivity_Album">
-    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="1" />
-    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Album">
-        <PropertyRef Name="AlbumID" />
-      </Principal>
-      <Dependent Role="ProfileActivity">
-        <PropertyRef Name="AlbumID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1528,18 +1503,6 @@
       </Principal>
       <Dependent Role="ContentType1">
         <PropertyRef Name="ContentTypeParentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProfileActivity_Profile">
-    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1" />
-    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Profile">
-        <PropertyRef Name="ProfileID" />
-      </Principal>
-      <Dependent Role="ProfileActivity">
-        <PropertyRef Name="ProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1676,6 +1639,122 @@
       </Principal>
       <Dependent Role="ProfileType1">
         <PropertyRef Name="ProfileTypeParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="ProfileActivityID" />
+    </Key>
+    <Property Name="ProfileActivityID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileActivityLocation" Type="Geography" Nullable="false" />
+    <NavigationProperty Name="ProfileActivity" Relationship="GorgiasModel.FK_Location_ProfileActivity" FromRole="Location" ToRole="ProfileActivity" />
+  </EntityType>
+  <EntityType Name="ProfileActivity">
+    <Key>
+      <PropertyRef Name="ProfileActivityID" />
+    </Key>
+    <Property Name="ProfileActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfileActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProfileActivityCount" Type="Int32" Nullable="false" />
+    <Property Name="ProfileActivityIsFirst" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileActivityParentID" Type="Int32" />
+    <Property Name="AlbumID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileID" Type="Int32" Nullable="false" />
+    <Property Name="ActivityTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ActivityType" Relationship="GorgiasModel.FK_ProfileActivity_ActivityType" FromRole="ProfileActivity" ToRole="ActivityType" />
+    <NavigationProperty Name="Album" Relationship="GorgiasModel.FK_ProfileActivity_Album" FromRole="ProfileActivity" ToRole="Album" />
+    <NavigationProperty Name="Location" Relationship="GorgiasModel.FK_Location_ProfileActivity" FromRole="ProfileActivity" ToRole="Location" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="ProfileActivity" ToRole="Profile" />
+    <NavigationProperty Name="ProfileActivityChilds" Relationship="GorgiasModel.FK_ProfileActivity_ProfileActivity" FromRole="ProfileActivity" ToRole="ProfileActivity1" />
+    <NavigationProperty Name="ProfileActivityParent" Relationship="GorgiasModel.FK_ProfileActivity_ProfileActivity" FromRole="ProfileActivity1" ToRole="ProfileActivity" />
+    <NavigationProperty Name="Share" Relationship="GorgiasModel.FK_Share_ProfileActivity" FromRole="ProfileActivity" ToRole="Share" />
+  </EntityType>
+  <EntityType Name="Share">
+    <Key>
+      <PropertyRef Name="ProfileActivityID" />
+    </Key>
+    <Property Name="ProfileActivityID" Type="Int32" Nullable="false" />
+    <Property Name="ProfileActivityShare" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProfileActivity" Relationship="GorgiasModel.FK_Share_ProfileActivity" FromRole="Share" ToRole="ProfileActivity" />
+  </EntityType>
+  <Association Name="FK_ProfileActivity_ActivityType">
+    <End Type="GorgiasModel.ActivityType" Role="ActivityType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActivityType">
+        <PropertyRef Name="ActivityTypeID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="ActivityTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_Album">
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_ProfileActivity">
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Location" Role="Location" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileActivity">
+        <PropertyRef Name="ProfileActivityID" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="ProfileActivityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1" />
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="ProfileActivity">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProfileActivity_ProfileActivity">
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="0..1" />
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileActivity">
+        <PropertyRef Name="ProfileActivityID" />
+      </Principal>
+      <Dependent Role="ProfileActivity1">
+        <PropertyRef Name="ProfileActivityParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Share_ProfileActivity">
+    <End Type="GorgiasModel.ProfileActivity" Role="ProfileActivity" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.Share" Role="Share" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProfileActivity">
+        <PropertyRef Name="ProfileActivityID" />
+      </Principal>
+      <Dependent Role="Share">
+        <PropertyRef Name="ProfileActivityID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

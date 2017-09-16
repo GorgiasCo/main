@@ -7,6 +7,8 @@ using Gorgias;
 using Gorgias.DataLayer.Interface;
 using Gorgias.Infrastruture.EntityFramework;
 using System.Linq;
+using System.Data.Entity.Spatial;
+
 namespace Gorgias.DataLayer.Repository.SQL
 {
     public class ProfileActivityRepository : IProfileActivityRepository, IDisposable
@@ -44,7 +46,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         #endregion
 
         //CRUD Functions
-        public ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, DateTime ProfileActivityDateTime)
+        public ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst)
         {
             try
             {
@@ -53,7 +55,8 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.AlbumID = AlbumID;
                 obj.ActivityTypeID = ActivityTypeID;
                 obj.ProfileActivityCount = ProfileActivityCount;
-                obj.ProfileActivityDateTime = ProfileActivityDateTime;
+                obj.ProfileActivityIsFirst = ProfileActivityIsFirst;
+                obj.ProfileActivityDate = DateTime.UtcNow;
                 context.ProfileActivities.Add(obj);
                 context.SaveChanges();
                 return obj;
@@ -64,7 +67,55 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, DateTime ProfileActivityDateTime)
+        public ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst, string ProfileActivityShare)
+        {
+            try
+            {
+                ProfileActivity obj = new ProfileActivity();
+                obj.ProfileID = ProfileID;
+                obj.AlbumID = AlbumID;
+                obj.ActivityTypeID = ActivityTypeID;
+                obj.ProfileActivityCount = ProfileActivityCount;
+                obj.ProfileActivityIsFirst = ProfileActivityIsFirst;
+                obj.ProfileActivityDate = DateTime.UtcNow;
+
+                obj.Share = new Share{ ProfileActivityShare = ProfileActivityShare };
+
+                context.ProfileActivities.Add(obj);
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new ProfileActivity();
+            }
+        }
+
+        public ProfileActivity Insert(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst, DbGeography ProfileActivityLocation)
+        {
+            try
+            {
+                ProfileActivity obj = new ProfileActivity();
+                obj.ProfileID = ProfileID;
+                obj.AlbumID = AlbumID;
+                obj.ActivityTypeID = ActivityTypeID;
+                obj.ProfileActivityCount = ProfileActivityCount;
+                obj.ProfileActivityIsFirst = ProfileActivityIsFirst;
+                obj.ProfileActivityDate = DateTime.UtcNow;
+
+                obj.Location = new Location { ProfileActivityLocation  = ProfileActivityLocation };
+
+                context.ProfileActivities.Add(obj);
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return new ProfileActivity();
+            }
+        }
+
+        public bool Update(int ProfileID, int AlbumID, int ActivityTypeID, int ProfileActivityCount, bool ProfileActivityIsFirst)
         {
             ProfileActivity obj = new ProfileActivity();
             obj = (from w in context.ProfileActivities where w.ProfileID == ProfileID && w.AlbumID == AlbumID select w).FirstOrDefault();
@@ -74,7 +125,8 @@ namespace Gorgias.DataLayer.Repository.SQL
 
                 obj.ActivityTypeID = ActivityTypeID;
                 obj.ProfileActivityCount = ProfileActivityCount;
-                obj.ProfileActivityDateTime = ProfileActivityDateTime;
+                obj.ProfileActivityIsFirst = ProfileActivityIsFirst;
+                obj.ProfileActivityDate = DateTime.UtcNow;
                 context.SaveChanges();
                 return true;
             }

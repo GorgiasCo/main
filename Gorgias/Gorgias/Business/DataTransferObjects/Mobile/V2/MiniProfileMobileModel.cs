@@ -11,6 +11,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public string ProfileShortDescription { get; set; }
         public string IndustryName { get; set; }
         public string ProfileTypeName { get; set; }
+        public string ProfileImage { get; set; }
 
         public bool isSubscribed { get; set; }
 

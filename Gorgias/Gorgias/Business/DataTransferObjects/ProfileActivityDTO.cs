@@ -11,8 +11,12 @@ namespace Gorgias.Business.DataTransferObjects
         public int AlbumID { get; set; }
         public int ActivityTypeID { get; set; }
         public int ProfileActivityCount { get; set; }
-        public DateTime ProfileActivityDateTime { get; set; }
+        public int? ProfileActivityParentID { get; set; }
+        public bool ProfileActivityIsFirst { get; set; }
+        public DateTime ProfileActivityDate { get; set; }
 
+        public virtual ShareDTO Share { get; set; }
+        public virtual LocationDTO Location { get; set; }
         public virtual AlbumDTO Album { get; set; }
         public virtual ProfileDTO Profile { get; set; }
         public virtual ActivityTypeDTO ActivityType { get; set; }
