@@ -23,6 +23,7 @@ namespace Gorgias.DataLayer.Interface
 
         //IQueryable
         IQueryable<AlbumType> GetAlbumTypesAllAsQueryable();
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetAlbumTypesAllAsQueryableByKeyValue(bool AlbumTypeStatus);
         IQueryable<AlbumType> GetAlbumTypesAllAsQueryable(bool AlbumTypeStatus);
         IQueryable<AlbumType> GetAlbumTypesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);
         IQueryable<AlbumType> GetAlbumTypesAllAsQueryable(bool AlbumTypeStatus, int page = 1, int pageSize = 7, string filter = null);

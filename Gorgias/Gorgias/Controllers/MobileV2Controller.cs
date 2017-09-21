@@ -113,6 +113,28 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Categories/{CategoryParentID}", Name = "GetV2MobileCategoriesByParentID")]
+        [HttpGet]
+        public HttpResponseMessage GetCategories(HttpRequestMessage request, int CategoryParentID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                //IEnumerable<CategoryMobileModel> result = BusinessLayer.Facades.Facade.CategoryFacade().getCategories(CategoryParentID, headerLanguage.First().Value);
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CategoryFacade().getCategories(CategoryParentID, headerLanguage.First().Value);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/ProfileTypes", Name = "GetV2MobileProfileTypes")]
         [HttpGet]
         public HttpResponseMessage GetProfileTypes(HttpRequestMessage request)
@@ -226,14 +248,16 @@ namespace Gorgias.Controllers
             {
                 HttpResponseMessage response = null;
                 var headerLanguage = request.Headers.AcceptLanguage;
-                IEnumerable<ContentRatingMobileModel> result = BusinessLayer.Facades.Facade.ContentRatingFacade().getContentRatings(headerLanguage.First().Value);
+                //IEnumerable<ContentRatingMobileModel> result = BusinessLayer.Facades.Facade.ContentRatingFacade().getContentRatings(headerLanguage.First().Value);
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.ContentRatingFacade().getContentRatingsByKeyValue(headerLanguage.First().Value);
+
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<ContentRatingMobileModel>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -246,14 +270,15 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                IEnumerable<LanguageMobileModel> result = BusinessLayer.Facades.Facade.LanguageFacade().getLanguages();
+                //IEnumerable<LanguageMobileModel> result = BusinessLayer.Facades.Facade.LanguageFacade().getLanguages();
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.LanguageFacade().getLanguagesByKeyValue();
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<LanguageMobileModel>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -475,14 +500,15 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                IEnumerable<Business.DataTransferObjects.Mobile.AlbumAvailabilityModel> result = BusinessLayer.Facades.Facade.WebFacade().AlbumAvailability(ProfileID);
+                //IEnumerable<Business.DataTransferObjects.Mobile.AlbumAvailabilityModel> result = BusinessLayer.Facades.Facade.WebFacade().AlbumAvailability(ProfileID);
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.AlbumTypeFacade().getAvailabilities();
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<Business.DataTransferObjects.Mobile.AlbumAvailabilityModel>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });

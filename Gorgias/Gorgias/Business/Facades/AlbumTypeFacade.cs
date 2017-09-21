@@ -18,6 +18,11 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class AlbumTypeFacade
     {
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getAvailabilities()
+        {
+            return DataLayer.DataLayerFacade.AlbumTypeRepository().GetAlbumTypesAllAsQueryableByKeyValue(true);
+        }
+
         public AlbumTypeDTO GetAlbumType(int AlbumTypeID)
         {
             AlbumTypeDTO result = Mapper.Map<AlbumTypeDTO>(DataLayer.DataLayerFacade.AlbumTypeRepository().GetAlbumType(AlbumTypeID));

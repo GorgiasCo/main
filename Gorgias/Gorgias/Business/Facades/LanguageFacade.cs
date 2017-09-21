@@ -23,6 +23,11 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAsQueryable();
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getLanguagesByKeyValue()
+        {
+            return DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAsQueryableByKeyValue();
+        }
+
         public LanguageDTO GetLanguage(int LanguageID)
         {
             LanguageDTO result = Mapper.Map<LanguageDTO>(DataLayer.DataLayerFacade.LanguageRepository().GetLanguage(LanguageID));

@@ -22,6 +22,12 @@ namespace Gorgias.BusinessLayer.Facades
         {
             return DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryable(languageCode);
         }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getContentRatingsByKeyValue(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRatingsAllAsQueryableByKeyValue(languageCode);
+        }
+
         public ContentRatingDTO GetContentRating(int ContentRatingID)
         {
             ContentRatingDTO result = Mapper.Map<ContentRatingDTO>(DataLayer.DataLayerFacade.ContentRatingRepository().GetContentRating(ContentRatingID));

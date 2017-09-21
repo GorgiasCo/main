@@ -157,6 +157,11 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.Languages where w.LanguageStatus == true orderby w.LanguageOrder ascending, w.LanguageName ascending select new Business.DataTransferObjects.Mobile.V2.LanguageMobileModel { LanguageCode = w.LanguageCode, LanguageID = w.LanguageID, LanguageName = w.LanguageName }).AsQueryable();
         }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetLanguagesAsQueryableByKeyValue()
+        {
+            return (from w in context.Languages where w.LanguageStatus == true orderby w.LanguageOrder ascending, w.LanguageName ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { KeyName = w.LanguageName, KeyID = w.LanguageID }).AsQueryable();
+        }
         //IQueryable Pagings
         public IQueryable<Language> GetLanguagesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)
         {

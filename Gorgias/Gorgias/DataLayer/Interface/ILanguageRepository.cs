@@ -23,6 +23,7 @@ namespace Gorgias.DataLayer.Interface
 
         //IQueryable
         IQueryable<Business.DataTransferObjects.Mobile.V2.LanguageMobileModel> GetLanguagesAsQueryable();
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetLanguagesAsQueryableByKeyValue();
         IQueryable<Language> GetLanguagesAllAsQueryable();
         IQueryable<Language> GetLanguagesAllAsQueryable(bool LanguageStatus);
         IQueryable<Language> GetLanguagesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);

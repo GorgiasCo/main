@@ -260,7 +260,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         //V2
         public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAllAsQueryable(string languageCode)
         {
-            return (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType}).AsQueryable();
+            return (from w in context.Categories where w.CategoryParentID != null  orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType}).AsQueryable();
         }
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesAllAsQueryableKeyValue(int CategoryParentID, string languageCode)
