@@ -78,7 +78,7 @@ namespace Gorgias.DataLayer.Authentication
 
         public async Task<bool> ResetPassword(ResetPasswordModel model)
         {
-            try 
+            try
             {
                 IdentityUser user = await _userManager.FindByIdAsync(model.Username);
                 IdentityResult result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
@@ -129,7 +129,8 @@ namespace Gorgias.DataLayer.Authentication
             IdentityUser user = new IdentityUser
             {
                 UserName = userModel.UserName,
-                Email = userModel.UserName
+                Email = userModel.UserName,
+                EmailConfirmed = true,
             };
 
             var result = await _userManager.CreateAsync(user, userModel.Password);

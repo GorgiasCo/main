@@ -13,6 +13,10 @@ using Gorgias.Business.DataTransferObjects;
 using Gorgias.Infrastruture.Core;
 using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
+using Gorgias.Infrastruture.Core.Encoder;
+using System.Threading.Tasks;
+using System.Configuration;
+using Gorgias.Infrastruture.Core.Email;
 
 namespace Gorgias.BusinessLayer.Facades
 {
@@ -21,7 +25,7 @@ namespace Gorgias.BusinessLayer.Facades
         //V2 Begin
         public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)
         {
-            return DataLayer.DataLayerFacade.ProfileRepository().GetV2MiniMobileProfile(ProfileID, RequestedProfileID, languageCode); 
+            return DataLayer.DataLayerFacade.ProfileRepository().GetV2MiniMobileProfile(ProfileID, RequestedProfileID, languageCode);
         }
         public Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID)
         {
@@ -30,7 +34,28 @@ namespace Gorgias.BusinessLayer.Facades
 
         public bool registerProfile(Business.DataTransferObjects.Mobile.V2.ProfileRegisterMobileModel registerProfileMobileModel)
         {
-            return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID);            
+            return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID);
+        }
+
+        public bool registerProfile(Business.DataTransferObjects.Mobile.V2.RegisterProfileMobileModel registerProfileMobileModel)
+        {
+            if(!registerProfileMobileModel.isFirstRegistration)
+            {
+                return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID, registerProfileMobileModel.ProfileBirthday, registerProfileMobileModel.ProfileLanguageApp);
+            } else
+            {
+                return registerProfileFirstTime(registerProfileMobileModel);
+            }            
+        }
+
+        public bool registerProfileFirstTime(Business.DataTransferObjects.Mobile.V2.RegisterProfileMobileModel registerProfileMobileModel)
+        {
+            bool result = DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileEmail);
+            if (result)
+            {
+                                
+            }
+            return result;
         }
 
         public ProfileDTO GetV2Profile(int ProfileID)

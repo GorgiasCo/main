@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using Gorgias;
 using Gorgias.DataLayer.Interface;
 using Gorgias.Infrastruture.EntityFramework;
 using System.Linq;
 using Gorgias.Business.DataTransferObjects;
+using System.Threading.Tasks;
 
 namespace Gorgias.DataLayer.Repository.SQL
 {
@@ -262,6 +263,12 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType}).AsQueryable();
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesAllAsQueryableKeyValue(int CategoryParentID, string languageCode)
+        {
+            return (from w in context.Categories where w.CategoryParentID == CategoryParentID orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, KeyName = w.CategoryName, KeyID = w.CategoryID}).AsQueryable();
+        }
+
+        //Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
         public IQueryable<Category> GetCategoriesAllAsQueryableX(string languageCode)
         {
             var xTest = (from w in context.Categories where w.CategoryParentID == null orderby w.CategoryID descending select new { ChildCategory = w.ChildCategory.Where(m => m.CategoryDescription == languageCode), CategoryID = w.CategoryID, CategoryName = w.CategoryName }).AsQueryable();

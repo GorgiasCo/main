@@ -277,6 +277,116 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID, DateTime ProfileBirthday, string ProfileLanguageApp)
+        {
+            Profile obj = new Profile();
+            obj = (from w in context.Profiles.Include("Industries").Include("Addresses") where w.ProfileID == ProfileID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                //Check Email is in system for registration ;)
+                //string emailProfile = ProfileEmail.ToLower();
+                //Profile resultEmailChecking = (from em in context.Profiles where em.ProfileEmail.ToLower().Equals(emailProfile) select em).FirstOrDefault();
+                //if (resultEmailChecking != null)
+                //{
+                //    return false;
+                //}
+
+                context.Profiles.Attach(obj);
+
+                if(ProfileFullname != "")
+                {
+                    obj.ProfileFullname = ProfileFullname;
+                }
+                 
+                if(ProfileFullnameEnglish != "")
+                {
+                    obj.ProfileFullnameEnglish = ProfileFullnameEnglish;
+                }
+
+                if (ProfileShortDescription != "")
+                {
+                    obj.ProfileShortDescription = ProfileShortDescription;
+                }
+
+                //obj.ProfileEmail = ProfileEmail;
+
+                if(ProfileTypeID > 0)
+                {
+                    obj.ProfileTypeID = ProfileTypeID;
+                }
+
+                obj.ProfileSetting = (from x in context.ProfileSettings where x.ProfileID == ProfileID select x).FirstOrDefault();
+
+                if(obj.ProfileSetting != null)
+                {
+                    if(ProfileBirthday != null)
+                    {
+                        obj.ProfileSetting.ProfileBirthday = ProfileBirthday;
+                    }
+                    if(CityID > 0)
+                    {
+                        obj.ProfileSetting.ProfileCityID = CityID;
+                    }                    
+                } else
+                {
+                    obj.ProfileSetting = new ProfileSetting { ProfileBirthday = ProfileBirthday != null ? ProfileBirthday : new Nullable<DateTime>(), ProfileCityID = CityID > 0 ? CityID : new Nullable<int>(), ProfileID = ProfileID, ProfileLanguageApp = ProfileLanguageApp };
+                }
+
+                if(IndustryID > 0){
+                    DataLayerFacade.ProfileIndustryRepository().Delete(ProfileID);
+                    obj.Industries.Add((from x in context.Industries where x.IndustryID == IndustryID select x).First());
+                } 
+
+                if(CityID > 0)
+                {
+                    obj.Addresses.Add(new Address { AddressAddress = "NA", AddressEmail = ProfileEmail, AddressName = ProfileFullname, AddressStatus = true, AddressTypeID = 1, CityID = CityID, AddressTel = "NA" });
+                }
+                                
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Update(int ProfileID, string ProfileFullname, string ProfileEmail)
+        {
+            Profile obj = new Profile();
+            obj = (from w in context.Profiles where w.ProfileID == ProfileID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                //Check Email is in system for registration ;)
+                string emailProfile = ProfileEmail.ToLower();
+                Profile resultEmailChecking = (from em in context.Profiles where em.ProfileEmail.ToLower().Equals(emailProfile) select em).FirstOrDefault();
+                if (resultEmailChecking != null)
+                {
+                    return false;
+                }
+
+                context.Profiles.Attach(obj);
+
+                obj.ProfileFullname = ProfileFullname;
+                obj.ProfileEmail = ProfileEmail;
+
+                User newProfileUser = new User { UserDateConfirmed = DateTime.UtcNow, UserDateCreated = DateTime.UtcNow, UserEmail = obj.ProfileEmail, UserFullname = obj.ProfileFullname, UserIsBlocked = false, UserStatus = true };
+                context.Users.Add(newProfileUser);
+                                
+                context.SaveChanges();
+
+                obj.UserProfiles.Add(new UserProfile { ProfileID = obj.ProfileID, UserID = newProfileUser.UserID, UserRoleID = 1 });
+
+                context.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Update(int ProfileID, string ProfileFullname)
         {
             Profile obj = new Profile();
@@ -471,7 +581,14 @@ namespace Gorgias.DataLayer.Repository.SQL
         //V2
         public Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID)
         {
-            return (from w in context.Profiles where w.ProfileEmail == ProfileEmail || w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.LoginAttempt { ProfileEmail = w.ProfileEmail, ProfileID = w.ProfileID }).FirstOrDefault();
+            var emailResult = (from w in context.Profiles where w.ProfileEmail == ProfileEmail select new Business.DataTransferObjects.Mobile.V2.LoginAttempt { ProfileEmail = w.ProfileEmail, ProfileID = w.ProfileID, alreadyRegistered = true }).FirstOrDefault();
+            if(emailResult != null)
+            {
+                return emailResult;
+            } else
+            {
+                return (from w in context.Profiles where w.ProfileID == ProfileID.Value select new Business.DataTransferObjects.Mobile.V2.LoginAttempt { ProfileEmail = w.ProfileEmail, ProfileID = w.ProfileID, alreadyRegistered = false }).FirstOrDefault();
+            }            
         }
 
         public int[] GetAdministrationProfiles(int CountryID)

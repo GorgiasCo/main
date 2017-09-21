@@ -121,14 +121,14 @@ namespace Gorgias.Controllers
             {
                 HttpResponseMessage response = null;
                 var headerLanguage = request.Headers.AcceptLanguage;
-                IEnumerable<ProfileTypeMobileModel> result = BusinessLayer.Facades.Facade.ProfileTypeFacade().getProfileTypesByLanguageCode(headerLanguage.First().Value);
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.ProfileTypeFacade().getProfileTypesByLanguageCodeByKeyValue(headerLanguage.First().Value);
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<ProfileTypeMobileModel>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -142,35 +142,35 @@ namespace Gorgias.Controllers
             {
                 HttpResponseMessage response = null;
                 var headerLanguage = request.Headers.AcceptLanguage;
-                IEnumerable<IndustryMobileModel> result = BusinessLayer.Facades.Facade.IndustryFacade().getIndustries(headerLanguage.First().Value);
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.IndustryFacade().getIndustriesByKeyValue(headerLanguage.First().Value);
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<IndustryMobileModel>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
         }
 
-        [Route("Mobile/V2/Cities/{CountryID}", Name = "GetV2MobileCitiesByCountryID")]
+        [Route("Mobile/V2/Cities/{searchKey}", Name = "GetV2MobileCitiesByCountryID")]
         [HttpGet]
-        public HttpResponseMessage GetCities(HttpRequestMessage request, int CountryID)
+        public HttpResponseMessage GetCities(HttpRequestMessage request, string searchKey)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
                 var headerLanguage = request.Headers.AcceptLanguage;
-                IEnumerable<CityMobileModel> result = BusinessLayer.Facades.Facade.CityFacade().getCities(CountryID, headerLanguage.First().Value);
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CityFacade().getCities(searchKey, headerLanguage.First().Value);
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<CityMobileModel>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -448,7 +448,7 @@ namespace Gorgias.Controllers
             });
         }
 
-        [Route("Mobile/Profile/NewUser", Name = "CreateV2NewMobileUser")]
+        [Route("Mobile/V2/Profile/NewUser", Name = "CreateV2NewMobileUser")]
         [HttpGet]
         public HttpResponseMessage CreateNewMobileUser(HttpRequestMessage request)
         {
@@ -613,6 +613,26 @@ namespace Gorgias.Controllers
                 }
                 else
                 {                    
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/Register/Full", Name = "GetV2MobileRegisterNewUserFull")]
+        [HttpPost]
+        public HttpResponseMessage ProfileRegisterFull(HttpRequestMessage request, RegisterProfileMobileModel profileRegisterMobileModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.ProfileFacade().registerProfile(profileRegisterMobileModel);
+                if (!result)
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotFound, false);
+                }
+                else
+                {
                     response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
                 }
                 return response;

@@ -28,6 +28,11 @@ namespace Gorgias.BusinessLayer.Facades
         {
             return DataLayer.DataLayerFacade.CityRepository().GetCitiesAsQueryable(CountryID,languageCode);
         }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getCities(string searchKey, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.CityRepository().GetCitiesAsQueryable(searchKey, languageCode);
+        }
         //V2 End ;)
         public CityDTO GetCity(int CityID)
         {

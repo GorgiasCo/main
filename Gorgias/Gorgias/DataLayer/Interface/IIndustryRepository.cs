@@ -26,6 +26,7 @@ namespace Gorgias.DataLayer.Interface
         IQueryable<Industry> GetIndustriesAllAsQueryable();
         IQueryable<Business.DataTransferObjects.IndustryDTO> GetIndustriesAllAsQueryable(string languageCode);
         IQueryable<Business.DataTransferObjects.Mobile.V2.IndustryMobileModel> GetIndustriesAsQueryable(string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetIndustriesAsKeyValueQueryable(string languageCode);
         IQueryable<Industry> GetIndustriesAllAsQueryable(bool IndustryStatus);
         IQueryable<Industry> GetIndustriesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);
         IQueryable<Industry> GetIndustriesAllAsQueryable(bool IndustryStatus, int page = 1, int pageSize = 7, string filter = null);

@@ -13,6 +13,7 @@ using Gorgias.Business.DataTransferObjects;
 using Gorgias.Infrastruture.Core;
 using Gorgias.Business.DataTransferObjects.Helper;
 using EntityFramework.Extensions;
+using System.Threading.Tasks;
 
 namespace Gorgias.BusinessLayer.Facades
 {
@@ -24,7 +25,10 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesAllAsQueryable(languageCode);
         }
 
-
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getCategories(int CategoryParentID, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesAllAsQueryableKeyValue(CategoryParentID, languageCode);
+        }
 
         //V2 End
         public CategoryDTO GetCategory(int CategoryID)

@@ -304,6 +304,59 @@ namespace Gorgias.Providers
                 context.Validated(ticket);
             }
 
+            if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m=> m.Profile.ProfileStatus == true && m.Profile.ProfileIsPeople == false && m.Profile.ProfileIsConfirmed == false))
+            {
+                UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
+                identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
+                var props = new AuthenticationProperties(new Dictionary<string, string>
+                {
+                    {
+                        "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
+                    },
+                    {
+                        "userName", context.UserName
+                    },
+                    {
+                        "userFullName", resultProfile.Profile.ProfileFullname
+                    },
+                    {
+                        "userID", resultProfile.ProfileID.ToString()
+                    }
+                    ,
+                    {
+                        "countryID", "0"
+                    },
+                    {
+                        "profileURL", resultProfile.Profile.ProfileURL
+                    }
+                    ,
+                    {
+                        "profileTypeID", resultProfile.Profile.ProfileTypeID.ToString()
+                    }
+                    ,
+                    {
+                        "profileIsConfirmed", resultProfile.Profile.ProfileIsConfirmed.ToString()
+                    }
+                    ,
+                    {
+                        "profileIsPeople", resultProfile.Profile.ProfileIsPeople.ToString()
+                    },
+                    {
+                        "userUserID", resultProfile.UserID.ToString()
+                    },
+                    {
+                        "Role", userRole
+                    },
+                    {
+                        "UserRole", resultProfile.UserRoleID.ToString()
+                    }
+                });
+                identity.AddClaim(new Claim("sub", context.UserName));
+
+                var ticket = new AuthenticationTicket(identity, props);
+                context.Validated(ticket);
+            }
+
             //if (resultProfile == null)
             //  if (resultUser.Count() == 0)
             //  {

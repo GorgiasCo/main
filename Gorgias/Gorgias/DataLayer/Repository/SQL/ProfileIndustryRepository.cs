@@ -69,6 +69,22 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
 		}
 
+        public bool Delete(int ProfileID)
+        {
+            Profile obj = (from w in context.Profiles.Include("Industries") where w.ProfileID == ProfileID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Profiles.Attach(obj);
+                obj.Industries.Clear();
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         //Relationship Functions based on Foreign Key
         //Relationship List
         public List<Profile> GetProfileIndustriesByIndustryID(int IndustryID, int page = 1, int pageSize = 7, string filter=null)

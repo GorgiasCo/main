@@ -29,6 +29,11 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.ProfileTypeRepository().GetProfileTypesAsQueryable(languageCode);
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getProfileTypesByLanguageCodeByKeyValue(string languageCode)
+        {
+            return DataLayer.DataLayerFacade.ProfileTypeRepository().GetProfileTypesAsQueryableAsKeyValue(languageCode);
+        }
+
         //V2 End ;)
         public ProfileTypeDTO GetProfileType(int ProfileTypeID)
         {

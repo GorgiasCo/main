@@ -201,6 +201,19 @@ namespace Gorgias.DataLayer.Repository.SQL
                     }).AsQueryable();
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetCitiesAsQueryable(string searchKey, string languageCode)
+        {
+            return (from w in context.Cities
+                    where w.CityStatus == true && w.CityParentID == null && w.CityName.ToLower().Contains(searchKey.ToLower()) || w.CityChilds.Any(m=> m.CityName.ToLower().Contains(searchKey))
+                    orderby w.CityName ascending
+                    select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
+                    {
+                        KeyName = w.CityName,
+                        KeyID = w.CityID,
+                        Multilanguage = w.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName
+                    }).AsQueryable();
+        }
+
         public IQueryable<City> GetCitiesAllAsQueryable(bool CityStatus)
         {
             return (from w in context.Cities where w.CityStatus == CityStatus orderby w.CityID descending select w).AsQueryable();

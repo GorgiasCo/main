@@ -201,6 +201,19 @@ namespace Gorgias.DataLayer.Repository.SQL
                     }).AsQueryable();
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetIndustriesAsKeyValueQueryable(string languageCode)
+        {
+            return (from w in context.Industries
+                    where w.IndustryStatus == true && w.IndustryParentID == null
+                    orderby w.IndustryName ascending
+                    select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
+                    {
+                        KeyName = w.IndustryName,
+                        KeyID = w.IndustryID,
+                        Multilanguage = w.IndustryChilds.Where(m => m.IndustryLanguageCode == languageCode).FirstOrDefault().IndustryName
+                    }).AsQueryable();
+        }
+
         public IQueryable<Industry> GetIndustriesAllAsQueryable(bool IndustryStatus)
         {
             return (from w in context.Industries where w.IndustryStatus == IndustryStatus orderby w.IndustryID descending select w).AsQueryable();

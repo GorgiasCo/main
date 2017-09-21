@@ -29,6 +29,7 @@ namespace Gorgias.DataLayer.Interface
         IQueryable<City> GetCitiesAllAsQueryable();
         IQueryable<Business.DataTransferObjects.CityDTO> GetCitiesAllAsQueryable(int CountryID, string languageCode);
         IQueryable<Business.DataTransferObjects.Mobile.V2.CityMobileModel> GetCitiesAsQueryable(int CountryID, string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetCitiesAsQueryable(string searchKey, string languageCode);
 
         IQueryable<City> GetCitiesAllAsQueryable(bool CityStatus);
         IQueryable<City> GetCitiesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);

@@ -195,6 +195,20 @@ namespace Gorgias.DataLayer.Repository.SQL
                         Multilanguage = w.ProfileTypeChilds.Where(m => m.ProfileTypeLanguageCode == languageCode).FirstOrDefault().ProfileTypeName
                     }).AsQueryable();
         }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetProfileTypesAsQueryableAsKeyValue(string languageCode)
+        {
+            return (from w in context.ProfileTypes
+                    where w.ProfileTypeStatus == true && w.ProfileTypeParentID == null
+                    orderby w.ProfileTypeName ascending
+                    select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
+                    {
+                        KeyID = w.ProfileTypeID,
+                        KeyName = w.ProfileTypeName,
+                        Multilanguage = w.ProfileTypeChilds.Where(m => m.ProfileTypeLanguageCode == languageCode).FirstOrDefault().ProfileTypeName
+                    }).AsQueryable();
+        }
+
         public IQueryable<ProfileType> GetProfileTypesAllAsQueryable(bool ProfileTypeStatus)
         {
             return (from w in context.ProfileTypes where w.ProfileTypeStatus == ProfileTypeStatus orderby w.ProfileTypeID descending select w).AsQueryable();
