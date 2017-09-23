@@ -7,6 +7,8 @@ using Gorgias;
 using Gorgias.DataLayer.Interface;
 using Gorgias.Infrastruture.EntityFramework;
 using System.Linq;
+using EntityFramework.Extensions;
+
 namespace Gorgias.DataLayer.Repository.SQL
 {
     public class ContentRepository : IContentRepository, IDisposable
@@ -111,6 +113,28 @@ namespace Gorgias.DataLayer.Repository.SQL
                 return false;
             }
         }
+
+        public bool Update(Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel[] contents)
+        {
+            List<int> contentIDs = new List<int>();
+            foreach (Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel obj in contents)
+            {
+                contentIDs.Add(obj.ContentID);
+            }
+            try {
+                using (var db = context)
+                {
+                    var result = db.Contents.Where(w=> contentIDs.Contains(w.ContentID)).ToList();//.UpdateAsync(mu => new Content() { ContentLike = mu.ContentLike});
+                    result.ForEach(m => m.ContentLike = m.ContentLike + contents.Where(w => w.ContentID == m.ContentID).First().ContentLikes);
+                    //db.Contents.AddRange(result);
+                    db.SaveChanges();
+                }
+                return true;
+            } catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }     
 
         public bool Delete(int ContentID)
         {

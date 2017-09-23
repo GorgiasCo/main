@@ -136,13 +136,8 @@ namespace Gorgias.Controllers
                 {
                     return errorResult;
                 }
-
-                
-
-
-            }
-
-            return Ok();
+            }            
+            return Ok(true);
         }
 
         // GET api/Account/ExternalLogin

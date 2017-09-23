@@ -4,6 +4,15 @@
     <EntitySetMapping Name="Albums">
       <EntityTypeMapping TypeName="GorgiasModel.Album">
         <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="ContentRatingID" ColumnName="ContentRatingID" />
+          <ScalarProperty Name="AlbumPriceToken" ColumnName="AlbumPriceToken" />
+          <ScalarProperty Name="AlbumIsTokenAvailable" ColumnName="AlbumIsTokenAvailable" />
+          <ScalarProperty Name="AlbumPrice" ColumnName="AlbumPrice" />
+          <ScalarProperty Name="AlbumRepostAttempt" ColumnName="AlbumRepostAttempt" />
+          <ScalarProperty Name="AlbumRepostRequest" ColumnName="AlbumRepostRequest" />
+          <ScalarProperty Name="AlbumRepostValue" ColumnName="AlbumRepostValue" />
+          <ScalarProperty Name="AlbumReadingLanguageCode" ColumnName="AlbumReadingLanguageCode" />
+          <ScalarProperty Name="AlbumHasComment" ColumnName="AlbumHasComment" />
           <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
           <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
           <ScalarProperty Name="AlbumDateCreated" ColumnName="AlbumDateCreated" />
@@ -22,6 +31,7 @@
     <EntitySetMapping Name="Contents">
       <EntityTypeMapping TypeName="GorgiasModel.Content">
         <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ContentDimension" ColumnName="ContentDimension" />
           <ScalarProperty Name="ContentID" ColumnName="ContentID" />
           <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
           <ScalarProperty Name="ContentURL" ColumnName="ContentURL" />

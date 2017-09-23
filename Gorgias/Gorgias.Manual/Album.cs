@@ -32,6 +32,15 @@ namespace Gorgias.Manual
         public System.DateTime AlbumDatePublish { get; set; }
         public System.DateTime AlbumDateExpire { get; set; }
         public int AlbumAvailability { get; set; }
+        public Nullable<bool> AlbumHasComment { get; set; }
+        public string AlbumReadingLanguageCode { get; set; }
+        public Nullable<int> AlbumRepostValue { get; set; }
+        public Nullable<int> AlbumRepostRequest { get; set; }
+        public Nullable<int> AlbumRepostAttempt { get; set; }
+        public Nullable<decimal> AlbumPrice { get; set; }
+        public Nullable<bool> AlbumIsTokenAvailable { get; set; }
+        public Nullable<int> AlbumPriceToken { get; set; }
+        public Nullable<int> ContentRatingID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Content> Contents { get; set; }

@@ -311,7 +311,6 @@ namespace Gorgias.DataLayer.Repository.SQL
                     obj.AlbumDatePublish = AlbumDatePublish;
                 }
                 
-
                 if (AlbumHasComment.HasValue)
                 {
                     obj.AlbumHasComment = AlbumHasComment.Value;
@@ -363,7 +362,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                         ContentLike = 0,
                         ContentTitle = objContent.ContentTitle,
                         ContentStatus = true,
-                        ContentURL = objContent.ContentTitle,
+                        ContentURL = objContent.ContentURL,
                         ContentType = objContent.ContentTypeID,
                         ContentGeoLocation = objContent.ContentGeoLocation,
                     });

@@ -18,7 +18,7 @@ namespace Gorgias.Controllers
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;                
+                HttpResponseMessage response = null;
                 AlbumUpdateMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().GetAlbumV2(AlbumID);
                 if (result == null)
                 {
@@ -263,6 +263,29 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Story/Settings/{ProfileID}/{CategoryParentID}", Name = "GetV2MobileStorySettingsNima")]
+        [HttpGet]
+        public HttpResponseMessage GetStorySettings(HttpRequestMessage request, int ProfileID, int CategoryParentID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                //IEnumerable<ContentRatingMobileModel> result = BusinessLayer.Facades.Facade.ContentRatingFacade().getContentRatings(headerLanguage.First().Value);
+                IEnumerable<SettingMobileModel> result = BusinessLayer.Facades.Facade.MobileFacade().getSettings(ProfileID, headerLanguage.First().Value, CategoryParentID);
+
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<SettingMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Languages", Name = "GetV2MobileLanguages")]
         [HttpGet]
         public HttpResponseMessage GetLanguages(HttpRequestMessage request)
@@ -332,8 +355,8 @@ namespace Gorgias.Controllers
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;                
-                AlbumMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbum(AlbumID,ProfileID);
+                HttpResponseMessage response = null;
+                AlbumMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbum(AlbumID, ProfileID);
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
@@ -529,7 +552,7 @@ namespace Gorgias.Controllers
         }
 
         //Need to Review How ;)
-        [Route("Mobile/V2/Contents/Likes", Name = "UpdateV2ContentsLikes")]
+        [Route("Mobile/V2/Contents/Likes/Old", Name = "UpdateV2ContentsLikes")]
         [HttpPost]
         public HttpResponseMessage UpdateContnetsLikes(HttpRequestMessage request, Business.DataTransferObjects.Mobile.ContentLikesModel[] ContentLikes)
         {
@@ -638,7 +661,7 @@ namespace Gorgias.Controllers
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
-                {                    
+                {
                     response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
                 }
                 return response;
@@ -711,7 +734,29 @@ namespace Gorgias.Controllers
                 }
                 return response;
             });
-        }        
+        }
+
+        [Route("Mobile/V2/Contents/Likes", Name = "MobileV2ContentsLikesInsert")]
+        [HttpPost]
+        public HttpResponseMessage ContentLikesInsert(HttpRequestMessage request, ContentLikeMobileModel[] contentLikes)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                bool result = BusinessLayer.Facades.Facade.ContentFacade().UpdateContentsLikes(contentLikes);
+                if (result)
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.Created, result);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotAcceptable, false);
+                }
+                return response;
+            });
+        }
+
 
         [Route("Mobile/V2/Album/New", Name = "MobileV2AlbumInsert")]
         [HttpPost]

@@ -11,6 +11,7 @@ namespace Gorgias.DataLayer.Interface
         Content Insert(String ContentTitle, String ContentURL, int ContentType, Boolean ContentStatus, Boolean ContentIsDeleted, DateTime? ContentCreatedDate, int AlbumID);        
         bool Update(int ContentID, String ContentTitle, String ContentURL, int ContentType, Boolean ContentStatus, Boolean ContentIsDeleted, int AlbumID);
         bool Update(int ContentID, int ContentLike);
+        bool Update(Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel[] Contents);
         bool Delete(int ContentID);
 
         Content GetContent(int ContentID);

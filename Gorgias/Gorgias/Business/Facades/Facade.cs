@@ -1,8 +1,14 @@
-﻿using Gorgias.Business.Facades.Web;
+﻿using Gorgias.Business.Facades;
+using Gorgias.Business.Facades.Web;
 namespace Gorgias.BusinessLayer.Facades
 {
     public static class Facade
     {
+        public static MobileFacade MobileFacade()
+        {
+            return new MobileFacade();
+        }
+
         public static ProfileActivityFacade ProfileActivityFacade()
         {
             return new ProfileActivityFacade();

@@ -18,13 +18,21 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class ContentFacade
     {
+        //V2
+        public bool UpdateContentsLikes(Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel[] Contents)
+        {
+            return DataLayer.DataLayerFacade.ContentRepository().Update(Contents);
+        }
+
+        //End V2
         public ContentDTO GetContent(int ContentID)
         {
             ContentDTO result = Mapper.Map<ContentDTO>(DataLayer.DataLayerFacade.ContentRepository().GetContent(ContentID));
             return result;
         }
 
-        public object getAlbumContentSet(int ProfileID) {
+        public object getAlbumContentSet(int ProfileID)
+        {
             return DataLayer.DataLayerFacade.AlbumRepository().getAlbumSet(ProfileID);
         }
 
@@ -143,7 +151,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public bool Insert(List<Business.DataTransferObjects.Mobile.ContentUploadMobileModel> objContents, int AlbumID)
         {
-            foreach(Business.DataTransferObjects.Mobile.ContentUploadMobileModel objContent in objContents)
+            foreach (Business.DataTransferObjects.Mobile.ContentUploadMobileModel objContent in objContents)
             {
                 ContentDTO obj = new ContentDTO();
                 obj.AlbumID = AlbumID;
@@ -164,7 +172,7 @@ namespace Gorgias.BusinessLayer.Facades
                 obj.ContentURL = objContent.ContentURL;
                 Insert(obj);
             }
-            return true; 
+            return true;
         }
 
         public AlbumDTO Insert(List<Business.DataTransferObjects.Mobile.ContentUploadMobileModel> objContents, int Availability, int CategoryID, int ProfileID)
@@ -177,14 +185,14 @@ namespace Gorgias.BusinessLayer.Facades
             objAlbum.AlbumDatePublish = objAlbum.AlbumDateCreated;
             objAlbum.AlbumIsDeleted = false;
             objAlbum.AlbumStatus = true;
-            objAlbum.AlbumView = 0;            
+            objAlbum.AlbumView = 0;
             objAlbum.CategoryID = CategoryID;
             objAlbum.ProfileID = ProfileID;
             objAlbum.AlbumAvailability = Availability;
             objAlbum.AlbumHasComment = true;
 
             AlbumDTO result = Facade.AlbumFacade().InsertForMobile(objAlbum);
-            if(result.AlbumID > 0)
+            if (result.AlbumID > 0)
             {
                 //To add album cover as independent image in album to get likes ;) like Facebook ;)
                 //objContents.RemoveAt(0);
@@ -196,13 +204,14 @@ namespace Gorgias.BusinessLayer.Facades
                     obj.AlbumID = result.AlbumID;
                     obj.ContentIsDeleted = false;
                     obj.ContentStatus = true;
-                    if(objContent.ContentTitle == string.Empty)
+                    if (objContent.ContentTitle == string.Empty)
                     {
                         obj.ContentTitle = null;
-                    } else
+                    }
+                    else
                     {
                         obj.ContentTitle = objContent.ContentTitle;
-                    }                   
+                    }
                     obj.ContentType = 1;
                     obj.ContentCreatedDate = DateTime.UtcNow;
                     // System.Configuration.ConfigurationManager.AppSettings["ContentCDN"] Can be used for CDN main Path

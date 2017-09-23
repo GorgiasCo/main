@@ -24,6 +24,7 @@ namespace Gorgias.Manual
         public int AlbumID { get; set; }
         public int ContentLike { get; set; }
         public System.Data.Entity.Spatial.DbGeography ContentGeoLocation { get; set; }
+        public string ContentDimension { get; set; }
     
         public virtual Album Album { get; set; }
     }

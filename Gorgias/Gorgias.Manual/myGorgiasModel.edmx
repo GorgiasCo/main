@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GorgiasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GorgiasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumID" />
@@ -21,13 +21,22 @@
           <Property Name="AlbumDatePublish" Type="datetime" Nullable="false" />
           <Property Name="AlbumDateExpire" Type="datetime" Nullable="false" />
           <Property Name="AlbumAvailability" Type="int" Nullable="false" />
+          <Property Name="AlbumHasComment" Type="bit" />
+          <Property Name="AlbumReadingLanguageCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="AlbumRepostValue" Type="int" />
+          <Property Name="AlbumRepostRequest" Type="int" />
+          <Property Name="AlbumRepostAttempt" Type="int" />
+          <Property Name="AlbumPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AlbumIsTokenAvailable" Type="bit" />
+          <Property Name="AlbumPriceToken" Type="int" />
+          <Property Name="ContentRatingID" Type="int" />
         </EntityType>
         <EntityType Name="Content">
           <Key>
             <PropertyRef Name="ContentID" />
           </Key>
           <Property Name="ContentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ContentTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="ContentTitle" Type="nvarchar" MaxLength="500" />
           <Property Name="ContentURL" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="ContentType" Type="int" Nullable="false" />
           <Property Name="ContentStatus" Type="bit" Nullable="false" />
@@ -36,6 +45,7 @@
           <Property Name="AlbumID" Type="int" Nullable="false" />
           <Property Name="ContentLike" Type="int" Nullable="false" />
           <Property Name="ContentGeoLocation" Type="geography" />
+          <Property Name="ContentDimension" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK_Content_Album">
           <End Role="Album" Type="Self.Album" Multiplicity="1">
@@ -59,8 +69,7 @@
             <End Role="Content" EntitySet="Content" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GorgiasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -81,6 +90,15 @@
           <Property Name="AlbumDateExpire" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AlbumAvailability" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contents" Relationship="Self.FK_Content_Album" FromRole="Album" ToRole="Content" />
+          <Property Name="AlbumHasComment" Type="Boolean" />
+          <Property Name="AlbumReadingLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AlbumRepostValue" Type="Int32" />
+          <Property Name="AlbumRepostRequest" Type="Int32" />
+          <Property Name="AlbumRepostAttempt" Type="Int32" />
+          <Property Name="AlbumPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AlbumIsTokenAvailable" Type="Boolean" />
+          <Property Name="AlbumPriceToken" Type="Int32" />
+          <Property Name="ContentRatingID" Type="Int32" />
         </EntityType>
         <EntityType Name="Content">
           <Key>
@@ -97,6 +115,7 @@
           <Property Name="ContentLike" Type="Int32" Nullable="false" />
           <Property Name="ContentGeoLocation" Type="Geography" Nullable="true" />
           <NavigationProperty Name="Album" Relationship="Self.FK_Content_Album" FromRole="Content" ToRole="Album" />
+          <Property Name="ContentDimension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Content_Album">
           <End Role="Album" Type="Self.Album" Multiplicity="1">
@@ -129,6 +148,15 @@
           <EntitySetMapping Name="Albums">
             <EntityTypeMapping TypeName="GorgiasModel.Album">
               <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="ContentRatingID" ColumnName="ContentRatingID" />
+                <ScalarProperty Name="AlbumPriceToken" ColumnName="AlbumPriceToken" />
+                <ScalarProperty Name="AlbumIsTokenAvailable" ColumnName="AlbumIsTokenAvailable" />
+                <ScalarProperty Name="AlbumPrice" ColumnName="AlbumPrice" />
+                <ScalarProperty Name="AlbumRepostAttempt" ColumnName="AlbumRepostAttempt" />
+                <ScalarProperty Name="AlbumRepostRequest" ColumnName="AlbumRepostRequest" />
+                <ScalarProperty Name="AlbumRepostValue" ColumnName="AlbumRepostValue" />
+                <ScalarProperty Name="AlbumReadingLanguageCode" ColumnName="AlbumReadingLanguageCode" />
+                <ScalarProperty Name="AlbumHasComment" ColumnName="AlbumHasComment" />
                 <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
                 <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
                 <ScalarProperty Name="AlbumDateCreated" ColumnName="AlbumDateCreated" />
@@ -147,6 +175,7 @@
           <EntitySetMapping Name="Contents">
             <EntityTypeMapping TypeName="GorgiasModel.Content">
               <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="ContentDimension" ColumnName="ContentDimension" />
                 <ScalarProperty Name="ContentID" ColumnName="ContentID" />
                 <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
                 <ScalarProperty Name="ContentURL" ColumnName="ContentURL" />

@@ -17,6 +17,15 @@
     <Property Name="AlbumDateExpire" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="AlbumAvailability" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Contents" Relationship="Self.FK_Content_Album" FromRole="Album" ToRole="Content" />
+    <Property Name="AlbumHasComment" Type="Boolean" />
+    <Property Name="AlbumReadingLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AlbumRepostValue" Type="Int32" />
+    <Property Name="AlbumRepostRequest" Type="Int32" />
+    <Property Name="AlbumRepostAttempt" Type="Int32" />
+    <Property Name="AlbumPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AlbumIsTokenAvailable" Type="Boolean" />
+    <Property Name="AlbumPriceToken" Type="Int32" />
+    <Property Name="ContentRatingID" Type="Int32" />
   </EntityType>
   <EntityType Name="Content">
     <Key>
@@ -33,6 +42,7 @@
     <Property Name="ContentLike" Type="Int32" Nullable="false" />
     <Property Name="ContentGeoLocation" Type="Geography" Nullable="true" />
     <NavigationProperty Name="Album" Relationship="Self.FK_Content_Album" FromRole="Content" ToRole="Album" />
+    <Property Name="ContentDimension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Content_Album">
     <End Role="Album" Type="Self.Album" Multiplicity="1">
