@@ -117,7 +117,7 @@ namespace Gorgias.Controllers
         public async Task<IHttpActionResult> Register(Business.DataTransferObjects.Mobile.V2.RegisterProfileMobileModel registerProfileMobileModel)
         {
             bool resultProfile;
-            if (!registerProfileMobileModel.isFirstRegistration)
+            if (registerProfileMobileModel.isFirstRegistration)
             {
                 resultProfile = DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID, registerProfileMobileModel.ProfileBirthday, registerProfileMobileModel.ProfileLanguageApp);
             }
@@ -126,7 +126,7 @@ namespace Gorgias.Controllers
                 resultProfile = DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileEmail); 
             }
 
-            if(resultProfile = true && registerProfileMobileModel.isFirstRegistration)
+            if(resultProfile && !registerProfileMobileModel.isFirstRegistration)
             {
                 IdentityResult result = await _repo.RegisterUser(new UserModel { Password = registerProfileMobileModel.ProfilePassword, UserName = registerProfileMobileModel.ProfileEmail });
 
@@ -137,7 +137,7 @@ namespace Gorgias.Controllers
                     return errorResult;
                 }
             }            
-            return Ok(true);
+            return Ok(resultProfile);
         }
 
         // GET api/Account/ExternalLogin

@@ -16,11 +16,12 @@ namespace Gorgias.DataLayer.Interface
         bool Update(int ProfileID, bool Status, int UpdateMode);
         bool Update(int ProfileID, string ProfileFullname);
         bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID);
-        bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID, DateTime ProfileBirthday, string ProfileLanguageApp);
+        bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID, DateTime? ProfileBirthday, string ProfileLanguageApp);
         bool Update(int ProfileID, string ProfileFullname, string ProfileEmail);
         bool Delete(int ProfileID);
 
         Profile GetProfile(int ProfileID);
+        Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID);
         Profile GetV2Profile(int ProfileID);
         Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode);
         IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();

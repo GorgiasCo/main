@@ -277,7 +277,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID, DateTime ProfileBirthday, string ProfileLanguageApp)
+        public bool Update(int ProfileID, string ProfileFullname, string ProfileFullnameEnglish, string ProfileShortDescription, string ProfileEmail, int ProfileTypeID, int IndustryID, int CityID, DateTime? ProfileBirthday, string ProfileLanguageApp)
         {
             Profile obj = new Profile();
             obj = (from w in context.Profiles.Include("Industries").Include("Addresses") where w.ProfileID == ProfileID select w).FirstOrDefault();
@@ -292,58 +292,66 @@ namespace Gorgias.DataLayer.Repository.SQL
                 //}
 
                 context.Profiles.Attach(obj);
-
-                if(ProfileFullname != "")
+                try
                 {
-                    obj.ProfileFullname = ProfileFullname;
-                }
-                 
-                if(ProfileFullnameEnglish != "")
-                {
-                    obj.ProfileFullnameEnglish = ProfileFullnameEnglish;
-                }
-
-                if (ProfileShortDescription != "")
-                {
-                    obj.ProfileShortDescription = ProfileShortDescription;
-                }
-
-                //obj.ProfileEmail = ProfileEmail;
-
-                if(ProfileTypeID > 0)
-                {
-                    obj.ProfileTypeID = ProfileTypeID;
-                }
-
-                obj.ProfileSetting = (from x in context.ProfileSettings where x.ProfileID == ProfileID select x).FirstOrDefault();
-
-                if(obj.ProfileSetting != null)
-                {
-                    if(ProfileBirthday != null)
+                    if (ProfileFullname != "")
                     {
-                        obj.ProfileSetting.ProfileBirthday = ProfileBirthday;
+                        obj.ProfileFullname = ProfileFullname;
                     }
-                    if(CityID > 0)
+
+                    if (ProfileFullnameEnglish != "")
                     {
-                        obj.ProfileSetting.ProfileCityID = CityID;
-                    }                    
-                } else
-                {
-                    obj.ProfileSetting = new ProfileSetting { ProfileBirthday = ProfileBirthday != null ? ProfileBirthday : new Nullable<DateTime>(), ProfileCityID = CityID > 0 ? CityID : new Nullable<int>(), ProfileID = ProfileID, ProfileLanguageApp = ProfileLanguageApp };
-                }
+                        obj.ProfileFullnameEnglish = ProfileFullnameEnglish;
+                    }
 
-                if(IndustryID > 0){
-                    DataLayerFacade.ProfileIndustryRepository().Delete(ProfileID);
-                    obj.Industries.Add((from x in context.Industries where x.IndustryID == IndustryID select x).First());
-                } 
+                    if (ProfileShortDescription != "")
+                    {
+                        obj.ProfileShortDescription = ProfileShortDescription;
+                    }
 
-                if(CityID > 0)
+                    //obj.ProfileEmail = ProfileEmail;
+
+                    if (ProfileTypeID > 0)
+                    {
+                        obj.ProfileTypeID = ProfileTypeID;
+                    }
+
+                    obj.ProfileSetting = (from x in context.ProfileSettings where x.ProfileID == ProfileID select x).FirstOrDefault();
+
+                    if (obj.ProfileSetting != null)
+                    {
+                        if (ProfileBirthday != null)
+                        {
+                            obj.ProfileSetting.ProfileBirthday = ProfileBirthday;
+                        }
+                        if (CityID > 0)
+                        {
+                            obj.ProfileSetting.ProfileCityID = CityID;
+                        }
+                    }
+                    else
+                    {
+                        obj.ProfileSetting = new ProfileSetting { ProfileBirthday = ProfileBirthday != null ? ProfileBirthday : new Nullable<DateTime>(), ProfileCityID = CityID > 0 ? CityID : new Nullable<int>(), ProfileID = ProfileID, ProfileLanguageApp = ProfileLanguageApp };
+                    }
+
+                    if (IndustryID > 0)
+                    {
+                        DataLayerFacade.ProfileIndustryRepository().Delete(ProfileID);
+                        obj.Industries.Add((from x in context.Industries where x.IndustryID == IndustryID select x).First());
+                    }
+
+                    if (CityID > 0)
+                    {
+                        obj.Addresses.Add(new Address { AddressAddress = "NA", AddressEmail = ProfileEmail, AddressName = ProfileFullname, AddressStatus = true, AddressTypeID = 1, CityID = CityID, AddressTel = "NA" });
+                    }
+
+                    context.SaveChanges();
+                    return true;
+                } catch(Exception ex)
                 {
-                    obj.Addresses.Add(new Address { AddressAddress = "NA", AddressEmail = ProfileEmail, AddressName = ProfileFullname, AddressStatus = true, AddressTypeID = 1, CityID = CityID, AddressTel = "NA" });
+                    string inner = ex.InnerException != null ? ex.InnerException.Message : " ";
+                    throw new Exception(ex.Message + inner);
                 }
-                                
-                context.SaveChanges();
-                return true;
             }
             else
             {
@@ -470,6 +478,11 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)
         {
             return (from w in context.Profiles where w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel { CityName = w.Addresses.FirstOrDefault().City.CityName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileID = w.ProfileID, ProfileFullname = w.ProfileFullname, ProfileFullnameEnglish = w.ProfileFullnameEnglish, ProfileShortDescription = w.ProfileShortDescription, ProfileTypeName = w.ProfileType.ProfileTypeName, TotalConnections = w.Connections.Count, TotalEngagements = w.Albums.Sum(a=> a.ProfileActivities.Where(ac=> ac.ActivityTypeID != 1).Count()), TotalViews = w.Albums.Sum(av=> av.AlbumView), isSubscribed = w.Connections.Any(cc=> cc.Profile1.ProfileID == RequestedProfileID), ProfileImage = w.ProfileImage}).FirstOrDefault();
+        }
+
+        public Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID)
+        {
+            return (from w in context.Profiles where w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel { CityName = w.Addresses.FirstOrDefault().City.CityName, CountryName = w.Addresses.FirstOrDefault().City.Country.CountryName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileID = w.ProfileID, ProfileFullname = w.ProfileFullname, ProfileFullnameEnglish = w.ProfileFullnameEnglish, ProfileShortDescription = w.ProfileShortDescription, ProfileTypeName = w.ProfileType.ProfileTypeName, CityID = w.Addresses.FirstOrDefault().CityID, IndustryID = w.Industries.FirstOrDefault().IndustryID, ProfileBirthday = w.ProfileSetting.ProfileBirthday, ProfileLanguageApp = w.ProfileSetting.ProfileLanguageApp, ProfileEmail = w.ProfileEmail, ProfileIsConfirmed = w.ProfileIsConfirmed, ProfileIsPeople = w.ProfileIsPeople, ProfileTypeID = w.ProfileTypeID , ProfileImage = w.ProfileImage }).FirstOrDefault();
         }
 
         public Profile GetV2Profile(int ProfileID)

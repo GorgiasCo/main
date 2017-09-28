@@ -33,7 +33,17 @@ namespace Gorgias.BusinessLayer.Facades
                 basequery = getAlbumsByCategoryContent(albumFilterMobileModel);
             }
 
-            var queryList = DataLayer.Repository.RepositoryHelper.Pagination<Album>(albumFilterMobileModel.Page, albumFilterMobileModel.Size, basequery).Future();
+            int pageRequested = 0;
+
+            if(albumFilterMobileModel.Page > 2)
+            {
+                pageRequested = albumFilterMobileModel.Page - 2;
+            } else
+            {
+                pageRequested = albumFilterMobileModel.Page;
+            }
+
+            var queryList = RepositoryHelper.Pagination<Album>(pageRequested, albumFilterMobileModel.Size, basequery).Future();
             var queryTotal = basequery.FutureCount();
 
             int intTotal = queryTotal.Value;

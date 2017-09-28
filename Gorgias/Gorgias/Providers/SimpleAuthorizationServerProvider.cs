@@ -254,39 +254,84 @@ namespace Gorgias.Providers
             if (resultuser.CountryID != null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1))
             {
                 UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
+                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
+
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
+                //var props = new AuthenticationProperties(new Dictionary<string, string>
+                //{
+                //    {
+                //        "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
+                //    },
+                //    {
+                //        "userName", context.UserName
+                //    },
+                //    {
+                //        "userFullName", resultProfile.Profile.ProfileFullname
+                //    },
+                //    {
+                //        "userID", resultProfile.ProfileID.ToString()
+                //    }
+                //    ,
+                //    {
+                //        "countryID", "0"
+                //    },
+                //    {
+                //        "profileURL", resultProfile.Profile.ProfileURL
+                //    }
+                //    ,
+                //    {
+                //        "profileTypeID", resultProfile.Profile.ProfileTypeID.ToString()
+                //    }
+                //    ,
+                //    {
+                //        "profileIsConfirmed", resultProfile.Profile.ProfileIsConfirmed.ToString()
+                //    }
+                //    ,
+                //    {
+                //        "profileIsPeople", resultProfile.Profile.ProfileIsPeople.ToString()
+                //    },
+                //    {
+                //        "userUserID", resultProfile.UserID.ToString()
+                //    },
+                //    {
+                //        "Role", userRole
+                //    },
+                //    {
+                //        "UserRole", resultProfile.UserRoleID.ToString()
+                //    }
+                //});
                 var props = new AuthenticationProperties(new Dictionary<string, string>
                 {
                     {
                         "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
                     },
                     {
-                        "userName", context.UserName
+                        "ProfileEmail", context.UserName
                     },
                     {
-                        "userFullName", resultProfile.Profile.ProfileFullname
+                        "ProfileFullname", resultProfile.Profile.ProfileFullname
                     },
                     {
-                        "userID", resultProfile.ProfileID.ToString()
+                        "ProfileID", resultProfile.ProfileID.ToString()
                     }
                     ,
                     {
                         "countryID", "0"
                     },
                     {
-                        "profileURL", resultProfile.Profile.ProfileURL
+                        "profileURL", resultProfile.Profile.ProfileURL != null ? resultProfile.Profile.ProfileURL : " "
                     }
                     ,
                     {
-                        "profileTypeID", resultProfile.Profile.ProfileTypeID.ToString()
+                        "ProfileTypeID", resultProfile.Profile.ProfileTypeID.ToString()
                     }
                     ,
                     {
-                        "profileIsConfirmed", resultProfile.Profile.ProfileIsConfirmed.ToString()
+                        "ProfileIsConfirmed", resultProfile.Profile.ProfileIsConfirmed.ToString()
                     }
                     ,
                     {
-                        "profileIsPeople", resultProfile.Profile.ProfileIsPeople.ToString()
+                        "ProfileIsPeople", resultProfile.Profile.ProfileIsPeople.ToString()
                     },
                     {
                         "userUserID", resultProfile.UserID.ToString()
@@ -296,6 +341,39 @@ namespace Gorgias.Providers
                     },
                     {
                         "UserRole", resultProfile.UserRoleID.ToString()
+                    },
+                    {
+                        "ProfileFullnameEnglish", profileSetting.ProfileFullnameEnglish != null ? profileSetting.ProfileFullnameEnglish : " "
+                    },
+                    {
+                        "CityID", profileSetting.CityID.HasValue ? profileSetting.CityID.Value.ToString() : "0"
+                    },
+                    {
+                        "IndustryID", profileSetting.IndustryID.HasValue ? profileSetting.IndustryID.ToString() : "0"
+                    },
+                    {
+                        "ProfileImage", profileSetting.ProfileImage != null ? profileSetting.ProfileImage : " "
+                    },
+                    {
+                        "ProfileLanguageApp", profileSetting.ProfileLanguageApp != null ? profileSetting.ProfileLanguageApp : " "
+                    },
+                    {
+                        "ProfileBirthday", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.ToString() : " "
+                    },
+                    {
+                        "ProfileShortDescription", profileSetting.ProfileShortDescription != null ? profileSetting.ProfileShortDescription : " "
+                    },
+                    {
+                        "ProfileTypeName", profileSetting.ProfileTypeName != null ? profileSetting.ProfileTypeName.ToString() : " "
+                    },
+                    {
+                        "IndustryName", profileSetting.IndustryName != null ? profileSetting.IndustryName.ToString() : " "
+                    },
+                    {
+                        "CountryName", profileSetting.CountryName != null ? profileSetting.CountryName.ToString() : " "
+                    },
+                    {
+                        "CityName", profileSetting.CityName != null ? profileSetting.CityName.ToString() : " "
                     }
                 });
                 identity.AddClaim(new Claim("sub", context.UserName));
@@ -307,6 +385,8 @@ namespace Gorgias.Providers
             if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m=> m.Profile.ProfileStatus == true && m.Profile.ProfileIsPeople == false && m.Profile.ProfileIsConfirmed == false))
             {
                 UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
+                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
+
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                 var props = new AuthenticationProperties(new Dictionary<string, string>
                 {
@@ -314,32 +394,32 @@ namespace Gorgias.Providers
                         "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
                     },
                     {
-                        "userName", context.UserName
+                        "ProfileEmail", context.UserName
                     },
                     {
-                        "userFullName", resultProfile.Profile.ProfileFullname
+                        "ProfileFullname", resultProfile.Profile.ProfileFullname
                     },
                     {
-                        "userID", resultProfile.ProfileID.ToString()
+                        "ProfileID", resultProfile.ProfileID.ToString()
                     }
                     ,
                     {
                         "countryID", "0"
                     },
                     {
-                        "profileURL", resultProfile.Profile.ProfileURL
+                        "profileURL", resultProfile.Profile.ProfileURL != null ? resultProfile.Profile.ProfileURL : " "
                     }
                     ,
                     {
-                        "profileTypeID", resultProfile.Profile.ProfileTypeID.ToString()
+                        "ProfileTypeID", resultProfile.Profile.ProfileTypeID.ToString()
                     }
                     ,
                     {
-                        "profileIsConfirmed", resultProfile.Profile.ProfileIsConfirmed.ToString()
+                        "ProfileIsConfirmed", resultProfile.Profile.ProfileIsConfirmed.ToString()
                     }
                     ,
                     {
-                        "profileIsPeople", resultProfile.Profile.ProfileIsPeople.ToString()
+                        "ProfileIsPeople", resultProfile.Profile.ProfileIsPeople.ToString()
                     },
                     {
                         "userUserID", resultProfile.UserID.ToString()
@@ -349,6 +429,39 @@ namespace Gorgias.Providers
                     },
                     {
                         "UserRole", resultProfile.UserRoleID.ToString()
+                    },
+                    {
+                        "ProfileFullnameEnglish", profileSetting.ProfileFullnameEnglish != null ? profileSetting.ProfileFullnameEnglish : " "
+                    },
+                    {
+                        "CityID", profileSetting.CityID.HasValue ? profileSetting.CityID.Value.ToString() : "0"
+                    },
+                    {
+                        "IndustryID", profileSetting.IndustryID.HasValue ? profileSetting.IndustryID.ToString() : "0"
+                    },
+                    {
+                        "ProfileImage", profileSetting.ProfileImage != null ? profileSetting.ProfileImage : " "
+                    },
+                    {
+                        "ProfileLanguageApp", profileSetting.ProfileLanguageApp != null ? profileSetting.ProfileLanguageApp : " "
+                    },
+                    {
+                        "ProfileBirthday", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.ToString() : " "
+                    },
+                    {
+                        "ProfileShortDescription", profileSetting.ProfileShortDescription != null ? profileSetting.ProfileShortDescription : " "
+                    },
+                    {
+                        "ProfileTypeName", profileSetting.ProfileTypeName != null ? profileSetting.ProfileTypeName.ToString() : " "
+                    },
+                    {
+                        "IndustryName", profileSetting.IndustryName != null ? profileSetting.IndustryName.ToString() : " "
+                    },
+                    {
+                        "CountryName", profileSetting.CountryName != null ? profileSetting.CountryName.ToString() : " "
+                    },
+                    {
+                        "CityName", profileSetting.CityName != null ? profileSetting.CityName.ToString() : " "
                     }
                 });
                 identity.AddClaim(new Claim("sub", context.UserName));

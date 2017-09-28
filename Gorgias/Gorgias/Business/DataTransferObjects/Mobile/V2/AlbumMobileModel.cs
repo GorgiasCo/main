@@ -29,6 +29,24 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
 
         //[Newtonsoft.Json.JsonIgnore]
         public DateTime AlbumDateExpire { get; set; }
+
+
+        public double AlbumExpiring
+        {
+            get
+            {
+                return AlbumDateExpire.Subtract(DateTime.UtcNow).TotalDays;
+            }
+        }
+
+        public string AlbumExpiringTitle
+        {
+            get
+            {
+                return Infrastruture.Core.DateToMoment.TimeLeft(AlbumDateExpire);
+            }
+        }
+
         public int AlbumAvailability { get; set; }
 
         //Comment Section

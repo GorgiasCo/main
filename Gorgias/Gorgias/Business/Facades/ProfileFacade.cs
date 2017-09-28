@@ -32,6 +32,11 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.ProfileRepository().getLoginAttempt(ProfileEmail, ProfileID);
         }
 
+        public Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel getProfileSetting(int ProfileID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileSetting(ProfileID);
+        }
+
         public bool registerProfile(Business.DataTransferObjects.Mobile.V2.ProfileRegisterMobileModel registerProfileMobileModel)
         {
             return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID);
@@ -41,7 +46,7 @@ namespace Gorgias.BusinessLayer.Facades
         {
             if(!registerProfileMobileModel.isFirstRegistration)
             {
-                return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID, registerProfileMobileModel.ProfileBirthday, registerProfileMobileModel.ProfileLanguageApp);
+                return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID, registerProfileMobileModel.ProfileBirthday.Value, registerProfileMobileModel.ProfileLanguageApp);
             } else
             {
                 return registerProfileFirstTime(registerProfileMobileModel);
