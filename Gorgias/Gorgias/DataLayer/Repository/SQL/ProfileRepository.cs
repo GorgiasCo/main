@@ -252,7 +252,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                 //Check Email is in system for registration ;)
                 string emailProfile = ProfileEmail.ToLower();
                 Profile resultEmailChecking = (from em in context.Profiles where em.ProfileEmail.ToLower().Equals(emailProfile) select em).FirstOrDefault();
-                if(resultEmailChecking != null)
+                if (resultEmailChecking != null)
                 {
                     return false;
                 }
@@ -266,8 +266,8 @@ namespace Gorgias.DataLayer.Repository.SQL
                 //obj.IndustryID = IndustryID;
                 obj.ProfileTypeID = ProfileTypeID;
 
-                obj.Industries.Add((from x in context.Industries where x.IndustryID == IndustryID select x).First());                
-                obj.Addresses.Add(new Address { AddressAddress = "NA", AddressEmail = ProfileEmail, AddressName = ProfileFullname, AddressStatus = true, AddressTypeID = 1, CityID = CityID, AddressTel = "NA" });                
+                obj.Industries.Add((from x in context.Industries where x.IndustryID == IndustryID select x).First());
+                obj.Addresses.Add(new Address { AddressAddress = "NA", AddressEmail = ProfileEmail, AddressName = ProfileFullname, AddressStatus = true, AddressTypeID = 1, CityID = CityID, AddressTel = "NA" });
                 context.SaveChanges();
                 return true;
             }
@@ -347,7 +347,8 @@ namespace Gorgias.DataLayer.Repository.SQL
 
                     context.SaveChanges();
                     return true;
-                } catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     string inner = ex.InnerException != null ? ex.InnerException.Message : " ";
                     throw new Exception(ex.Message + inner);
@@ -380,7 +381,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
                 User newProfileUser = new User { UserDateConfirmed = DateTime.UtcNow, UserDateCreated = DateTime.UtcNow, UserEmail = obj.ProfileEmail, UserFullname = obj.ProfileFullname, UserIsBlocked = false, UserStatus = true };
                 context.Users.Add(newProfileUser);
-                                
+
                 context.SaveChanges();
 
                 obj.UserProfiles.Add(new UserProfile { ProfileID = obj.ProfileID, UserID = newProfileUser.UserID, UserRoleID = 1 });
@@ -472,17 +473,34 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Profile GetProfile(int ProfileID)
         {
             return (from w in context.Profiles.Include("Theme").Include("SubscriptionType").Include("ProfileType") where w.ProfileID == ProfileID select w).FirstOrDefault();
-        }       
+        }
 
         //V2 Begin
         public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)
         {
-            return (from w in context.Profiles where w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel { CityName = w.Addresses.FirstOrDefault().City.CityName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileID = w.ProfileID, ProfileFullname = w.ProfileFullname, ProfileFullnameEnglish = w.ProfileFullnameEnglish, ProfileShortDescription = w.ProfileShortDescription, ProfileTypeName = w.ProfileType.ProfileTypeName, TotalConnections = w.Connections.Count, TotalEngagements = w.Albums.Sum(a=> a.ProfileActivities.Where(ac=> ac.ActivityTypeID != 1).Count()), TotalViews = w.Albums.Sum(av=> av.AlbumView), isSubscribed = w.Connections.Any(cc=> cc.Profile1.ProfileID == RequestedProfileID), ProfileImage = w.ProfileImage}).FirstOrDefault();
+            return (from w in context.Profiles.Include("Connections").Include("Albums")
+                    where w.ProfileID == ProfileID
+                    select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel
+                    {
+                        CityName = w.Addresses.FirstOrDefault().City.CityName,
+                        IndustryName = w.Industries.FirstOrDefault().IndustryName,
+                        ProfileID = w.ProfileID,
+                        ProfileFullname = w.ProfileFullname,
+                        ProfileFullnameEnglish = w.ProfileFullnameEnglish,
+                        ProfileShortDescription = w.ProfileShortDescription,
+                        ProfileTypeName = w.ProfileType.ProfileTypeName,
+                        TotalConnections = w.Connections.Count,
+                        TotalEngagements = w.Albums.Sum(a => a.ProfileActivities.Where(ac => ac.ActivityTypeID != 1).Count()),
+                        TotalViews = w.Albums.Sum(av => av.AlbumView),
+                        isSubscribed = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID),
+                        ProfileImage = w.ProfileImage
+                    }
+            ).FirstOrDefault();
         }
 
         public Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID)
         {
-            return (from w in context.Profiles where w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel { CityName = w.Addresses.FirstOrDefault().City.CityName, CountryName = w.Addresses.FirstOrDefault().City.Country.CountryName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileID = w.ProfileID, ProfileFullname = w.ProfileFullname, ProfileFullnameEnglish = w.ProfileFullnameEnglish, ProfileShortDescription = w.ProfileShortDescription, ProfileTypeName = w.ProfileType.ProfileTypeName, CityID = w.Addresses.FirstOrDefault().CityID, IndustryID = w.Industries.FirstOrDefault().IndustryID, ProfileBirthday = w.ProfileSetting.ProfileBirthday, ProfileLanguageApp = w.ProfileSetting.ProfileLanguageApp, ProfileEmail = w.ProfileEmail, ProfileIsConfirmed = w.ProfileIsConfirmed, ProfileIsPeople = w.ProfileIsPeople, ProfileTypeID = w.ProfileTypeID , ProfileImage = w.ProfileImage }).FirstOrDefault();
+            return (from w in context.Profiles where w.ProfileID == ProfileID select new Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel { CityName = w.Addresses.FirstOrDefault().City.CityName, CountryName = w.Addresses.FirstOrDefault().City.Country.CountryName, IndustryName = w.Industries.FirstOrDefault().IndustryName, ProfileID = w.ProfileID, ProfileFullname = w.ProfileFullname, ProfileFullnameEnglish = w.ProfileFullnameEnglish, ProfileShortDescription = w.ProfileShortDescription, ProfileTypeName = w.ProfileType.ProfileTypeName, CityID = w.Addresses.FirstOrDefault().CityID, IndustryID = w.Industries.FirstOrDefault().IndustryID, ProfileBirthday = w.ProfileSetting.ProfileBirthday, ProfileLanguageApp = w.ProfileSetting.ProfileLanguageApp, ProfileEmail = w.ProfileEmail, ProfileIsConfirmed = w.ProfileIsConfirmed, ProfileIsPeople = w.ProfileIsPeople, ProfileTypeID = w.ProfileTypeID, ProfileImage = w.ProfileImage }).FirstOrDefault();
         }
 
         public Profile GetV2Profile(int ProfileID)
@@ -499,13 +517,13 @@ namespace Gorgias.DataLayer.Repository.SQL
                           select
                             new Business.DataTransferObjects.Report.ProfileReport
                             {
-                            ProfileID = w.ProfileID,
-                            ProfileView = w.ProfileView,
-                            AlbumView = w.Albums.Sum(av => av.AlbumView),
-                            AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
-                            AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
-                            Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
-                            StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
+                                ProfileID = w.ProfileID,
+                                ProfileView = w.ProfileView,
+                                AlbumView = w.Albums.Sum(av => av.AlbumView),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
+                                AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
+                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
+                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count()
                             }).ToList();
             return result;
         }
@@ -518,16 +536,17 @@ namespace Gorgias.DataLayer.Repository.SQL
                           select
                             new Business.DataTransferObjects.Report.ProfileVisitReport
                             {
-                                ProfileView = w.ProfileView, AlbumView = w.Albums.Sum(av => av.AlbumView)
+                                ProfileView = w.ProfileView,
+                                AlbumView = w.Albums.Sum(av => av.AlbumView)
                             }).ToList();
-            return result.Sum(m=>m.ProfileVisit);
+            return result.Sum(m => m.ProfileVisit);
         }
 
         public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID)
         {
             //int currentDay = DateTime.UtcNow.Day;
             var result = (from w in context.Profiles
-                          where w.SubscriptionTypeID != 4 && w.UserProfiles.Any(up=> up.UserID == UserID)
+                          where w.SubscriptionTypeID != 4 && w.UserProfiles.Any(up => up.UserID == UserID)
                           select
                             new Business.DataTransferObjects.Report.ProfileReport
                             {
@@ -595,13 +614,14 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID)
         {
             var emailResult = (from w in context.Profiles where w.ProfileEmail == ProfileEmail select new Business.DataTransferObjects.Mobile.V2.LoginAttempt { ProfileEmail = w.ProfileEmail, ProfileID = w.ProfileID, alreadyRegistered = true }).FirstOrDefault();
-            if(emailResult != null)
+            if (emailResult != null)
             {
                 return emailResult;
-            } else
+            }
+            else
             {
                 return (from w in context.Profiles where w.ProfileID == ProfileID.Value select new Business.DataTransferObjects.Mobile.V2.LoginAttempt { ProfileEmail = w.ProfileEmail, ProfileID = w.ProfileID, alreadyRegistered = false }).FirstOrDefault();
-            }            
+            }
         }
 
         public int[] GetAdministrationProfiles(int CountryID)

@@ -476,7 +476,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
         {
-            return (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
+            return (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
         }
 
         //Lists
@@ -562,7 +562,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID)
         {
             //var currentDate = DateTime.UtcNow;
-            var result = (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID && w.Contents.Count > 0 select w).AsQueryable();
+            var result = (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID select w).AsQueryable();
             return result;
         }
 

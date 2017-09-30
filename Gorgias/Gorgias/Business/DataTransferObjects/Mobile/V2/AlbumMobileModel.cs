@@ -74,6 +74,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public string CategoryName { get; set; }
 
         public bool? isFelt { get; set; }
+        public bool? isSubscribed { get; set; }
 
         public double ExpiringTime
         {

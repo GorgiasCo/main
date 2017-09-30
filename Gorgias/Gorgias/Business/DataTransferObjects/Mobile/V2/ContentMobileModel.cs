@@ -97,6 +97,8 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         //Content Type Info
         public int ContentTypeID { get; set; }
         public string ContentTypeExpression { get; set; }
+        public string ContentTypeName { get; set; }
+
         //public virtual ContentTypeDTO ContentType { get; set; }
     }
 }

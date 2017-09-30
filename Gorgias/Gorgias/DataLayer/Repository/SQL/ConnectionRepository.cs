@@ -70,7 +70,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             if (currentConnection != null)
             {
                 Delete(ProfileID, RequestedProfileID, RequestTypeID);
-                return true;
+                return false;
             } else
             {
                 try
