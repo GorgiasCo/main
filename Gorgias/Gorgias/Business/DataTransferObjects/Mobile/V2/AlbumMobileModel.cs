@@ -35,7 +35,11 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         {
             get
             {
-                return AlbumDateExpire.Subtract(DateTime.UtcNow).TotalDays;
+                if(AlbumDateExpire > DateTime.UtcNow)
+                {
+                    return AlbumDateExpire.Subtract(DateTime.UtcNow).TotalDays;
+                }
+                return 0;
             }
         }
 
@@ -172,13 +176,16 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
             {
                 //Because of album cover like, we added a album cover in Content table as a independent photo ;)
                 IList<ContentLikeMobileModel> result = new List<ContentLikeMobileModel>();
-                if(Images.Count > 0)
+                if(Images != null)
                 {
-                    foreach (ContentMobileModel obj in Images)
+                    if (Images.Count > 0)
                     {
-                        result.Add(new ContentLikeMobileModel { ContentID = obj.ContentID, ContentLikes = 0 });
+                        foreach (ContentMobileModel obj in Images)
+                        {
+                            result.Add(new ContentLikeMobileModel { ContentID = obj.ContentID, ContentLikes = 0 });
+                        }
                     }
-                }                
+                }               
                 //Contents.Insert(0, new ContentMobileModel { ContentURL = AlbumCover });
                 //if (isValidate)
                 //{

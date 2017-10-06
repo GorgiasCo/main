@@ -81,10 +81,10 @@
                 templateUrl: "/layout/mainLogin.html",
                 controller: "mainLoginController"
             })
-            //.when("/login", {
-            //    templateUrl: "/layout/login.html",
-            //    controller: "loginController"
-            //})
+            .when("/login", {
+                templateUrl: "/layout/login.html",
+                controller: "loginController"
+            })
             //            .when("/signup", {
             //                templateUrl: "/layout/signup.html",
             //                controller: "signupController"

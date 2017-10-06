@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\darktheme.css" />
     <Content Include="assets\js\controllers\admin\Profile\addProfileController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Address\listprofileAddressController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Agency\listprofileAgencyController.js" />
@@ -83,6 +84,7 @@
     <Content Include="assets\js\controllers\admin\Profile\Agency\User\viewUserController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Album\listprofileAlbumController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Connection\listprofileConnectionController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\Dashboard\viewDashboardController.js" />
     <Content Include="assets\js\controllers\admin\Profile\editAdminProfileUploadController.js" />
     <Content Include="assets\js\controllers\admin\Profile\editProfileController.js" />
     <Content Include="assets\js\controllers\admin\Profile\ExternalLink\listprofileExternalLinkController.js" />
@@ -118,6 +120,8 @@
     <Content Include="assets\plugins\angular-bootstrap\ui-bootstrap-2.2.0-csp.css" />
     <Content Include="assets\plugins\angular-bootstrap\ui-bootstrap-2.2.0.js" />
     <Content Include="assets\plugins\angular-bootstrap\ui-bootstrap-tpls-2.2.0.js" />
+    <Content Include="assets\plugins\angular-chart.js\angular-chart.js" />
+    <Content Include="assets\plugins\angular-chart.js\angular-chart.min.js" />
     <Content Include="assets\plugins\angular-datatable\datatables\angular-datatables.directive.js" />
     <Content Include="assets\plugins\angular-datatable\datatables\angular-datatables.factory.js" />
     <Content Include="assets\plugins\angular-datatable\datatables\angular-datatables.instances.js" />
@@ -156,6 +160,7 @@
     <Content Include="assets\plugins\angular-toastr\toastr.js" />
     <Content Include="assets\plugins\angular-uuid\angular-uuid.js" />
     <Content Include="assets\plugins\angular-validator\angular-validator.js" />
+    <Content Include="assets\plugins\angularjs-fusion\angular-fusioncharts.min.js" />
     <Content Include="assets\plugins\dropzone\basic.css" />
     <Content Include="assets\plugins\dropzone\dropzone-amd-module.js" />
     <Content Include="assets\plugins\dropzone\dropzone.css" />
@@ -481,6 +486,7 @@
     <Content Include="assets\plugins\jquery-datatables\ISSUE_TEMPLATE.md" />
     <Content Include="assets\plugins\jquery-datatables\media\images\Sorting icons.psd" />
     <Content Include="assets\plugins\jquery-datatables\Readme.md" />
+    <Content Include="assets\plugins\angular-chart.js\angular-chart.min.js.map" />
     <None Include="Properties\PublishProfiles\cpgorgias - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cpgorgias - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
@@ -1677,6 +1683,7 @@
     <Content Include="tpl\admin\viewAdminAgencyProfile.html" />
     <Content Include="tpl\admin\viewAdminAgencyProfileEdit.html" />
     <Content Include="tpl\admin\viewAdminProfile.html" />
+    <Content Include="tpl\admin\viewDashboard.html" />
     <Content Include="tpl\app.boxed.html" />
     <Content Include="tpl\app.html" />
     <Content Include="tpl\apps\calendar\calendar.html" />

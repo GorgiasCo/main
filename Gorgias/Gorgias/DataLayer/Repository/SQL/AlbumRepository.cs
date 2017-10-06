@@ -476,6 +476,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
         {
+            Update(AlbumID);
             return (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
         }
 
@@ -559,10 +560,24 @@ namespace Gorgias.DataLayer.Repository.SQL
             return result;
         }
 
+        public IQueryable<Album> GetV2AlbumByCategoryAsQueryable()
+        {
+            //var currentDate = DateTime.UtcNow;
+            var result = (from w in context.Albums where w.AlbumStatus == true && w.AlbumIsDeleted == false select w).AsQueryable();
+            return result;
+        }
+
         public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID)
         {
             //var currentDate = DateTime.UtcNow;
             var result = (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID select w).AsQueryable();
+            return result;
+        }
+
+        public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID, int ProfileID)
+        {
+            //var currentDate = DateTime.UtcNow;
+            var result = (from w in context.Albums where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.Profile.ProfileIsConfirmed == true && w.Profile.ProfileIsPeople == true select w).AsQueryable();
             return result;
         }
 

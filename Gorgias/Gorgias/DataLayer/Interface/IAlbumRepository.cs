@@ -45,7 +45,10 @@ namespace Gorgias.DataLayer.Interface
         IList<Business.DataTransferObjects.Mobile.AlbumMobileModel> GetAlbumContentsAsQueryable(int ProfileID, int page = 1, int pageSize = 7, int contentSize = 6);
         IList<Business.DataTransferObjects.Mobile.AlbumMobileModel> GetV2AlbumContentsAsQueryable(int page = 1, int pageSize = 7, int contentSize = 6);
         IQueryable<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> GetV2AlbumContentsByCategoryAsQueryable(int CategoryID);
+
+        IQueryable<Album> GetV2AlbumByCategoryAsQueryable();
         IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID);
+        IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID, int ProfileID);
 
         IList<Business.DataTransferObjects.Mobile.AlbumMobileAdminModel> GetAdminAlbumContentsAsQueryable(int ProfileID, int page = 1, int pageSize = 7, int contentSize = 6);
         System.Threading.Tasks.Task<IList<Business.DataTransferObjects.Mobile.AlbumMobileAdminModel>> GetAdminAlbumContentsAsQueryableAsync(int ProfileID, int page = 1, int pageSize = 7, int contentSize = 6);

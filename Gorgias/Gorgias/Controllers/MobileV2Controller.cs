@@ -349,14 +349,14 @@ namespace Gorgias.Controllers
             });
         }
 
-        [Route("Mobile/V2/Album/{AlbumID}/{ProfileID}", Name = "GetV2MobileAlbumDetail")]
+        [Route("Mobile/V2/Album/{AlbumID}/{ProfileID}/{DeviceWidth}", Name = "GetV2MobileAlbumDetail")]
         [HttpGet]
-        public HttpResponseMessage GetAlbum(HttpRequestMessage request, int AlbumID, int ProfileID)
+        public HttpResponseMessage GetAlbum(HttpRequestMessage request, int AlbumID, int ProfileID, int DeviceWidth)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                AlbumMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbum(AlbumID, ProfileID);
+                AlbumMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbum(AlbumID, ProfileID, DeviceWidth);
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);

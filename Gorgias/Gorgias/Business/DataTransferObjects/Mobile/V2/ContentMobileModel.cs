@@ -94,10 +94,22 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
             }
         }
 
+        public int ContentDeviceHeight
+        {
+            get
+            {
+                if (ContentHeight > 0 && DeviceWidth > 0 && ContentWidth > 0)
+                {
+                    return ((DeviceWidth) * ContentHeight) / (ContentWidth);
+                }
+                return 0;
+            }
+        }
         //Content Type Info
         public int ContentTypeID { get; set; }
         public string ContentTypeExpression { get; set; }
         public string ContentTypeName { get; set; }
+        public int DeviceWidth { get; set; }
 
         //public virtual ContentTypeDTO ContentType { get; set; }
     }

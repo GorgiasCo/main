@@ -419,8 +419,8 @@ angular.module('gorgiasapp')
                 })
                 .state('app.dashboard', {
                     url: "/dashboard",
-                    templateUrl: "tpl/dashboard.html",
-                    controller: 'DashboardCtrl',
+                    templateUrl: "tpl/admin/viewDashboard.html",//tpl/dashboard.html
+                    controller: 'viewDashboardController',//DashboardCtrl
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -436,7 +436,33 @@ angular.module('gorgiasapp')
                             })
                                 .then(function () {
                                     return $ocLazyLoad.load([
-                                        'assets/js/controllers/dashboard.js'
+                                        'assets/js/controllers/admin/Profile/Dashboard/viewDashboardController.js'
+//'assets/js/controllers/dashboard.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+                .state('app.dashboard.chart', {
+                    url: "/dashboard/chart",
+                    templateUrl: "tpl/admin/viewDashboard.html",
+                    controller: 'viewDashboardController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'nvd3',
+                                    'mapplic',
+                                    'rickshaw',
+                                    'metrojs',
+                                    'sparkline',
+                                    'skycons',
+                                    'switchery'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/admin/Profile/Dashboard/viewDashboardController.js'
                                     ]);
                                 });
                         }]
