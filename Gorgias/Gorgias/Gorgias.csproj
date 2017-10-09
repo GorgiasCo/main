@@ -391,7 +391,9 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginAttempt.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginProfileMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\MiniProfileMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\PhoneConfigMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileActivityUpdateMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingLanguageMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSettingMobileModel.cs" />

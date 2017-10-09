@@ -12,6 +12,7 @@ namespace Gorgias.DataLayer.Interface
         Profile Insert(String ProfileFullname, string ProfileFullnameEnglish, Boolean ProfileIsPeople, Boolean ProfileIsDeleted, DateTime ProfileDateCreated, String ProfileDescription, int ProfileView, int ProfileLike, String ProfileURL, String ProfileShortDescription, String ProfileImage, String ProfileEmail, Boolean ProfileStatus, Boolean ProfileIsConfirmed, int ProfileTypeID, int ThemeID, int SubscriptionTypeID, int UserID);
         Profile Insert(Profile obj);
         Profile Insert();
+        Profile Insert(string DeviceLanguage, string DeviceID, string DeviceToken);
         bool Update(int ProfileID, String ProfileFullname, string ProfileFullnameEnglish, Boolean ProfileIsPeople, Boolean ProfileIsDeleted, DateTime ProfileDateCreated, String ProfileDescription, int ProfileView, int ProfileLike, String ProfileURL, String ProfileShortDescription, String ProfileImage, String ProfileEmail, Boolean ProfileStatus, Boolean ProfileIsConfirmed, int ProfileTypeID, int ThemeID, int SubscriptionTypeID);
         bool Update(int ProfileID, bool Status, int UpdateMode);
         bool Update(int ProfileID, string ProfileFullname);

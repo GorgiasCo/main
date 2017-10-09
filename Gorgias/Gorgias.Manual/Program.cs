@@ -36,7 +36,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3014
-            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3144 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3155 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {

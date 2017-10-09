@@ -109,6 +109,22 @@ namespace Gorgias.BusinessLayer.Facades
             }
         }
 
+        //V2
+        public CategoryDTO Insert(string CategoryName, int? CategoryID, string languageCode)
+        {
+            CategoryDTO result = Mapper.Map<CategoryDTO>(DataLayer.DataLayerFacade.CategoryRepository().Insert(CategoryName, CategoryID, languageCode));
+
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return new CategoryDTO();
+            }
+        }
+        //End of V2
+
         public bool Delete(int CategoryID)
         {
             bool result = DataLayer.DataLayerFacade.CategoryRepository().Delete(CategoryID);

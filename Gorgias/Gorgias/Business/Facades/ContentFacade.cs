@@ -19,9 +19,9 @@ namespace Gorgias.BusinessLayer.Facades
     public class ContentFacade
     {
         //V2
-        public bool UpdateContentsLikes(Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel[] Contents)
+        public bool UpdateContentsLikes(Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel[] Contents, int ProfileID, int AlbumID)
         {
-            return DataLayer.DataLayerFacade.ContentRepository().Update(Contents);
+            return DataLayer.DataLayerFacade.ContentRepository().Update(Contents, ProfileID, AlbumID);
         }
 
         //End V2

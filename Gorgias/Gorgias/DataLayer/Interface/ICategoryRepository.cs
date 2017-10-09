@@ -8,8 +8,8 @@ namespace Gorgias.DataLayer.Interface
 {
     public interface ICategoryRepository
     {
-
         Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID);
+        Category Insert(string CategoryName, int? ProfileID, string languageCode);
         bool Update(int CategoryID, String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID);
 
         Category Insert(String CategoryName, Boolean CategoryStatus, String CategoryImage, String CategoryDescription, int CategoryParentID, int? CategoryOrder, int? CategoryType);

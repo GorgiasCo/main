@@ -208,9 +208,9 @@ namespace Gorgias.DataLayer.Repository.SQL
                     orderby w.CityName ascending
                     select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
                     {
-                        KeyName = w.CityName,
+                        KeyName = w.CityName + ", " + w.Country.CountryName,
                         KeyID = w.CityID,
-                        Multilanguage = w.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName
+                        Multilanguage = w.CityChilds.Any(m => m.CityLanguageCode == languageCode) ? w.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName + ", " + w.Country.CountryChilds.Where(m => m.CountryLanguageCode == languageCode).FirstOrDefault().CountryName : null
                     }).AsQueryable();
         }
 

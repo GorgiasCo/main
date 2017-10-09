@@ -19,6 +19,8 @@ namespace Gorgias
         {
             this.Contents = new HashSet<Content>();
             this.ProfileActivities = new HashSet<ProfileActivity>();
+            this.Categories = new HashSet<Category>();
+            this.AlbumChilds = new HashSet<Album>();
         }
     
         public int AlbumID { get; set; }
@@ -42,6 +44,7 @@ namespace Gorgias
         public Nullable<bool> AlbumIsTokenAvailable { get; set; }
         public Nullable<int> AlbumPriceToken { get; set; }
         public Nullable<int> ContentRatingID { get; set; }
+        public Nullable<int> AlbumParentID { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Profile Profile { get; set; }
@@ -51,5 +54,10 @@ namespace Gorgias
         public virtual ContentRating ContentRating { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfileActivity> ProfileActivities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Album> AlbumChilds { get; set; }
+        public virtual Album AlbumParent { get; set; }
     }
 }

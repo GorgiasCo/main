@@ -9,12 +9,12 @@
         <EntityTypeShape EntityType="GorgiasModel.AddressType" Width="1.5" PointX="6" PointY="7.375" />
         <EntityTypeShape EntityType="GorgiasModel.Album" Width="1.75" PointX="8.25" PointY="16.5" />
         <EntityTypeShape EntityType="GorgiasModel.Attribute" Width="1.5" PointX="3" PointY="22.625" />
-        <EntityTypeShape EntityType="GorgiasModel.Category" Width="1.5" PointX="6" PointY="26.875" />
+        <EntityTypeShape EntityType="GorgiasModel.Category" Width="1.5" PointX="6" PointY="26.5" />
         <EntityTypeShape EntityType="GorgiasModel.City" Width="1.5" PointX="6" PointY="3.25" />
         <EntityTypeShape EntityType="GorgiasModel.Connection" Width="1.5" PointX="5.25" PointY="13.75" />
         <EntityTypeShape EntityType="GorgiasModel.Content" Width="1.5" PointX="10.5" PointY="20.75" />
         <EntityTypeShape EntityType="GorgiasModel.Country" Width="1.5" PointX="3.75" PointY="3.125" />
-        <EntityTypeShape EntityType="GorgiasModel.ExternalLink" Width="1.5" PointX="8.125" PointY="23.25" />
+        <EntityTypeShape EntityType="GorgiasModel.ExternalLink" Width="1.5" PointX="7.75" PointY="23.875" />
         <EntityTypeShape EntityType="GorgiasModel.Feature" Width="1.5" PointX="10" PointY="25.125" />
         <EntityTypeShape EntityType="GorgiasModel.FeaturedSponsor" Width="1.5" PointX="11.25" PointY="17" />
         <EntityTypeShape EntityType="GorgiasModel.Industry" Width="1.5" PointX="0.5" PointY="12.875" />
@@ -113,6 +113,9 @@
         <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_Profile" />
         <AssociationConnector Association="GorgiasModel.FK_ProfileActivity_ProfileActivity" />
         <AssociationConnector Association="GorgiasModel.FK_Share_ProfileActivity" />
+        <AssociationConnector Association="GorgiasModel.FK_Category_Profile" />
+        <AssociationConnector Association="GorgiasModel.AlbumTopic" />
+        <AssociationConnector Association="GorgiasModel.FK_Album_Album" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -58,14 +58,15 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.CategoryStatus = CategoryStatus;
                 obj.CategoryImage = CategoryImage;
                 obj.CategoryDescription = CategoryDescription;
-                if(CategoryParentID > 0)
+                if (CategoryParentID > 0)
                 {
                     obj.CategoryParentID = CategoryParentID;
-                } else
+                }
+                else
                 {
                     obj.CategoryParentID = null;
                 }
-                
+
                 context.Categories.Add(obj);
                 context.SaveChanges();
                 return obj;
@@ -73,6 +74,28 @@ namespace Gorgias.DataLayer.Repository.SQL
             catch (Exception ex)
             {
                 return new Category();
+            }
+        }
+
+        public Category Insert(string CategoryName, int? ProfileID, string languageCode)
+        {
+            try
+            {
+                Category obj = new Category();
+                obj.CategoryName = CategoryName;
+                obj.CategoryStatus = true;
+                obj.CategoryParentID = null;
+                obj.CategoryDescription = languageCode;
+
+                obj.ProfileID = ProfileID.HasValue ? ProfileID : null;
+
+                context.Categories.Add(obj);
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -96,7 +119,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                 else
                 {
                     obj.CategoryParentID = null;
-                }                
+                }
                 context.SaveChanges();
                 return true;
             }
@@ -120,11 +143,12 @@ namespace Gorgias.DataLayer.Repository.SQL
                 if (CategoryOrder.HasValue)
                 {
                     obj.CategoryOrder = CategoryOrder;
-                } else
+                }
+                else
                 {
                     obj.CategoryOrder = null;
                 }
-                
+
                 obj.CategoryType = CategoryType;
                 if (CategoryParentID > 0)
                 {
@@ -260,12 +284,12 @@ namespace Gorgias.DataLayer.Repository.SQL
         //V2
         public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAllAsQueryable(string languageCode)
         {
-            return (from w in context.Categories where w.CategoryParentID != null  orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType}).AsQueryable();
+            return (from w in context.Categories where w.CategoryParentID != null orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType }).AsQueryable();
         }
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesAllAsQueryableKeyValue(int CategoryParentID, string languageCode)
         {
-            return (from w in context.Categories where w.CategoryParentID == CategoryParentID orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, KeyName = w.CategoryName, KeyID = w.CategoryID}).AsQueryable();
+            return (from w in context.Categories where w.CategoryParentID == CategoryParentID orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, KeyName = w.CategoryName, KeyID = w.CategoryID }).AsQueryable();
         }
 
         //Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel

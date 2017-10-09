@@ -18,6 +18,11 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class LanguageFacade
     {
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ProfileReadingLanguageMobileModel> getReadingLanguages(int ProfileID)
+        {
+            return DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAsQueryable(ProfileID);
+        }
+
         public IQueryable<Business.DataTransferObjects.Mobile.V2.LanguageMobileModel> getLanguages()
         {
             return DataLayer.DataLayerFacade.LanguageRepository().GetLanguagesAsQueryable();

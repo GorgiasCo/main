@@ -36,6 +36,7 @@ namespace Gorgias
             this.ProfileReadings = new HashSet<ProfileReading>();
             this.ProfileTokens = new HashSet<ProfileToken>();
             this.ProfileActivities = new HashSet<ProfileActivity>();
+            this.Categories = new HashSet<Category>();
         }
     
         public int ProfileID { get; set; }
@@ -100,5 +101,7 @@ namespace Gorgias
         public virtual ICollection<ProfileToken> ProfileTokens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfileActivity> ProfileActivities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

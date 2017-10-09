@@ -307,6 +307,48 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Profile/Reader/Languages/{ProfileID}", Name = "GetV2MobileProfileReaderLanguages")]
+        [HttpGet]
+        public HttpResponseMessage GetProfileReaderLanguages(HttpRequestMessage request, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                IEnumerable<ProfileReadingLanguageMobileModel> result = BusinessLayer.Facades.Facade.LanguageFacade().getReadingLanguages(ProfileID);
+                //IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.LanguageFacade().getLanguagesByKeyValue();
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/Update/Reader/Languages/{ProfileID}", Name = "UpdateV2MobileProfileReaderLanguages")]
+        [HttpPost]
+        public HttpResponseMessage UpdateProfileReaderLanguages(HttpRequestMessage request, int ProfileID, IEnumerable<ProfileReadingLanguageMobileModel> languages)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.ProfileReadingFacade().updateProfileLanguageReadings(languages, ProfileID);
+                //IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.LanguageFacade().getLanguagesByKeyValue();
+                if (!result)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Quotes", Name = "GetV2MobileQuotes")]
         [HttpGet]
         public HttpResponseMessage GetQuotes(HttpRequestMessage request)
@@ -511,6 +553,46 @@ namespace Gorgias.Controllers
                 else
                 {
                     response = request.CreateResponse<int>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/New/User/PhoneSetting", Name = "CreateV2NewMobileUserWithDeviceID")]
+        [HttpPost]
+        public HttpResponseMessage CreateNewMobileUser(HttpRequestMessage request, PhoneConfigMobileModel phoneConfig)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                int result = BusinessLayer.Facades.Facade.ProfileFacade().createNewMobileUser(phoneConfig);
+                if (result == 0)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<int>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/User/PhoneSetting/{DeviceLanguage}/{ProfileID}", Name = "UpdateV2ProfileDeviceLanguage")]
+        [HttpGet]
+        public HttpResponseMessage UpdateProfileDeviceLanguage(HttpRequestMessage request, string deviceLanguage, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.ProfileFacade().updateProfileDeviceLanguage(deviceLanguage, ProfileID);
+                if (!result)
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotFound, false);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -736,15 +818,15 @@ namespace Gorgias.Controllers
             });
         }
 
-        [Route("Mobile/V2/Contents/Likes", Name = "MobileV2ContentsLikesInsert")]
+        [Route("Mobile/V2/Contents/Likes/{ProfileID}/{AlbumID}", Name = "MobileV2ContentsLikesInsert")]
         [HttpPost]
-        public HttpResponseMessage ContentLikesInsert(HttpRequestMessage request, ContentLikeMobileModel[] contentLikes)
+        public HttpResponseMessage ContentLikesInsert(HttpRequestMessage request, ContentLikeMobileModel[] contentLikes, int ProfileID, int AlbumID)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
 
-                bool result = BusinessLayer.Facades.Facade.ContentFacade().UpdateContentsLikes(contentLikes);
+                bool result = BusinessLayer.Facades.Facade.ContentFacade().UpdateContentsLikes(contentLikes, ProfileID, AlbumID);
                 if (result)
                 {
                     response = request.CreateResponse<bool>(HttpStatusCode.Created, result);
@@ -767,6 +849,27 @@ namespace Gorgias.Controllers
                 HttpResponseMessage response = null;
 
                 Business.DataTransferObjects.AlbumDTO result = BusinessLayer.Facades.Facade.AlbumFacade().InsertV2(objAlbum);
+                if (result != null)
+                {
+                    response = request.CreateResponse<Business.DataTransferObjects.AlbumDTO>(HttpStatusCode.Created, result);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotAcceptable, false);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Album/New/Topic", Name = "MobileV2AlbumInsert")]
+        [HttpPost]
+        public HttpResponseMessage AlbumWithTopicInsert(HttpRequestMessage request, AlbumUpdateMobileModel objAlbum)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                Business.DataTransferObjects.AlbumDTO result = BusinessLayer.Facades.Facade.AlbumFacade().InsertV2Topic(objAlbum);
                 if (result != null)
                 {
                     response = request.CreateResponse<Business.DataTransferObjects.AlbumDTO>(HttpStatusCode.Created, result);

@@ -63,6 +63,15 @@
     <Property Name="AlbumIsTokenAvailable" Type="bit" />
     <Property Name="AlbumPriceToken" Type="int" />
     <Property Name="ContentRatingID" Type="int" />
+    <Property Name="AlbumParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="AlbumTopic">
+    <Key>
+      <PropertyRef Name="AlbumID" />
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="AlbumID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AlbumType">
     <Key>
@@ -99,6 +108,7 @@
     <Property Name="CategoryParentID" Type="int" />
     <Property Name="CategoryType" Type="int" />
     <Property Name="CategoryOrder" Type="int" />
+    <Property Name="ProfileID" Type="int" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -620,6 +630,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Album_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+    <End Role="Album1" Type="Self.Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="Album1">
+        <PropertyRef Name="AlbumParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Album_AlbumType">
     <End Role="AlbumType" Type="Self.AlbumType" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -676,6 +698,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_AlbumTopic_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AlbumTopic" Type="Self.AlbumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="AlbumTopic">
+        <PropertyRef Name="AlbumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AlbumTopic_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="AlbumTopic" Type="Self.AlbumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="AlbumTopic">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Category_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Category1" Type="Self.Category" Multiplicity="*" />
@@ -685,6 +733,18 @@
       </Principal>
       <Dependent Role="Category1">
         <PropertyRef Name="CategoryParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Profile">
+    <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="ProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1412,6 +1472,7 @@
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AddressType" EntityType="Self.AddressType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AlbumTopic" EntityType="Self.AlbumTopic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlbumType" EntityType="Self.AlbumType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -1474,6 +1535,10 @@
       <End Role="Profile" EntitySet="Profile" />
       <End Role="Address" EntitySet="Address" />
     </AssociationSet>
+    <AssociationSet Name="FK_Album_Album" Association="Self.FK_Album_Album">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="Album1" EntitySet="Album" />
+    </AssociationSet>
     <AssociationSet Name="FK_Album_AlbumType" Association="Self.FK_Album_AlbumType">
       <End Role="AlbumType" EntitySet="AlbumType" />
       <End Role="Album" EntitySet="Album" />
@@ -1490,9 +1555,21 @@
       <End Role="Profile" EntitySet="Profile" />
       <End Role="Album" EntitySet="Album" />
     </AssociationSet>
+    <AssociationSet Name="FK_AlbumTopic_Album" Association="Self.FK_AlbumTopic_Album">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="AlbumTopic" EntitySet="AlbumTopic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AlbumTopic_Category" Association="Self.FK_AlbumTopic_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="AlbumTopic" EntitySet="AlbumTopic" />
+    </AssociationSet>
     <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Category1" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_Profile" Association="Self.FK_Category_Profile">
+      <End Role="Profile" EntitySet="Profile" />
+      <End Role="Category" EntitySet="Category" />
     </AssociationSet>
     <AssociationSet Name="FK_City_City" Association="Self.FK_City_City">
       <End Role="City" EntitySet="City" />

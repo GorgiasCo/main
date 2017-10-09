@@ -378,6 +378,202 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, int? AlbumParentID)
+        {
+            try
+            {
+                Album obj = new Album();
+                obj.AlbumName = AlbumName;
+                obj.AlbumDateCreated = DateTime.UtcNow;
+                obj.AlbumStatus = AlbumStatus;
+                obj.AlbumCover = AlbumCover;
+                obj.AlbumIsDeleted = false;
+                obj.CategoryID = CategoryID;
+                obj.ProfileID = ProfileID;
+
+                if (AlbumParentID.HasValue)
+                {
+                    obj.AlbumParentID = AlbumParentID;
+                }
+
+                if (AlbumStatus)
+                {
+                    obj.AlbumDatePublish = obj.AlbumDateCreated;
+                }
+                else
+                {
+                    obj.AlbumDatePublish = AlbumDatePublish;
+                }
+
+                if (AlbumHasComment.HasValue)
+                {
+                    obj.AlbumHasComment = AlbumHasComment.Value;
+                }
+                else
+                {
+                    obj.AlbumHasComment = false;
+                }
+
+                //Add for Hottest
+                if (AlbumAvailability > 0)
+                {
+                    obj.AlbumDateExpire = obj.AlbumDatePublish.AddMinutes(AlbumAvailability);
+                }
+                else
+                {
+                    //4 years to expire
+                    obj.AlbumDateExpire = obj.AlbumDateCreated.AddMonths(48);
+                }
+
+                //obj.AlbumDatePublish = obj.AlbumDateCreated;
+                obj.AlbumAvailability = AlbumAvailability;
+
+                //obj.AlbumHasComment = AlbumHasComment;
+                obj.AlbumReadingLanguageCode = AlbumReadingLanguageCode;
+                obj.AlbumRepostValue = AlbumRepostValue.HasValue ? AlbumRepostValue.Value : 500;
+                obj.AlbumRepostRequest = AlbumRepostRequest.HasValue ? AlbumRepostRequest.Value : 0;
+                obj.AlbumRepostAttempt = AlbumRepostAttempt.HasValue ? AlbumRepostAttempt.Value : 0;
+                obj.AlbumPrice = AlbumPrice.HasValue ? AlbumPrice.Value : 0;
+                obj.AlbumIsTokenAvailable = AlbumIsTokenAvailable.HasValue ? AlbumIsTokenAvailable.Value : false;
+                obj.AlbumPriceToken = AlbumPriceToken.HasValue ? AlbumPriceToken.Value : 0;
+
+                if (ContentRatingID.HasValue)
+                {
+                    obj.ContentRatingID = ContentRatingID.Value;
+                }
+                else
+                {
+                    obj.ContentRatingID = null;
+                }
+
+                foreach (Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel objContent in Contents)
+                {
+                    obj.Contents.Add(new Content
+                    {
+                        ContentCreatedDate = obj.AlbumDateCreated,
+                        ContentDimension = objContent.ContentDimension,
+                        ContentIsDeleted = false,
+                        ContentLike = 0,
+                        ContentTitle = objContent.ContentTitle,
+                        ContentStatus = true,
+                        ContentURL = objContent.ContentURL,
+                        ContentType = objContent.ContentTypeID,
+                        ContentGeoLocation = objContent.ContentGeoLocation,
+                    });
+                }
+
+                context.Albums.Add(obj);
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, Business.DataTransferObjects.Mobile.V2.CategoryNewMobileModel Topic)
+        {
+            try
+            {
+                Album obj = new Album();
+                obj.AlbumName = AlbumName;
+                obj.AlbumDateCreated = DateTime.UtcNow;
+                obj.AlbumStatus = AlbumStatus;
+                obj.AlbumCover = AlbumCover;
+                obj.AlbumIsDeleted = false;
+                obj.CategoryID = CategoryID;
+                obj.ProfileID = ProfileID;
+
+                if (AlbumStatus)
+                {
+                    obj.AlbumDatePublish = obj.AlbumDateCreated;
+                }
+                else
+                {
+                    obj.AlbumDatePublish = AlbumDatePublish;
+                }
+
+                if (AlbumHasComment.HasValue)
+                {
+                    obj.AlbumHasComment = AlbumHasComment.Value;
+                }
+                else
+                {
+                    obj.AlbumHasComment = false;
+                }
+
+                //Add for Hottest
+                if (AlbumAvailability > 0)
+                {
+                    obj.AlbumDateExpire = obj.AlbumDatePublish.AddMinutes(AlbumAvailability);
+                }
+                else
+                {
+                    //4 years to expire
+                    obj.AlbumDateExpire = obj.AlbumDateCreated.AddMonths(48);
+                }
+
+                //obj.AlbumDatePublish = obj.AlbumDateCreated;
+                obj.AlbumAvailability = AlbumAvailability;
+
+                //obj.AlbumHasComment = AlbumHasComment;
+                obj.AlbumReadingLanguageCode = AlbumReadingLanguageCode;
+                obj.AlbumRepostValue = AlbumRepostValue.HasValue ? AlbumRepostValue.Value : 500;
+                obj.AlbumRepostRequest = AlbumRepostRequest.HasValue ? AlbumRepostRequest.Value : 0;
+                obj.AlbumRepostAttempt = AlbumRepostAttempt.HasValue ? AlbumRepostAttempt.Value : 0;
+                obj.AlbumPrice = AlbumPrice.HasValue ? AlbumPrice.Value : 0;
+                obj.AlbumIsTokenAvailable = AlbumIsTokenAvailable.HasValue ? AlbumIsTokenAvailable.Value : false;
+                obj.AlbumPriceToken = AlbumPriceToken.HasValue ? AlbumPriceToken.Value : 0;
+
+                if (ContentRatingID.HasValue)
+                {
+                    obj.ContentRatingID = ContentRatingID.Value;
+                }
+                else
+                {
+                    obj.ContentRatingID = null;
+                }
+
+                foreach (Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel objContent in Contents)
+                {
+                    obj.Contents.Add(new Content
+                    {
+                        ContentCreatedDate = obj.AlbumDateCreated,
+                        ContentDimension = objContent.ContentDimension,
+                        ContentIsDeleted = false,
+                        ContentLike = 0,
+                        ContentTitle = objContent.ContentTitle,
+                        ContentStatus = true,
+                        ContentURL = objContent.ContentURL,
+                        ContentType = objContent.ContentTypeID,
+                        ContentGeoLocation = objContent.ContentGeoLocation,
+                    });
+                }
+
+                if(Topic != null)
+                {
+                    if (Topic.CategoryID.HasValue)
+                    {
+                        Category resultCategory = (from x in context.Categories where x.CategoryID == Topic.CategoryID select x).First();
+                        obj.Categories.Add(resultCategory);
+                    } else
+                    {
+                        obj.Categories.Add(new Category { CategoryName = Topic.CategoryName, CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode });
+                    }
+                }
+
+                context.Albums.Add(obj);
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public bool Update(int AlbumID, String AlbumName, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, int AlbumView, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID)
         {
             Album obj = new Album();

@@ -19,6 +19,19 @@ namespace Gorgias.BusinessLayer.Facades
     public class ProfileReadingFacade
     {
         //V2 Begin
+        public bool updateProfileLanguageReadings(IEnumerable<Business.DataTransferObjects.Mobile.V2.ProfileReadingLanguageMobileModel> languages, int ProfileID)
+        {
+            DataLayer.DataLayerFacade.ProfileReadingRepository().DeleteByProfileID(ProfileID);
+            foreach (Business.DataTransferObjects.Mobile.V2.ProfileReadingLanguageMobileModel obj in languages)
+            {
+                if (obj.isSelected)
+                {
+                    DataLayer.DataLayerFacade.ProfileReadingRepository().Insert(obj.LanguageCode, DateTime.UtcNow, ProfileID);
+                }                
+            }
+            return true;
+        }
+
         public bool updateProfileReadings(Business.DataTransferObjects.Mobile.V2.ProfileReadingMobileModel profileReadings)
         {
             DataLayer.DataLayerFacade.ProfileReadingRepository().DeleteByProfileID(profileReadings.ProfileID);

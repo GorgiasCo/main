@@ -114,19 +114,23 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
-        public bool Update(Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel[] contents)
+        public bool Update(Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel[] contents, int ProfileID, int AlbumID)
         {
-            List<int> contentIDs = new List<int>();
+            List<int> contentIDs = new List<int>();            
+
             foreach (Business.DataTransferObjects.Mobile.V2.ContentLikeMobileModel obj in contents)
             {
-                contentIDs.Add(obj.ContentID);
+                contentIDs.Add(obj.ContentID);                
             }
             try {
                 using (var db = context)
                 {
                     var result = db.Contents.Where(w=> contentIDs.Contains(w.ContentID)).ToList();//.UpdateAsync(mu => new Content() { ContentLike = mu.ContentLike});
                     result.ForEach(m => m.ContentLike = m.ContentLike + contents.Where(w => w.ContentID == m.ContentID).First().ContentLikes);
-                    //db.Contents.AddRange(result);
+                    //db.Contents.AddRange(result);                   
+
+                    db.ProfileActivities.Add(new ProfileActivity { ActivityTypeID = 13, AlbumID = AlbumID, ProfileActivityIsFirst = true, ProfileActivityDate = DateTime.UtcNow, ProfileID = ProfileID, ProfileActivityCount = contents.Sum(m => m.ContentLikes) });
+
                     db.SaveChanges();
                 }
                 return true;

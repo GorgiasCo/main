@@ -292,6 +292,18 @@
       <End Role="ProfileActivity" EntitySet="ProfileActivities" />
       <End Role="Share" EntitySet="Shares" />
     </AssociationSet>
+    <AssociationSet Name="FK_Category_Profile" Association="GorgiasModel.FK_Category_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="AlbumTopic" Association="GorgiasModel.AlbumTopic">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Album_Album" Association="GorgiasModel.FK_Album_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Album1" EntitySet="Albums" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Address">
     <Key>
@@ -355,6 +367,10 @@
     <Property Name="ContentRatingID" Type="Int32" />
     <NavigationProperty Name="ContentRating" Relationship="GorgiasModel.FK_Album_ContentRating" FromRole="Album" ToRole="ContentRating" />
     <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_Album" FromRole="Album" ToRole="ProfileActivity" />
+    <NavigationProperty Name="Categories" Relationship="GorgiasModel.AlbumTopic" FromRole="Album" ToRole="Category" />
+    <Property Name="AlbumParentID" Type="Int32" />
+    <NavigationProperty Name="AlbumChilds" Relationship="GorgiasModel.FK_Album_Album" FromRole="Album" ToRole="Album1" />
+    <NavigationProperty Name="AlbumParent" Relationship="GorgiasModel.FK_Album_Album" FromRole="Album1" ToRole="Album" />
   </EntityType>
   <EntityType Name="Attribute">
     <Key>
@@ -387,6 +403,9 @@
     <Property Name="CategoryType" Type="Int32" />
     <Property Name="CategoryOrder" Type="Int32" />
     <NavigationProperty Name="Quotes" Relationship="GorgiasModel.FK_Quote_Category" FromRole="Category" ToRole="Quote" />
+    <Property Name="ProfileID" Type="Int32" />
+    <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Category_Profile" FromRole="Category" ToRole="Profile" />
+    <NavigationProperty Name="AlbumsTopics" Relationship="GorgiasModel.AlbumTopic" FromRole="Category" ToRole="Album" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -581,6 +600,7 @@
     <NavigationProperty Name="ProfileReadings" Relationship="GorgiasModel.FK_ProfileReading_ProfileReading" FromRole="Profile" ToRole="ProfileReading" />
     <NavigationProperty Name="ProfileTokens" Relationship="GorgiasModel.FK_ProfileToken_Profile" FromRole="Profile" ToRole="ProfileToken" />
     <NavigationProperty Name="ProfileActivities" Relationship="GorgiasModel.FK_ProfileActivity_Profile" FromRole="Profile" ToRole="ProfileActivity" />
+    <NavigationProperty Name="Categories" Relationship="GorgiasModel.FK_Category_Profile" FromRole="Profile" ToRole="Category" />
   </EntityType>
   <EntityType Name="ProfileAttribute">
     <Key>
@@ -1755,6 +1775,34 @@
       </Principal>
       <Dependent Role="Share">
         <PropertyRef Name="ProfileActivityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Profile">
+    <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="0..1" />
+    <End Type="GorgiasModel.Category" Role="Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="ProfileID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlbumTopic">
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+    <End Type="GorgiasModel.Category" Role="Category" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Album_Album">
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="0..1" />
+    <End Type="GorgiasModel.Album" Role="Album1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="Album1">
+        <PropertyRef Name="AlbumParentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

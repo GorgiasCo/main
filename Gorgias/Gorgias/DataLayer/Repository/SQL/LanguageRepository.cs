@@ -147,12 +147,26 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.Languages orderby w.LanguageID descending select w).AsQueryable();
         }
+
         public IQueryable<Language> GetLanguagesAllAsQueryable(bool LanguageStatus)
         {
             return (from w in context.Languages where w.LanguageStatus == LanguageStatus orderby w.LanguageID descending select w).AsQueryable();
         }
 
         //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ProfileReadingLanguageMobileModel> GetLanguagesAsQueryable(int ProfileID)
+        {
+            IQueryable<Business.DataTransferObjects.Mobile.V2.ProfileReadingLanguageMobileModel> result = context.Database.SqlQuery<Business.DataTransferObjects.Mobile.V2.ProfileReadingLanguageMobileModel>("SELECT  dbo.ProfileReading.ProfileReadingID, dbo.Language.LanguageName, dbo.Language.LanguageCode, dbo.Language.LanguageOrder, dbo.ProfileReading.ProfileID, dbo.Language.LanguageID FROM dbo.ProfileReading RIGHT OUTER JOIN dbo.Language ON dbo.Language.LanguageCode = dbo.ProfileReading.ProfileReadingLanguageCode AND dbo.ProfileReading.ProfileID = " + ProfileID + "  OR dbo.ProfileReading.ProfileReadingID IS NULL ORDER BY dbo.ProfileReading.ProfileReadingID DESC, dbo.Language.LanguageOrder").Select(m => new Business.DataTransferObjects.Mobile.V2.ProfileReadingLanguageMobileModel
+            {
+                isSelected = m.ProfileReadingID != null,
+                LanguageCode = m.LanguageCode,
+                LanguageID = m.LanguageID,
+                LanguageName = m.LanguageName,
+                ProfileReadingID = m.ProfileReadingID
+            }).AsQueryable();
+            return result;            
+        }
+
         public IQueryable<Business.DataTransferObjects.Mobile.V2.LanguageMobileModel> GetLanguagesAsQueryable()
         {
             return (from w in context.Languages where w.LanguageStatus == true orderby w.LanguageOrder ascending, w.LanguageName ascending select new Business.DataTransferObjects.Mobile.V2.LanguageMobileModel { LanguageCode = w.LanguageCode, LanguageID = w.LanguageID, LanguageName = w.LanguageName }).AsQueryable();

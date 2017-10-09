@@ -184,6 +184,10 @@ namespace Gorgias.BusinessLayer.Facades
         {
             Album w = DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2Mobile(AlbumID,ProfileID);
 
+            //Add ProfileID as Viewer in ProfileActivity ;)
+
+            new ProfileActivityFacade().Insert(new Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel { ActivityTypeID = 14, AlbumID = AlbumID, ProfileActivityCount = 1, ProfileActivityIsFirst=true, ProfileID = ProfileID, Share = "", Location = "" });           
+
             Business.DataTransferObjects.Mobile.V2.AlbumMobileModel result = new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
             {
                 ProfileID = w.ProfileID,
@@ -485,7 +489,21 @@ namespace Gorgias.BusinessLayer.Facades
         //V2 fx ;)
         public AlbumDTO InsertV2(Business.DataTransferObjects.Mobile.V2.AlbumUpdateMobileModel objAlbum)
         {
-            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumHasComment, objAlbum.AlbumReadingLanguageCode, objAlbum.AlbumRepostValue, objAlbum.AlbumRepostRequest, objAlbum.AlbumRepostAttempt, objAlbum.AlbumPrice, objAlbum.AlbumIsTokenAvailable, objAlbum.AlbumPriceToken, objAlbum.ContentRatingID, objAlbum.Contents));
+            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumHasComment, objAlbum.AlbumReadingLanguageCode, objAlbum.AlbumRepostValue, objAlbum.AlbumRepostRequest, objAlbum.AlbumRepostAttempt, objAlbum.AlbumPrice, objAlbum.AlbumIsTokenAvailable, objAlbum.AlbumPriceToken, objAlbum.ContentRatingID, objAlbum.Contents, objAlbum.AlbumParentID));
+
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return new AlbumDTO();
+            }
+        }
+
+        public AlbumDTO InsertV2Topic(Business.DataTransferObjects.Mobile.V2.AlbumUpdateMobileModel objAlbum)
+        {
+            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumHasComment, objAlbum.AlbumReadingLanguageCode, objAlbum.AlbumRepostValue, objAlbum.AlbumRepostRequest, objAlbum.AlbumRepostAttempt, objAlbum.AlbumPrice, objAlbum.AlbumIsTokenAvailable, objAlbum.AlbumPriceToken, objAlbum.ContentRatingID, objAlbum.Contents, objAlbum.Topic));
 
             if (result != null)
             {
