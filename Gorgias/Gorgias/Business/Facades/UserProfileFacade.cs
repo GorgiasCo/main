@@ -18,6 +18,12 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class UserProfileFacade
     {
+        //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel> getUserProfiles(int UserID)
+        {
+            return DataLayer.DataLayerFacade.UserProfileRepository().GetUserProfilesAsQueryable(UserID);
+        }
+        //Ends V2
         public UserProfileDTO GetUserProfile(int ProfileID, int UserRoleID, int UserID)
         {
             UserProfileDTO result = Mapper.Map<UserProfileDTO>(DataLayer.DataLayerFacade.UserProfileRepository().GetUserProfile(ProfileID, UserRoleID, UserID));
@@ -87,7 +93,7 @@ namespace Gorgias.BusinessLayer.Facades
 
         public DTResult<UserProfileDTO> FilterResult(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param, int CountryID)
         {
-            var basequery = DataLayer.DataLayerFacade.UserProfileRepository().GetUserProfilesAllAsQueryable().Where(m=> m.Profile.Addresses.Any(a=> a.City.CountryID == CountryID));
+            var basequery = DataLayer.DataLayerFacade.UserProfileRepository().GetUserProfilesAllAsQueryable().Where(m => m.Profile.Addresses.Any(a => a.City.CountryID == CountryID));
 
             if (search.Length > 0)
             {

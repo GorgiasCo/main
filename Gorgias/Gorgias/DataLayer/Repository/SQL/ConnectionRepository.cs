@@ -71,7 +71,8 @@ namespace Gorgias.DataLayer.Repository.SQL
             {
                 Delete(ProfileID, RequestedProfileID, RequestTypeID);
                 return false;
-            } else
+            }
+            else
             {
                 try
                 {
@@ -92,16 +93,52 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public bool Insert(int ProfileID, int RequestedProfileID, int RequestTypeID, bool ConnectionStatus)
+        {
+            try
+            {
+                Connection obj = new Connection();
+                obj.ProfileID = ProfileID;
+                obj.RequestedProfileID = RequestedProfileID;
+                obj.RequestTypeID = RequestTypeID;
+                obj.ConnectStatus = ConnectionStatus;
+                obj.ConnectDateCreated = DateTime.UtcNow;
+                context.Connections.Add(obj);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public bool Update(int ProfileID, int RequestedProfileID, int RequestTypeID, Boolean ConnectStatus)
         {
             Connection obj = new Connection();
-            obj = (from w in context.Connections where w.ProfileID == RequestedProfileID && w.RequestedProfileID == ProfileID  && w.RequestTypeID == RequestTypeID select w).FirstOrDefault();
+            obj = (from w in context.Connections where w.ProfileID == RequestedProfileID && w.RequestedProfileID == ProfileID && w.RequestTypeID == RequestTypeID select w).FirstOrDefault();
             if (obj != null)
             {
                 context.Connections.Attach(obj);
-
                 obj.ConnectStatus = ConnectStatus;
                 obj.ConnectDateCreated = DateTime.Now;
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Update(int ProfileID, int RequestedProfileID)
+        {
+            Connection obj = new Connection();
+            obj = (from w in context.Connections where w.ProfileID == ProfileID && w.RequestedProfileID == RequestedProfileID && w.RequestTypeID == 4 && w.ConnectStatus == false select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Connections.Attach(obj);
+                obj.ConnectStatus = true;                
                 context.SaveChanges();
                 return true;
             }
@@ -196,6 +233,15 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Connections where w.ConnectStatus == ConnectStatus orderby w.ProfileID, w.RequestedProfileID, w.RequestTypeID descending select w).AsQueryable();
         }
         //IQueryable Pagings
+
+        //V2 Begin ;)
+        //ProfileSubscribeMobileModel
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ProfileSubscribeMobileModel> GetConnectionsByProfileIDAllAsQueryable(int ProfileID)
+        {
+            return context.Connections.Where(m => m.RequestedProfileID == ProfileID && m.RequestTypeID == 3).Select(c => new Business.DataTransferObjects.Mobile.V2.ProfileSubscribeMobileModel { ProfileID = c.ProfileID }).AsQueryable();
+        }
+        //V2 End ;)
+
         public IQueryable<Connection> GetConnectionsAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)
         {
             IQueryable<Connection> xList;

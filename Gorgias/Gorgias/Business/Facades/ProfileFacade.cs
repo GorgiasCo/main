@@ -23,6 +23,11 @@ namespace Gorgias.BusinessLayer.Facades
     public class ProfileFacade
     {
         //V2 Begin
+        public string getProfileFullname(int ProfileID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileFullname(ProfileID);
+        }
+
         public int createNewMobileUser(Business.DataTransferObjects.Mobile.V2.PhoneConfigMobileModel phoneConfig)
         {
             return DataLayer.DataLayerFacade.ProfileRepository().Insert(phoneConfig.DeviceLanguage, phoneConfig.DeviceID, phoneConfig.DeviceToken).ProfileID;
@@ -31,6 +36,11 @@ namespace Gorgias.BusinessLayer.Facades
         public bool updateProfileDeviceLanguage(string DeviceLanguage, int ProfieID)
         {
             return DataLayer.DataLayerFacade.ProfileSettingRepository().Update(ProfieID, DeviceLanguage);
+        }
+
+        public Business.DataTransferObjects.Mobile.V2.SettingProfileMobileModel GetV2SettingMobileProfile(int ProfileID, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetV2SettingMobileProfile(ProfileID, languageCode);
         }
 
         public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)

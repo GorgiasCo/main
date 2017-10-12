@@ -292,6 +292,21 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Categories where w.CategoryParentID == CategoryParentID orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, KeyName = w.CategoryName, KeyID = w.CategoryID }).AsQueryable();
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesByProfileIDAsQueryableKeyValue(int ProfileID, string languageCode)
+        {
+            return (from w in context.Categories where w.ProfileID == ProfileID orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, KeyName = w.CategoryName, KeyID = w.CategoryID }).AsQueryable();
+        }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAvailableByProfileIDAsQueryable(int ProfileID, string languageCode)
+        {
+            return (from w in context.Categories where w.ProfileID == ProfileID && w.Albums.Count > 0 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID }).AsQueryable();
+        }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesBySearchAsQueryableKeyValue(string CategorySearch)
+        {
+            return (from w in context.Categories where w.CategoryName.Contains(CategorySearch) && w.CategoryType == 1 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.CategoryName, KeyName = w.CategoryName, KeyID = w.CategoryID }).AsQueryable();
+        }
+
         //Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
         public IQueryable<Category> GetCategoriesAllAsQueryableX(string languageCode)
         {

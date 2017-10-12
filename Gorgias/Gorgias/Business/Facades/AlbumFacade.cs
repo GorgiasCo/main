@@ -64,6 +64,7 @@ namespace Gorgias.BusinessLayer.Facades
                 AlbumComments = w.Contents.Sum(m => m.Comments.Count),
                 AlbumHasComment = w.AlbumHasComment,
                 AlbumIsTokenAvailable = w.AlbumIsTokenAvailable,
+                CategoryID = w.CategoryID
                 //Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
                 //{
                 //    ContentLike = c.ContentLike,
@@ -120,7 +121,7 @@ namespace Gorgias.BusinessLayer.Facades
                     break;
                 case 16:
                     //Expiring Soon
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderBy(m => SqlFunctions.DateDiff("minute", m.AlbumDateExpire,m.AlbumDatePublish));//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m => SqlFunctions.DateDiff("minute", m.AlbumDateExpire,m.AlbumDatePublish));//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
                     break;
                 case 17:
                     //Expired ;)
@@ -133,6 +134,18 @@ namespace Gorgias.BusinessLayer.Facades
                 case 22:
                     //stayOn ;)
                     basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.Profile.Connections.Any(c=> c.RequestedProfileID == albumFilterMobileModel.ProfileID && c.RequestTypeID == 3)).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 23:
+                    //myStories ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.ProfileID == albumFilterMobileModel.ProfileID).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 24:
+                    //storyLand ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 25:
+                    //myStories ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.Profile.ProfileIsConfirmed == true && m.Profile.ProfileIsPeople == false).OrderByDescending(m => m.AlbumDatePublish);
                     break;
                 default:
                     basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID);

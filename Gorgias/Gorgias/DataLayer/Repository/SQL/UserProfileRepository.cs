@@ -107,7 +107,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IEnumerable<UserProfile> GetAdministrationCountryUserProfile(int CountryID)
         {
-            return (from w in context.UserProfiles.Include("Profile").Include("User") where w.Profile.Addresses.Any(m=> m.City.CountryID == CountryID) && w.Profile.SubscriptionTypeID != 5 orderby w.ProfileID descending select w).ToList().Distinct();
+            return (from w in context.UserProfiles.Include("Profile").Include("User") where w.Profile.Addresses.Any(m => m.City.CountryID == CountryID) && w.Profile.SubscriptionTypeID != 5 orderby w.ProfileID descending select w).ToList().Distinct();
         }
 
         public IEnumerable<UserProfile> GetUserProfileAgency(int UserID)
@@ -125,10 +125,11 @@ namespace Gorgias.DataLayer.Repository.SQL
             try
             {
                 return (from w in context.UserProfiles where w.UserID == UserID && w.ProfileID == ProfileID orderby w.ProfileID descending select w).FirstOrDefault();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }            
+            }
         }
 
         public UserProfile GetUserProfile(int ProfileID, int UserRoleID, int UserID)
@@ -165,6 +166,26 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.UserProfiles.Include("Profile").Include("User") orderby w.ProfileID, w.UserRoleID, w.UserID descending select w).AsQueryable();
         }
+
+        //V2
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel> GetUserProfilesAsQueryable(int UserID)
+        {
+            return (from w in context.UserProfiles
+                    where w.UserID == UserID
+                    orderby w.ProfileID, w.UserRoleID, w.UserID descending
+                    select new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
+                    {
+                        ProfileID = w.ProfileID,
+                        UserID = w.UserID,
+                        UserRoleID = w.UserRoleID,
+                        ProfileFullname = w.Profile.ProfileFullname,
+                        ProfileImage = w.Profile.ProfileImage,
+                        ProfileIsConfirmed = w.Profile.ProfileIsConfirmed,
+                        ProfileIsPeople = w.Profile.ProfileIsPeople
+                    }).AsQueryable();
+        }
+
+        //Ends V2
         //IQueryable Pagings
         public IQueryable<UserProfile> GetUserProfilesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)
         {

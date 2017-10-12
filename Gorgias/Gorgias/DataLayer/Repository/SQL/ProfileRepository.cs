@@ -536,6 +536,11 @@ namespace Gorgias.DataLayer.Repository.SQL
         }
 
         //V2 Begin
+        public string GetProfileFullname(int ProfileID)
+        {
+            return (from w in context.Profiles where w.ProfileID == ProfileID select w).FirstOrDefault().ProfileFullname;
+        }
+
         public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)
         {
             return (from w in context.Profiles.Include("Connections").Include("Albums")
@@ -549,10 +554,38 @@ namespace Gorgias.DataLayer.Repository.SQL
                         ProfileFullnameEnglish = w.ProfileFullnameEnglish,
                         ProfileShortDescription = w.ProfileShortDescription,
                         ProfileTypeName = w.ProfileType.ProfileTypeName,
+                        ProfileURL = w.ProfileURL,
+                        ProfileIsConfirmed = w.ProfileIsConfirmed,
+                        ProfileIsPeople = w.ProfileIsPeople,
                         TotalConnections = w.Connections.Count,
                         TotalEngagements = w.Albums.Sum(a => a.ProfileActivities.Where(ac => ac.ActivityTypeID != 1).Count()),
                         TotalViews = w.Albums.Sum(av => av.AlbumView),
-                        isSubscribed = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID),
+                        isSubscribed = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 3),
+                        isBookmarked = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 4 && cc.ConnectStatus == true),
+                        ProfileImage = w.ProfileImage
+                    }
+            ).FirstOrDefault();
+        }
+
+        public Business.DataTransferObjects.Mobile.V2.SettingProfileMobileModel GetV2SettingMobileProfile(int ProfileID, string languageCode)
+        {
+            return (from w in context.Profiles.Include("Connections").Include("Albums")
+                    where w.ProfileID == ProfileID
+                    select new Business.DataTransferObjects.Mobile.V2.SettingProfileMobileModel
+                    {                        
+                        ProfileID = w.ProfileID,
+                        ProfileFullname = w.ProfileFullname,
+                        ProfileFullnameEnglish = w.ProfileFullnameEnglish,
+                        ProfileShortDescription = w.ProfileShortDescription,                        
+                        ProfileURL = w.ProfileURL,
+                        ProfileIsConfirmed = w.ProfileIsConfirmed,
+                        ProfileIsPeople = w.ProfileIsPeople,
+                        TotalConnections = w.Connections.Count,
+                        TotalEngagements = w.Albums.Sum(a => a.ProfileActivities.Where(ac => ac.ActivityTypeID != 1).Count()),
+                        TotalViews = w.Albums.Sum(av => av.AlbumView),
+                        TotalFeel = w.Albums.Sum(tf => tf.ProfileActivities.Where(ac => ac.ActivityType.ActivityTypeParentID == 2).Count()),
+                        TotalLikes = w.Albums.Sum(tl => tl.Contents.Sum(c=> c.ContentLike)),
+                        TotalShares = w.Albums.Sum(a => a.ProfileActivities.Where(ac => ac.ActivityTypeID != 12).Count()),
                         ProfileImage = w.ProfileImage
                     }
             ).FirstOrDefault();

@@ -22,9 +22,11 @@ namespace Gorgias.DataLayer.Interface
         bool Delete(int ProfileID);
 
         Profile GetProfile(int ProfileID);
+        string GetProfileFullname(int ProfileID);
         Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID);
         Profile GetV2Profile(int ProfileID);
         Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode);
+        Business.DataTransferObjects.Mobile.V2.SettingProfileMobileModel GetV2SettingMobileProfile(int ProfileID, string languageCode);
         IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();
         Int64 GetProfileReportCurrentProfileViews();
         IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID);

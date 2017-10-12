@@ -377,6 +377,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumUpdateMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryNewMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CityMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentCommentMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ContentLikeMobileModel.cs" />
@@ -397,11 +398,14 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSettingMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileSubscribeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileTokenMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\QuoteMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\RegisterProfileMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\SettingMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\SettingProfileMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\UserProfileMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\NewsletterDTO.cs" />
     <Compile Include="Business\DataTransferObjects\PaymentDTO.cs" />
     <Compile Include="Business\DataTransferObjects\ProfileActivityDTO.cs" />

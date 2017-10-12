@@ -18,6 +18,13 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class ConnectionFacade
     {
+        //V2 Begin ;)
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.ProfileSubscribeMobileModel> getProfileSubscribes(int ProfileID)
+        {
+            return DataLayer.DataLayerFacade.ConnectionRepository().GetConnectionsByProfileIDAllAsQueryable(ProfileID);
+        }
+        //V2 Ends ;)
+
         public ConnectionDTO GetConnection(int ProfileID, int RequestedProfileID, int RequestTypeID)
         {
             ConnectionDTO result = Mapper.Map<ConnectionDTO>(DataLayer.DataLayerFacade.ConnectionRepository().GetConnection(ProfileID, RequestedProfileID, RequestTypeID));
@@ -191,7 +198,13 @@ namespace Gorgias.BusinessLayer.Facades
 
         public bool InsertForMobile(ConnectionDTO objConnection)
         {
-            return DataLayer.DataLayerFacade.ConnectionRepository().Insert(objConnection.ProfileID, objConnection.RequestedProfileID, objConnection.RequestTypeID);            
+            if(objConnection.RequestTypeID == 4)
+            {
+                return DataLayer.DataLayerFacade.ConnectionRepository().Insert(objConnection.ProfileID, objConnection.RequestedProfileID, objConnection.RequestTypeID, false);
+            } else
+            {
+                return DataLayer.DataLayerFacade.ConnectionRepository().Insert(objConnection.ProfileID, objConnection.RequestedProfileID, objConnection.RequestTypeID);
+            }            
         }
 
         public ConnectionDTO Insert(ConnectionDTO objConnection)
@@ -224,6 +237,19 @@ namespace Gorgias.BusinessLayer.Facades
         public bool Update(int ProfileID, int RequestedProfileID, int RequestTypeID, ConnectionDTO objConnection)
         {
             bool result = DataLayer.DataLayerFacade.ConnectionRepository().Update(ProfileID, RequestedProfileID, RequestTypeID, objConnection.ConnectStatus);
+            if (result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Update(int ProfileID, int RequestedProfileID)
+        {
+            bool result = DataLayer.DataLayerFacade.ConnectionRepository().Update(ProfileID, RequestedProfileID);
             if (result)
             {
                 return true;

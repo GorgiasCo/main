@@ -51,6 +51,14 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
             }
         }
 
+        public bool canRepost
+        {
+            get
+            {
+                return !isValidate ? true : false;
+            }
+        }
+
         public int AlbumAvailability { get; set; }
 
         //Comment Section

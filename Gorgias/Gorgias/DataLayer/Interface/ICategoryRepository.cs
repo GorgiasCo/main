@@ -31,6 +31,9 @@ namespace Gorgias.DataLayer.Interface
         IQueryable<Business.DataTransferObjects.CategoryDTO> GetCategoriesAllAsQueryable(string languageCode);
         IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAllAsQueryable(string languageCode);
         IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesAllAsQueryableKeyValue(int CategoryParentID, string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesByProfileIDAsQueryableKeyValue(int ProfileID, string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAvailableByProfileIDAsQueryable(int ProfileID, string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesBySearchAsQueryableKeyValue(string CategorySearch);
         IQueryable<Category> GetCategoriesAllAsQueryableX(string languageCode);
         IQueryable<Business.DataTransferObjects.Mobile.CategoryMobileModel> GetCategoriesAllAsQueryable(int ProfileID);
         IQueryable<Category> GetCategoriesAllAsQueryable(bool CategoryStatus);

@@ -30,6 +30,21 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesAllAsQueryableKeyValue(CategoryParentID, languageCode);
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getCategoriesByProfile(int ProfileID, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesByProfileIDAsQueryableKeyValue(ProfileID, languageCode);
+        }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> getCategoriesAvailableByProfile(int ProfileID, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesAvailableByProfileIDAsQueryable(ProfileID, languageCode);
+        }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getCategoriesBySearch(string categorySearch)
+        {
+            return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesBySearchAsQueryableKeyValue(categorySearch);
+        }
+
         //V2 End
         public CategoryDTO GetCategory(int CategoryID)
         {
