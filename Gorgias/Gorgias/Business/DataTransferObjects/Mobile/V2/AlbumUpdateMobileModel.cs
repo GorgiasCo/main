@@ -32,6 +32,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public int? AlbumPriceToken { get; set; }
         public int? ContentRatingID { get; set; }
         public int? AlbumParentID { get; set; }
+        public string CategoryName { get; set; }
 
         public ICollection<ContentUpdateMobileModel> Contents { get; set; }
 

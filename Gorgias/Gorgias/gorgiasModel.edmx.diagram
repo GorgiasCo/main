@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="GorgiasModel.Industry" Width="1.5" PointX="0.5" PointY="12.875" />
         <EntityTypeShape EntityType="GorgiasModel.LinkType" Width="1.5" PointX="6" PointY="31" />
         <EntityTypeShape EntityType="GorgiasModel.Message" Width="1.5" PointX="5.25" PointY="45.25" />
-        <EntityTypeShape EntityType="GorgiasModel.Profile" Width="1.5" PointX="3" PointY="14.25" />
+        <EntityTypeShape EntityType="GorgiasModel.Profile" Width="1.5" PointX="2.75" PointY="11.125" />
         <EntityTypeShape EntityType="GorgiasModel.ProfileAttribute" Width="1.5" PointX="5.25" PointY="17.125" />
         <EntityTypeShape EntityType="GorgiasModel.ProfileSocialNetwork" Width="1.5" PointX="5.25" PointY="20.125" />
         <EntityTypeShape EntityType="GorgiasModel.ProfileTag" Width="1.5" PointX="5.25" PointY="11.125" />
@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="GorgiasModel.RequestType" Width="1.5" PointX="3" PointY="8.125" />
         <EntityTypeShape EntityType="GorgiasModel.SocialNetwork" Width="1.5" PointX="3" PointY="26.875" />
         <EntityTypeShape EntityType="GorgiasModel.SubscriptionType" Width="1.5" PointX="0.75" PointY="20.125" />
-        <EntityTypeShape EntityType="GorgiasModel.Tag" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="GorgiasModel.Tag" Width="1.5" PointX="0.5" PointY="8.875" />
         <EntityTypeShape EntityType="GorgiasModel.Theme" Width="1.5" PointX="0.75" PointY="23.25" />
         <EntityTypeShape EntityType="GorgiasModel.User" Width="1.5" PointX="3" PointY="33.25" />
         <EntityTypeShape EntityType="GorgiasModel.UserProfile" Width="1.5" PointX="5.25" PointY="23" />

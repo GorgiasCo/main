@@ -4,6 +4,7 @@
     {
         private string _keyName;
         public int KeyID { get; set; }
+        public string KeyExtra { get; set; }
         public string KeyName
         {
             get

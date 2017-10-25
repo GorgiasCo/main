@@ -10,14 +10,19 @@ namespace Gorgias.Business.Facades
     public class MobileFacade
     {
 
-        public ICollection<SettingMobileModel> getSettings(int ProfileID, string languageCode, int CategoryParentID)
+        public ICollection<SettingMobileModel> getSettings(int ProfileID, string languageCode, int CategoryParentID, bool ProfileIsConfirmed)
         {
             ICollection<SettingMobileModel> result = new List<SettingMobileModel>();
 
             result.Add(new SettingMobileModel { SettingName = "Languages", SettingCollection = Facade.LanguageFacade().getLanguagesByKeyValue() });
-            result.Add(new SettingMobileModel { SettingName = "Categories", SettingCollection = Facade.CategoryFacade().getCategories(CategoryParentID,languageCode)});
+            result.Add(new SettingMobileModel { SettingName = "Topics", SettingCollection = Facade.CategoryFacade().getCategories(CategoryParentID,languageCode)});
             result.Add(new SettingMobileModel { SettingName = "ContentRatings", SettingCollection = Facade.ContentRatingFacade().getContentRatingsByKeyValue(languageCode)});
-            result.Add(new SettingMobileModel { SettingName = "Availabilities", SettingCollection = Facade.AlbumTypeFacade().getAvailabilities() });
+            result.Add(new SettingMobileModel { SettingName = "Availabilities", SettingCollection = Facade.AlbumTypeFacade().getAvailabilities(ProfileID, ProfileIsConfirmed) });
+
+            if (ProfileIsConfirmed)
+            {
+                result.Add(new SettingMobileModel { SettingName = "Categories", SettingCollection = Facade.CategoryFacade().getCategoriesByProfile(ProfileID, languageCode) });
+            }            
 
             return result;
         }

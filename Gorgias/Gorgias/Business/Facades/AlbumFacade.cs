@@ -21,9 +21,15 @@ namespace Gorgias.BusinessLayer.Facades
     public class AlbumFacade
     {
         //V2 Begin
+        public int? getAlbumTotalViewsByProfileID(int ProfileID)
+        {
+            return DataLayer.DataLayerFacade.AlbumRepository().GetAlbumViewsV2Mobile(ProfileID);
+        }
+
         public PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> getAlbums(Business.DataTransferObjects.Mobile.V2.AlbumFilterMobileModel albumFilterMobileModel)
         {
             IQueryable<Album> basequery;
+            //if (albumFilterMobileModel.CategoryTypeID == 2 && albumFilterMobileModel.isMicroApp == false)
             if (albumFilterMobileModel.CategoryTypeID == 2)
             {
                 basequery = getAlbumsByCategoryAction(albumFilterMobileModel);
@@ -64,7 +70,9 @@ namespace Gorgias.BusinessLayer.Facades
                 AlbumComments = w.Contents.Sum(m => m.Comments.Count),
                 AlbumHasComment = w.AlbumHasComment,
                 AlbumIsTokenAvailable = w.AlbumIsTokenAvailable,
-                CategoryID = w.CategoryID
+                CategoryID = w.CategoryID,
+                AlbumRepostRequest = w.AlbumRepostRequest,
+                AlbumRepostValue = w.AlbumRepostValue,
                 //Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
                 //{
                 //    ContentLike = c.ContentLike,
@@ -106,10 +114,10 @@ namespace Gorgias.BusinessLayer.Facades
             {
                 case 1:
                     basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).OrderByDescending(m => m.AlbumView);
-                    break;                
+                    break;
                 case 3:
                     //Not Expired
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m=> m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
                     break;
                 case 12:
                     //Gorgias
@@ -121,7 +129,7 @@ namespace Gorgias.BusinessLayer.Facades
                     break;
                 case 16:
                     //Expiring Soon
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m => SqlFunctions.DateDiff("minute", m.AlbumDateExpire,m.AlbumDatePublish));//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m=> m.AlbumDateExpire).OrderByDescending(m => SqlFunctions.DateDiff("minute", m.AlbumDateExpire, m.AlbumDatePublish));//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
                     break;
                 case 17:
                     //Expired ;)
@@ -129,11 +137,11 @@ namespace Gorgias.BusinessLayer.Facades
                     break;
                 case 21:
                     //iFelt ;)
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.ProfileActivities.Any(a=> a.ProfileID == albumFilterMobileModel.ProfileID && a.ActivityType.ActivityTypeParentID == 2)).OrderByDescending(m => m.AlbumDatePublish);
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.ProfileActivities.Any(a => a.ProfileID == albumFilterMobileModel.ProfileID && a.ActivityType.ActivityTypeParentID == 2)).OrderByDescending(m => m.AlbumDatePublish);
                     break;
                 case 22:
                     //stayOn ;)
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.Profile.Connections.Any(c=> c.RequestedProfileID == albumFilterMobileModel.ProfileID && c.RequestTypeID == 3)).OrderByDescending(m => m.AlbumDatePublish);
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.Profile.Connections.Any(c => c.RequestedProfileID == albumFilterMobileModel.ProfileID && c.RequestTypeID == 3)).OrderByDescending(m => m.AlbumDatePublish);
                     break;
                 case 23:
                     //myStories ;)
@@ -144,8 +152,12 @@ namespace Gorgias.BusinessLayer.Facades
                     basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
                     break;
                 case 25:
-                    //myStories ;)
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.Profile.ProfileIsConfirmed == true && m.Profile.ProfileIsPeople == false).OrderByDescending(m => m.AlbumDatePublish);
+                    //BrandSo ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.Profile.ProfileIsConfirmed == true && m.Profile.ProfileIsPeople == false && m.AlbumDatePublish < currentDate).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 86:
+                    //MicroApp Home All Stories ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.ProfileID == albumFilterMobileModel.MicroAppProfileID).OrderByDescending(m => m.AlbumDatePublish);
                     break;
                 default:
                     basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID);
@@ -188,18 +200,25 @@ namespace Gorgias.BusinessLayer.Facades
             //}
 
             var currentDate = DateTime.UtcNow;
-            basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).Where(wm => wm.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
+            if (albumFilterMobileModel.isMicroApp == false)
+            {
+                basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).Where(wm => wm.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
+            }
+            else
+            {
+                basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryForMicroAppAsQueryable(albumFilterMobileModel.CategoryID).Where(wm => wm.AlbumDatePublish <= currentDate && wm.ProfileID == albumFilterMobileModel.MicroAppProfileID).OrderByDescending(m => m.AlbumDatePublish);
+            }
 
             return basequery;
         }
 
         public Business.DataTransferObjects.Mobile.V2.AlbumMobileModel getAlbum(int AlbumID, int ProfileID, int DeviceWidth)
         {
-            Album w = DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2Mobile(AlbumID,ProfileID);
+            Album w = DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2Mobile(AlbumID, ProfileID);
 
             //Add ProfileID as Viewer in ProfileActivity ;)
 
-            new ProfileActivityFacade().Insert(new Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel { ActivityTypeID = 14, AlbumID = AlbumID, ProfileActivityCount = 1, ProfileActivityIsFirst=true, ProfileID = ProfileID, Share = "", Location = "" });           
+            new ProfileActivityFacade().Insert(new Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel { ActivityTypeID = 14, AlbumID = AlbumID, ProfileActivityCount = 1, ProfileActivityIsFirst = true, ProfileID = ProfileID, Share = "", Location = "" });
 
             Business.DataTransferObjects.Mobile.V2.AlbumMobileModel result = new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
             {
@@ -219,8 +238,23 @@ namespace Gorgias.BusinessLayer.Facades
                 AlbumComments = w.Contents.Sum(m => m.Comments.Count),
                 AlbumHasComment = w.AlbumHasComment,
                 AlbumView = w.AlbumView,
+                AlbumRepostRequest = w.AlbumRepostRequest,
+                AlbumRepostValue = w.AlbumRepostValue,
+                AlbumParentID = w.AlbumParentID,
+                AlbumParentProfileID = w.AlbumParent != null ? w.AlbumParent.ProfileID : 0,
+                AlbumRelatedInfo = w.AlbumParent != null ? new Business.DataTransferObjects.Mobile.V2.AlbumProfileRelatedMobileModel
+                {
+                    ProfileID = w.AlbumParent.ProfileID,
+                    AlbumID = w.AlbumParentID.Value,
+                    ProfileFullname = w.AlbumParent.Profile.ProfileFullname,
+                    AlbumCover = w.AlbumParent.AlbumCover,
+                    AlbumPublishDate = w.AlbumDatePublish,
+                    AlbumTitle = w.AlbumParent.AlbumName,
+                    DeviceWidth = DeviceWidth,
+                    ContentDimension = w.AlbumParent.Contents.OrderBy(m => m.ContentID).FirstOrDefault().ContentDimension
+                } : null,
                 isFelt = w.ProfileActivities.Any(m => m.ProfileID == ProfileID),
-                isSubscribed = w.Profile.Connections.Any(m=> m.RequestedProfileID == ProfileID),
+                isSubscribed = w.Profile.Connections.Any(m => m.RequestedProfileID == ProfileID),
                 Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
                 {
                     ContentLike = c.ContentLike,
@@ -235,14 +269,76 @@ namespace Gorgias.BusinessLayer.Facades
                     ContentTypeName = c.ContentType1.ContentTypeName,
                     DeviceWidth = DeviceWidth,
                 }).ToList()
-            };            
+            };
+
+            return result;
+        }
+
+        public Business.DataTransferObjects.Mobile.V2.AlbumMobileModel getAlbum(int AlbumID, int ProfileID, int DeviceWidth, Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel Activity)
+        {
+            Album w = DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2Mobile(AlbumID, ProfileID);
+
+            //Add ProfileID as Viewer in ProfileActivity ;)
+
+            new ProfileActivityFacade().Insert(new Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel { ActivityTypeID = 14, AlbumID = AlbumID, ProfileActivityCount = 1, ProfileActivityIsFirst = Activity.ProfileActivityIsFirst, ProfileID = ProfileID, Share = Activity.Share, Location = "" });
+
+            Business.DataTransferObjects.Mobile.V2.AlbumMobileModel result = new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
+            {
+                ProfileID = w.ProfileID,
+                AlbumID = w.AlbumID,
+                AlbumCover = w.AlbumCover,
+                AlbumDateCreated = w.AlbumDateCreated,
+                AlbumName = w.AlbumName,
+                AlbumAvailability = w.AlbumAvailability,
+                AlbumDateExpire = w.AlbumDateExpire,
+                AlbumDatePublish = w.AlbumDatePublish,
+                CategoryName = w.Category.CategoryName,
+                CategoryID = w.CategoryID,
+                //AlbumAvailabilityName = w.AlbumType.AlbumTypeName,
+                AlbumLike = w.Contents.Sum(m => m.ContentLike),
+                AlbumContents = w.Contents.Count,
+                AlbumComments = w.Contents.Sum(m => m.Comments.Count),
+                AlbumHasComment = w.AlbumHasComment,
+                AlbumView = w.AlbumView,
+                AlbumRepostRequest = w.AlbumRepostRequest,
+                AlbumRepostValue = w.AlbumRepostValue,
+                AlbumParentID = w.AlbumParentID,
+                AlbumParentProfileID = w.AlbumParent != null ? w.AlbumParent.ProfileID : 0,
+                AlbumRelatedInfo = w.AlbumParent != null ? new Business.DataTransferObjects.Mobile.V2.AlbumProfileRelatedMobileModel
+                {
+                    ProfileID = w.AlbumParent.ProfileID,
+                    AlbumID = w.AlbumParentID.Value,
+                    ProfileFullname = w.AlbumParent.Profile.ProfileFullname,
+                    AlbumCover = w.AlbumParent.AlbumCover,
+                    AlbumPublishDate = w.AlbumDatePublish,
+                    AlbumTitle = w.AlbumParent.AlbumName,
+                    DeviceWidth = DeviceWidth,
+                    ContentDimension = w.AlbumParent.Contents.OrderBy(m => m.ContentID).FirstOrDefault().ContentDimension
+                } : null,
+                isFelt = w.ProfileActivities.Any(m => m.ProfileID == ProfileID),
+                isSubscribed = w.Profile.Connections.Any(m => m.RequestedProfileID == ProfileID),
+                Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
+                {
+                    ContentLike = c.ContentLike,
+                    ContentComments = c.Comments.Count,
+                    TopComments = c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname, CommentID = m.CommentID }).ToList(),
+                    ContentURL = c.ContentURL,
+                    ContentID = c.ContentID,
+                    ContentTitle = c.ContentTitle,
+                    ContentDimension = c.ContentDimension,
+                    ContentTypeID = c.ContentType,
+                    ContentTypeExpression = c.ContentType1.ContentTypeExpression,
+                    ContentTypeName = c.ContentType1.ContentTypeName,
+                    DeviceWidth = DeviceWidth,
+                }).ToList()
+            };
 
             return result;
         }
 
         public Business.DataTransferObjects.Mobile.V2.AlbumUpdateMobileModel GetAlbumV2(int AlbumID)
         {
-            return DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2(AlbumID);            
+            return DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2(AlbumID);
         }
 
         //V2 End
@@ -348,7 +444,6 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
-
         public PaginationSet<AlbumDTO> GetAlbumsByCategoryID(int CategoryID, int page, int pagesize)
         {
 
@@ -369,6 +464,7 @@ namespace Gorgias.BusinessLayer.Facades
 
             return result;
         }
+
         public DTResult<AlbumDTO> FilterResultByProfileID(string search, string sortOrder, int start, int length, List<string> columnFilters, DTParameters param, int ProfileID)
         {
             var basequery = DataLayer.DataLayerFacade.AlbumRepository().GetAlbumsAllAsQueryable().Where(m => m.ProfileID == ProfileID);
@@ -393,7 +489,6 @@ namespace Gorgias.BusinessLayer.Facades
             };
             return result;
         }
-
 
         public PaginationSet<AlbumDTO> GetAlbumsByProfileID(int ProfileID, int page, int pagesize)
         {
@@ -514,9 +609,14 @@ namespace Gorgias.BusinessLayer.Facades
             }
         }
 
-        public AlbumDTO InsertV2Topic(Business.DataTransferObjects.Mobile.V2.AlbumUpdateMobileModel objAlbum)
+        public AlbumDTO InsertV2Topic(Business.DataTransferObjects.Mobile.V2.AlbumUpdateV2MobileModel objAlbum)
         {
-            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumDatePublish, objAlbum.AlbumAvailability, objAlbum.AlbumHasComment, objAlbum.AlbumReadingLanguageCode, objAlbum.AlbumRepostValue, objAlbum.AlbumRepostRequest, objAlbum.AlbumRepostAttempt, objAlbum.AlbumPrice, objAlbum.AlbumIsTokenAvailable, objAlbum.AlbumPriceToken, objAlbum.ContentRatingID, objAlbum.Contents, objAlbum.Topic));
+            if (!objAlbum.AlbumDatePublish.HasValue)
+            {
+                objAlbum.AlbumDatePublish = DateTime.UtcNow;
+            }
+
+            AlbumDTO result = Mapper.Map<AlbumDTO>(DataLayer.DataLayerFacade.AlbumRepository().Insert(objAlbum.AlbumName, objAlbum.AlbumStatus, objAlbum.AlbumCover, objAlbum.CategoryID, objAlbum.ProfileID, objAlbum.AlbumDatePublish.Value, objAlbum.AlbumAvailability, objAlbum.AlbumHasComment, objAlbum.AlbumReadingLanguageCode, objAlbum.AlbumRepostValue, objAlbum.AlbumRepostRequest, objAlbum.AlbumRepostAttempt, objAlbum.AlbumPrice, objAlbum.AlbumIsTokenAvailable, objAlbum.AlbumPriceToken, objAlbum.ContentRatingID, objAlbum.Contents, objAlbum.Topic, objAlbum.AlbumParentID));
 
             if (result != null)
             {
@@ -536,6 +636,11 @@ namespace Gorgias.BusinessLayer.Facades
         public bool RepostAlbum(int AlbumID)
         {
             return DataLayer.DataLayerFacade.AlbumRepository().UpdateRepostAlbum(AlbumID);
+        }
+
+        public bool RequestRepostAlbum(int AlbumID)
+        {
+            return DataLayer.DataLayerFacade.AlbumRepository().UpdateRequestRepostAlbum(AlbumID);
         }
 
     }

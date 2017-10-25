@@ -203,14 +203,16 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetCitiesAsQueryable(string searchKey, string languageCode)
         {
+            //KeyName = w.CityName + ", " + w.Country.CountryName,
+            //Multilanguage = w.CityChilds.Any(m => m.CityLanguageCode == languageCode) ? w.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName + ", " + w.Country.CountryChilds.Where(m => m.CountryLanguageCode == languageCode).FirstOrDefault().CountryName : null
             return (from w in context.Cities
-                    where w.CityStatus == true && w.CityParentID == null && w.CityName.ToLower().Contains(searchKey.ToLower()) || w.CityChilds.Any(m=> m.CityName.ToLower().Contains(searchKey))
+                    where w.CityStatus == true && w.CityParentID == null && (w.CityName.ToLower().Contains(searchKey.ToLower()) || w.CityChilds.Any(m=> m.CityName.ToLower().Contains(searchKey)))
                     orderby w.CityName ascending
                     select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
                     {
-                        KeyName = w.CityName + ", " + w.Country.CountryName,
+                        KeyName = w.CityName,
                         KeyID = w.CityID,
-                        Multilanguage = w.CityChilds.Any(m => m.CityLanguageCode == languageCode) ? w.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName + ", " + w.Country.CountryChilds.Where(m => m.CountryLanguageCode == languageCode).FirstOrDefault().CountryName : null
+                        Multilanguage = w.CityChilds.Any(m => m.CityLanguageCode == languageCode) ? w.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName : null
                     }).AsQueryable();
         }
 

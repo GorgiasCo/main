@@ -116,14 +116,26 @@ namespace Gorgias.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Register(Business.DataTransferObjects.Mobile.V2.RegisterProfileMobileModel registerProfileMobileModel)
         {
+            Business.DataTransferObjects.Mobile.V2.RegisterResultMobileModel finalResult = new Business.DataTransferObjects.Mobile.V2.RegisterResultMobileModel();
             bool resultProfile;
             if (registerProfileMobileModel.isFirstRegistration)
             {
-                resultProfile = DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID, registerProfileMobileModel.ProfileBirthday, registerProfileMobileModel.ProfileLanguageApp);
+                resultProfile = DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.IndustryName, registerProfileMobileModel.CityID, registerProfileMobileModel.ProfileBirthday, registerProfileMobileModel.ProfileLanguageApp);
+                finalResult.Result = resultProfile;
             }
             else
             {
-                resultProfile = DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileEmail); 
+                int result = DataLayer.DataLayerFacade.ProfileRepository().UpdateByUserID(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileEmail);
+                if (result > 0)
+                {
+                    resultProfile = true;
+                    finalResult.Result = resultProfile;
+                    finalResult.UserID = result;
+                } else
+                {
+                    resultProfile = false;
+                    finalResult.Result = resultProfile;
+                }
             }
 
             if(resultProfile && !registerProfileMobileModel.isFirstRegistration)
@@ -137,7 +149,7 @@ namespace Gorgias.Controllers
                     return errorResult;
                 }
             }            
-            return Ok(resultProfile);
+            return Ok(finalResult);
         }
 
         // GET api/Account/ExternalLogin

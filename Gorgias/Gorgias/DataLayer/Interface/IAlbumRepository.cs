@@ -11,10 +11,11 @@ namespace Gorgias.DataLayer.Interface
         //V2 Begin ;)
         Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents);
         Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, int? AlbumParentID);
-        Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, Business.DataTransferObjects.Mobile.V2.CategoryNewMobileModel Topic);
+        Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, Business.DataTransferObjects.Mobile.V2.CategoryNewMobileModel Topic, int? AlbumParentID);
         bool Update(int AlbumID, String AlbumName, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, int AlbumView, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID);
         bool UpdatePublishAlbum(int AlbumID);
         bool UpdateRepostAlbum(int AlbumID);
+        bool UpdateRequestRepostAlbum(int AlbumID);
         //V2 End ;)
         Album Insert(String AlbumName, DateTime AlbumDateCreated, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID);
         Album Insert(String AlbumName, DateTime AlbumDateCreated, DateTime AlbumDatePublish, int AlbumAvailability, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, bool? AlbumHasComment);
@@ -27,6 +28,7 @@ namespace Gorgias.DataLayer.Interface
         Album GetAlbum(int AlbumID);
         Business.DataTransferObjects.Mobile.V2.AlbumUpdateMobileModel GetAlbumV2(int AlbumID);
         Album GetAlbumV2Mobile(int AlbumID, int ProfileID);
+        int? GetAlbumViewsV2Mobile(int ProfileID);
 
         //List
         List<Album> GetAlbumsAll();
@@ -50,6 +52,7 @@ namespace Gorgias.DataLayer.Interface
 
         IQueryable<Album> GetV2AlbumByCategoryAsQueryable();
         IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID);
+        IQueryable<Album> GetV2AlbumByCategoryForMicroAppAsQueryable(int CategoryID);
         IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID, int ProfileID);
 
         IList<Business.DataTransferObjects.Mobile.AlbumMobileAdminModel> GetAdminAlbumContentsAsQueryable(int ProfileID, int page = 1, int pageSize = 7, int contentSize = 6);

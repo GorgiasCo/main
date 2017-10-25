@@ -174,7 +174,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetLanguagesAsQueryableByKeyValue()
         {
-            return (from w in context.Languages where w.LanguageStatus == true orderby w.LanguageOrder ascending, w.LanguageName ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { KeyName = w.LanguageName, KeyID = w.LanguageID }).AsQueryable();
+            return (from w in context.Languages where w.LanguageStatus == true orderby w.LanguageOrder ascending, w.LanguageName ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { KeyName = w.LanguageName, KeyID = w.LanguageID, KeyExtra = w.LanguageCode }).AsQueryable();
         }
         //IQueryable Pagings
         public IQueryable<Language> GetLanguagesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)

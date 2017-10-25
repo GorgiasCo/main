@@ -23,6 +23,12 @@ namespace Gorgias.BusinessLayer.Facades
     public class ProfileFacade
     {
         //V2 Begin
+        public Business.DataTransferObjects.Mobile.V2.NewUserRegisterMobileModel createNewMobileUser()
+        {
+            Profile registeredUser = DataLayer.DataLayerFacade.ProfileRepository().Insert();
+            return new Business.DataTransferObjects.Mobile.V2.NewUserRegisterMobileModel { ProfileID = registeredUser.ProfileID, ProfileFullname = registeredUser.ProfileFullname };
+        }
+
         public string getProfileFullname(int ProfileID)
         {
             return DataLayer.DataLayerFacade.ProfileRepository().GetProfileFullname(ProfileID);

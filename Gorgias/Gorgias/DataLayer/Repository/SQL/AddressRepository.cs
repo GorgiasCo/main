@@ -122,6 +122,25 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public bool DeleteByProfileID(int ProfileID)
+        {
+            Profile obj = new Profile();
+            obj = (from w in context.Profiles.Include("Addresses") where w.ProfileID == ProfileID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Profiles.Attach(obj);
+
+                obj.Addresses.Clear();
+
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Address GetAddress(int AddressID)
         {
             return (from w in context.Addresses where w.AddressID == AddressID select w).FirstOrDefault();

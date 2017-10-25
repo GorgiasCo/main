@@ -10,6 +10,9 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public int AlbumID { get; set; }
         public int ProfileID { get; set; }
         public string AlbumName { get; set; }
+        public int? AlbumParentID { get; set; }
+        public int? AlbumParentProfileID { get; set; }
+        public AlbumProfileRelatedMobileModel AlbumRelatedInfo { get; set; }
 
         //Album Statistic Section
         public int AlbumContents { get; set; }
@@ -47,6 +50,14 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         {
             get
             {
+                return Infrastruture.Core.DateToMoment.TimeLeftTitleOnly(AlbumDateExpire);
+            }
+        }
+
+        public string AlbumExpiringValue
+        {
+            get
+            {
                 return Infrastruture.Core.DateToMoment.TimeLeft(AlbumDateExpire);
             }
         }
@@ -56,6 +67,14 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
             get
             {
                 return !isValidate ? true : false;
+            }
+        }
+
+        public bool canUpcoming
+        {
+            get
+            {
+                return AlbumDatePublish > DateTime.UtcNow ? true : false;
             }
         }
 

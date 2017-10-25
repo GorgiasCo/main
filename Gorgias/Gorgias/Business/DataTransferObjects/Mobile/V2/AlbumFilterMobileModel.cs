@@ -12,5 +12,8 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public int ProfileID { get; set; }
         public int Page { get; set; }
         public int Size { get; set; }
+        public string[] Languages { get; set; }
+        public bool? isMicroApp { get; set; }
+        public int? MicroAppProfileID { get; set; }
     }
 }

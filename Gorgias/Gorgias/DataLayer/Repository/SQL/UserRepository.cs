@@ -178,7 +178,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public User GetUserForAdministration(string UserEmail)
         {
-            return (from w in context.Users.Include("UserProfiles.Profile") where w.UserEmail == UserEmail && w.UserStatus == true select w).FirstOrDefault();
+            return (from w in context.Users.Include("UserProfiles.Profile") where w.UserEmail.ToLower() == UserEmail.ToLower() && w.UserStatus == true select w).FirstOrDefault();
         }
 
         public bool GetUserByProfile(int UserID, int ProfileID)

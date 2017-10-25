@@ -149,7 +149,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         //V2 ;)
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetAlbumTypesAllAsQueryableByKeyValue(bool AlbumTypeStatus)
         {
-            return (from w in context.AlbumTypes where w.AlbumTypeStatus == AlbumTypeStatus orderby w.AlbumTypeID ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { KeyID = w.AlbumTypeID, KeyName = w.AlbumTypeName }).AsQueryable();
+            return (from w in context.AlbumTypes where w.AlbumTypeStatus == AlbumTypeStatus && w.AlbumTypeID != 0 orderby w.AlbumTypeID ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { KeyID = w.AlbumTypeID, KeyName = w.AlbumTypeName }).AsQueryable();
         }
         //End V2
         public IQueryable<AlbumType> GetAlbumTypesAllAsQueryable(bool AlbumTypeStatus)

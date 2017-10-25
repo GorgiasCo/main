@@ -81,6 +81,12 @@ namespace Gorgias.DataLayer.Repository.SQL
 
                 obj.Share = new Share{ ProfileActivityShare = ProfileActivityShare };
 
+                ProfileActivity shareActivity = (from x in context.ProfileActivities where x.Share.ProfileActivityShare.Equals(ProfileActivityShare) select x).FirstOrDefault();
+                if(shareActivity != null)
+                {
+                    obj.ProfileActivityParent = shareActivity;
+                }
+
                 context.ProfileActivities.Add(obj);
                 context.SaveChanges();
                 return obj;

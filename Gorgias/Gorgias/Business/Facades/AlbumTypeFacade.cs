@@ -23,6 +23,47 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.AlbumTypeRepository().GetAlbumTypesAllAsQueryableByKeyValue(true);
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getAvailabilities(int ProfileID, bool ProfileIsConfirmed)
+        {
+            IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> result = DataLayer.DataLayerFacade.AlbumTypeRepository().GetAlbumTypesAllAsQueryableByKeyValue(true);
+            IList<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> newResult = new List<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel>();
+            if (!ProfileIsConfirmed)
+            {
+                int? totalView = Facade.AlbumFacade().getAlbumTotalViewsByProfileID(ProfileID);
+                int interval = 8;
+
+                if (!totalView.HasValue)
+                {
+                    totalView = 0;
+                }
+
+                foreach (Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel obj in result)
+                {
+                    if(obj.KeyID != 1)
+                    {
+                        int acceptedView = obj.KeyID * 100 * interval;
+                        int currentResult = totalView.Value > 0 ? totalView.Value - acceptedView : -1;
+                        //acceptedView.ToString() + ", " +
+                        obj.KeyExtra = currentResult >= 0 ? null : (totalView >= 0 ? (acceptedView - totalView).ToString() : acceptedView.ToString());
+                        if (currentResult == -1)
+                        {
+                            totalView = 0;
+                        }
+                        else
+                        {
+                            totalView = currentResult;
+                        }
+                    }
+                    newResult.Add(obj);
+                    interval += 2;
+                }
+            } else
+            {
+                newResult = result.ToList();
+            }            
+            return newResult.AsQueryable();
+        }
+
         public AlbumTypeDTO GetAlbumType(int AlbumTypeID)
         {
             AlbumTypeDTO result = Mapper.Map<AlbumTypeDTO>(DataLayer.DataLayerFacade.AlbumTypeRepository().GetAlbumType(AlbumTypeID));

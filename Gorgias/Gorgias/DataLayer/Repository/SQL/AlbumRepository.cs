@@ -281,7 +281,25 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.AlbumDatePublish = DateTime.UtcNow;
                 obj.AlbumDateExpire = obj.AlbumDatePublish.AddMinutes(obj.AlbumAvailability);
                 obj.AlbumRepostAttempt = obj.AlbumRepostAttempt + 1;
-                obj.AlbumRepostRequest = 0; 
+                obj.AlbumRepostRequest = 0;
+                context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateRequestRepostAlbum(int AlbumID)
+        {
+            Album obj = new Album();
+            obj = (from w in context.Albums where w.AlbumID == AlbumID select w).FirstOrDefault();
+            if (obj != null)
+            {
+                context.Albums.Attach(obj);
+
+                obj.AlbumRepostRequest = obj.AlbumRepostRequest + 1;
                 context.SaveChanges();
                 return true;
             }
@@ -306,11 +324,12 @@ namespace Gorgias.DataLayer.Repository.SQL
                 if (AlbumStatus)
                 {
                     obj.AlbumDatePublish = obj.AlbumDateCreated;
-                } else
+                }
+                else
                 {
                     obj.AlbumDatePublish = AlbumDatePublish;
                 }
-                
+
                 if (AlbumHasComment.HasValue)
                 {
                     obj.AlbumHasComment = AlbumHasComment.Value;
@@ -473,7 +492,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         }
 
 
-        public Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, Business.DataTransferObjects.Mobile.V2.CategoryNewMobileModel Topic)
+        public Album Insert(String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, Business.DataTransferObjects.Mobile.V2.CategoryNewMobileModel Topic, int? AlbumParentID)
         {
             try
             {
@@ -486,14 +505,16 @@ namespace Gorgias.DataLayer.Repository.SQL
                 obj.CategoryID = CategoryID;
                 obj.ProfileID = ProfileID;
 
-                if (AlbumStatus)
-                {
-                    obj.AlbumDatePublish = obj.AlbumDateCreated;
-                }
-                else
-                {
-                    obj.AlbumDatePublish = AlbumDatePublish;
-                }
+                obj.AlbumDatePublish = AlbumDatePublish;
+
+                //if (AlbumStatus)
+                //{
+                //    obj.AlbumDatePublish = obj.AlbumDateCreated;
+                //}
+                //else
+                //{
+                //    obj.AlbumDatePublish = AlbumDatePublish;
+                //}
 
                 if (AlbumHasComment.HasValue)
                 {
@@ -515,12 +536,18 @@ namespace Gorgias.DataLayer.Repository.SQL
                     obj.AlbumDateExpire = obj.AlbumDateCreated.AddMonths(48);
                 }
 
+                if (AlbumParentID.HasValue)
+                {
+                    obj.AlbumParentID = AlbumParentID.Value;
+                }
+
                 //obj.AlbumDatePublish = obj.AlbumDateCreated;
                 obj.AlbumAvailability = AlbumAvailability;
 
                 //obj.AlbumHasComment = AlbumHasComment;
                 obj.AlbumReadingLanguageCode = AlbumReadingLanguageCode;
-                obj.AlbumRepostValue = AlbumRepostValue.HasValue ? AlbumRepostValue.Value : 500;
+                //Repost value * 100 as logic
+                obj.AlbumRepostValue = AlbumAvailability * 100;
                 obj.AlbumRepostRequest = AlbumRepostRequest.HasValue ? AlbumRepostRequest.Value : 0;
                 obj.AlbumRepostAttempt = AlbumRepostAttempt.HasValue ? AlbumRepostAttempt.Value : 0;
                 obj.AlbumPrice = AlbumPrice.HasValue ? AlbumPrice.Value : 0;
@@ -552,15 +579,16 @@ namespace Gorgias.DataLayer.Repository.SQL
                     });
                 }
 
-                if(Topic != null)
+                if (Topic != null)
                 {
                     if (Topic.CategoryID.HasValue)
                     {
                         Category resultCategory = (from x in context.Categories where x.CategoryID == Topic.CategoryID select x).First();
                         obj.Categories.Add(resultCategory);
-                    } else
+                    }
+                    else
                     {
-                        obj.Categories.Add(new Category { CategoryName = Topic.CategoryName, CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode });
+                        obj.Categories.Add(new Category { CategoryName = Topic.CategoryName, CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 11, CategoryOrder = 0 });
                     }
                 }
 
@@ -673,7 +701,23 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
         {
             Update(AlbumID);
-            return (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
+            return (from w in context.Albums.Include("AlbumParent.Profile").Include("AlbumParent.Contents").Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
+        }
+
+        public int? GetAlbumViewsV2Mobile(int ProfileID)
+        {
+            //int? result;
+
+            return (from w in context.Albums where w.ProfileID == ProfileID && w.AlbumIsDeleted == false select w).Sum(m => (int?)m.AlbumView);
+
+            //try
+            //{
+            //    result = (from w in context.Albums where w.ProfileID == ProfileID && w.AlbumIsDeleted == false select w).Sum(m => (int?)m.AlbumView);
+            //} catch (ArgumentNullException ex)
+            //{
+            //    result = 0;
+            //}            
+            //return result;
         }
 
         //Lists
@@ -767,6 +811,13 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             //var currentDate = DateTime.UtcNow;
             var result = (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.CategoryID == CategoryID select w).AsQueryable();
+            return result;
+        }
+
+        public IQueryable<Album> GetV2AlbumByCategoryForMicroAppAsQueryable(int CategoryID)
+        {
+            //var currentDate = DateTime.UtcNow;
+            var result = (from w in context.Albums.Include("Contents.Comments.Profile").Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false && (w.CategoryID == CategoryID || w.Categories.Any(m => m.CategoryID == CategoryID)) select w).AsQueryable();
             return result;
         }
 

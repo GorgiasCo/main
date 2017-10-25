@@ -13,6 +13,7 @@ namespace Gorgias.DataLayer.Interface
         Address Insert(String AddressName, Boolean AddressStatus, String AddressTel, String AddressFax, String AddressZipCode, String AddressAddress, String AddressEmail, String AddressImage, int CityID, int ProfileID, int AddressTypeID, DbGeography AddressLocation);
         bool Update(int AddressID, String AddressName, Boolean AddressStatus, String AddressTel, String AddressFax, String AddressZipCode, String AddressAddress, String AddressEmail, String AddressImage, int CityID, int ProfileID, int AddressTypeID, DbGeography AddressLocation);
         bool Delete(int AddressID);
+        bool DeleteByProfileID(int ProfileID);
 
         Address GetAddress(int AddressID);
 

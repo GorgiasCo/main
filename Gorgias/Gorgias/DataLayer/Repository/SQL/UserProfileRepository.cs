@@ -172,7 +172,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.UserProfiles
                     where w.UserID == UserID
-                    orderby w.ProfileID, w.UserRoleID, w.UserID descending
+                    orderby w.UserRoleID ascending
                     select new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
                     {
                         ProfileID = w.ProfileID,

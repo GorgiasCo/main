@@ -284,7 +284,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         //V2
         public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAllAsQueryable(string languageCode)
         {
-            return (from w in context.Categories where w.CategoryParentID != null orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType }).AsQueryable();
+            return (from w in context.Categories where w.CategoryParentID == 11 || w.CategoryParentID == 13 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType }).AsQueryable();
         }
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesAllAsQueryableKeyValue(int CategoryParentID, string languageCode)
@@ -299,12 +299,12 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAvailableByProfileIDAsQueryable(int ProfileID, string languageCode)
         {
-            return (from w in context.Categories where w.ProfileID == ProfileID && w.Albums.Count > 0 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID }).AsQueryable();
+            return (from w in context.Categories where ((w.ProfileID == ProfileID && w.AlbumsTopics.Count > 0) || (w.Albums.Any(m=> m.ProfileID == ProfileID)) && w.CategoryID !=  29 && w.CategoryDescription == "en") || w.CategoryParentID == 85 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType }).AsQueryable();
         }
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesBySearchAsQueryableKeyValue(string CategorySearch)
         {
-            return (from w in context.Categories where w.CategoryName.Contains(CategorySearch) && w.CategoryType == 1 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.CategoryName, KeyName = w.CategoryName, KeyID = w.CategoryID }).AsQueryable();
+            return (from w in context.Categories where w.CategoryName.Contains(CategorySearch) && w.CategoryType == 1 && w.CategoryParentID == null && w.ProfileID != null orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel { Multilanguage = w.CategoryName, KeyName = w.CategoryName }).Distinct().AsQueryable();
         }
 
         //Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel

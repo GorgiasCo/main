@@ -26,5 +26,18 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         public bool? ProfileIsConfirmed { get; set; }
         public bool? ProfileIsPeople { get; set; }
         public string ProfileImage { get; set; }
+        public string ProfileURL { get; set; }
+        public int UserID { get; set; }
+
+        public string ProfileBirthdayTitle
+        {
+            get
+            {
+                return ProfileBirthday.HasValue ? ProfileBirthday.Value.ToString("MMMM dd, yyyy") : null;
+            }
+        }
+
+        //Manage Joint Accounts ;)
+        public IEnumerable<UserProfileMobileModel> Accounts { get; set; }
     }
 }

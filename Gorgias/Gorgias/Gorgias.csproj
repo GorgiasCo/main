@@ -375,7 +375,9 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ActivityTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumFilterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumProfileRelatedMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumUpdateMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\AlbumUpdateV2MobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CategoryNewMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\CityMobileModel.cs" />
@@ -392,6 +394,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginAttempt.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\LoginProfileMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\MiniProfileMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\NewUserRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\PhoneConfigMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileActivityUpdateMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingLanguageMobileModel.cs" />
@@ -403,6 +406,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileTypeMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\QuoteMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\RegisterProfileMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\RegisterResultMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\SettingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\SettingProfileMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\UserProfileMobileModel.cs" />

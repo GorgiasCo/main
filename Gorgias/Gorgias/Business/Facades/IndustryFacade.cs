@@ -29,6 +29,11 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAsKeyValueQueryable(languageCode);
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getIndustriesByKeywordByKeyValue(string keyword)
+        {
+            return DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesByKeywordAsKeyValueQueryable(keyword);
+        }
+
         public IQueryable<IndustryDTO> getIndustriesByLanguageCode(string languageCode)
         {
             return DataLayer.DataLayerFacade.IndustryRepository().GetIndustriesAllAsQueryable(languageCode);

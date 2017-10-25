@@ -37,7 +37,8 @@ namespace Gorgias.BusinessLayer.Facades
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> getCategoriesAvailableByProfile(int ProfileID, string languageCode)
         {
-            return DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesAvailableByProfileIDAsQueryable(ProfileID, languageCode);
+            IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel>  result = DataLayer.DataLayerFacade.CategoryRepository().GetV2CategoriesAvailableByProfileIDAsQueryable(ProfileID, languageCode);
+            return result;
         }
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getCategoriesBySearch(string categorySearch)

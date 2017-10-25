@@ -89,7 +89,7 @@ namespace Gorgias.Providers
             string userRole = "user";
             using (AuthRepository _repo = new AuthRepository())
             {
-                IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+                IdentityUser user = await _repo.FindUser(context.UserName.ToLower(), context.Password);
                 //IdentityUserRole role = user.Roles.FirstOrDefault();
                 //if (role != null)
                 //{

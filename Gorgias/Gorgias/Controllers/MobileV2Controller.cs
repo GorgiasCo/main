@@ -72,6 +72,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Album/Request/Repost/{AlbumID}", Name = "GetV2MobileAlbumRequestToRepost")]
+        [HttpGet]
+        public HttpResponseMessage RequestRepostAlbum(HttpRequestMessage request, int AlbumID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.AlbumFacade().RequestRepostAlbum(AlbumID);
+                if (!result)
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotFound, false);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Album/Publish/Upcoming/{AlbumID}", Name = "GetV2MobileAlbumPublishUpcoming")]
         [HttpGet]
         public HttpResponseMessage PublishAlbum(HttpRequestMessage request, int AlbumID)
@@ -248,6 +268,27 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Industries/{Keyword}", Name = "GetV2MobileIndustriesByKeyword")]
+        [HttpGet]
+        public HttpResponseMessage GetIndustriesByKeyword(HttpRequestMessage request, string Keyword)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.IndustryFacade().getIndustriesByKeywordByKeyValue(Keyword);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Cities/{searchKey}", Name = "GetV2MobileCitiesByCountryID")]
         [HttpGet]
         public HttpResponseMessage GetCities(HttpRequestMessage request, string searchKey)
@@ -334,16 +375,16 @@ namespace Gorgias.Controllers
             });
         }
 
-        [Route("Mobile/V2/Story/Settings/{ProfileID}/{CategoryParentID}", Name = "GetV2MobileStorySettingsNima")]
+        [Route("Mobile/V2/Story/Settings/{ProfileID}/{CategoryParentID}/{ProfileIsConfirmed}", Name = "GetV2MobileStorySettingsNima")]
         [HttpGet]
-        public HttpResponseMessage GetStorySettings(HttpRequestMessage request, int ProfileID, int CategoryParentID)
+        public HttpResponseMessage GetStorySettings(HttpRequestMessage request, int ProfileID, int CategoryParentID, bool ProfileIsConfirmed)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
                 var headerLanguage = request.Headers.AcceptLanguage;
                 //IEnumerable<ContentRatingMobileModel> result = BusinessLayer.Facades.Facade.ContentRatingFacade().getContentRatings(headerLanguage.First().Value);
-                IEnumerable<SettingMobileModel> result = BusinessLayer.Facades.Facade.MobileFacade().getSettings(ProfileID, headerLanguage.First().Value, CategoryParentID);
+                IEnumerable<SettingMobileModel> result = BusinessLayer.Facades.Facade.MobileFacade().getSettings(ProfileID, headerLanguage.First().Value, CategoryParentID, ProfileIsConfirmed);
 
                 if (result == null)
                 {
@@ -482,6 +523,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Album/{AlbumID}/{ProfileID}/{DeviceWidth}", Name = "GetV2MobileAlbumDetailWithActivity")]
+        [HttpPost]
+        public HttpResponseMessage GetAlbum(HttpRequestMessage request, int AlbumID, int ProfileID, int DeviceWidth, ProfileActivityUpdateMobileModel Activity)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                AlbumMobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbum(AlbumID, ProfileID, DeviceWidth, Activity);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<AlbumMobileModel>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Profile/Mini/{ProfileID}/{RequestedProfileID}", Name = "GetV2MobileMiniProfile")]
         [HttpGet]
         public HttpResponseMessage GetMiniProfile(HttpRequestMessage request, int ProfileID, int RequestedProfileID)
@@ -559,6 +620,27 @@ namespace Gorgias.Controllers
                 else
                 {
                     response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/Account/Setting/{ProfileID}", Name = "GetProfileAccountSettingMobileV2")]
+        [HttpGet]
+        public HttpResponseMessage ProfileAccountSetting(HttpRequestMessage request, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                LoginProfileMobileModel result = BusinessLayer.Facades.Facade.ProfileFacade().getProfileSetting(ProfileID);
+
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<LoginProfileMobileModel>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -699,14 +781,16 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                int result = BusinessLayer.Facades.Facade.WebFacade().createNewMobileUser();
-                if (result == 0)
+                //int result = BusinessLayer.Facades.Facade.WebFacade().createNewMobileUser();
+                NewUserRegisterMobileModel result = BusinessLayer.Facades.Facade.ProfileFacade().createNewMobileUser();
+                //NewUserRegisterMobileModel
+                if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<int>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<NewUserRegisterMobileModel>(HttpStatusCode.OK, result);
                 }
                 return response;
             });
@@ -870,7 +954,7 @@ namespace Gorgias.Controllers
                 }
                 else
                 {
-                    if (result.ProfileEmail.Equals(loginAttempt.ProfileEmail))
+                    if (result.ProfileEmail.ToLower().Equals(loginAttempt.ProfileEmail.ToLower()))
                     {
                         result.isValid = true;
                     }
@@ -1017,7 +1101,7 @@ namespace Gorgias.Controllers
 
         [Route("Mobile/V2/Album/New/Topic", Name = "MobileV2AlbumInsertWithNewTopic")]
         [HttpPost]
-        public HttpResponseMessage AlbumWithTopicInsert(HttpRequestMessage request, AlbumUpdateMobileModel objAlbum)
+        public HttpResponseMessage AlbumWithTopicInsert(HttpRequestMessage request, AlbumUpdateV2MobileModel objAlbum)
         {
             return CreateHttpResponse(request, () =>
             {
