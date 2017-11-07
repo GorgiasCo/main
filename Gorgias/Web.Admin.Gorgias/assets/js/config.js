@@ -4,8 +4,8 @@
  * ============================================================ */
 
 //var serviceBase = 'https://gorgiasapi.azurewebsites.net/';
-//var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
-var serviceBase = 'http://localhost:43587/';
+var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
+//var serviceBase = 'http://localhost:43587/';
 //var serviceBase = 'http://gorgiasapp-v2.azurewebsites.net/';
 //var serviceBase = 'http://apiigorgias.azurewebsites.net/';
 //var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
@@ -804,6 +804,24 @@ angular.module('gorgiasapp')
                         }]
                     }
                 })
+                 .state('app.forms.addnewalbum', {
+                     url: '/album/new',
+                     templateUrl: 'tpl/admin/album/addnewalbum.html',
+                     controller: 'addNewAlbumController',
+                     resolve: {
+                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                             return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone'
+                             ], {
+                                 insertBefore: '#lazyload_placeholder'
+                             })
+                                 .then(function () {
+                                     return $ocLazyLoad.load('assets/js/controllers/admin/profile/album/addNewAlbumController.js');
+                                 });
+                         }]
+                     }
+                 })
                 .state('app.forms.agency', {
                     url: '/agency/',
                     templateUrl: 'tpl/admin/viewAdminAgencyProfile.html',

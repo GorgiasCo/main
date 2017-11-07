@@ -134,8 +134,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>myGorgiasModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="countries.csv" />
+    <None Include="country-en.csv" />
+    <None Include="country-hans.csv" />
+    <None Include="country-hant.csv" />
     <None Include="myGorgiasModel.edmx.diagram">
       <DependentUpon>myGorgiasModel.edmx</DependentUpon>
+    </None>
+    <None Include="newCountries.csv" />
+    <None Include="C:\Users\yasser\Desktop\newCountryiesFromCharls.csv">
+      <Link>newCountryiesFromCharls.csv</Link>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -194,6 +202,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gorgias\Gorgias.csproj">
+      <Project>{BAC0709B-A1B3-48DA-BD72-E996A4ED1F0A}</Project>
+      <Name>Gorgias</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

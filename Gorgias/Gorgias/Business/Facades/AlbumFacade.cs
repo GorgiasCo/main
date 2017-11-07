@@ -223,6 +223,10 @@ namespace Gorgias.BusinessLayer.Facades
             Business.DataTransferObjects.Mobile.V2.AlbumMobileModel result = new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
             {
                 ProfileID = w.ProfileID,
+                ProfileFullname = w.Profile.ProfileFullname,
+                ProfileFullnameEnglish = w.Profile.ProfileFullnameEnglish != null ? w.Profile.ProfileFullnameEnglish : null,
+                ProfileIsConfirmed = w.Profile.ProfileIsConfirmed,
+                ProfileIsPeople = w.Profile.ProfileIsPeople,
                 AlbumID = w.AlbumID,
                 AlbumCover = w.AlbumCover,
                 AlbumDateCreated = w.AlbumDateCreated,
@@ -254,7 +258,7 @@ namespace Gorgias.BusinessLayer.Facades
                     ContentDimension = w.AlbumParent.Contents.OrderBy(m => m.ContentID).FirstOrDefault().ContentDimension
                 } : null,
                 isFelt = w.ProfileActivities.Any(m => m.ProfileID == ProfileID),
-                isSubscribed = w.Profile.Connections.Any(m => m.RequestedProfileID == ProfileID),
+                isSubscribed = w.Profile.Connections.Any(m => m.RequestedProfileID == ProfileID && m.RequestTypeID == 3),
                 Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
                 {
                     ContentLike = c.ContentLike,

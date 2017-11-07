@@ -8,7 +8,13 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
     public class AlbumMobileModel
     {
         public int AlbumID { get; set; }
+
         public int ProfileID { get; set; }
+        public string ProfileFullname { get; set; }
+        public string ProfileFullnameEnglish { get; set; }
+        public bool ProfileIsConfirmed { get; set; }
+        public bool ProfileIsPeople { get; set; }
+
         public string AlbumName { get; set; }
         public int? AlbumParentID { get; set; }
         public int? AlbumParentProfileID { get; set; }
@@ -66,7 +72,19 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         {
             get
             {
-                return !isValidate ? true : false;
+                if (!isValidate)
+                {
+                    if(AlbumRepostValue != 0)
+                    {
+                        return AlbumRepostValue <= AlbumRepostRequest ? true : false;
+                    } else
+                    {
+                        return false;
+                    }
+                } else
+                {
+                    return false;
+                }                
             }
         }
 

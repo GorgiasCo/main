@@ -95,21 +95,54 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public bool Insert(int ProfileID, int RequestedProfileID, int RequestTypeID, bool ConnectionStatus)
         {
-            try
+            Connection resultStayON = (from w in context.Connections where w.ProfileID == ProfileID && w.RequestedProfileID == RequestedProfileID && w.RequestTypeID == 3 select w).FirstOrDefault();
+            if(resultStayON != null)
             {
-                Connection obj = new Connection();
-                obj.ProfileID = ProfileID;
-                obj.RequestedProfileID = RequestedProfileID;
-                obj.RequestTypeID = RequestTypeID;
-                obj.ConnectStatus = ConnectionStatus;
-                obj.ConnectDateCreated = DateTime.UtcNow;
-                context.Connections.Add(obj);
-                context.SaveChanges();
-                return true;
+                try
+                {
+                    Connection obj = new Connection();
+                    obj.ProfileID = ProfileID;
+                    obj.RequestedProfileID = RequestedProfileID;
+                    obj.RequestTypeID = RequestTypeID;
+                    obj.ConnectStatus = ConnectionStatus;
+                    obj.ConnectDateCreated = DateTime.UtcNow;
+
+                    context.Connections.Add(obj);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return false;
+                try
+                {
+                    Connection obj = new Connection();
+                    obj.ProfileID = ProfileID;
+                    obj.RequestedProfileID = RequestedProfileID;
+                    obj.RequestTypeID = RequestTypeID;
+                    obj.ConnectStatus = ConnectionStatus;
+                    obj.ConnectDateCreated = DateTime.UtcNow;
+
+                    Connection objStayOn = new Connection();
+                    objStayOn.ProfileID = ProfileID;
+                    objStayOn.RequestedProfileID = RequestedProfileID;
+                    objStayOn.RequestTypeID = 3;
+                    objStayOn.ConnectStatus = ConnectionStatus;
+                    objStayOn.ConnectDateCreated = DateTime.UtcNow;
+
+                    context.Connections.Add(obj);
+                    context.Connections.Add(objStayOn);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
         }
 

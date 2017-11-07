@@ -19,9 +19,14 @@ namespace Gorgias.BusinessLayer.Facades
     public class CountryFacade
     {
         //V2 Begin ;)
-        public IQueryable<Business.DataTransferObjects.Mobile.V2.CountryMobileModel> getCountries(string languageCode)
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getCountries(string languageCode)
         {
             return DataLayer.DataLayerFacade.CountryRepository().GetCountriesAsQueryable(languageCode);
+        }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> getCountries(string languageCode, string keyword)
+        {
+            return DataLayer.DataLayerFacade.CountryRepository().GetCountriesByKeywordAsQueryable(languageCode, keyword);
         }
 
         public IQueryable<CountryDTO> getCountriesByLanguageCode(string languageCode)

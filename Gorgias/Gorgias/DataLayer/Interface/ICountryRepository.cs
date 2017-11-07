@@ -24,7 +24,8 @@ namespace Gorgias.DataLayer.Interface
         //IQueryable
         IQueryable<Country> GetCountriesAllAsQueryable();
         IQueryable<Business.DataTransferObjects.CountryDTO> GetCountriesAllAsQueryable(string languageCode);
-        IQueryable<Business.DataTransferObjects.Mobile.V2.CountryMobileModel> GetCountriesAsQueryable(string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetCountriesAsQueryable(string languageCode);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetCountriesByKeywordAsQueryable(string languageCode, string keyword);
         IQueryable<Country> GetCountriesAllAsQueryable(bool CountryStatus);
         IQueryable<Country> GetCountriesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);
         IQueryable<Country> GetCountriesAllAsQueryable(bool CountryStatus, int page = 1, int pageSize = 7, string filter = null);

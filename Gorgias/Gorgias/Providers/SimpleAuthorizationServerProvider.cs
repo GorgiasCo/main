@@ -361,6 +361,9 @@ namespace Gorgias.Providers
                         "ProfileBirthday", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.ToString() : " "
                     },
                     {
+                        "ProfileBirthdayTitle", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.Value.ToString("MMMM dd, yyyy") : " "
+                    },
+                    {
                         "ProfileShortDescription", profileSetting.ProfileShortDescription != null ? profileSetting.ProfileShortDescription : " "
                     },
                     {
@@ -373,7 +376,7 @@ namespace Gorgias.Providers
                         "CountryName", profileSetting.CountryName != null ? profileSetting.CountryName.ToString() : " "
                     },
                     {
-                        "CityName", profileSetting.CityName != null ? profileSetting.CityName.ToString() : " "
+                        "CityName", profileSetting.CityName != null ? profileSetting.CityName.ToString() : " " //                        "CityName", profileSetting.CityName != null ? profileSetting.CityName.ToString() : " "
                     }
                 });
                 identity.AddClaim(new Claim("sub", context.UserName));
@@ -447,6 +450,9 @@ namespace Gorgias.Providers
                     },
                     {
                         "ProfileBirthday", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.ToString() : " "
+                    },                    
+                    {
+                        "ProfileBirthdayTitle", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.Value.ToString("MMMM dd, yyyy") : " "
                     },
                     {
                         "ProfileShortDescription", profileSetting.ProfileShortDescription != null ? profileSetting.ProfileShortDescription : " "

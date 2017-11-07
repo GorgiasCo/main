@@ -14,6 +14,7 @@ angular.module('gorgiasapp', [
     'angular-uuid',
     'angular-preload-image',
     'ui.bootstrap',
-    'datatables'
+    'datatables',
+    'angular-owl-carousel-2'
 ]);
  

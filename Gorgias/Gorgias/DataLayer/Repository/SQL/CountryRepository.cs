@@ -191,15 +191,28 @@ namespace Gorgias.DataLayer.Repository.SQL
                     }).AsQueryable();
         }
 
-        public IQueryable<Business.DataTransferObjects.Mobile.V2.CountryMobileModel> GetCountriesAsQueryable(string languageCode)
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetCountriesAsQueryable(string languageCode)
         {
             return (from w in context.Countries
-                    where w.CountryParentID == null && w.CountryStatus == true
+                    where w.CountryParentID == null
                     orderby w.CountryName ascending
-                    select new Business.DataTransferObjects.Mobile.V2.CountryMobileModel
+                    select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
                     {
-                        CountryName = w.CountryName,
-                        CountryID = w.CountryID,
+                        KeyName = w.CountryName,
+                        KeyID = w.CountryID,
+                        Multilanguage = w.CountryChilds.Where(m => m.CountryLanguageCode == languageCode).FirstOrDefault().CountryName
+                    }).AsQueryable();
+        }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetCountriesByKeywordAsQueryable(string languageCode, string keyword)
+        {
+            return (from w in context.Countries
+                    where w.CountryParentID == null && (w.CountryName.ToLower().Contains(keyword.ToLower()) || w.CountryChilds.Any(m=> m.CountryName.ToLower().Contains(keyword.ToLower())))
+                    orderby w.CountryName ascending
+                    select new Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel
+                    {
+                        KeyName = w.CountryName,
+                        KeyID = w.CountryID,
                         Multilanguage = w.CountryChilds.Where(m => m.CountryLanguageCode == languageCode).FirstOrDefault().CountryName
                     }).AsQueryable();
         }

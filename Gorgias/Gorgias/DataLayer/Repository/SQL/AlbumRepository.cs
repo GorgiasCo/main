@@ -449,7 +449,8 @@ namespace Gorgias.DataLayer.Repository.SQL
 
                 //obj.AlbumHasComment = AlbumHasComment;
                 obj.AlbumReadingLanguageCode = AlbumReadingLanguageCode;
-                obj.AlbumRepostValue = AlbumRepostValue.HasValue ? AlbumRepostValue.Value : 500;
+                //Added after see charls post on best logo ;)
+                obj.AlbumRepostValue = AlbumAvailability * 100;
                 obj.AlbumRepostRequest = AlbumRepostRequest.HasValue ? AlbumRepostRequest.Value : 0;
                 obj.AlbumRepostAttempt = AlbumRepostAttempt.HasValue ? AlbumRepostAttempt.Value : 0;
                 obj.AlbumPrice = AlbumPrice.HasValue ? AlbumPrice.Value : 0;
@@ -701,7 +702,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
         {
             Update(AlbumID);
-            return (from w in context.Albums.Include("AlbumParent.Profile").Include("AlbumParent.Contents").Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
+            return (from w in context.Albums.Include("AlbumParent.Profile").Include("AlbumParent.Contents").Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections").Include("Profile") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
         }
 
         public int? GetAlbumViewsV2Mobile(int ProfileID)

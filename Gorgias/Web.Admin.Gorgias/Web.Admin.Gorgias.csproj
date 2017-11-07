@@ -82,7 +82,9 @@
     <Content Include="assets\js\controllers\admin\Profile\Agency\User\editUserController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Agency\User\listUserController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Agency\User\viewUserController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\Album\addNewAlbumController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Album\listprofileAlbumController.js" />
+    <Content Include="assets\js\controllers\admin\Profile\Album\uploadPhotoController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Connection\listprofileConnectionController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Dashboard\viewDashboardController.js" />
     <Content Include="assets\js\controllers\admin\Profile\editAdminProfileUploadController.js" />
@@ -156,6 +158,8 @@
     <Content Include="assets\plugins\angular-languages\angular-translate.js" />
     <Content Include="assets\plugins\angular-languages\angular-translate.min.js" />
     <Content Include="assets\plugins\angular-modal-service\angular-modal-service.js" />
+    <Content Include="assets\plugins\angular-owl\angular-owl-carousel-2.js" />
+    <Content Include="assets\plugins\angular-owl\angular-owl-carousel.js" />
     <Content Include="assets\plugins\angular-pre-load-image\angular-preload-image.js" />
     <Content Include="assets\plugins\angular-toastr\toastr.js" />
     <Content Include="assets\plugins\angular-uuid\angular-uuid.js" />
@@ -1666,6 +1670,8 @@
     <Content Include="pages\js\pages.min.js" />
     <Content Include="pages\js\pages.social.js" />
     <Content Include="pages\js\pages.social.min.js" />
+    <Content Include="tpl\admin\Album\addNewAlbum.html" />
+    <Content Include="tpl\admin\Album\uploadPhoto.html" />
     <Content Include="tpl\admin\ProfileCommission\addProfileCommission.html" />
     <Content Include="tpl\admin\ProfileCommission\editProfileCommission.html" />
     <Content Include="tpl\admin\ProfileCommission\listProfileCommission.html" />

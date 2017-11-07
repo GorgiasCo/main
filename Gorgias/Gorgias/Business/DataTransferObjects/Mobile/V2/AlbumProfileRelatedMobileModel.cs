@@ -4,12 +4,21 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
 {
     public class AlbumProfileRelatedMobileModel
     {
-        public int ProfileID { get; set; }        
+        public int ProfileID { get; set; }
         public string AlbumTitle { get; set; }
         public int AlbumID { get; set; }
         public string AlbumCover { get; set; }
         public string ProfileFullname { get; set; }
         public System.DateTime AlbumPublishDate { get; set; }
+
+        public string AlbumPublishDateTitle
+        {
+            get
+            {
+                return AlbumPublishDate != null ? AlbumPublishDate.ToString("MMMM dd, yyyy") : "" ;
+            }
+        }
+
 
         public string cdnAlbumCover
         {

@@ -318,14 +318,35 @@ namespace Gorgias.Controllers
             {
                 HttpResponseMessage response = null;
                 var headerLanguage = request.Headers.AcceptLanguage;
-                IEnumerable<CountryMobileModel> result = BusinessLayer.Facades.Facade.CountryFacade().getCountries(headerLanguage.First().Value);
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CountryFacade().getCountries(headerLanguage.First().Value);
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
                 }
                 else
                 {
-                    response = request.CreateResponse<IEnumerable<CountryMobileModel>>(HttpStatusCode.OK, result);
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Countries/{keyword}", Name = "GetV2MobileCountriesByKeyword")]
+        [HttpGet]
+        public HttpResponseMessage GetCountriesByKeyword(HttpRequestMessage request, string keyword)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CountryFacade().getCountries(headerLanguage.First().Value, keyword);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
                 }
                 return response;
             });

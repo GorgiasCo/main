@@ -28,6 +28,29 @@
 
             $scope.ProfileID = authService.authentication.userID;// $route.current.params.id;
 
+
+            $scope.properties = {
+                // autoHeight:true,
+                animateIn: 'fadeIn',
+                lazyLoad: true,
+                autoWidth: true,
+                onDragged: function () {
+                    console.log(event);
+                }
+            };
+
+            function callback(event) {
+                //var element = event.target;         // DOM element, in this example .owl-carousel
+                var name = event.type;           // Name of the event, in this example dragged
+                var namespace = event.namespace;      // Namespace of the event, in this example owl.carousel
+                var items = event.item.count;     // Number of items
+                var item = event.item.index;     // Position of the current item
+                // Provided by the navigation plugin
+                var pages = event.page.count;     // Number of pages
+                var page = event.page.index;     // Position of the current page
+                var size = event.page.size;      // Number of items per page
+                console.log(name, namespace, items, item, pages, page, size, 'OWL ;)');
+            };
             //Check Authorization ;)
             //checkValidity();
             //loadValidity();
