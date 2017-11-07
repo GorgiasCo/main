@@ -530,16 +530,16 @@ demo/3.svg" class="full-width">
 
 
                         <div class="panel-body">
-                            <a href="#" ng-click="addNewContent()">Add New Block oo)o</a>
+                            <button id="addnewPhoto">Add New Block oo)o</button> <!--href="#" ng-click="addNewContent()"-->
                             <button data-target="#modalFillIn" data-toggle="modal" id="btnFillSizeToggler2">Generate</button>
                             <div class="form-group">
-                                <!--<ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>-->
+                                <ng-dropzone class="dropzone" style="display:none" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
                             </div>
                         </div>
 
                         <div ng-repeat="content in Contents">
                             <h1><input ng-model="content.ContentTitle" /></h1>
-                            <h1><img ng-src="content.ContentURL" /></h1>
+                            <h1><img ng-src="{{content.ContentURL}}" /></h1>
                             <br />
                         </div>
                     </div>

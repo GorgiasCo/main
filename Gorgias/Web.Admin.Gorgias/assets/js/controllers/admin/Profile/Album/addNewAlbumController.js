@@ -374,22 +374,37 @@
                 notificationService.displayError(response.data.Errors);
             }
 
+            function uuidv4() {
+                return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+                    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+                )
+            }
+
+            function getName() {
+                var d = new Date();
+                var n = d.getTime();
+                return uuidv4() + n + '.jpg';
+            }
+
+            console.log(uuidv4(), 'uuid ;)', getName());
 
             $scope.masterFileName = "profile";
             //dropzone ;)
             $scope.dzOptions = {
-                url: $scope.baseURL + 'api/images/name?ImageName=' + $scope.imagename + '&MasterFileName=profile',
+                url: 'https://api.gorgias.com/api/images/name?ImageName=hottest-' + $scope.imagename + '&MasterFileName=album',
                 paramName: 'photo',
                 maxFilesize: '10',
                 acceptedFiles: 'image/jpeg, images/jpg, image/png',
                 addRemoveLinks: true,
+                previewsContainer: false,
+                clickable: '#addnewPhoto',
                 maxFiles: 1,
-                autoProcessQueue: false,
+                autoProcessQueue: true,
                 init: function () {
                     this.on("addedfile", function (file) {
                         $scope.hasFile = true;
-                        $scope.imagename = 'profile-' + $scope.ProfileID + '.' + file.name.split(".")[1];
-                        $scope.object.ProfileImage = 'https://gorgiasasia.blob.core.windows.net/images/' + 'profile-' + $scope.ProfileID + '.' + file.name.split(".")[1];
+                        $scope.imagename = getName();
+                        $scope.object.ProfileImage = 'https://gorgiasasia.blob.core.windows.net/albums/hottest-' + $scope.imagename;
                         console.log($scope.hasFile);
                     }),
                     this.on("processing", function (file) {
@@ -404,13 +419,7 @@
 
                     //console.log(file.previewTemplate.find('img').attr('src'));
 
-                    var addedContent = {};
-                    addedContent.ContentTitle = "it is me title ;)";
-                    addedContent.ContentURL = "it is you URL ;)";
-                    addedContent.ContentID = $scope.contentIndex + 1;
-                    $scope.Contents.push(addedContent);
-                    $scope.contentIndex = $scope.contentIndex + 1;
-                    console.log('added', $scope.Contents);
+                   
 
                 },
                 removedfile: function (file) {
@@ -432,7 +441,13 @@
                 'success': function (file, xhr) {
                     console.log('success ;)');
                     console.log(file, xhr);
-                    redirectBack();
+                    var addedContent = {};
+                    addedContent.ContentTitle = "it is me title ;)" + $scope.imagename;
+                    addedContent.ContentURL = 'https://gorgiasasia.blob.core.windows.net/images/' + $scope.imagename;
+                    addedContent.ContentID = $scope.contentIndex + 1;
+                    $scope.Contents.push(addedContent);
+                    $scope.contentIndex = $scope.contentIndex + 1;
+                    console.log('added', $scope.Contents);
                 },
             };
 
