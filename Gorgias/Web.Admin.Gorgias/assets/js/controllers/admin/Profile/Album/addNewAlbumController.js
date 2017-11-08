@@ -398,19 +398,17 @@
                 addRemoveLinks: true,
                 previewsContainer: false,
                 clickable: '#addnewPhoto',
-                maxFiles: 5,
+                maxFiles: 1,
                 autoProcessQueue: true,
                 init: function () {
                     this.on("addedfile", function (file) {
-                        //$scope.hasFile = true;
-                        //$scope.object.ProfileImage = 'https://gorgiasasia.blob.core.windows.net/albums/hottest-' + $scope.imagename;
-                        //console.log($scope.imagename, 'addedFile init ;)');
+                        $scope.hasFile = true;
+                        $scope.imagename = getName();
+                        $scope.object.ProfileImage = 'https://gorgiasasia.blob.core.windows.net/albums/hottest-' + $scope.imagename;
+                        console.log($scope.hasFile);
                     }),
                     this.on("processing", function (file) {
-                        $scope.imagename = getName();
-
-                        this.options.url = $scope.baseURL + 'api/images/name?ImageName=hottest-' + $scope.imagename + '&MasterFileName=album';
-                        console.log($scope.imagename, file, 'processing ;)');
+                        this.options.url = $scope.baseURL + 'api/images/name?ImageName=' + $scope.imagename + '&MasterFileName=profile';
                     });
                 },
                 addedfile: function (file) {
@@ -437,24 +435,19 @@
             //Visit http://www.dropzonejs.com/#events for more events
             $scope.dzCallbacks = {
                 'addedfile': function (file) {
-                    console.log(file, 'addedfile dzCallbacks');
+                    console.log(file);
                     $scope.newFile = file;
                 },
                 'success': function (file, xhr) {
                     console.log('success ;)');
                     console.log(file, xhr);
-
                     var addedContent = {};
-                    addedContent.ContentTitle = "it is me title ;)" + xhr.Result[0].FileUrl;
-                    addedContent.ContentURL = xhr.Result[0].FileUrl;
+                    addedContent.ContentTitle = "it is me title ;)" + $scope.imagename;
+                    addedContent.ContentURL = 'https://gorgiasasia.blob.core.windows.net/images/' + $scope.imagename;
                     addedContent.ContentID = $scope.contentIndex + 1;
                     $scope.Contents.push(addedContent);
                     $scope.contentIndex = $scope.contentIndex + 1;
-                    console.log('added', $scope.Contents, xhr.Result[0].FileUrl);
-                },
-                'uploading': function (file, xhr) {
-                    console.log('uploading ;)');
-                    console.log(file, xhr);
+                    console.log('added', $scope.Contents);
                 },
             };
 
