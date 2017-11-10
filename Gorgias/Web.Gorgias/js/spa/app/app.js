@@ -21,6 +21,15 @@
                 templateUrl: "/layout/main.html",
                 controller: "mainController"
             })
+            .when("/terms-of-use", {
+                templateUrl: "/layout/termOfUse.html",
+            })
+            .when("/about-us", {
+                templateUrl: "/layout/aboutUsGorgias.html",
+            })
+            .when("/contact-us", {
+                templateUrl: "/layout/contactUsGorgias.html",
+            })
             .when("/admin/profile/:id", {
                 templateUrl: "/layout/admin/viewAdminProfile.html",
                 controller: "viewAdminProfileController"
@@ -94,8 +103,8 @@
     }
 
     //var serviceBase = 'https://gorgiasapi.azurewebsites.net/';
-    //var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
-    var serviceBase = 'http://localhost:43587/';
+    var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
+    //var serviceBase = 'http://localhost:43587/';
     //var serviceBase = 'http://devgorgias.azurewebsites.net/';
 
     app.constant('ngAuthSettings', {

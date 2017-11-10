@@ -1532,10 +1532,12 @@
     <Content Include="js\ui-bootstrap-2.2.0.js" />
     <Content Include="js\ui-bootstrap-tpls-2.2.0.js" />
     <Content Include="layout\about.html" />
+    <Content Include="layout\aboutUsGorgias.html" />
     <Content Include="layout\admin\viewAdminAgencyProfile.html" />
     <Content Include="layout\admin\viewAdminAgencyProfileEdit.html" />
     <Content Include="layout\admin\viewAdminProfile.html" />
     <Content Include="layout\bk.html" />
+    <Content Include="layout\contactUsGorgias.html" />
     <Content Include="layout\directive\frontpage.slider.tpl.html" />
     <Content Include="layout\directive\rev-slider.html" />
     <Content Include="layout\directive\sideBarNew.html" />
@@ -1552,6 +1554,7 @@
     <Content Include="layout\modal\modal.html" />
     <Content Include="layout\resetpassword.html" />
     <Content Include="layout\slideshow.html" />
+    <Content Include="layout\termOfUse.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
