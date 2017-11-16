@@ -299,7 +299,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.CategoryMobileModel> GetV2CategoriesAvailableByProfileIDAsQueryable(int ProfileID, string languageCode)
         {
-            return (from w in context.Categories where ((w.ProfileID == ProfileID && w.AlbumsTopics.Count > 0) || (w.Albums.Any(m=> m.ProfileID == ProfileID)) && w.CategoryID !=  29 && w.CategoryDescription == "en") || w.CategoryParentID == 85 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType }).AsQueryable();
+            return (from w in context.Categories where ((w.ProfileID == ProfileID && w.AlbumsTopics.Count > 0) || (w.Albums.Any(m=> m.ProfileID == ProfileID && m.AlbumIsDeleted == false)) && w.CategoryID !=  29 && w.CategoryDescription == "en") || w.CategoryParentID == 85 orderby w.CategoryType descending, w.CategoryOrder ascending select new Business.DataTransferObjects.Mobile.V2.CategoryMobileModel { Multilanguage = w.ChildCategory.Where(m => m.CategoryDescription == languageCode).FirstOrDefault().CategoryName, CategoryName = w.CategoryName, CategoryID = w.CategoryID, CategoryType = w.CategoryType }).AsQueryable();
         }
 
         public IQueryable<Business.DataTransferObjects.Mobile.V2.KeyValueMobileModel> GetV2CategoriesBySearchAsQueryableKeyValue(string CategorySearch)

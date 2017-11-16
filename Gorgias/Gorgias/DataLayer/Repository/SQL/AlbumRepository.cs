@@ -589,7 +589,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                     }
                     else
                     {
-                        obj.Categories.Add(new Category { CategoryName = Topic.CategoryName, CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 11, CategoryOrder = 0 });
+                        obj.Categories.Add(new Category { CategoryName = Topic.CategoryName, CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 1, CategoryOrder = 0 });
                     }
                 }
 

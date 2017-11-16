@@ -196,6 +196,18 @@ namespace Gorgias.BusinessLayer.Facades
             return result;
         }
 
+        public string InsertBookmarkFromMicroApp(int ProfileID, int MicroAppProfileID)
+        {
+            Connection resultBookmark = DataLayer.DataLayerFacade.ConnectionRepository().GetConnection(ProfileID, MicroAppProfileID, 4);
+            if(resultBookmark != null)
+            {
+                return "0";
+            } else
+            {
+                return DataLayer.DataLayerFacade.ProfileRepository().GetProfileFullname(MicroAppProfileID);// DataLayer.DataLayerFacade.ConnectionRepository().Insert(ProfileID, MicroAppProfileID, 4, true);
+            }
+        }
+
         public bool InsertForMobile(ConnectionDTO objConnection)
         {
             if(objConnection.RequestTypeID == 4)

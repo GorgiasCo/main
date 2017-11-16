@@ -85,6 +85,9 @@ namespace Gorgias.Providers
 
             if (allowedOrigin == null) allowedOrigin = "*";
 
+            var headerLanguage = context.Request.Headers.GetValues("Accept-Language").FirstOrDefault();
+
+
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
             string userRole = "user";
             using (AuthRepository _repo = new AuthRepository())
@@ -254,7 +257,16 @@ namespace Gorgias.Providers
             if (resultuser.CountryID != null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1))
             {
                 UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
-                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
+
+                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting;
+
+                if (headerLanguage != "")
+                {
+                    profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID, headerLanguage.ToLower());
+                } else
+                {
+                    profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
+                }
 
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                 //var props = new AuthenticationProperties(new Dictionary<string, string>
@@ -388,7 +400,19 @@ namespace Gorgias.Providers
             if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m=> m.Profile.ProfileStatus == true && m.Profile.ProfileIsPeople == false && m.Profile.ProfileIsConfirmed == false))
             {
                 UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
-                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
+
+                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting;
+
+                if (headerLanguage != "")
+                {
+                    profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID, headerLanguage.ToLower());
+                }
+                else
+                {
+                    profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
+                }
+
+                //Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
 
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                 var props = new AuthenticationProperties(new Dictionary<string, string>

@@ -29,6 +29,7 @@
             })
             .when("/contact-us", {
                 templateUrl: "/layout/contactUsGorgias.html",
+                controller: "contactGorgiasController"
             })
             .when("/admin/profile/:id", {
                 templateUrl: "/layout/admin/viewAdminProfile.html",

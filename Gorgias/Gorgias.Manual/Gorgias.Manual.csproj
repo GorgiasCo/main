@@ -106,7 +106,16 @@
     <Compile Include="Album.cs">
       <DependentUpon>myGorgiasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>myGorgiasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Content.cs">
+      <DependentUpon>myGorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>myGorgiasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Industry.cs">
       <DependentUpon>myGorgiasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="myGorgiasModel.Context.cs">
@@ -145,6 +154,8 @@
     <None Include="C:\Users\yasser\Desktop\newCountryiesFromCharls.csv">
       <Link>newCountryiesFromCharls.csv</Link>
     </None>
+    <None Include="newProfession.csv" />
+    <None Include="newProfessionInsert.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

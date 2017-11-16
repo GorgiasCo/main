@@ -1,0 +1,140 @@
+﻿1,Dining,餐饮,餐飲
+2,Others,其他,其他
+3,Entertainment,娱乐,娛樂
+4,Fashion,时尚,時尚
+5,Tech,技术,技術
+6,Living,活的,活的
+7,Travel,旅行,旅行
+8,Life,生活,生活
+9,Design,设计,設計
+10,Design,设计,設計
+11,Life,生活,生活
+12,CEO,首席执行官,首席執行官
+13,Accessory designer,配件设计师,配件設計師
+14,Actor/Actress,演员,演員
+15,Advertising designer,广告设计师,廣告設計師
+16,Student,学生,學生
+17,COO,首席运营官,首席運營官
+18,CFO,首席财务官,首席財務官
+19,CIO,首席信息官,首席信息官
+20,Art director,艺术总监,藝術總監
+21,Artisan,工匠,工匠
+22,Blogger,博客,博客
+23,Brand manager,品牌经理,品牌經理
+24,Compositor,合成器,合成器
+25,Copywriter,笔者,筆者
+26,Editor,编辑,編輯
+27,Engineer,工程师,工程師
+28,Event planner,活动策划人,活動策劃人
+29,Fashion designer,时装设计师,時裝設計師
+30,Food stylist,食品造型师,食品造型師
+31,Game artist,游戏艺术家,遊戲藝術家
+32,Graphic designer,平面设计师,平面設計師
+33,Hairstylist,发型师,髮型師
+34,Illustrator,插画,插畫
+35,Interior designer,室内设计师,室內設計師
+36,Jewellery designer,珠宝设计师,珠寶設計師
+37,Journalist,记者,記者
+38,Landscape Architect,景观设计师,景觀設計師
+39,Make-up artist,彩妆大师,彩妝大師
+40,Lyricist,作词,作詞
+41,Media designer,媒体设计师,媒體設計師
+42,Model,模型,模型
+43,Music artist,音乐艺术家,音樂藝術家
+44,Party planner,党的策划者,黨的策劃者
+45,Photographer,摄影师,攝影師
+46,Photojournalist,摄影记者,攝影記者
+47,Production designer,产品设计师,產品設計師
+48,Reporter,记者,記者
+49,Screenwriter,编剧,編劇
+50,Sound designer,声音设计师,聲音設計師
+51,Tattooist,纹身,紋身
+52,Wedding planner,婚礼策划师,婚禮策劃師
+53,Writer,作家,作家
+54,Ballet dancer,芭蕾舞演员,芭蕾舞演員
+55,Choreographer,编舞师,編舞師
+56,Dance therapy,舞蹈疗法师,舞蹈療法師
+57,Exotic dancer,异国情调的舞者,異國情調的舞者
+58,Animator,动画制作者,動畫製作者
+59,Film producer,电影制作人,電影製作人
+60,Application analyst,应用分析师,應用分析師
+61,Data scientist,数据科学家,數據科學家
+62,Network analyst,网络分析师,網絡分析師
+63,Security engineer,安全工程师,安全工程師
+64,System Administrator,系统管理员,系統管理員
+65,Data analyst,数据分析师,數據分析師
+66,Demographic marketer,人口统计营销人员,人口統計營銷人員
+67,Statistician,统计员,統計員
+68,Government scientist,政府科学家,政府科學家
+69,Inventor,发明者,發明者
+70,School science technician,学校科学技术人员,學校科學技術人員
+71,Psychologist,心理学家,心理學家
+72,Biologist,生物学家,生物學家
+73,Biomedical scientist,生物医学科学家,生物醫學科學家
+74,Medical laboratory scientist,医学实验室的科学家,醫學實驗室的科學家
+75,Chemist,化学家,化學家
+76,Geographer,地理学,地理學
+77,Geologist,地质学家,地質學家
+78,Urban Planner,城市规划师,城市規劃師
+79,Chief Data officer,首席数据官,首席數據官
+80,Chief Design officer,首席设计官,首席設計官
+81,Chief Content officer,首席内容官,首席內容官
+82,Chief Experience officer,首席体验官,首席體驗官
+83,Project Manager,项目经理,項目經理
+84,Purchasing Department Manager,采购部门经理,採購部門經理
+85,Business Service Manager,业务服务经理,業務服務經理
+86,Quality Services Manager,优质的服务经理,優質的服務經理
+87,Accommodation Manager,住宿经理,住宿經理
+88,Hotel Manager,酒店经理,酒店經理
+89,Rooms Division Manager,房间部经理,房間部經理
+90,Catering Manager,餐饮经理,餐飲經理
+91,Kitchen Manager,厨房经理,廚房經理
+92,Restaurant Manager,餐厅经理,餐廳經理
+93,Call Centre Manager,呼叫中心经理,呼叫中心經理
+94,Tourist Information Centre Manager,旅游信息中心经理,旅遊信息中心經理
+95,Leisure Park Manager,休闲公园经理,休閒公園經理
+96,Recreation centre manager,娱乐中心经理,娛樂中心經理
+97,Sport facility manager,体育设施经理,體育設施經理
+98,Sports centre manager,体育中心经理,體育中心經理
+99,Shop manager,商店管理员,商店管理員
+100,Baker,面包师傅,麵包師傅
+101,Lawyer,律师,律師
+102,Pharmacist,药剂师,藥劑師
+103,Teacher,老师,老師
+104,Dietitian,营养师,營養師
+105,Police Officer,警官,警官
+106,Mechanic,机械师,機械師
+107,Electrician,电工,電工
+108,Consultant,顾问,顧問
+109,Plumber,水管工人,水管工人
+110,Chef,厨师,廚師
+111,Broker,经纪人,經紀人
+112,Butcher,屠夫,屠夫
+113,Tailor,裁缝,裁縫
+114,Librarian,图书管理员,圖書管理員
+115,Farmer,农民,農民
+116,Tradesman,零售商,零售商
+117,Machinist,机械师,機械師
+118,Welder,焊机师,焊機師
+119,Optician,配镜,配鏡
+120,Barber,理发师,理髮師
+121,Athlete,运动员,運動員
+122,Coach,教练,教練
+123,Athletic Trainer,运动训练师,運動訓練師
+124,Sports Agent,运动代理员,運動代理員
+125,Scout,侦察员,偵察員
+126,Referee,裁判员,裁判員
+127,Sports Commentator,体育评论员,體育評論員
+128,Football Player,足球运动员,足球運動員
+129,Equipment Manager,设备经理,設備經理
+130,Sports Commentator,体育评论员,體育評論員
+131,Announcer,播音员,播音員
+132,Sports Analyst,体育分析师,體育分析師
+133,Assistant Stylist,助理造型师,助理造型師
+134,Brand Ambassador,品牌代言人,品牌代言人
+145,Shoe Maker,鞋匠,鞋匠
+146,Scuba Diving,水肺潜水,水肺潛水
+151,CTO,首席技术官,首席技術官
+152,UX Designer,UX 设计师,UX 設計師
+153,UX/UI Designer,UX/UI 设计师,UX/UI 設計師
+154,Database Administration,数据库管理,數據庫管理

@@ -58,6 +58,11 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.ProfileRepository().getLoginAttempt(ProfileEmail, ProfileID);
         }
 
+        public Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel getProfileSetting(int ProfileID, string languageCode)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileSetting(ProfileID, languageCode);
+        }
+
         public Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel getProfileSetting(int ProfileID)
         {
             return DataLayer.DataLayerFacade.ProfileRepository().GetProfileSetting(ProfileID);

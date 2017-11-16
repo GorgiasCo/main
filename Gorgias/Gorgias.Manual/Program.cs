@@ -34,9 +34,46 @@ namespace Gorgias.Manual
 
             SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
-            setupContents();
+            //setupContents();
 
+            //Add countries ;)
             //var resultCountry = readCountriesJSON();
+
+            //GorgiasEntities ex = new GorgiasEntities();
+            //ex.Countries.AddRange(resultCountry);
+
+            //try
+            //{
+            //    ex.SaveChanges();
+            //}
+            //catch (Exception exception)
+            //{
+            //    Console.WriteLine(exception.Message);
+            //}
+
+            //var industries = readIndustriesJSON();
+            GorgiasEntities context = new GorgiasEntities();
+
+            //foreach(Industry obj in industries)
+            //{
+            //    try {
+            //        Industry exist = (from x in context.Industries where x.IndustryID == obj.IndustryID select x).First();
+            //        if (exist != null)
+            //        {
+            //            context.Industries.Attach(exist);
+            //            exist.Industry1 = obj.Industry1;
+            //            context.SaveChanges();
+            //            Console.WriteLine(exist.Industry1.Count + "///*****///" + exist.IndustryID + "*****(00)*****" + exist.IndustryName);
+            //        }                    
+            //    } catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }                
+            //}
+
+            //var industryForInsert = readIndustriesJSONForInsert();
+            //context.Industries.AddRange(industryForInsert);
+            //context.SaveChanges();
 
             //setupContents();
             //var main = readJSON();
@@ -105,12 +142,72 @@ namespace Gorgias.Manual
                     obj.CountryShortName = values[0].Split(',')[0];
                     obj.CountryName = values[0].Split(',')[1].Replace("\"", "");
 
-                    obj.CountryChilds.Add(new Country { CountryStatus = false, CountryName = values[0].Split(',')[2].Replace("\"", ""), CountryLanguageCode = "zh-hans", CountryPhoneCode = "0"});
-                    obj.CountryChilds.Add(new Country { CountryStatus = false, CountryName = values[0].Split(',')[3].Replace("\"", ""), CountryLanguageCode = "zh-hant", CountryPhoneCode = "0" });
+                    City relatedCity = new City {CityName = obj.CountryName, CityStatus = true, CityLanguageCode = "en"};
+                    relatedCity.CityChilds.Add(new City { CityName = values[0].Split(',')[2].Replace("\"", ""), CityStatus = true, CityLanguageCode = "zh-hans", Country = obj });
+                    relatedCity.CityChilds.Add(new City { CityName = values[0].Split(',')[3].Replace("\"", ""), CityStatus = true, CityLanguageCode = "zh-hant", Country = obj });
+
+                    obj.Cities.Add(relatedCity);
+
+                    obj.CountryChilds.Add(new Country { CountryStatus = false, CountryName = values[0].Split(',')[2].Replace("\"", ""), CountryShortName = obj.CountryShortName, CountryLanguageCode = "zh-hans", CountryPhoneCode = "0"});
+                    obj.CountryChilds.Add(new Country { CountryStatus = false, CountryName = values[0].Split(',')[3].Replace("\"", ""), CountryShortName = obj.CountryShortName, CountryLanguageCode = "zh-hant", CountryPhoneCode = "0" });
 
                     output.Add(obj);
-                    Console.WriteLine(obj.CountryShortName + " --- " + obj.CountryName + " --- " + obj.CountryChilds.Count);
+                    Console.WriteLine(obj.CountryShortName + " --- " + obj.CountryName + " --- " + obj.CountryChilds.Count + "------" + obj.Cities.Count);
                 }
+                output.RemoveAt(0);
+                return output;
+            }
+        }
+
+        public static List<Industry> readIndustriesJSON()
+        {
+            using (var reader = new StreamReader(@"E:\Yasser\main\Gorgias\Gorgias.Manual\newProfession.csv", System.Text.Encoding.UTF8))
+            {
+                List<Industry> output = new List<Industry>();
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split('\n');
+
+                    Industry obj = new Industry();
+                    obj.IndustryLanguageCode = "en";
+                    obj.IndustryName = values[0].Split(',')[1].Replace("\"", "");
+                    obj.IndustryStatus = true;
+                    obj.IndustryID = int.Parse(values[0].Split(',')[0]);
+
+                    obj.Industry1.Add(new Industry { IndustryLanguageCode = "zh-hans", IndustryName = values[0].Split(',')[2].Replace("\"", ""), IndustryStatus = true });
+                    obj.Industry1.Add(new Industry { IndustryLanguageCode = "zh-hant", IndustryName = values[0].Split(',')[3].Replace("\"", ""), IndustryStatus = true });
+                    
+                    output.Add(obj);
+                    Console.WriteLine(obj.IndustryName + " --- " + obj.Industry1.Count+ " --- " + obj.IndustryID);
+                }
+                //output.RemoveAt(0);
+                return output;
+            }
+        }
+
+        public static List<Industry> readIndustriesJSONForInsert()
+        {
+            using (var reader = new StreamReader(@"E:\Yasser\main\Gorgias\Gorgias.Manual\newProfessionInsert.csv", System.Text.Encoding.UTF8))
+            {
+                List<Industry> output = new List<Industry>();
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split('\n');
+
+                    Industry obj = new Industry();
+                    obj.IndustryLanguageCode = "en";
+                    obj.IndustryName = values[0].Split(',')[0].Replace("\"", "");
+                    obj.IndustryStatus = true;
+
+                    obj.Industry1.Add(new Industry { IndustryLanguageCode = "zh-hans", IndustryName = values[0].Split(',')[1].Replace("\"", ""), IndustryStatus = true });
+                    obj.Industry1.Add(new Industry { IndustryLanguageCode = "zh-hant", IndustryName = values[0].Split(',')[2].Replace("\"", ""), IndustryStatus = true });
+
+                    output.Add(obj);
+                    Console.WriteLine(obj.IndustryName + " --- " + obj.Industry1.Count);
+                }
+                //output.RemoveAt(0);
                 return output;
             }
         }
@@ -166,7 +263,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3331 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3338 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {
@@ -176,25 +273,28 @@ namespace Gorgias.Manual
                 {
                     try
                     {
-                        string image = content.ContentURL; //@"https://gorgiasasia.blob.core.windows.net/albums/album-6e998edc-9601-46f7-ae98-db9eb39b634f.jpg?timestamp=522";
-                        byte[] imageData = new WebClient().DownloadData(image);
-                        MemoryStream imgStream = new MemoryStream(imageData);
-                        Image img = Image.FromStream(imgStream);
+                        if(content.ContentType == 1)
+                        {
+                            string image = content.ContentURL; //@"https://gorgiasasia.blob.core.windows.net/albums/album-6e998edc-9601-46f7-ae98-db9eb39b634f.jpg?timestamp=522";
+                            byte[] imageData = new WebClient().DownloadData(image);
+                            MemoryStream imgStream = new MemoryStream(imageData);
+                            Image img = Image.FromStream(imgStream);
 
 
-                        //HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(@"http://img.khoahoc.tv/photos/image/2015/05/14/hang_13.jpg";);
+                            //HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(@"http://img.khoahoc.tv/photos/image/2015/05/14/hang_13.jpg";);
 
-                        //HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+                            //HttpWebResponse response = (HttpWebResponse)req.GetResponse();
 
-                        //Stream stream = response.GetResponseStream();
+                            //Stream stream = response.GetResponseStream();
 
-                        //Image img = Image.FromStream(stream);
+                            //Image img = Image.FromStream(stream);
 
-                        //stream.Close();
-                        content.ContentDimension = img.Width + "-" + img.Height;
-                        Console.WriteLine("******************----" + content.ContentID + "--------" + content.ContentDimension);
+                            //stream.Close();
+                            content.ContentDimension = img.Width + "-" + img.Height;
+                            Console.WriteLine("******************----" + content.ContentID + "--------" + content.ContentDimension);
+                        }                        
                     }
-                    catch
+                    catch(Exception se)
                     {
                         return false;
                     }

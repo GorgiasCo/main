@@ -26,6 +26,9 @@
     <Property Name="AlbumIsTokenAvailable" Type="Boolean" />
     <Property Name="AlbumPriceToken" Type="Int32" />
     <Property Name="ContentRatingID" Type="Int32" />
+    <Property Name="AlbumParentID" Type="Int32" />
+    <NavigationProperty Name="Album1" Relationship="GorgiasModel.FK_Album_Album" FromRole="Album" ToRole="Album1" />
+    <NavigationProperty Name="Album2" Relationship="GorgiasModel.FK_Album_Album" FromRole="Album1" ToRole="Album" />
   </EntityType>
   <EntityType Name="Content">
     <Key>
@@ -65,5 +68,137 @@
       <End Role="Album" EntitySet="Albums" />
       <End Role="Content" EntitySet="Contents" />
     </AssociationSet>
+    <EntitySet Name="Cities" EntityType="GorgiasModel.City" />
+    <EntitySet Name="Countries" EntityType="GorgiasModel.Country" />
+    <AssociationSet Name="FK_Album_Album" Association="GorgiasModel.FK_Album_Album">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Album1" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_City" Association="GorgiasModel.FK_City_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="City1" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="GorgiasModel.FK_City_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Country_Country" Association="GorgiasModel.FK_Country_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Country1" EntitySet="Countries" />
+    </AssociationSet>
+    <EntitySet Name="Industries" EntityType="GorgiasModel.Industry" />
+    <AssociationSet Name="FK_Industry_Industry" Association="GorgiasModel.FK_Industry_Industry">
+      <End Role="Industry" EntitySet="Industries" />
+      <End Role="Industry1" EntitySet="Industries" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="CityStatus" Type="Boolean" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="CityUpdateDate" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="CityLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CityParentID" Type="Int32" />
+    <NavigationProperty Name="CityChilds" Relationship="GorgiasModel.FK_City_City" FromRole="City" ToRole="City1" />
+    <NavigationProperty Name="City2" Relationship="GorgiasModel.FK_City_City" FromRole="City1" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="GorgiasModel.FK_City_Country" FromRole="City" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="CountryShortName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CountryStatus" Type="Boolean" />
+    <Property Name="CountryPhoneCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="CountryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CountryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountryLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CountryParentID" Type="Int32" />
+    <NavigationProperty Name="Cities" Relationship="GorgiasModel.FK_City_Country" FromRole="Country" ToRole="City" />
+    <NavigationProperty Name="CountryChilds" Relationship="GorgiasModel.FK_Country_Country" FromRole="Country" ToRole="Country1" />
+    <NavigationProperty Name="Country2" Relationship="GorgiasModel.FK_Country_Country" FromRole="Country1" ToRole="Country" />
+  </EntityType>
+  <Association Name="FK_Album_Album">
+    <End Type="GorgiasModel.Album" Role="Album" Multiplicity="0..1" />
+    <End Type="GorgiasModel.Album" Role="Album1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="Album1">
+        <PropertyRef Name="AlbumParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_City">
+    <End Type="GorgiasModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="GorgiasModel.City" Role="City1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="City1">
+        <PropertyRef Name="CityParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Type="GorgiasModel.Country" Role="Country" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GorgiasModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Country_Country">
+    <End Type="GorgiasModel.Country" Role="Country" Multiplicity="0..1" />
+    <End Type="GorgiasModel.Country" Role="Country1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Country1">
+        <PropertyRef Name="CountryParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="IndustryID" />
+    </Key>
+    <Property Name="IndustryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IndustryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IndustryStatus" Type="Boolean" Nullable="false" />
+    <Property Name="IndustryParentID" Type="Int32" />
+    <Property Name="IndustryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IndustryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IndustryLanguageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IndustryOrder" Type="Int32" />
+    <NavigationProperty Name="Industry1" Relationship="GorgiasModel.FK_Industry_Industry" FromRole="Industry" ToRole="Industry1" />
+    <NavigationProperty Name="Industry2" Relationship="GorgiasModel.FK_Industry_Industry" FromRole="Industry1" ToRole="Industry" />
+  </EntityType>
+  <Association Name="FK_Industry_Industry">
+    <End Type="GorgiasModel.Industry" Role="Industry" Multiplicity="0..1" />
+    <End Type="GorgiasModel.Industry" Role="Industry1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryID" />
+      </Principal>
+      <Dependent Role="Industry1">
+        <PropertyRef Name="IndustryParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

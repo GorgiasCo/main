@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Albums">
       <EntityTypeMapping TypeName="GorgiasModel.Album">
         <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="AlbumParentID" ColumnName="AlbumParentID" />
           <ScalarProperty Name="ContentRatingID" ColumnName="ContentRatingID" />
           <ScalarProperty Name="AlbumPriceToken" ColumnName="AlbumPriceToken" />
           <ScalarProperty Name="AlbumIsTokenAvailable" ColumnName="AlbumIsTokenAvailable" />
@@ -42,6 +43,48 @@
           <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
           <ScalarProperty Name="ContentLike" ColumnName="ContentLike" />
           <ScalarProperty Name="ContentGeoLocation" ColumnName="ContentGeoLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="GorgiasModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="CityParentID" ColumnName="CityParentID" />
+          <ScalarProperty Name="CityLanguageCode" ColumnName="CityLanguageCode" />
+          <ScalarProperty Name="CityUpdateDate" ColumnName="CityUpdateDate" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CityStatus" ColumnName="CityStatus" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="GorgiasModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="CountryParentID" ColumnName="CountryParentID" />
+          <ScalarProperty Name="CountryLanguageCode" ColumnName="CountryLanguageCode" />
+          <ScalarProperty Name="CountryDescription" ColumnName="CountryDescription" />
+          <ScalarProperty Name="CountryImage" ColumnName="CountryImage" />
+          <ScalarProperty Name="CountryPhoneCode" ColumnName="CountryPhoneCode" />
+          <ScalarProperty Name="CountryStatus" ColumnName="CountryStatus" />
+          <ScalarProperty Name="CountryShortName" ColumnName="CountryShortName" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Industries">
+      <EntityTypeMapping TypeName="GorgiasModel.Industry">
+        <MappingFragment StoreEntitySet="Industry">
+          <ScalarProperty Name="IndustryOrder" ColumnName="IndustryOrder" />
+          <ScalarProperty Name="IndustryLanguageCode" ColumnName="IndustryLanguageCode" />
+          <ScalarProperty Name="IndustryDescription" ColumnName="IndustryDescription" />
+          <ScalarProperty Name="IndustryImage" ColumnName="IndustryImage" />
+          <ScalarProperty Name="IndustryParentID" ColumnName="IndustryParentID" />
+          <ScalarProperty Name="IndustryStatus" ColumnName="IndustryStatus" />
+          <ScalarProperty Name="IndustryName" ColumnName="IndustryName" />
+          <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

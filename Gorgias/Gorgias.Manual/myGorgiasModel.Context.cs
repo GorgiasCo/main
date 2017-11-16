@@ -27,5 +27,8 @@ namespace Gorgias.Manual
     
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Industry> Industries { get; set; }
     }
 }

@@ -25,6 +25,19 @@
     <Property Name="AlbumIsTokenAvailable" Type="bit" />
     <Property Name="AlbumPriceToken" Type="int" />
     <Property Name="ContentRatingID" Type="int" />
+    <Property Name="AlbumParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="CityStatus" Type="bit" Nullable="false" />
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="CityUpdateDate" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="CityLanguageCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="CityParentID" Type="int" />
   </EntityType>
   <EntityType Name="Content">
     <Key>
@@ -42,6 +55,71 @@
     <Property Name="ContentGeoLocation" Type="geography" />
     <Property Name="ContentDimension" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="CountryShortName" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CountryStatus" Type="bit" />
+    <Property Name="CountryPhoneCode" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="CountryImage" Type="nvarchar" MaxLength="150" />
+    <Property Name="CountryDescription" Type="ntext" />
+    <Property Name="CountryLanguageCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="CountryParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="IndustryID" />
+    </Key>
+    <Property Name="IndustryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IndustryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IndustryStatus" Type="bit" Nullable="false" />
+    <Property Name="IndustryParentID" Type="int" />
+    <Property Name="IndustryImage" Type="nvarchar" MaxLength="150" />
+    <Property Name="IndustryDescription" Type="ntext" />
+    <Property Name="IndustryLanguageCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="IndustryOrder" Type="int" />
+  </EntityType>
+  <Association Name="FK_Album_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+    <End Role="Album1" Type="Self.Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="AlbumID" />
+      </Principal>
+      <Dependent Role="Album1">
+        <PropertyRef Name="AlbumParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="City1" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="City1">
+        <PropertyRef Name="CityParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Content_Album">
     <End Role="Album" Type="Self.Album" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -56,12 +134,59 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Country_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Country1" Type="Self.Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Country1">
+        <PropertyRef Name="CountryParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Industry_Industry">
+    <End Role="Industry" Type="Self.Industry" Multiplicity="0..1" />
+    <End Role="Industry1" Type="Self.Industry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryID" />
+      </Principal>
+      <Dependent Role="Industry1">
+        <PropertyRef Name="IndustryParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="GorgiasModelStoreContainer">
     <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Album_Album" Association="Self.FK_Album_Album">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="Album1" EntitySet="Album" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_City" Association="Self.FK_City_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="City1" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
     <AssociationSet Name="FK_Content_Album" Association="Self.FK_Content_Album">
       <End Role="Album" EntitySet="Album" />
       <End Role="Content" EntitySet="Content" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Country_Country" Association="Self.FK_Country_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Country1" EntitySet="Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Industry_Industry" Association="Self.FK_Industry_Industry">
+      <End Role="Industry" EntitySet="Industry" />
+      <End Role="Industry1" EntitySet="Industry" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

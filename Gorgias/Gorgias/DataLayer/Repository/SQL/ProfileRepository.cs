@@ -480,20 +480,38 @@ namespace Gorgias.DataLayer.Repository.SQL
                     //Check Industry is Empty or not ;)
                     if (IndustryName.Trim() != "")
                     {
-                        if (IndustryName != "" && IndustryID.Value == 0 && !IndustryName.ToLower().Trim().Equals(obj.Industries.FirstOrDefault().IndustryName.ToLower()))
+                        if (IndustryName != "" && IndustryID.Value == 0)
                         {
-                            DataLayerFacade.ProfileIndustryRepository().Delete(ProfileID);
-                            Industry currentIndustry = (from w in context.Industries where w.IndustryName.ToLower().Equals(IndustryName.ToLower()) select w).FirstOrDefault();
-                            if (currentIndustry != null)
+                            if (obj.Industries.Count > 0)
                             {
-                                obj.Industries.Add(currentIndustry);
+                                if (!IndustryName.ToLower().Trim().Equals(obj.Industries.FirstOrDefault().IndustryName.ToLower()))
+                                {
+                                    DataLayerFacade.ProfileIndustryRepository().Delete(ProfileID);
+                                    Industry currentIndustry = (from w in context.Industries where w.IndustryName.ToLower().Equals(IndustryName.ToLower()) select w).FirstOrDefault();
+                                    if (currentIndustry != null)
+                                    {
+                                        obj.Industries.Add(currentIndustry);
+                                    }
+                                    else
+                                    {
+                                        obj.Industries.Add(new Industry { IndustryName = IndustryName.Trim(), IndustryDescription = "", IndustryLanguageCode = ProfileLanguageApp, IndustryImage = "", IndustryOrder = 9999, IndustryStatus = true });
+                                    }
+                                }
                             }
                             else
                             {
-                                obj.Industries.Add(new Industry { IndustryName = IndustryName.Trim(), IndustryDescription = "", IndustryLanguageCode = ProfileLanguageApp, IndustryImage = "", IndustryOrder = 9999, IndustryStatus = true });
+                                Industry currentIndustry = (from w in context.Industries where w.IndustryName.ToLower().Equals(IndustryName.ToLower()) select w).FirstOrDefault();
+                                if (currentIndustry != null)
+                                {
+                                    obj.Industries.Add(currentIndustry);
+                                }
+                                else
+                                {
+                                    obj.Industries.Add(new Industry { IndustryName = IndustryName.Trim(), IndustryDescription = "", IndustryLanguageCode = ProfileLanguageApp, IndustryImage = "", IndustryOrder = 9999, IndustryStatus = true });
+                                }
                             }
                         }
-                    }                    
+                    }
 
                     if (IndustryID.Value > 0 && !obj.Industries.Any(m => m.IndustryID == IndustryID))
                     {
@@ -511,10 +529,15 @@ namespace Gorgias.DataLayer.Repository.SQL
                         if (countryResult.CountryParent != null)
                         {
                             cityID = countryResult.CountryParent.Cities.FirstOrDefault().CityID;
-                        } else
+                        }
+                        else
                         {
                             cityID = countryResult.Cities.FirstOrDefault().CityID;
                         }
+
+                        context.Addresses.RemoveRange(obj.Addresses);
+
+                        obj.Addresses.Clear();
                         obj.Addresses.Add(new Address { AddressAddress = "NA", AddressEmail = ProfileEmail, AddressName = ProfileFullname, AddressStatus = true, AddressTypeID = 1, CityID = cityID, AddressTel = "NA" });
                     }
 
@@ -690,32 +713,67 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Profiles where w.ProfileID == ProfileID select w).FirstOrDefault().ProfileFullname;
         }
 
+        public string GetProfileURL(int ProfileID)
+        {
+            return (from w in context.Profiles where w.ProfileID == ProfileID select w).FirstOrDefault().ProfileURL;
+        }
+
         public Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode)
         {
             //Todo : changed from City to Country ;)
-            return (from w in context.Profiles.Include("Connections").Include("Albums")
-                    where w.ProfileID == ProfileID
-                    select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel
-                    {
-                        //CityName = w.Addresses.OrderByDescending(m => m.AddressID).FirstOrDefault().City.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName,
-                        CityName = w.Addresses.OrderByDescending(m => m.AddressID).FirstOrDefault().City.Country.CountryChilds.Where(m => m.CountryLanguageCode == languageCode).FirstOrDefault().CountryName,
-                        IndustryName = w.Industries.FirstOrDefault().IndustryName,
-                        ProfileID = w.ProfileID,
-                        ProfileFullname = w.ProfileFullname,
-                        ProfileFullnameEnglish = w.ProfileFullnameEnglish,
-                        ProfileShortDescription = w.ProfileShortDescription,
-                        ProfileTypeName = w.ProfileType.ProfileTypeName,
-                        ProfileURL = w.ProfileURL,
-                        ProfileIsConfirmed = w.ProfileIsConfirmed,
-                        ProfileIsPeople = w.ProfileIsPeople,
-                        TotalConnections = w.Connections.Count,
-                        TotalEngagements = w.Albums.Sum(a => a.ProfileActivities.Where(ac => ac.ActivityTypeID != 1).Count()),
-                        TotalViews = w.Albums.Sum(av => av.AlbumView),
-                        isSubscribed = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 3),
-                        isBookmarked = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 4 && cc.ConnectStatus == true),
-                        ProfileImage = w.ProfileImage
-                    }
-            ).FirstOrDefault();
+            if (languageCode.ToLower().Equals("zh-hans") || languageCode.ToLower().Equals("zh-hant"))
+            {
+                return (from w in context.Profiles.Include("Connections").Include("Albums")
+                        where w.ProfileID == ProfileID
+                        select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel
+                        {
+                            //CityName = w.Addresses.OrderByDescending(m => m.AddressID).FirstOrDefault().City.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName,
+                            CityName = w.Addresses.FirstOrDefault().City.Country.CountryChilds.Where(m => m.CountryLanguageCode.ToLower() == languageCode.ToLower()).FirstOrDefault().CountryName,
+                            IndustryName = w.Industries.FirstOrDefault().IndustryName,
+                            ProfileID = w.ProfileID,
+                            ProfileFullname = w.ProfileFullname,
+                            ProfileFullnameEnglish = w.ProfileFullnameEnglish,
+                            ProfileShortDescription = w.ProfileShortDescription,
+                            ProfileTypeName = w.ProfileType.ProfileTypeName,
+                            ProfileURL = w.ProfileURL,
+                            ProfileIsConfirmed = w.ProfileIsConfirmed,
+                            ProfileIsPeople = w.ProfileIsPeople,
+                            TotalConnections = w.Connections.Count,
+                            TotalEngagements = w.Albums.Sum(a => a.ProfileActivities.Where(ac => ac.ActivityTypeID != 1).Count()),
+                            TotalViews = w.Albums.Sum(av => av.AlbumView),
+                            isSubscribed = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 3),
+                            isBookmarked = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 4 && cc.ConnectStatus == true),
+                            ProfileImage = w.ProfileImage
+                        }
+                ).FirstOrDefault();
+            }
+            else
+            {
+                return (from w in context.Profiles.Include("Connections").Include("Albums")
+                        where w.ProfileID == ProfileID
+                        select new Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel
+                        {
+                            //CityName = w.Addresses.OrderByDescending(m => m.AddressID).FirstOrDefault().City.CityChilds.Where(m => m.CityLanguageCode == languageCode).FirstOrDefault().CityName,
+                            CityName = w.Addresses.FirstOrDefault().City.Country.CountryName,
+                            IndustryName = w.Industries.FirstOrDefault().IndustryName,
+                            ProfileID = w.ProfileID,
+                            ProfileFullname = w.ProfileFullname,
+                            ProfileFullnameEnglish = w.ProfileFullnameEnglish,
+                            ProfileShortDescription = w.ProfileShortDescription,
+                            ProfileTypeName = w.ProfileType.ProfileTypeName,
+                            ProfileURL = w.ProfileURL,
+                            ProfileIsConfirmed = w.ProfileIsConfirmed,
+                            ProfileIsPeople = w.ProfileIsPeople,
+                            TotalConnections = w.Connections.Count,
+                            TotalEngagements = w.Albums.Sum(a => a.ProfileActivities.Where(ac => ac.ActivityTypeID != 1).Count()),
+                            TotalViews = w.Albums.Sum(av => av.AlbumView),
+                            isSubscribed = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 3),
+                            isBookmarked = w.Connections.Any(cc => cc.RequestedProfileID == RequestedProfileID && cc.RequestTypeID == 4 && cc.ConnectStatus == true),
+                            ProfileImage = w.ProfileImage
+                        }
+                ).FirstOrDefault();
+            }
+
         }
 
         public Business.DataTransferObjects.Mobile.V2.SettingProfileMobileModel GetV2SettingMobileProfile(int ProfileID, string languageCode)
@@ -799,6 +857,126 @@ namespace Gorgias.DataLayer.Repository.SQL
             //})
 
             return result;
+        }
+
+        public Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID, string languageCode)
+        {
+            if (languageCode.ToLower().Equals("zh-hans") || languageCode.ToLower().Equals("zh-hant"))
+            {
+                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel result = (from w in context.Profiles
+                                                                                         where w.ProfileID == ProfileID
+                                                                                         select new Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel
+                                                                                         {
+                                                                                             //CityName = w.Addresses.OrderByDescending(m=> m.AddressID).FirstOrDefault().City.CityName,
+                                                                                             CityName = w.Addresses.FirstOrDefault().City.Country.CountryChilds.Where(m => m.CountryLanguageCode.ToLower() == languageCode.ToLower()).FirstOrDefault().CountryName,
+                                                                                             CountryName = w.Addresses.FirstOrDefault().City.Country.CountryName,
+                                                                                             IndustryName = w.Industries.FirstOrDefault().IndustryChilds.Where(m => m.IndustryLanguageCode.ToLower() == languageCode.ToLower()).FirstOrDefault().IndustryName,
+                                                                                             ProfileID = w.ProfileID,
+                                                                                             ProfileFullname = w.ProfileFullname,
+                                                                                             ProfileFullnameEnglish = w.ProfileFullnameEnglish,
+                                                                                             ProfileShortDescription = w.ProfileShortDescription,
+                                                                                             ProfileTypeName = w.ProfileType.ProfileTypeChilds.Where(m => m.ProfileTypeLanguageCode.ToLower() == languageCode.ToLower()).FirstOrDefault().ProfileTypeName,
+                                                                                             //Changed to Country, CityID
+                                                                                             CityID = w.Addresses.OrderByDescending(m => m.AddressID).FirstOrDefault().City.Country.CountryID,
+                                                                                             IndustryID = w.Industries.FirstOrDefault().IndustryID,
+                                                                                             ProfileBirthday = w.ProfileSetting.ProfileBirthday,
+                                                                                             ProfileLanguageApp = w.ProfileSetting.ProfileLanguageApp,
+                                                                                             ProfileEmail = w.ProfileEmail,
+                                                                                             ProfileIsConfirmed = w.ProfileIsConfirmed,
+                                                                                             ProfileIsPeople = w.ProfileIsPeople,
+                                                                                             ProfileTypeID = w.ProfileTypeID,
+                                                                                             ProfileImage = w.ProfileImage,
+                                                                                             ProfileURL = w.ProfileURL,
+                                                                                             UserID = w.UserProfiles.Where(u => u.UserRoleID == 1).FirstOrDefault().UserID,
+                                                                                         }).FirstOrDefault();
+
+                if (result != null)
+                {
+                    result.Accounts = (from w in context.UserProfiles
+                                       where w.UserID == result.UserID && (w.UserRoleID == 5 || w.UserRoleID == 1)
+                                       select new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
+                                       {
+                                           ProfileFullname = w.Profile.ProfileFullname,
+                                           ProfileID = w.ProfileID,
+                                           ProfileImage = w.Profile.ProfileImage,
+                                           ProfileIsConfirmed = w.Profile.ProfileIsConfirmed,
+                                           ProfileIsPeople = w.Profile.ProfileIsPeople,
+                                           UserID = w.UserID,
+                                           UserRoleID = w.UserRoleID
+                                       }).OrderBy(o => o.UserRoleID).ToList();
+                }
+
+                //w.UserProfiles.Where(uw => uw.UserRoleID == 5).Select(s => new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
+                //{
+                //    ProfileFullname = s.User.UserProfiles..ProfileFullname,
+                //    ProfileID = s.ProfileID,
+                //    ProfileImage = s.Profile.ProfileImage,
+                //    ProfileIsConfirmed = s.Profile.ProfileIsConfirmed,
+                //    ProfileIsPeople = s.Profile.ProfileIsPeople,
+                //    UserID = s.UserID,
+                //    UserRoleID = s.UserRoleID
+                //})
+
+                return result;
+            }
+            else
+            {
+                Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel result = (from w in context.Profiles
+                                                                                         where w.ProfileID == ProfileID
+                                                                                         select new Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel
+                                                                                         {
+                                                                                             //CityName = w.Addresses.OrderByDescending(m=> m.AddressID).FirstOrDefault().City.CityName,
+                                                                                             CityName = w.Addresses.OrderByDescending(m => m.AddressID).FirstOrDefault().City.Country.CountryName,
+                                                                                             CountryName = w.Addresses.FirstOrDefault().City.Country.CountryName,
+                                                                                             IndustryName = w.Industries.FirstOrDefault().IndustryName,
+                                                                                             ProfileID = w.ProfileID,
+                                                                                             ProfileFullname = w.ProfileFullname,
+                                                                                             ProfileFullnameEnglish = w.ProfileFullnameEnglish,
+                                                                                             ProfileShortDescription = w.ProfileShortDescription,
+                                                                                             ProfileTypeName = w.ProfileType.ProfileTypeName,
+                                                                                             //Changed to Country, CityID
+                                                                                             CityID = w.Addresses.OrderByDescending(m => m.AddressID).FirstOrDefault().City.Country.CountryID,
+                                                                                             IndustryID = w.Industries.FirstOrDefault().IndustryID,
+                                                                                             ProfileBirthday = w.ProfileSetting.ProfileBirthday,
+                                                                                             ProfileLanguageApp = w.ProfileSetting.ProfileLanguageApp,
+                                                                                             ProfileEmail = w.ProfileEmail,
+                                                                                             ProfileIsConfirmed = w.ProfileIsConfirmed,
+                                                                                             ProfileIsPeople = w.ProfileIsPeople,
+                                                                                             ProfileTypeID = w.ProfileTypeID,
+                                                                                             ProfileImage = w.ProfileImage,
+                                                                                             ProfileURL = w.ProfileURL,
+                                                                                             UserID = w.UserProfiles.Where(u => u.UserRoleID == 1).FirstOrDefault().UserID,
+                                                                                         }).FirstOrDefault();
+
+                if (result != null)
+                {
+                    result.Accounts = (from w in context.UserProfiles
+                                       where w.UserID == result.UserID && (w.UserRoleID == 5 || w.UserRoleID == 1)
+                                       select new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
+                                       {
+                                           ProfileFullname = w.Profile.ProfileFullname,
+                                           ProfileID = w.ProfileID,
+                                           ProfileImage = w.Profile.ProfileImage,
+                                           ProfileIsConfirmed = w.Profile.ProfileIsConfirmed,
+                                           ProfileIsPeople = w.Profile.ProfileIsPeople,
+                                           UserID = w.UserID,
+                                           UserRoleID = w.UserRoleID
+                                       }).OrderBy(o => o.UserRoleID).ToList();
+                }
+
+                //w.UserProfiles.Where(uw => uw.UserRoleID == 5).Select(s => new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
+                //{
+                //    ProfileFullname = s.User.UserProfiles..ProfileFullname,
+                //    ProfileID = s.ProfileID,
+                //    ProfileImage = s.Profile.ProfileImage,
+                //    ProfileIsConfirmed = s.Profile.ProfileIsConfirmed,
+                //    ProfileIsPeople = s.Profile.ProfileIsPeople,
+                //    UserID = s.UserID,
+                //    UserRoleID = s.UserRoleID
+                //})
+
+                return result;
+            }
         }
 
         public Profile GetV2Profile(int ProfileID)

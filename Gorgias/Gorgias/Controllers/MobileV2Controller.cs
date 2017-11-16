@@ -653,7 +653,8 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                LoginProfileMobileModel result = BusinessLayer.Facades.Facade.ProfileFacade().getProfileSetting(ProfileID);
+                var headerLanguage = request.Headers.AcceptLanguage;
+                LoginProfileMobileModel result = BusinessLayer.Facades.Facade.ProfileFacade().getProfileSetting(ProfileID, headerLanguage.First().Value);
 
                 if (result == null)
                 {
@@ -684,6 +685,19 @@ namespace Gorgias.Controllers
                 {
                     response = request.CreateResponse<IEnumerable<UserProfileMobileModel>>(HttpStatusCode.OK, result);
                 }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Profile/MicroApp/Subscribe/Status/{ProfileID}/{MicroAppProfileID}", Name = "SubscriberBookmarkFromMicroAppMobileV2")]
+        [HttpGet]
+        public HttpResponseMessage SubscriberFromMicroApp(HttpRequestMessage request, int ProfileID, int MicroAppProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                string result = BusinessLayer.Facades.Facade.ConnectionFacade().InsertBookmarkFromMicroApp(ProfileID, MicroAppProfileID);
+                response = request.CreateResponse<string>(HttpStatusCode.OK, result);
                 return response;
             });
         }

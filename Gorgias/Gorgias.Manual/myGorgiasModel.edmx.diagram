@@ -8,6 +8,14 @@
         <EntityTypeShape EntityType="GorgiasModel.Album" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="GorgiasModel.Content" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="GorgiasModel.FK_Content_Album" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GorgiasModel.City" Width="1.5" PointX="7.625" PointY="1.125" />
+        <EntityTypeShape EntityType="GorgiasModel.Country" Width="1.5" PointX="5.375" PointY="1" />
+        <AssociationConnector Association="GorgiasModel.FK_Album_Album" />
+        <AssociationConnector Association="GorgiasModel.FK_City_City" />
+        <AssociationConnector Association="GorgiasModel.FK_City_Country" />
+        <AssociationConnector Association="GorgiasModel.FK_Country_Country" />
+        <EntityTypeShape EntityType="GorgiasModel.Industry" Width="1.5" PointX="3.375" PointY="5.75" />
+        <AssociationConnector Association="GorgiasModel.FK_Industry_Industry" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

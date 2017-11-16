@@ -1511,6 +1511,7 @@
     <Content Include="js\spa\controller\admin\Profile\viewAdminAgencyProfileEditController.js" />
     <Content Include="js\spa\controller\admin\Profile\viewAdminProfileController.js" />
     <Content Include="js\spa\controller\admin\Profile\viewProfileController.js" />
+    <Content Include="js\spa\controller\contactGorgiasController.js" />
     <Content Include="js\spa\controller\contactReportController.js" />
     <Content Include="js\spa\controller\downloadAppController.js" />
     <Content Include="js\spa\controller\emailconfirmationController.js" />
