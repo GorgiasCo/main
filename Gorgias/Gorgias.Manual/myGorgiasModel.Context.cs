@@ -30,5 +30,7 @@ namespace Gorgias.Manual
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Industry> Industries { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Profile> Profiles { get; set; }
     }
 }

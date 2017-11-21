@@ -345,6 +345,53 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.AlbumRepository().GetAlbumV2(AlbumID);
         }
 
+        //V2 Web
+
+        public PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> getLatestAlbums(int pageSize, int pageNumber)
+        {
+            IQueryable<Album> basequery;
+            basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().OrderByDescending(m => m.AlbumView).OrderByDescending(w => w.Contents.Sum(m => m.ContentLike));
+
+            var queryList = RepositoryHelper.Pagination<Album>(pageNumber, pageSize, basequery).Future();
+            var queryTotal = basequery.FutureCount();
+
+            int intTotal = queryTotal.Value;
+
+            var tt = queryList.Select(w => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
+            {
+                ProfileID = w.ProfileID,
+                AlbumID = w.AlbumID,
+                AlbumCover = w.AlbumCover,
+                AlbumDateCreated = w.AlbumDateCreated,
+                AlbumName = w.AlbumName,
+                AlbumAvailability = w.AlbumAvailability,
+                AlbumDateExpire = w.AlbumDateExpire,
+                AlbumDatePublish = w.AlbumDatePublish,
+                //AlbumAvailabilityName = w.AlbumType.AlbumTypeName,
+                AlbumView = w.AlbumView,
+                AlbumLike = w.Contents.Sum(m => m.ContentLike),
+                AlbumContents = w.Contents.Count,
+                AlbumComments = w.Contents.Sum(m => m.Comments.Count),
+                AlbumHasComment = w.AlbumHasComment,
+                AlbumIsTokenAvailable = w.AlbumIsTokenAvailable,
+                CategoryID = w.CategoryID,
+                AlbumRepostRequest = w.AlbumRepostRequest,
+                AlbumRepostValue = w.AlbumRepostValue,
+            }).ToList();
+
+            PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> result = new PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel>()
+            {
+                Page = pageNumber,
+                TotalCount = intTotal,
+                TotalPages = (int)Math.Ceiling((decimal)intTotal / pageSize),
+                Items = tt
+            };
+
+            return result;
+        }
+
+        //V2 End
+
         //V2 End
 
         public AlbumDTO GetAlbum(int AlbumID)

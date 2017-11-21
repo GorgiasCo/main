@@ -32,6 +32,28 @@
           <Property Name="ContentRatingID" Type="int" />
           <Property Name="AlbumParentID" Type="int" />
         </EntityType>
+        <EntityType Name="AlbumTopic">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="AlbumID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CategoryStatus" Type="bit" Nullable="false" />
+          <Property Name="CategoryImage" Type="nvarchar" MaxLength="150" />
+          <Property Name="CategoryDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryParentID" Type="int" />
+          <Property Name="CategoryType" Type="int" />
+          <Property Name="CategoryOrder" Type="int" />
+          <Property Name="ProfileID" Type="int" />
+        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="CityID" />
@@ -87,6 +109,30 @@
           <Property Name="IndustryLanguageCode" Type="nvarchar" MaxLength="10" />
           <Property Name="IndustryOrder" Type="int" />
         </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileFullname" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ProfileFullnameEnglish" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProfileIsPeople" Type="bit" Nullable="false" />
+          <Property Name="ProfileIsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ProfileDateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ProfileDescription" Type="ntext" />
+          <Property Name="ProfileView" Type="bigint" Nullable="false" />
+          <Property Name="ProfileLike" Type="int" Nullable="false" />
+          <Property Name="ProfileCredit" Type="int" Nullable="false" />
+          <Property Name="ProfileURL" Type="nvarchar" MaxLength="150" />
+          <Property Name="ProfileShortDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProfileEmail" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProfileStatus" Type="bit" Nullable="false" />
+          <Property Name="ProfileIsConfirmed" Type="bit" Nullable="false" />
+          <Property Name="ProfileTypeID" Type="int" Nullable="false" />
+          <Property Name="ThemeID" Type="int" Nullable="false" />
+          <Property Name="SubscriptionTypeID" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Album_Album">
           <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
           <End Role="Album1" Type="Self.Album" Multiplicity="*" />
@@ -96,6 +142,84 @@
             </Principal>
             <Dependent Role="Album1">
               <PropertyRef Name="AlbumParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Album_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Album_Profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlbumTopic_Album">
+          <End Role="Album" Type="Self.Album" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AlbumTopic" Type="Self.AlbumTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="AlbumTopic">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlbumTopic_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="AlbumTopic" Type="Self.AlbumTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="AlbumTopic">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="CategoryParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="ProfileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -165,13 +289,40 @@
         </Association>
         <EntityContainer Name="GorgiasModelStoreContainer">
           <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumTopic" EntityType="Self.AlbumTopic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Album_Album" Association="Self.FK_Album_Album">
             <End Role="Album" EntitySet="Album" />
             <End Role="Album1" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Album_Category" Association="Self.FK_Album_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Album_Profile" Association="Self.FK_Album_Profile">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlbumTopic_Album" Association="Self.FK_AlbumTopic_Album">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="AlbumTopic" EntitySet="AlbumTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlbumTopic_Category" Association="Self.FK_AlbumTopic_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="AlbumTopic" EntitySet="AlbumTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Profile" Association="Self.FK_Category_Profile">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="Category" EntitySet="Category" />
           </AssociationSet>
           <AssociationSet Name="FK_City_City" Association="Self.FK_City_City">
             <End Role="City" EntitySet="City" />
@@ -227,6 +378,9 @@
           <Property Name="AlbumParentID" Type="Int32" />
           <NavigationProperty Name="Album1" Relationship="GorgiasModel.FK_Album_Album" FromRole="Album" ToRole="Album1" />
           <NavigationProperty Name="Album2" Relationship="GorgiasModel.FK_Album_Album" FromRole="Album1" ToRole="Album" />
+          <NavigationProperty Name="Category" Relationship="GorgiasModel.FK_Album_Category" FromRole="Album" ToRole="Category" />
+          <NavigationProperty Name="Categories" Relationship="GorgiasModel.AlbumTopic" FromRole="Album" ToRole="Category" />
+          <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Album_Profile" FromRole="Album" ToRole="Profile" />
         </EntityType>
         <EntityType Name="Content">
           <Key>
@@ -288,6 +442,28 @@
           <AssociationSet Name="FK_Industry_Industry" Association="GorgiasModel.FK_Industry_Industry">
             <End Role="Industry" EntitySet="Industries" />
             <End Role="Industry1" EntitySet="Industries" />
+          </AssociationSet>
+          <EntitySet Name="Categories" EntityType="GorgiasModel.Category" />
+          <AssociationSet Name="FK_Album_Category" Association="GorgiasModel.FK_Album_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Album" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Category" Association="GorgiasModel.FK_Category_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category1" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="AlbumTopic" Association="GorgiasModel.AlbumTopic">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <EntitySet Name="Profiles" EntityType="GorgiasModel.Profile" />
+          <AssociationSet Name="FK_Album_Profile" Association="GorgiasModel.FK_Album_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Album" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Profile" Association="GorgiasModel.FK_Category_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="City">
@@ -399,6 +575,107 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryStatus" Type="Boolean" Nullable="false" />
+          <Property Name="CategoryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryParentID" Type="Int32" />
+          <Property Name="CategoryType" Type="Int32" />
+          <Property Name="CategoryOrder" Type="Int32" />
+          <Property Name="ProfileID" Type="Int32" />
+          <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_Category" FromRole="Category" ToRole="Album" />
+          <NavigationProperty Name="Category1" Relationship="GorgiasModel.FK_Category_Category" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category2" Relationship="GorgiasModel.FK_Category_Category" FromRole="Category1" ToRole="Category" />
+          <NavigationProperty Name="Albums1" Relationship="GorgiasModel.AlbumTopic" FromRole="Category" ToRole="Album" />
+          <NavigationProperty Name="Profile" Relationship="GorgiasModel.FK_Category_Profile" FromRole="Category" ToRole="Profile" />
+        </EntityType>
+        <Association Name="FK_Album_Category">
+          <End Type="GorgiasModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Category">
+          <End Type="GorgiasModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="GorgiasModel.Category" Role="Category1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="CategoryParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AlbumTopic">
+          <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+          <End Type="GorgiasModel.Category" Role="Category" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileFullname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileFullnameEnglish" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileIsPeople" Type="Boolean" Nullable="false" />
+          <Property Name="ProfileIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ProfileDateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProfileDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileView" Type="Int64" Nullable="false" />
+          <Property Name="ProfileLike" Type="Int32" Nullable="false" />
+          <Property Name="ProfileCredit" Type="Int32" Nullable="false" />
+          <Property Name="ProfileURL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileStatus" Type="Boolean" Nullable="false" />
+          <Property Name="ProfileIsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="ProfileTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ThemeID" Type="Int32" Nullable="false" />
+          <Property Name="SubscriptionTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Albums" Relationship="GorgiasModel.FK_Album_Profile" FromRole="Profile" ToRole="Album" />
+          <NavigationProperty Name="Categories" Relationship="GorgiasModel.FK_Category_Profile" FromRole="Profile" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Album_Profile">
+          <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GorgiasModel.Album" Role="Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Profile">
+          <End Type="GorgiasModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="GorgiasModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -489,6 +766,54 @@
                 <ScalarProperty Name="IndustryStatus" ColumnName="IndustryStatus" />
                 <ScalarProperty Name="IndustryName" ColumnName="IndustryName" />
                 <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="GorgiasModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="CategoryOrder" ColumnName="CategoryOrder" />
+                <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
+                <ScalarProperty Name="CategoryParentID" ColumnName="CategoryParentID" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
+                <ScalarProperty Name="CategoryStatus" ColumnName="CategoryStatus" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AlbumTopic" TypeName="GorgiasModel.AlbumTopic" StoreEntitySet="AlbumTopic">
+            <EndProperty Name="Category">
+              <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+            </EndProperty>
+            <EndProperty Name="Album">
+              <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="GorgiasModel.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="SubscriptionTypeID" ColumnName="SubscriptionTypeID" />
+                <ScalarProperty Name="ThemeID" ColumnName="ThemeID" />
+                <ScalarProperty Name="ProfileTypeID" ColumnName="ProfileTypeID" />
+                <ScalarProperty Name="ProfileIsConfirmed" ColumnName="ProfileIsConfirmed" />
+                <ScalarProperty Name="ProfileStatus" ColumnName="ProfileStatus" />
+                <ScalarProperty Name="ProfileEmail" ColumnName="ProfileEmail" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+                <ScalarProperty Name="ProfileShortDescription" ColumnName="ProfileShortDescription" />
+                <ScalarProperty Name="ProfileURL" ColumnName="ProfileURL" />
+                <ScalarProperty Name="ProfileCredit" ColumnName="ProfileCredit" />
+                <ScalarProperty Name="ProfileLike" ColumnName="ProfileLike" />
+                <ScalarProperty Name="ProfileView" ColumnName="ProfileView" />
+                <ScalarProperty Name="ProfileDescription" ColumnName="ProfileDescription" />
+                <ScalarProperty Name="ProfileDateCreated" ColumnName="ProfileDateCreated" />
+                <ScalarProperty Name="ProfileIsDeleted" ColumnName="ProfileIsDeleted" />
+                <ScalarProperty Name="ProfileIsPeople" ColumnName="ProfileIsPeople" />
+                <ScalarProperty Name="ProfileFullnameEnglish" ColumnName="ProfileFullnameEnglish" />
+                <ScalarProperty Name="ProfileFullname" ColumnName="ProfileFullname" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

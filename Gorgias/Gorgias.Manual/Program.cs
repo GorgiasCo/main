@@ -54,6 +54,62 @@ namespace Gorgias.Manual
             //var industries = readIndustriesJSON();
             GorgiasEntities context = new GorgiasEntities();
 
+            //var topicsFromStories = readStoryTopicsJSON();
+            var brandsAlbum = (from x in context.Albums where x.Profile.ProfileIsConfirmed == true && x.Profile.ProfileIsPeople == false select x).ToList();
+            var topics = (from x in context.Categories where x.CategoryParentID == 13 select x).ToList();
+
+            //foreach (Category obj in topicsFromStories)
+            //{
+            //    Album updatedAlbum = (from a in context.Albums where a.AlbumID == obj.CategoryParentID select a).First();
+            //    context.Albums.Attach(updatedAlbum);
+
+            //    if (updatedAlbum.CategoryID > 10)
+            //    {
+            //        updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == 6).First());
+            //    }
+            //    else
+            //    {
+            //        updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == obj.CategoryID).First());
+            //    }
+
+            //    context.SaveChanges();
+            //    Console.WriteLine(updatedAlbum.AlbumID + "----" + obj.CategoryParentID + "----" + updatedAlbum.CategoryID + "----" + obj.CategoryID + "--- Thanks Allah, Saved");
+            //}
+
+            //Insert Topics
+            foreach (Album obj in brandsAlbum)
+            {
+                //Album updatedAlbum = (from a in context.Albums where a.AlbumID == obj.CategoryParentID select a).First();
+
+                //if (updatedAlbum.CategoryID > 10)
+                //{
+                //    updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == 6).First());
+                //}
+                //else
+                //{
+                //    updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == obj.CategoryID).First());
+                //}
+
+                context.Albums.Attach(obj);                
+                obj.Categories.Add(topics.Where(m => m.CategoryID == obj.CategoryID).First());
+
+                context.SaveChanges();
+                Console.WriteLine(obj.AlbumID + "----" + obj.CategoryID + "--- Thanks Allah, Saved");
+
+                //if (updatedAlbum.CategoryID < 11)
+                //{
+                //    //context.Albums.Attach(updatedAlbum);
+                //    //updatedAlbum.CategoryID = topics.Where(m => m.CategoryName == obj.CategoryName).First().CategoryID;
+                //    //context.SaveChanges();
+                //    //Console.WriteLine(updatedAlbum.AlbumID + "----" + obj.CategoryParentID + "----" + updatedAlbum.CategoryID + "----" + obj.CategoryID + "--- Thanks Allah, Saved");
+                //}  else
+                //{
+                //    Console.WriteLine(updatedAlbum.AlbumID + "----" + obj.CategoryParentID + "----" + updatedAlbum.CategoryID + "----" + obj.CategoryID + "--- Thanks Allah, Done");
+                //}               
+            }
+
+
+
             //foreach(Industry obj in industries)
             //{
             //    try {
@@ -153,6 +209,29 @@ namespace Gorgias.Manual
 
                     output.Add(obj);
                     Console.WriteLine(obj.CountryShortName + " --- " + obj.CountryName + " --- " + obj.CountryChilds.Count + "------" + obj.Cities.Count);
+                }
+                output.RemoveAt(0);
+                return output;
+            }
+        }
+
+        public static List<Category> readStoryTopicsJSON()
+        {
+            using (var reader = new StreamReader(@"E:\Yasser\main\Gorgias\Gorgias.Manual\albumsGorgiasPeopleForExport-Updated-ReadyForInsert.csv", System.Text.Encoding.UTF8))
+            {
+                List<Category> output = new List<Category>();
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split('\n');
+
+                    Category obj = new Category();
+                    obj.CategoryID = int.Parse(values[0].Split(',')[1]);
+                    obj.CategoryName = values[0].Split(',')[2];
+                    obj.CategoryParentID = int.Parse(values[0].Split(',')[0]);                    
+
+                    output.Add(obj);
+                    Console.WriteLine(obj.CategoryID + " --- " + obj.CategoryParentID + " --- " + obj.CategoryName);
                 }
                 output.RemoveAt(0);
                 return output;

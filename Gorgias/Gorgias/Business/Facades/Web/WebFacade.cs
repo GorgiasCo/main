@@ -416,6 +416,18 @@ namespace Gorgias.Business.Facades.Web
             return result;
         }
 
+        //V2
+        public MainEntities getMainV2Entities()
+        {
+            MainEntities objEntities = new MainEntities();
+            var r = new WebRepository().getStoredProcedure<CountryModel, IndustryModel, ProfileTypeModel, TagModel>("[dbo].[getMainEntities]");
+            objEntities.Country = (IEnumerable<CountryModel>)r[0];
+            objEntities.Industry = (IEnumerable<IndustryModel>)r[1];
+            objEntities.ProfileType = (IEnumerable<ProfileTypeModel>)r[2];
+            objEntities.Tags = (IEnumerable<TagModel>)r[3];
+            return objEntities;
+        }
+
         public MainEntities getMainEntities()
         {
             MainEntities objEntities = new MainEntities();

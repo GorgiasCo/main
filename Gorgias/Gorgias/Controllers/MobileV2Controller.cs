@@ -724,6 +724,27 @@ namespace Gorgias.Controllers
         }
 
         //From V1
+        [Route("Mobile/V2/Subscriber/InApp/{Mode}/{ProfileID}/{UserProfileID}", Name = "SubscriberInAppMobileV2")]
+        [HttpGet]
+        public HttpResponseMessage SubscriberInApp(HttpRequestMessage request, int Mode, int ProfileID, int UserProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                bool result = BusinessLayer.Facades.Facade.ConnectionFacade().InsertInAppForMobile(new Business.DataTransferObjects.ConnectionDTO { ProfileID = ProfileID, RequestedProfileID = UserProfileID, RequestTypeID = Mode });
+
+                if (!result)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Subscriber/{Mode}/{ProfileID}/{UserProfileID}", Name = "SubscriberMobileV2")]
         [HttpGet]
         public HttpResponseMessage Subscriber(HttpRequestMessage request, int Mode, int ProfileID, int UserProfileID)

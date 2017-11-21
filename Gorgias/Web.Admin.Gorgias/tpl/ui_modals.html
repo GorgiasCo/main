@@ -25,26 +25,29 @@
                     <div class="col-lg-5 col-md-height col-md-6 col-top">
                         <!-- START PANEL -->
                         <div class="panel panel-transparent">
-                            <div class="panel-heading">
-                                <div class="panel-title">Getting started
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <h3>A modal helps to displays content that temporarily blocks interactions with a web site</h3>
-                                <p>These are native boostrap modals and work as the same way as it does but more awesome with the added styles and animation giving the user more options to go to</p>
-                                <br>
-                                <div>
-                                    <div class="profile-img-wrapper m-t-5 inline">
-                                        <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" ui-jq="unveil" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
-                                        <div class="chat-status available">
-                                        </div>
-                                    </div>
-                                    <div class="inline m-l-10">
-                                        <p class="small hint-text m-t-5">VIA senior product manage
-                                            <br> for UI/UX at REVOX</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="sections_group">
+        <div class="entry-content">
+            <div class="section">
+
+                <p>hi hi hi ;)</p>
+
+
+                <div class="panel-body">
+                    <button id="addnewPhoto">Add New Block oo)o</button>
+                    <div class="form-group">
+                        <ng-dropzone class="dropzone" style="display:none" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
+                    </div>
+                </div>
+
+                <div ng-repeat="content in Contents">
+                    <h1><input ng-model="content.ContentTitle" /></h1>
+                    <h1><img ng-src="{{content.ContentURL}}" /></h1>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+
                         </div>
                         <!-- END PANEL -->
                     </div>

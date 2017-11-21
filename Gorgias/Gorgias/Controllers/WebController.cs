@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace Gorgias.Controllers
 {
@@ -52,7 +53,9 @@ namespace Gorgias.Controllers
                 },
                 Data = new Dictionary<string, string>
                 {
-                    {"albumID", objNotification.AlbumID },
+                    {"AlbumID", objNotification.AlbumID },
+                    {"ProfileID", objNotification.ChannelID },
+                    {"canValidate", "true" },
                     {"remote", "true"},
                     {"Body", objNotification.Body},
                     {"Title", objNotification.Title},
@@ -64,6 +67,49 @@ namespace Gorgias.Controllers
 
             response = request.CreateResponse(HttpStatusCode.Accepted, result);
             return response;            
+        }
+
+        [Route("Web/Notification/V2/", Name = "SendV2Notification")]
+        //[Authorize]
+        [HttpPost]
+        public async System.Threading.Tasks.Task<HttpResponseMessage> SendV2Notification(HttpRequestMessage request, NotificationModel objNotification)
+        {
+            HttpResponseMessage response = null;
+
+            FirebaseNet.Messaging.FCMClient client = new FirebaseNet.Messaging.FCMClient("AAAAH1qDRKw:APA91bHX1I5ohgU4_gm42LmgFf7Gem_7gxq0-TlXYXptzXGnpBj4i9pw2o7Um3CUqT03YUN0HwmqgtdHqWCYhMh8LZUAX0jSHja4GJYnNebGo8B_i5Q4IzZaY1wk6F52XSM3u-OA6FHo");
+
+            var serializer = new JavaScriptSerializer();
+            var data = new {AlbumID = objNotification.AlbumID, ProfileID = objNotification.ProfileID.Value, canValidate = true};
+            var json = serializer.Serialize(data);
+
+            var message = new FirebaseNet.Messaging.Message()
+            {
+                To = "/topics/" + objNotification.ChannelID,
+                Notification = new FirebaseNet.Messaging.AndroidNotification()
+                {
+                    Body = objNotification.Body,
+                    Title = objNotification.Title,
+                    Icon = "myIcon",
+                    Sound = "default",
+                    ClickAction = "fcm.ACTION.HELLO"
+                },
+                Data = new Dictionary<string, string>
+                {
+                    {"AlbumID", objNotification.AlbumID },
+                    {"ProfileID", objNotification.ProfileID.Value.ToString()},
+                    {"canValidate", "true" },
+                    {"extraData", json},
+                    {"remote", "true"},
+                    {"Body", objNotification.Body},
+                    {"Title", objNotification.Title},
+                    {"click_action", "fcm.ACTION.HELLO"},
+                }
+            };
+
+            var result = await client.SendMessageAsync(message);
+
+            response = request.CreateResponse(HttpStatusCode.Accepted, result);
+            return response;
         }
 
 

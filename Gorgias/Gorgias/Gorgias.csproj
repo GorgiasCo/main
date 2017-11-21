@@ -672,6 +672,7 @@
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WebController.cs" />
+    <Compile Include="Controllers\WebV2Controller.cs" />
     <Compile Include="Country.cs">
       <DependentUpon>gorgiasModel.tt</DependentUpon>
     </Compile>

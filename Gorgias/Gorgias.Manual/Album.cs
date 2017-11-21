@@ -19,6 +19,7 @@ namespace Gorgias.Manual
         {
             this.Contents = new HashSet<Content>();
             this.Album1 = new HashSet<Album>();
+            this.Categories = new HashSet<Category>();
         }
     
         public int AlbumID { get; set; }
@@ -49,5 +50,9 @@ namespace Gorgias.Manual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Album1 { get; set; }
         public virtual Album Album2 { get; set; }
+        public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 }

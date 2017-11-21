@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.controller('addNewAlbumController', ['$scope', '$stateParams', '$http', 'apiService', 'ngAuthSettings', '$location', 'notificationService', '$anchorScroll', 'authService', '$translate', 'ModalService', '$uibModal',
-        function ($scope, $stateParams, $http, apiService, ngAuthSettings, $location, notificationService, $anchorScroll, authService, $translate, ModalService, $uibModal) {
+    app.controller('addNewAlbumController', ['$scope', '$stateParams', '$http', 'apiService', 'ngAuthSettings', '$location', 'notificationService', '$anchorScroll', 'authService', '$translate',
+        function ($scope, $stateParams, $http, apiService, ngAuthSettings, $location, notificationService, $anchorScroll, authService, $translate) {
 
             var vm = this;
 
@@ -37,6 +37,60 @@
                 ContentType: '',
                 ContentID: null,
             };
+
+            $scope.modal = {};
+            $scope.modal.slideUp = "default";
+            $scope.modal.stickUp = "default";
+
+            $scope.toggleSlideUpSize = function () {
+                var size = $scope.modal.slideUp;
+                var modalElem = $('#modalSlideUp');
+                if (size == "mini") {
+                    $('#modalSlideUpSmall').modal('show');
+                } else {
+                    $('#modalSlideUp').modal('show');
+                    if (size == "default") {
+                        modalElem.children('.modal-dialog').removeClass('modal-lg');
+                    } else if (size == "full") {
+                        modalElem.children('.modal-dialog').addClass('modal-lg');
+                    }
+                }
+            };
+
+            $scope.stickUpSizeToggler = function () {
+                var size = $scope.modal.stickUp;
+                var modalElem = $('#myModal');
+                if (size == "mini") {
+                    $('#modalStickUpSmall').modal('show')
+                } else {
+                    $('#myModal').modal('show')
+                    if (size == "default") {
+                        modalElem.children('.modal-dialog').removeClass('modal-lg');
+                    } else if (size == "full") {
+                        modalElem.children('.modal-dialog').addClass('modal-lg');
+                    }
+                }
+            };
+
+            $scope.modalSlideLeft = function () {
+                setTimeout(function () {
+                    $('#modalSlideLeft').modal('show');
+                }, 300);
+            };
+
+            $scope.fillSizeToggler = function () {
+                console.log('fillSizeToggler');
+                console.log('fillSizeToggler', $('#modalFillIn').modal());
+                $('#modalFillIn').modal();
+                // Only for fillin modals so that the backdrop action is still there
+                $('#modalFillIn').on('show.bs.modal', function (e) {
+                    $('body').addClass('fill-in-modal');
+                })
+                $('#modalFillIn').on('hidden.bs.modal', function (e) {
+                    $('body').removeClass('fill-in-modal');
+                })
+
+            }
 
             $scope.addNewContent = function () {
                 //var addedContent = {};
@@ -389,6 +443,11 @@
             console.log(uuidv4(), 'uuid ;)', getName());
 
             $scope.masterFileName = "profile";
+
+            var maxImageWidth = 800;
+            var maxImageHeight = 800;
+            var isImageValidation = false;
+
             //dropzone ;)
             $scope.dzOptions = {
                 url: 'https://api.gorgias.com/api/images/name?ImageName=hottest-' + $scope.imagename + '&MasterFileName=album',
@@ -412,6 +471,29 @@
                         this.options.url = $scope.baseURL + 'api/images/name?ImageName=hottest-' + $scope.imagename + '&MasterFileName=album';
                         console.log($scope.imagename, file, 'processing ;)');
                     });
+                    this.on("thumbnail", function (file) {
+                        // Do the dimension checks you want to do
+                        if (isImageValidation) {
+                            if (file.width > maxImageWidth || file.height > maxImageHeight) {
+                                console.log(file.width, file.height, 'hi its image ;)');
+                                file.rejectDimensions();
+                            }
+                            else {
+                                console.log(file.width, file.height, 'hi accept its image ;)');
+                                file.acceptDimensions();
+                            }
+                        } else {
+                            console.log(file.width, file.height, 'image ;)');
+                            file.acceptDimensions();
+                        }                        
+                    });
+                },
+                accept: function(file, done) {
+                    file.acceptDimensions = done;
+                    file.rejectDimensions = function() { done("Invalid dimension."); };
+                    // Of course you could also just put the `done` function in the file
+                    // and call it either with or without error in the `thumbnail` event
+                    // callback, but I think that this is cleaner.
                 },
                 addedfile: function (file) {
                     //file.previewTemplate = $(this.options.previewTemplate);
@@ -420,9 +502,6 @@
                     //file.previewTemplate.find(".details").append($("<div class=\"size\">" + (this.filesize(file.size)) + "</div>"));
 
                     //console.log(file.previewTemplate.find('img').attr('src'));
-
-
-
                 },
                 removedfile: function (file) {
                     var _ref;
@@ -445,9 +524,10 @@
                     console.log(file, xhr);
 
                     var addedContent = {};
-                    addedContent.ContentTitle = "it is me title ;)" + xhr.Result[0].FileUrl;
+                    addedContent.ContentTitle = file.width + '-' + file.height + "*" + xhr.Result[0].FileUrl;
                     addedContent.ContentURL = xhr.Result[0].FileUrl;
                     addedContent.ContentID = $scope.contentIndex + 1;
+                    addedContent.ContentDimenssion = file.width + '-' + file.height;
                     $scope.Contents.push(addedContent);
                     $scope.contentIndex = $scope.contentIndex + 1;
                     console.log('added', $scope.Contents, xhr.Result[0].FileUrl);
@@ -481,6 +561,9 @@
                 $location.url('/');
                 console.log('good bye ;)');
             }
+
+
+            
 
         }]);
 })(angular.module('gorgiasapp'));

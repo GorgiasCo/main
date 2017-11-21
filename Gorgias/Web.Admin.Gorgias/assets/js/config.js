@@ -642,14 +642,20 @@ angular.module('gorgiasapp')
                     }
                 })
                 .state('app.ui.modals', {
-                    url: '/modals',
-                    templateUrl: 'tpl/ui_modals.html',
-                    controller: 'ModalsCtrl',
+                    url: '/story/new',
+                    templateUrl: 'tpl/admin/album/addnewalbum.html',
+                    controller: 'addNewAlbumController',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'assets/js/controllers/modals.js'
-                            ]);
+                                   'select',
+                                   'dropzone'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/album/addNewAlbumController.js');
+                                });
                         }]
                     }
                 })
@@ -1226,7 +1232,6 @@ angular.module('gorgiasapp')
                     url: '/timeline',
                     templateUrl: 'tpl/extra_timeline.html'
                 })
-
             // Extra - Others
             .state('access', {
                 url: '/access',

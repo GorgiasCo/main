@@ -204,7 +204,19 @@ namespace Gorgias.BusinessLayer.Facades
                 return "0";
             } else
             {
-                return DataLayer.DataLayerFacade.ProfileRepository().GetProfileFullname(MicroAppProfileID);// DataLayer.DataLayerFacade.ConnectionRepository().Insert(ProfileID, MicroAppProfileID, 4, true);
+                return DataLayer.DataLayerFacade.ProfileRepository().GetProfileFullname(ProfileID);// DataLayer.DataLayerFacade.ConnectionRepository().Insert(ProfileID, MicroAppProfileID, 4, true);
+            }
+        }
+
+        public bool InsertInAppForMobile(ConnectionDTO objConnection)
+        {
+            if (objConnection.RequestTypeID == 4)
+            {
+                return DataLayer.DataLayerFacade.ConnectionRepository().Insert(objConnection.ProfileID, objConnection.RequestedProfileID, objConnection.RequestTypeID, true);
+            }
+            else
+            {
+                return DataLayer.DataLayerFacade.ConnectionRepository().Insert(objConnection.ProfileID, objConnection.RequestedProfileID, objConnection.RequestTypeID);
             }
         }
 

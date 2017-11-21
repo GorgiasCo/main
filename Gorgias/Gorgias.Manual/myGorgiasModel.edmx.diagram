@@ -16,6 +16,13 @@
         <AssociationConnector Association="GorgiasModel.FK_Country_Country" />
         <EntityTypeShape EntityType="GorgiasModel.Industry" Width="1.5" PointX="3.375" PointY="5.75" />
         <AssociationConnector Association="GorgiasModel.FK_Industry_Industry" />
+        <EntityTypeShape EntityType="GorgiasModel.Category" Width="1.5" PointX="3" PointY="10.375" />
+        <AssociationConnector Association="GorgiasModel.FK_Album_Category" />
+        <AssociationConnector Association="GorgiasModel.FK_Category_Category" />
+        <AssociationConnector Association="GorgiasModel.AlbumTopic" />
+        <EntityTypeShape EntityType="GorgiasModel.Profile" Width="1.5" PointX="8" PointY="4.875" />
+        <AssociationConnector Association="GorgiasModel.FK_Album_Profile" />
+        <AssociationConnector Association="GorgiasModel.FK_Category_Profile" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

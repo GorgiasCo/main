@@ -88,5 +88,53 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="GorgiasModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="CategoryOrder" ColumnName="CategoryOrder" />
+          <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
+          <ScalarProperty Name="CategoryParentID" ColumnName="CategoryParentID" />
+          <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+          <ScalarProperty Name="CategoryImage" ColumnName="CategoryImage" />
+          <ScalarProperty Name="CategoryStatus" ColumnName="CategoryStatus" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AlbumTopic" TypeName="GorgiasModel.AlbumTopic" StoreEntitySet="AlbumTopic">
+      <EndProperty Name="Category">
+        <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+      </EndProperty>
+      <EndProperty Name="Album">
+        <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="GorgiasModel.Profile">
+        <MappingFragment StoreEntitySet="Profile">
+          <ScalarProperty Name="SubscriptionTypeID" ColumnName="SubscriptionTypeID" />
+          <ScalarProperty Name="ThemeID" ColumnName="ThemeID" />
+          <ScalarProperty Name="ProfileTypeID" ColumnName="ProfileTypeID" />
+          <ScalarProperty Name="ProfileIsConfirmed" ColumnName="ProfileIsConfirmed" />
+          <ScalarProperty Name="ProfileStatus" ColumnName="ProfileStatus" />
+          <ScalarProperty Name="ProfileEmail" ColumnName="ProfileEmail" />
+          <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+          <ScalarProperty Name="ProfileShortDescription" ColumnName="ProfileShortDescription" />
+          <ScalarProperty Name="ProfileURL" ColumnName="ProfileURL" />
+          <ScalarProperty Name="ProfileCredit" ColumnName="ProfileCredit" />
+          <ScalarProperty Name="ProfileLike" ColumnName="ProfileLike" />
+          <ScalarProperty Name="ProfileView" ColumnName="ProfileView" />
+          <ScalarProperty Name="ProfileDescription" ColumnName="ProfileDescription" />
+          <ScalarProperty Name="ProfileDateCreated" ColumnName="ProfileDateCreated" />
+          <ScalarProperty Name="ProfileIsDeleted" ColumnName="ProfileIsDeleted" />
+          <ScalarProperty Name="ProfileIsPeople" ColumnName="ProfileIsPeople" />
+          <ScalarProperty Name="ProfileFullnameEnglish" ColumnName="ProfileFullnameEnglish" />
+          <ScalarProperty Name="ProfileFullname" ColumnName="ProfileFullname" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
