@@ -256,82 +256,6 @@
             function ProfileLoadCompleted(response) {
                 console.log(response.data.Result);
                 $scope.object = response.data.Result;
-
-                /* ---------------------------------------------------------------------------
-             * Chart
-             * --------------------------------------------------------------------------- */
-                //angular.element('.chart').waypoint({
-                //    offset: '100%',
-                //    triggerOnce: true,
-                //    handler: function () {
-                //        var color = jQuery(this).attr('data-color');
-                //        jQuery(this).easyPieChart({
-                //            animate: 1000,
-                //            barColor: color,
-                //            lineCap: 'circle',
-                //            lineWidth: 8,
-                //            size: 140,
-                //            scaleColor: false,
-                //            trackColor: '#f8f8f8'
-                //        });
-                //    }
-                //});
-
-                //angular.element('.blog_slider_ul').each(function () {
-
-                //    // Init carouFredSel
-                //    jQuery(this).carouFredSel({
-                //        circular: true,
-                //        responsive: true,
-                //        items: {
-                //            width: 380,
-                //            visible: {
-                //                min: 1,
-                //                max: 4
-                //            }
-                //        },
-                //        scroll: {
-                //            duration: 500,
-                //            easing: 'swing'
-                //        },
-                //        prev: {
-                //            button: function () {
-                //                return jQuery(this).closest('.blog_slider').find('.slider_prev');
-                //            }
-                //        },
-                //        next: {
-                //            button: function () {
-                //                return jQuery(this).closest('.blog_slider').find('.slider_next');
-                //            }
-                //        },
-                //        pagination: {
-                //            container: function () {
-                //                return jQuery(this).closest('.blog_slider').find('.slider_pagination');
-                //            }
-                //        },
-                //        auto: {
-                //            play: false,
-                //            timeoutDuration: 0,
-                //        },
-                //        swipe: {
-                //            onTouch: true,
-                //            onMouse: true,
-                //            onBefore: function () {
-                //                jQuery(this).find('a').addClass('disable');
-                //                jQuery(this).find('li').trigger('mouseleave');
-                //            },
-                //            onAfter: function () {
-                //                jQuery(this).find('a').removeClass('disable');
-                //            }
-                //        }
-                //    });
-
-                //    // Disable accidental clicks while swiping
-                //    jQuery(this).on('click', 'a.disable', function () {
-                //        return false;
-                //    });
-                //});
-
                 notificationService.displaySuccess("Profile loaded");
             }
 
@@ -340,10 +264,11 @@
             }
 
             function insertObject() {
-                apiService.post($scope.baseURL + 'api/Profile/ProfileID/' + $scope.ProfileID, $scope.object,
-                updateProfileSucceded,
-                updateProfileFailed);
-                console.log("Post!!!" + $scope.object);
+                if ($scope.Category != undefined && $scope.Contents.length >= 3) {
+                    console.log($scope.object, $scope.Category, 'added ;)');
+                } else {
+                    $scope.stickUpSizeToggler();
+                }                
             }
 
             function updateProfileSucceded(result) {
@@ -524,10 +449,11 @@
                     console.log(file, xhr);
 
                     var addedContent = {};
-                    addedContent.ContentTitle = file.width + '-' + file.height + "*" + xhr.Result[0].FileUrl;
+                    addedContent.ContentTitle = null;
                     addedContent.ContentURL = xhr.Result[0].FileUrl;
-                    addedContent.ContentID = $scope.contentIndex + 1;
-                    addedContent.ContentDimenssion = file.width + '-' + file.height;
+                    addedContent.ContentDimension = file.width + '-' + file.height;
+                    addedContent.ContentTypeID = 1;
+                    addedContent.ContentGeoLocation = null;
                     $scope.Contents.push(addedContent);
                     $scope.contentIndex = $scope.contentIndex + 1;
                     console.log('added', $scope.Contents, xhr.Result[0].FileUrl);
@@ -545,21 +471,83 @@
             $scope.removedfile = function () {
                 $scope.dzMethods.removeFile($scope.newFile); //We got $scope.newFile from 'addedfile' event callback
                 console.log('$scope.newFile');
-            }
+            };
             //End dropzone ;)
 
+            $scope.regx = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+            $scope.searchKeywordURL = $scope.baseURL + "api/Mobile/V2/Categories/Search/";
+            var todayDate = new Date();
 
+            var dd = todayDate.getDate();
+            var mm = todayDate.getMonth() + 1; //January is 0!
+            var yyyy = todayDate.getFullYear();
 
-            //loadIndustries()
-            //loadProfileTypes()
-            //loadThemes()
-            //loadSubscriptionTypes()
+            $scope.today = yyyy + '-' + mm + '-' + dd ;
+            $scope.object.AlbumDatePublish = todayDate;//$scope.today;
 
-            $scope.signout = function () {
-                authService.fillAuthData();
-                authService.logOut();
-                $location.url('/');
-                console.log('good bye ;)');
+            console.log($scope.today, 'Today');
+
+            $scope.addNewTextContent = function () {
+                var addedContent = {};
+                addedContent.ContentTitle = null;
+                addedContent.ContentURL = null;
+                //addedContent.ContentID = $scope.contentIndex + 1;
+                addedContent.ContentDimenssion = null;
+                addedContent.ContentTypeID = 2;
+                addedContent.ContentGeoLocation = null;
+                $scope.Contents.push(addedContent);
+            };
+
+            $scope.addNewCTAContent = function () {
+                var addedContent = {};
+                addedContent.ContentTitle = null;
+                addedContent.ContentURL = null;
+                //addedContent.ContentID = $scope.contentIndex + 1;
+                addedContent.ContentDimenssion = null;
+                addedContent.ContentTypeID = 3;
+                addedContent.ContentGeoLocation = null;
+                $scope.Contents.push(addedContent);
+            };
+
+            loadStorySettings();
+            loadContentTypes();
+
+            function loadStorySettings() {
+                apiService.get($scope.baseURL + 'api/Mobile/V2/Story/Settings/1011/13/true', null,
+                StorySettingsLoadCompleted,
+                StorySettingsLoadFailed);
+            }
+
+            function StorySettingsLoadCompleted(response) {
+                console.log(response.data.Result);
+
+                $scope.Languages = response.data.Result[0].SettingCollection;
+                $scope.Topics = response.data.Result[1].SettingCollection;
+                $scope.ContentRatings = response.data.Result[2].SettingCollection;
+                $scope.Availabilities = response.data.Result[3].SettingCollection;
+                $scope.Categories = response.data.Result[1].SettingCollection;
+
+                notificationService.displaySuccess("StorySettingsLoadCompleted loaded");
+            }
+
+            function StorySettingsLoadFailed(response) {
+                notificationService.displayError(response.data.Errors);
+            }
+
+            function loadContentTypes() {
+                apiService.get($scope.baseURL + 'api/Mobile/V2/Content/Types/3', null,
+                contentTypesLoadCompleted,
+                contentTypesLoadFailed);
+            }
+
+            function contentTypesLoadCompleted(response) {
+                console.log(response.data.Result);
+                $scope.ContentTypes = response.data.Result;                
+                notificationService.displaySuccess("StorySettingsLoadCompleted loaded");
+            }
+
+            function contentTypesLoadFailed(response) {
+                notificationService.displayError(response.data.Errors);
             }
 
 

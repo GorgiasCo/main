@@ -118,6 +118,8 @@
     <Content Include="assets\js\services\notificationService.js" />
     <Content Include="assets\js\services\tokensManagerService.js" />
     <Content Include="assets\js\services\trialService.js" />
+    <Content Include="assets\plugins\angular-angucomplete\angucomplete.css" />
+    <Content Include="assets\plugins\angular-angucomplete\angucomplete.js" />
     <Content Include="assets\plugins\angular-bootstrap\bootstrap.min.js" />
     <Content Include="assets\plugins\angular-bootstrap\ui-bootstrap-2.2.0-csp.css" />
     <Content Include="assets\plugins\angular-bootstrap\ui-bootstrap-2.2.0.js" />
