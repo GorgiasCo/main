@@ -27,15 +27,16 @@
                         </div>
                         <div class="panel-body" ng-if="content.ContentTypeID == 1">
                             <img ng-src="{{content.ContentURL}}" style="width:100%; height:60%;" />
-                            <textarea rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="200"></textarea>
-                        </div>
-                        <div class="panel-body" ng-if="content.ContentTypeID == 2">
-                            <input type="text" name="ProfileFullname" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
-                            <textarea rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentURL" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="200" required></textarea>
+                            <textarea ng-if="$index == 0" rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="250" required></textarea>
+                            <textarea ng-if="$index > 0" rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="250"></textarea>
                         </div>
                         <div class="panel-body" ng-if="content.ContentTypeID == 3">
-                            <select id="ContentTypeID" class="form-control cs-select cs-skin-slide" ng-model="object.ContentTypeID" ng-options="option.ContentTypeID as option.ContentTypeName for option in ContentTypes" title="Please select at least one" required></select><input type="hidden" name="ContentTypeID" ng-value="object.ContentTypeID" />
-                            <input type="text" ng-pattern="regx" style="margin-top:7px;" name="ProfileFullname" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
+                            <input type="text" name="ProfileFullname" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
+                            <textarea rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentURL" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="250" required></textarea>
+                        </div>
+                        <div class="panel-body" ng-if="content.ContentTypeID > 3">
+                            <select id="ContentTypeID" class="form-control cs-select cs-skin-slide" ng-change="content.ContentTypeID=content.ContentTitle" ng-model="content.ContentTitle" ng-options="option.ContentTypeID as option.ContentTypeName for option in ContentTypes" title="Please select at least one" required></select><input type="hidden" name="ContentTypeID" ng-value="object.ContentTypeID" />
+                            <input type="text" ng-pattern="regx" style="margin-top:7px;" name="ProfileFullname" ng-model="content.ContentURL" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
                         </div>
                     </div>
                     <div data-pages="portlet" class="panel panel-default" id="portlet-basic">
@@ -53,7 +54,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="row" style="margin:7px 0px;">
+                    <div class="row" style="margin:7px 0px;" ng-show="ProfileIsConfirmed == true">
                         <div angucomplete-alt placeholder="Category"
                              pause="60"
                              selected-object="Category"
@@ -79,7 +80,11 @@
                     </div>-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <div pg-form-group class="form-group form-group-default required">
+                            <div pg-form-group class="form-group form-group-default" ng-if="ProfileIsConfirmed == true">
+                                <label>{{'ProfileType' | translate}}Topics</label>
+                                <select id="TopicID" class="form-control" ng-model="object.TopicID" ng-options="option.KeyID as option.KeyName for option in Categories" title="Please select at least one"></select><input type="hidden" name="Topics" ng-value="object.TopicID" />
+                            </div>
+                            <div pg-form-group class="form-group form-group-default required" ng-if="ProfileIsConfirmed == false">
                                 <label>{{'ProfileType' | translate}}Topics</label>
                                 <select id="TopicID" class="form-control" ng-model="object.TopicID" ng-options="option.KeyID as option.KeyName for option in Categories" title="Please select at least one" required></select><input type="hidden" name="Topics" ng-value="object.TopicID" />
                             </div>
@@ -89,7 +94,7 @@
                                 <label>{{'Subscription' | translate}}</label>
                                 <select id="AlbumReadingLanguageCode" class="form-control cs-select cs-skin-slide"
                                         ng-model="object.AlbumReadingLanguageCode"
-                                        ng-options="option.KeyID as option.KeyName for option in Languages" title="Please select at least one" required></select><input type="hidden" name="AlbumReadingLanguageCode" ng-value="object.AlbumReadingLanguageCode" />
+                                        ng-options="option.KeyExtra as option.KeyName for option in Languages" title="Please select at least one" required></select><input type="hidden" name="AlbumReadingLanguageCode" ng-value="object.AlbumReadingLanguageCode" />
                             </div>
                         </div>
                     </div>

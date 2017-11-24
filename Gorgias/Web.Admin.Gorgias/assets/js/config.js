@@ -642,7 +642,7 @@ angular.module('gorgiasapp')
                     }
                 })
                 .state('app.ui.modals', {
-                    url: '/story/new',
+                    url: '/story/new/:id',
                     templateUrl: 'tpl/admin/album/addnewalbum.html',
                     controller: 'addNewAlbumController',
                     resolve: {

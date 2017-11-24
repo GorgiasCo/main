@@ -4689,6 +4689,7 @@ button:disabled {
     width: 100vw;
     bottom: 0;
     margin-top: 13px;
+    z-index:999999;
 }
 
 .footer-copyright {

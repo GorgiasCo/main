@@ -2,6 +2,8 @@
     'use strict';
     app.controller('addNewAlbumController', ['$scope', '$stateParams', '$http', 'apiService', 'ngAuthSettings', '$location', 'notificationService', '$anchorScroll', 'authService', '$translate',
         function ($scope, $stateParams, $http, apiService, ngAuthSettings, $location, notificationService, $anchorScroll, authService, $translate) {
+            $scope.ProfileIsConfirmed = false;
+            //$scope.ProfileID = 1011;
 
             var vm = this;
 
@@ -26,7 +28,7 @@
 
             $scope.AddObject = insertObject;
 
-            $scope.ProfileID = authService.authentication.userID;// $route.current.params.id;
+            //$scope.ProfileID = authService.authentication.userID;// $route.current.params.id;
 
             $scope.contentIndex = 0;
 
@@ -182,9 +184,10 @@
                 //checkValidity();
             }
 
+            //ToDO
+            $scope.ProfileID = $stateParams.id;//$route.current.params.id;
             console.log($scope.ProfileID, 'log in now admin', authService.authentication.userID, 'auth', authService.authentication);
 
-            $scope.ProfileID = $stateParams.id;//$route.current.params.id;
             $scope.hasFile = false;
 
             $scope.checkedMenu = false;
@@ -263,13 +266,7 @@
                 notificationService.displayError(response.data.Errors);
             }
 
-            function insertObject() {
-                if ($scope.Category != undefined && $scope.Contents.length >= 3) {
-                    console.log($scope.object, $scope.Category, 'added ;)');
-                } else {
-                    $scope.stickUpSizeToggler();
-                }                
-            }
+
 
             function updateProfileSucceded(result) {
                 console.log("Success" + result.data.Result);
@@ -410,12 +407,12 @@
                         } else {
                             console.log(file.width, file.height, 'image ;)');
                             file.acceptDimensions();
-                        }                        
+                        }
                     });
                 },
-                accept: function(file, done) {
+                accept: function (file, done) {
                     file.acceptDimensions = done;
-                    file.rejectDimensions = function() { done("Invalid dimension."); };
+                    file.rejectDimensions = function () { done("Invalid dimension."); };
                     // Of course you could also just put the `done` function in the file
                     // and call it either with or without error in the `thumbnail` event
                     // callback, but I think that this is cleaner.
@@ -476,13 +473,14 @@
 
             $scope.regx = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
             $scope.searchKeywordURL = $scope.baseURL + "api/Mobile/V2/Categories/Search/";
+
             var todayDate = new Date();
 
             var dd = todayDate.getDate();
             var mm = todayDate.getMonth() + 1; //January is 0!
             var yyyy = todayDate.getFullYear();
 
-            $scope.today = yyyy + '-' + mm + '-' + dd ;
+            $scope.today = yyyy + '-' + mm + '-' + dd;
             $scope.object.AlbumDatePublish = todayDate;//$scope.today;
 
             console.log($scope.today, 'Today');
@@ -493,7 +491,7 @@
                 addedContent.ContentURL = null;
                 //addedContent.ContentID = $scope.contentIndex + 1;
                 addedContent.ContentDimenssion = null;
-                addedContent.ContentTypeID = 2;
+                addedContent.ContentTypeID = 3;
                 addedContent.ContentGeoLocation = null;
                 $scope.Contents.push(addedContent);
             };
@@ -504,16 +502,125 @@
                 addedContent.ContentURL = null;
                 //addedContent.ContentID = $scope.contentIndex + 1;
                 addedContent.ContentDimenssion = null;
-                addedContent.ContentTypeID = 3;
+                addedContent.ContentTypeID = 4;
                 addedContent.ContentGeoLocation = null;
                 $scope.Contents.push(addedContent);
             };
 
+            function insertObject() {
+                if ($scope.ProfileIsConfirmed) {
+                    console.log($scope.Category, 'before action ;)');
+                    if ($scope.Category != undefined && $scope.Contents.length >= 3) {
+                        console.log($scope.object, $scope.Category, 'added ;)');
+
+                        $scope.object.Contents = $scope.Contents;
+
+                        let categoryName = $scope.Category.title != undefined ? $scope.Category.originalObject.KeyName : $scope.Category.originalObject;
+
+                        let newAlbumData = {
+                            AlbumName: $scope.Contents[0].ContentTitle,
+                            AlbumStatus: true,
+                            AlbumCover: $scope.Contents[0].ContentURL,
+                            CategoryID: $scope.object.TopicID != undefined ? $scope.object.TopicID : 29,
+                            ProfileID: $scope.ProfileID,
+                            AlbumDatePublish: $scope.object.AlbumDatePublish,
+                            AlbumView: 0,
+                            AlbumAvailability: $scope.object.AlbumAvailability,
+                            AlbumHasComment: $scope.object.AlbumHasComment != undefined ? $scope.object.AlbumHasComment : false,
+                            AlbumReadingLanguageCode: $scope.object.AlbumReadingLanguageCode,
+                            AlbumRepostValue: null,
+                            AlbumRepostRequest: null,
+                            AlbumRepostAttempt: null,
+                            AlbumPrice: null,
+                            AlbumIsTokenAvailable: null,
+                            AlbumPriceToken: null,
+                            ContentRatingID: $scope.object.ContentRatingID,
+                            AlbumParentID: $scope.object.AlbumParentID,
+                            Topic: { CategoryName: categoryName, CategoryID: null },//Why???? ;)
+                            Contents: $scope.Contents
+                            // [
+                            // {
+                            // "ContentTitle":"hello WOW from fiddler4 h6",
+                            // "ContentURL":"https://gorgiasasia.blob.core.windows.net/images/content-20161106233839-pic(4).jpg",
+                            // "ContentGeoLocation":null,
+                            // "ContentDimension":"800-600",
+                            // "ContentTypeID":1
+                            // }]
+                        };
+
+                        console.log(newAlbumData, 'newalbumdata added ;)');
+
+                        InsertNewStory(newAlbumData);
+
+                    } else {
+                        $scope.stickUpSizeToggler();
+                    }
+                } else {
+                    if ($scope.Contents.length >= 3) {
+                        console.log($scope.object, 'added ;)');
+
+                        $scope.object.Contents = $scope.Contents;
+
+                        let newAlbumData = {
+                            AlbumName: $scope.Contents[0].ContentTitle,
+                            AlbumStatus: true,
+                            AlbumCover: $scope.Contents[0].ContentURL,
+                            CategoryID: $scope.object.TopicID != '' ? $scope.object.TopicID : 29,
+                            ProfileID: $scope.ProfileID,
+                            AlbumDatePublish: $scope.object.AlbumDatePublish,
+                            AlbumView: 0,
+                            AlbumAvailability: $scope.object.AlbumAvailability,
+                            AlbumHasComment: $scope.object.AlbumHasComment != undefined ? $scope.object.AlbumHasComment : false,
+                            AlbumReadingLanguageCode: $scope.object.AlbumReadingLanguageCode,
+                            AlbumRepostValue: null,
+                            AlbumRepostRequest: null,
+                            AlbumRepostAttempt: null,
+                            AlbumPrice: null,
+                            AlbumIsTokenAvailable: null,
+                            AlbumPriceToken: null,
+                            ContentRatingID: $scope.object.ContentRatingID,
+                            AlbumParentID: $scope.object.AlbumParentID,
+                            Topic: null,//Why???? ;)
+                            Contents: $scope.Contents
+                            // [
+                            // {
+                            // "ContentTitle":"hello WOW from fiddler4 h6",
+                            // "ContentURL":"https://gorgiasasia.blob.core.windows.net/images/content-20161106233839-pic(4).jpg",
+                            // "ContentGeoLocation":null,
+                            // "ContentDimension":"800-600",
+                            // "ContentTypeID":1
+                            // }]
+                        };
+
+                        console.log(newAlbumData, 'newalbumdata added ;)');
+
+                        InsertNewStory(newAlbumData);
+
+                    } else {
+                        $scope.stickUpSizeToggler();
+                    }
+                }
+            }
+
             loadStorySettings();
             loadContentTypes();
 
+            function InsertNewStory(data) {
+                apiService.post($scope.baseURL + 'api/Mobile/V2/Album/New/Topic/', data,
+                insertNewStoryCompleted,
+                insertNewStoryFailed);
+            }
+
+            function insertNewStoryCompleted(response) {
+                console.log(response, 'insertNewStoryCompleted');
+            }
+
+            function insertNewStoryFailed(error) {
+                console.log(error, 'insertNewStoryFailed');
+            }
+
             function loadStorySettings() {
-                apiService.get($scope.baseURL + 'api/Mobile/V2/Story/Settings/1011/13/true', null,
+                apiService.get($scope.baseURL + 'api/Mobile/V2/Story/Settings/' + $scope.ProfileID + '/13/' + $scope.ProfileIsConfirmed, null,
                 StorySettingsLoadCompleted,
                 StorySettingsLoadFailed);
             }
@@ -542,7 +649,7 @@
 
             function contentTypesLoadCompleted(response) {
                 console.log(response.data.Result);
-                $scope.ContentTypes = response.data.Result;                
+                $scope.ContentTypes = response.data.Result;
                 notificationService.displaySuccess("StorySettingsLoadCompleted loaded");
             }
 
@@ -551,7 +658,7 @@
             }
 
 
-            
+
 
         }]);
 })(angular.module('gorgiasapp'));
