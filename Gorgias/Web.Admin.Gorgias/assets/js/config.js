@@ -5,20 +5,32 @@
 
 //var serviceBase = 'https://gorgiasapi.azurewebsites.net/';
 //var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
-//var serviceBase = 'http://localhost:43587/';
-var serviceBase = 'http://gorgiasapp-v3.azurewebsites.net/';
+var serviceBase = 'http://localhost:43587/';
+//var serviceBase = 'http://gorgiasapp-v3.azurewebsites.net/';
 //var serviceBase = 'http://apiigorgias.azurewebsites.net/';
 //var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
 
 
 angular.module('gorgiasapp')
-    .run(['authService', '$location', "$rootScope", "$window",
-        function (authService, $location, $rootScope, $window) {
+    .run(['authService', '$location', "$rootScope", "$window", "localStorageService",
+        function (authService, $location, $rootScope, $window, localStorageService) {
             authService.fillAuthData();
 
             if (authService.authentication.userID == 0) {
                 $location.url('/access/login');
             }
+
+            $rootScope.previousState;
+            $rootScope.currentState;
+            $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+                $rootScope.previousState = from.name;
+                $rootScope.currentState = to.name;
+
+                localStorageService.set('pageHistory', {from: from.name, fromParams: fromParams, to: to.name, toParams: toParams});
+
+                console.log('Previous state:' + $rootScope.previousState, fromParams)
+                console.log('Current state:' + $rootScope.currentState, toParams)
+            });
 
             $rootScope.$on('$routeChangeSuccess', function (evt, absNewUrl, absOldUrl) {
                 //$anchorScroll('top');
@@ -54,6 +66,7 @@ angular.module('gorgiasapp')
             $httpProvider.defaults.headers.post = {};
             $httpProvider.defaults.headers.put = {};
             $httpProvider.defaults.headers.patch = {};
+
 
             $translateProvider.translations('en', {
                 AllMyProfile: 'Profiles',
@@ -168,7 +181,29 @@ angular.module('gorgiasapp')
                 expiredInTitle: " expires in",
                 candidNotificationTitle: "ICONIC Candid",
                 updateNotificationTitle: " Update",
-                AlbumHasComments: "Allow Comments",//允许评论
+                AlbumHasComments: "Allow Comments",//允许评论 new V2
+
+                NewStory: "New Story",
+                AddNewPhoto: "+ New Photo",
+                AddNewText: "+ New Text",
+                AddNewCTA: "+ New CTA",
+                NewStoryCategory: "microAp Category",
+                NewStoryDate: "Publish Date",
+                NewStoryTopic: "Topic",
+                NewStoryReadingLanguage: "Language",
+                NewStoryAvailability: "Expire in",
+                NewStoryContentRating: "Content Rate",
+                NewStoryCanReview: "Can Review?",
+                NewStoryStoryTitlePlaceHolder: "Story Title",
+                NewStoryContentTitle: "Title",
+                NewStoryContentURLCTAPlaceholder: "Link must be bigan with https://",
+                NewStoryYouNeedAtLeastThreePhoto: "You need 3 photos to publish your story",
+                NewStoryContinue: "Continue",
+                NewStoryCongratulationTitle: "Congratulation, your story is published.",
+                NewStoryCongratulationNewStoryTitle: "New Story",
+                NewStoryCongratulationGoToMyProfileTitle: "Go to My Profile",
+
+
                 
 
 
@@ -641,7 +676,7 @@ angular.module('gorgiasapp')
                         }]
                     }
                 })
-                .state('app.ui.modals', {
+                .state('app.ui.story', {
                     url: '/story/new/:id',
                     templateUrl: 'tpl/admin/album/addnewalbum.html',
                     controller: 'addNewAlbumController',

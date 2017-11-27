@@ -1,21 +1,18 @@
-﻿
-<div class="register-container full-height sm-p-t-30">
+﻿<div class="register-container full-height sm-p-t-30" style="margin-top:13px;">
     <div class="d-flex justify-content-center flex-column full-height ">
-        <!--<div class="row">
-            <div class="col-md-6">-->
         <!-- START PANEL -->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">
-                    {{'MyProfileInformation' | translate}}
+                    {{'NewStory' | translate}}
                 </div>
             </div>
-            <div class="panel-body" style="background-color:burlywood;">
+            <div class="panel-body">
                 <form id="form" role="form" novalidate angular-validator name="addProfileForm" angular-validator-submit="AddObject()">
                     <div data-pages="portlet" ng-repeat="content in Contents" class="panel panel-default" id="portlet-basic">
                         <div class="panel-heading ">
                             <div class="panel-title">
-                                Portlet Title
+                                
                             </div>
                             <div class="panel-controls">
                                 <ul>
@@ -27,35 +24,35 @@
                         </div>
                         <div class="panel-body" ng-if="content.ContentTypeID == 1">
                             <img ng-src="{{content.ContentURL}}" style="width:100%; height:60%;" />
-                            <textarea ng-if="$index == 0" rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="250" required></textarea>
-                            <textarea ng-if="$index > 0" rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="250"></textarea>
+                            <textarea ng-if="$index == 0" rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="{{'NewStoryStoryTitlePlaceHolder' | translate}}" maxlength="250" required></textarea>
+                            <textarea ng-if="$index > 0" rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="{{'DescribeSomething' | translate}}" maxlength="250"></textarea>
                         </div>
                         <div class="panel-body" ng-if="content.ContentTypeID == 3">
-                            <input type="text" name="ProfileFullname" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
-                            <textarea rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentURL" validate-on="blur" class="form-control" placeholder="Describe Something..." maxlength="250" required></textarea>
+                            <input type="text" name="ProfileFullname" ng-model="content.ContentTitle" validate-on="blur" class="form-control" placeholder="{{'NewStoryContentTitle' | translate}}" required />
+                            <textarea rows="5" style="height: 70px;margin-top:7px;" name="ProfileDescription" ng-model="content.ContentURL" validate-on="blur" class="form-control" placeholder="{{'DescribeSomething' | translate}}" maxlength="250" required></textarea>
                         </div>
                         <div class="panel-body" ng-if="content.ContentTypeID > 3">
                             <select id="ContentTypeID" class="form-control cs-select cs-skin-slide" ng-change="content.ContentTypeID=content.ContentTitle" ng-model="content.ContentTitle" ng-options="option.ContentTypeID as option.ContentTypeName for option in ContentTypes" title="Please select at least one" required></select><input type="hidden" name="ContentTypeID" ng-value="object.ContentTypeID" />
-                            <input type="text" ng-pattern="regx" style="margin-top:7px;" name="ProfileFullname" ng-model="content.ContentURL" validate-on="blur" class="form-control" placeholder="eg.: John Doe" required />
+                            <input type="text" ng-pattern="regx" style="margin-top:7px;" name="ProfileFullname" ng-model="content.ContentURL" validate-on="blur" class="form-control" placeholder="{{'NewStoryContentURLCTAPlaceholder' | translate}}" required />
                         </div>
                     </div>
                     <div data-pages="portlet" class="panel panel-default" id="portlet-basic">
                         <div class="panel-body" style="text-align:center;">
                             <button class="btn btn-primary btn-cons m-b-10" id="addnewPhoto" type="button">
-                                <i class="pg-form"></i> <span class="bold">Submit</span>
+                                <i class="fa fa-picture-o"></i> <span class="bold">{{'AddNewPhoto' | translate}}</span>
                             </button>
                             <!-- Indicates a successful or positive action -->
                             <button class="btn btn-success btn-cons m-b-10" ng-click="addNewTextContent()" ng-disabled="Contents.length == 0" type="button">
-                                <i class="fa fa-cloud-upload"></i> <span class="bold">Upload</span>
+                                <i class="pg-form"></i> <span class="bold">{{'AddNewText' | translate}}</span>
                             </button>
                             <!-- Contextual button for informational alert messages -->
                             <button class="btn btn-info btn-cons m-b-10" ng-click="addNewCTAContent()" ng-disabled="Contents.length == 0" type="button">
-                                <i class="fa fa-paste"></i> <span class="bold">Edit</span>
+                                <i class="fa fa-link"></i> <span class="bold">{{'AddNewCTA' | translate}}</span>
                             </button>
                         </div>
                     </div>
                     <div class="row" style="margin:7px 0px;" ng-show="ProfileIsConfirmed == true">
-                        <div angucomplete-alt placeholder="Category"
+                        <div angucomplete-alt placeholder="{{'NewStoryCategory' | translate}}"
                              pause="60"
                              selected-object="Category"
                              remote-url="{{searchKeywordURL}}"
@@ -69,7 +66,7 @@
                              field-required="true"></div>
                     </div>
                     <div pg-form-group class="form-group form-group-default required">
-                        <label>{{'ShortDescription' | translate}}</label>
+                        <label>{{'NewStoryDate' | translate}}</label>
                         <input type="date" name="AlbumDatePublish" min="{{today}}" ng-model="object.AlbumDatePublish" validate-on="blur" class="form-control" required />
                     </div>
                     <!--<div pg-form-group class="form-group form-group-default required">
@@ -81,17 +78,17 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default" ng-if="ProfileIsConfirmed == true">
-                                <label>{{'ProfileType' | translate}}Topics</label>
+                                <label>{{'NewStoryTopic' | translate}}Topics</label>
                                 <select id="TopicID" class="form-control" ng-model="object.TopicID" ng-options="option.KeyID as option.KeyName for option in Categories" title="Please select at least one"></select><input type="hidden" name="Topics" ng-value="object.TopicID" />
                             </div>
                             <div pg-form-group class="form-group form-group-default required" ng-if="ProfileIsConfirmed == false">
-                                <label>{{'ProfileType' | translate}}Topics</label>
+                                <label>{{'NewStoryTopic' | translate}}Topics</label>
                                 <select id="TopicID" class="form-control" ng-model="object.TopicID" ng-options="option.KeyID as option.KeyName for option in Categories" title="Please select at least one" required></select><input type="hidden" name="Topics" ng-value="object.TopicID" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default required">
-                                <label>{{'Subscription' | translate}}</label>
+                                <label>{{'NewStoryReadingLanguage' | translate}}</label>
                                 <select id="AlbumReadingLanguageCode" class="form-control cs-select cs-skin-slide"
                                         ng-model="object.AlbumReadingLanguageCode"
                                         ng-options="option.KeyExtra as option.KeyName for option in Languages" title="Please select at least one" required></select><input type="hidden" name="AlbumReadingLanguageCode" ng-value="object.AlbumReadingLanguageCode" />
@@ -101,37 +98,63 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default required">
-                                <label>{{'ProfileType' | translate}}</label>
-                                <select id="AlbumAvailability" class="form-control" ng-model="object.AlbumAvailability" ng-options="option.KeyID as option.KeyName for option in Availabilities" title="Please select at least one" required></select><input type="hidden" name="Availabilities" ng-value="object.AlbumAvailability" />
+                                <label>{{'NewStoryAvailability' | translate}}</label>
+                                <select id="AlbumAvailability" class="form-control" ng-model="object.AlbumAvailability" ng-options="option.KeyID as prepareAvailability(option) for option in Availabilities" title="Please select at least one" required></select><input type="hidden" name="Availabilities" ng-value="object.AlbumAvailability" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div pg-form-group class="form-group form-group-default required">
-                                <label>{{'Subscription' | translate}}</label>
+                                <label>{{'NewStoryContentRating' | translate}}</label>
                                 <select id="ContentRatingID" class="form-control" ng-model="object.ContentRatingID" ng-options="option.KeyID as option.KeyName for option in ContentRatings" title="Please select at least one" required></select><input type="hidden" name="ContentRatingID" ng-value="object.ContentRatingID" />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div pg-form-group class="form-group form-group-default">
-                            <input type="checkbox" name="AlbumHasComment" ng-model="object.AlbumHasComment" />Can Review?
+                            <input type="checkbox" name="AlbumHasComment" ng-model="object.AlbumHasComment" />{{'NewStoryCanReview' | translate}}
                         </div>
+                    </div>
+                    <div class="row" ng-if="errorStory == 1">
+                        <p style="color:red;padding:5px 13px;">{{errorStoryNumberOfPhotoTitle}}</p>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <button class="btn btn-primary" type="submit" ng-disabled="addProfileForm.$invalid">{{'Submit' | translate}}</button>
-                            <a class="btn btn-default" ng-click="redirect()">{{'Cancel' | translate}}</a>
+                            <a class="btn btn-default" ng-click="cancel()">{{'Cancel' | translate}}</a>
                         </div>
                     </div>
                     <ng-dropzone class="dropzone" style="display:none" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
                 </form>
-
             </div>
         </div>
-        <!-- END PANEL -->
-        <!--</div>
+        <!-- END PANEL -->        
+    </div>
+</div>
+<div class="modal fade slide-up disable-scroll" id="modalSlideUpSmall" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+            <div class="modal-content">
+                <div class="modal-body text-center m-t-20">
+                    <h4 class="no-margin p-b-10">{{'NewStoryYouNeedAtLeastThreePhoto' | translate}}</h4>
+                    <button type="button" class="btn btn-primary btn-cons" data-dismiss="modal">{{'NewStoryContinue' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
 
-
-                       </div>-->
+<div class="modal fade slide-up disable-scroll" id="modalSlideUpSmallCongratulation" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+            <div class="modal-content">
+                <div class="modal-body text-center m-t-20">
+                    <h4 class="no-margin p-b-10">{{'NewStoryCongratulationTitle' | translate}}</h4>
+                    <button type="button" class="btn btn-primary btn-cons" ng-click="resetNewStory()">{{'NewStoryCongratulationNewStoryTitle' | translate}}</button>
+                    <button type="button" class="btn btn-default btn-cons" data-dismiss="modal" ng-click="cancel()">{{'NewStoryCongratulationGoToMyProfileTitle' | translate}}</button>                    
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
 </div>

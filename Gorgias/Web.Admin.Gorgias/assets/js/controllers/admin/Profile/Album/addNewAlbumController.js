@@ -1,9 +1,12 @@
 ﻿(function (app) {
     'use strict';
-    app.controller('addNewAlbumController', ['$scope', '$stateParams', '$http', 'apiService', 'ngAuthSettings', '$location', 'notificationService', '$anchorScroll', 'authService', '$translate',
-        function ($scope, $stateParams, $http, apiService, ngAuthSettings, $location, notificationService, $anchorScroll, authService, $translate) {
+    app.controller('addNewAlbumController', ['$scope', '$stateParams', '$http', 'apiService', 'ngAuthSettings', '$location', 'notificationService', '$anchorScroll', 'authService', '$translate', 'localStorageService', '$state', '$filter',
+        function ($scope, $stateParams, $http, apiService, ngAuthSettings, $location, notificationService, $anchorScroll, authService, $translate, localStorageService, $state, $filter) {
             $scope.ProfileIsConfirmed = false;
             //$scope.ProfileID = 1011;
+
+            var historyPage = localStorageService.get('pageHistory');
+            console.log('add new ;)', historyPage);
 
             var vm = this;
 
@@ -27,7 +30,7 @@
             $scope.baseURL = ngAuthSettings.apiServiceBaseUri;
 
             $scope.AddObject = insertObject;
-
+            $scope.cancel = redirectBack;
             //$scope.ProfileID = authService.authentication.userID;// $route.current.params.id;
 
             $scope.contentIndex = 0;
@@ -43,35 +46,58 @@
             $scope.modal = {};
             $scope.modal.slideUp = "default";
             $scope.modal.stickUp = "default";
+            $scope.errorStoryNumberOfPhotoTitle = $filter('translate')('NewStoryYouNeedAtLeastThreePhoto');
+
+            $scope.errorStory = 0;
+
+            $scope.resetNewStory = function () {
+                $scope.Contents = null;
+                $scope.errorStory = 0;
+                $('#modalSlideUpSmallCongratulation').modal('hide');
+            };
 
             $scope.toggleSlideUpSize = function () {
-                var size = $scope.modal.slideUp;
-                var modalElem = $('#modalSlideUp');
-                if (size == "mini") {
-                    $('#modalSlideUpSmall').modal('show');
-                } else {
-                    $('#modalSlideUp').modal('show');
-                    if (size == "default") {
-                        modalElem.children('.modal-dialog').removeClass('modal-lg');
-                    } else if (size == "full") {
-                        modalElem.children('.modal-dialog').addClass('modal-lg');
-                    }
-                }
+                $scope.errorStory = 1;
+                //var size = $scope.modal.slideUp;
+                //var modalElem = $('#modalSlideUp');
+                //if (size == "mini") {
+                //    $('#modalSlideUpSmall').modal('show');
+                //} else {
+                //    $('#modalSlideUp').modal('show');
+                //    if (size == "default") {
+                //        modalElem.children('.modal-dialog').removeClass('modal-lg');
+                //    } else if (size == "full") {
+                //        modalElem.children('.modal-dialog').addClass('modal-lg');
+                //    }
+                //}
+            };
+
+            $scope.modalCongratulation = function () {
+                $('#modalSlideUpSmallCongratulation').modal('show');
             };
 
             $scope.stickUpSizeToggler = function () {
-                var size = $scope.modal.stickUp;
-                var modalElem = $('#myModal');
-                if (size == "mini") {
-                    $('#modalStickUpSmall').modal('show')
-                } else {
-                    $('#myModal').modal('show')
-                    if (size == "default") {
-                        modalElem.children('.modal-dialog').removeClass('modal-lg');
-                    } else if (size == "full") {
-                        modalElem.children('.modal-dialog').addClass('modal-lg');
-                    }
-                }
+                $scope.errorStory = 1;
+
+                //var size = $scope.modal.stickUp;
+
+                $('#modalSlideUpSmall').modal('show');
+                //$('#modalSlideLeft').modal('show');
+
+
+                console.log('stickUpSizeToggler', $('#modalStickUpSmall'));
+
+                //var modalElem = $('#myModal');
+                //if (size == "mini") {
+                //    $('#modalStickUpSmall').modal('show')
+                //} else {
+                //    $('#myModal').modal('show')
+                //    if (size == "default") {
+                //        modalElem.children('.modal-dialog').removeClass('modal-lg');
+                //    } else if (size == "full") {
+                //        modalElem.children('.modal-dialog').addClass('modal-lg');
+                //    }
+                //}
             };
 
             $scope.modalSlideLeft = function () {
@@ -129,9 +155,6 @@
                 //});
 
             };
-
-
-
 
 
 
@@ -250,6 +273,8 @@
                 console.log(response);
             }
 
+            loadProfile();
+
             function loadProfile() {
                 apiService.get($scope.baseURL + 'api/Profile/ProfileID/' + $scope.ProfileID, null,
                 ProfileLoadCompleted,
@@ -257,8 +282,13 @@
             }
 
             function ProfileLoadCompleted(response) {
-                console.log(response.data.Result);
-                $scope.object = response.data.Result;
+                console.log(response.data.Result, 'ProfileLoadCompleted profile loaded');
+                //$scope.object = response.data.Result;
+                $scope.ProfileIsConfirmed = response.data.Result.ProfileIsConfirmed;
+
+                loadStorySettings();
+                loadContentTypes();
+
                 notificationService.displaySuccess("Profile loaded");
             }
 
@@ -286,7 +316,19 @@
             }
 
             function redirectBack() {
-                $location.url('/profile');
+                //$location.url('/profile');
+                console.log('redirect Back ;)', historyPage);
+                setTimeout(function () {
+                    $('#modalSlideUpSmallCongratulation').modal('hide');
+                }, 300);
+
+                setTimeout(function () {
+                    if (historyPage.from != "" && historyPage.to !== historyPage.from) {
+                        $state.go(historyPage.from, historyPage.fromParams);
+                    } else {
+                        $state.go('app.forms.masteradministrator', historyPage.toParams);
+                    }
+                }, 300);
             }
 
             function loadIndustries() {
@@ -602,9 +644,6 @@
                 }
             }
 
-            loadStorySettings();
-            loadContentTypes();
-
             function InsertNewStory(data) {
                 apiService.post($scope.baseURL + 'api/Mobile/V2/Album/New/Topic/', data,
                 insertNewStoryCompleted,
@@ -612,6 +651,8 @@
             }
 
             function insertNewStoryCompleted(response) {
+                $scope.modalCongratulation();
+                $scope.errorStory = 0;
                 console.log(response, 'insertNewStoryCompleted');
             }
 
@@ -631,10 +672,20 @@
                 $scope.Languages = response.data.Result[0].SettingCollection;
                 $scope.Topics = response.data.Result[1].SettingCollection;
                 $scope.ContentRatings = response.data.Result[2].SettingCollection;
-                $scope.Availabilities = response.data.Result[3].SettingCollection;
+                $scope.Availabilities = prepareAvailableAvailabilities(response.data.Result[3].SettingCollection);
                 $scope.Categories = response.data.Result[1].SettingCollection;
 
                 notificationService.displaySuccess("StorySettingsLoadCompleted loaded");
+            }
+
+            function prepareAvailableAvailabilities(availabilities) {
+                var results = [];
+                availabilities.forEach(function (item) {
+                    if (item.KeyExtra == null) {
+                        results.push(item);
+                    }
+                });
+                return results;
             }
 
             function StorySettingsLoadFailed(response) {
@@ -657,8 +708,42 @@
                 notificationService.displayError(response.data.Errors);
             }
 
+            $scope.prepareAvailability = function (data) {
+
+                var item = data.KeyID;
+                console.log(data, 'Availability');
+
+                if (data.KeyExtra != null) {
+                    return;
+                }
+
+                var hours = (item / (60)).toFixed(0);
+
+                var days = (item / (60 * 24)).toFixed(0);
+                var result = null;
+
+                if (item < 60) {
+                    result = item > 1 ? item + ' mins' : item + ' min';
+                } else if (hours < 24) {
+                    result = hours > 1 ? hours + ' hours' : hours + ' hour';
+                } else {
+                    result = days > 1 ? days + ' days' : days + ' day';
+                }
+
+                return result;
+            }
 
 
+            //$scope.notificationDate = {
+            //    body: $scope.nProfile.ProfileFullname + " has published awesome candid " + $scope.AvailabilityName + " expires in" + $scope.resultN,
+            //    title: "ICONIC Candid",
+            //    albumid: $scope.object.AlbumID,
+            //    channelid: "ch" + $scope.item
+            //};
+
+
+            //$scope.modalCongratulation();
+            //$scope.stickUpSizeToggler();
 
         }]);
 })(angular.module('gorgiasapp'));
