@@ -61,7 +61,7 @@ angular.module('gorgiasapp')
                         _authentication.isAuth = true;
                         _authentication.userName = response.userName;
                         _authentication.userFullName = response.userFullName;
-                        _authentication.userID = response.userID;
+                        _authentication.userID = response.ProfileID;
                         _authentication.userProfileURL = response.profileURL;
                         _authentication.userProfileTypeID = response.profileTypeID;
                         _authentication.userIsConfirmed = response.profileIsConfirmed;

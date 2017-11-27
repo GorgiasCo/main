@@ -143,7 +143,7 @@ namespace Gorgias.Business.Facades.Web
             {
                 if (objUser.CountryID != null)
                 {
-                    return Mapper.Map<List<ProfileDTO>>(DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable().Where(m => m.Addresses.Any(a => a.City.CountryID == objUser.CountryID.Value)));
+                    return Mapper.Map<List<ProfileDTO>>(DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable().Where(m => m.Addresses.Any(a => a.City.CountryID == objUser.CountryID.Value) && m.ProfileIsConfirmed == true));
                 }
             }
             return null;

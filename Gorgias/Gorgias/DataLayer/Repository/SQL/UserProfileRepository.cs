@@ -112,7 +112,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IEnumerable<UserProfile> GetUserProfileAgency(int UserID)
         {
-            return (from w in context.UserProfiles.Include("Profile") where w.UserID == UserID && w.UserRoleID == 5 orderby w.ProfileID descending select w).ToList();
+            return (from w in context.UserProfiles.Include("Profile") where w.UserID == UserID && w.UserRoleID == 5 && w.Profile.ProfileIsConfirmed == true orderby w.ProfileID descending select w).ToList();
         }
 
         public int[] GetAdministrationUserProfile(int UserID)

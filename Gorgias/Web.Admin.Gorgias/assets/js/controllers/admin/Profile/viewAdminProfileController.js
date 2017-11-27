@@ -66,7 +66,7 @@ angular.module('gorgiasapp')
             console.log($scope.ProfileID, 'log in now admin', authService.authentication.userID, 'auth', authService.authentication);
 
             //$scope.ProfileID = $stateParams.current.params.id;
-            $scope.ProfileID = 1001;// $stateParams.id;
+            //$scope.ProfileID = 1001;// $stateParams.id;
             $scope.hasFile = false;
 
             $scope.checkedMenu = false;
@@ -327,11 +327,6 @@ angular.module('gorgiasapp')
                 notificationService.displayError(response.data.Errors);
             }
 
-
-
-
-
-
             loadIndustries()
             loadProfileTypes()
             loadThemes()
@@ -343,6 +338,8 @@ angular.module('gorgiasapp')
                 $location.url('/');
                 console.log('good bye ;)');
             }
+
+            console.log('profile admin it is me ;)');
 
         }]);
 //(function (app) {

@@ -34,7 +34,7 @@ namespace Gorgias.Manual
 
             SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
-            //setupContents();
+            setupContents();
 
             //Add countries ;)
             //var resultCountry = readCountriesJSON();
@@ -55,8 +55,8 @@ namespace Gorgias.Manual
             GorgiasEntities context = new GorgiasEntities();
 
             //var topicsFromStories = readStoryTopicsJSON();
-            var brandsAlbum = (from x in context.Albums where x.Profile.ProfileIsConfirmed == true && x.Profile.ProfileIsPeople == false select x).ToList();
-            var topics = (from x in context.Categories where x.CategoryParentID == 13 select x).ToList();
+            //var brandsAlbum = (from x in context.Albums where x.Profile.ProfileIsConfirmed == true && x.Profile.ProfileIsPeople == false select x).ToList();
+            //var topics = (from x in context.Categories where x.CategoryParentID == 13 select x).ToList();
 
             //foreach (Category obj in topicsFromStories)
             //{
@@ -77,36 +77,36 @@ namespace Gorgias.Manual
             //}
 
             //Insert Topics
-            foreach (Album obj in brandsAlbum)
-            {
-                //Album updatedAlbum = (from a in context.Albums where a.AlbumID == obj.CategoryParentID select a).First();
+            //foreach (Album obj in brandsAlbum)
+            //{
+            //    //Album updatedAlbum = (from a in context.Albums where a.AlbumID == obj.CategoryParentID select a).First();
 
-                //if (updatedAlbum.CategoryID > 10)
-                //{
-                //    updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == 6).First());
-                //}
-                //else
-                //{
-                //    updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == obj.CategoryID).First());
-                //}
+            //    //if (updatedAlbum.CategoryID > 10)
+            //    //{
+            //    //    updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == 6).First());
+            //    //}
+            //    //else
+            //    //{
+            //    //    updatedAlbum.Categories.Add(topics.Where(m => m.CategoryID == obj.CategoryID).First());
+            //    //}
 
-                context.Albums.Attach(obj);                
-                obj.Categories.Add(topics.Where(m => m.CategoryID == obj.CategoryID).First());
+            //    context.Albums.Attach(obj);                
+            //    obj.Categories.Add(topics.Where(m => m.CategoryID == obj.CategoryID).First());
 
-                context.SaveChanges();
-                Console.WriteLine(obj.AlbumID + "----" + obj.CategoryID + "--- Thanks Allah, Saved");
+            //    context.SaveChanges();
+            //    Console.WriteLine(obj.AlbumID + "----" + obj.CategoryID + "--- Thanks Allah, Saved");
 
-                //if (updatedAlbum.CategoryID < 11)
-                //{
-                //    //context.Albums.Attach(updatedAlbum);
-                //    //updatedAlbum.CategoryID = topics.Where(m => m.CategoryName == obj.CategoryName).First().CategoryID;
-                //    //context.SaveChanges();
-                //    //Console.WriteLine(updatedAlbum.AlbumID + "----" + obj.CategoryParentID + "----" + updatedAlbum.CategoryID + "----" + obj.CategoryID + "--- Thanks Allah, Saved");
-                //}  else
-                //{
-                //    Console.WriteLine(updatedAlbum.AlbumID + "----" + obj.CategoryParentID + "----" + updatedAlbum.CategoryID + "----" + obj.CategoryID + "--- Thanks Allah, Done");
-                //}               
-            }
+            //    //if (updatedAlbum.CategoryID < 11)
+            //    //{
+            //    //    //context.Albums.Attach(updatedAlbum);
+            //    //    //updatedAlbum.CategoryID = topics.Where(m => m.CategoryName == obj.CategoryName).First().CategoryID;
+            //    //    //context.SaveChanges();
+            //    //    //Console.WriteLine(updatedAlbum.AlbumID + "----" + obj.CategoryParentID + "----" + updatedAlbum.CategoryID + "----" + obj.CategoryID + "--- Thanks Allah, Saved");
+            //    //}  else
+            //    //{
+            //    //    Console.WriteLine(updatedAlbum.AlbumID + "----" + obj.CategoryParentID + "----" + updatedAlbum.CategoryID + "----" + obj.CategoryID + "--- Thanks Allah, Done");
+            //    //}               
+            //}
 
 
 
@@ -342,7 +342,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3338 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3439 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {

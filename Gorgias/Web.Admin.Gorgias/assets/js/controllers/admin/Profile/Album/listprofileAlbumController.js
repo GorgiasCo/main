@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.controller('listprofileAlbumController', ['$scope', '$stateParams', '$http', '$compile', 'apiService', 'ngAuthSettings', '$location', 'notificationService', '$filter', 'uuid',
-        function ($scope, $stateParams, $http, $compile, apiService, ngAuthSettings, $location, notificationService, $filter, uuid) {
+    app.controller('listprofileAlbumController', ['$scope', '$stateParams', '$http', '$compile', 'apiService', 'ngAuthSettings', '$location', 'notificationService', '$filter', 'uuid', '$state', 'localStorageService',
+        function ($scope, $stateParams, $http, $compile, apiService, ngAuthSettings, $location, notificationService, $filter, uuid, $state, localStorageService) {
 
             $scope.item = $stateParams.id;//$route.current.params.id;
             $scope.objectItemID = 0;
@@ -41,14 +41,24 @@
             $scope.object = { ProfileID: $stateParams.id, AlbumStatus: true };//$route.current.params.id AlbumAvailability: 0
 
             function addNew() {
-                $scope.isList = false;
-                $scope.isAdd = true;
-                $scope.isEdit = false;
-                $scope.object = { ProfileID: $stateParams.id, AlbumStatus: true };//$route.current.params.id AlbumAvailability: 0
+                //$state.go('app.ui.story');
 
-                //Load Components
-                loadCategories();
-                loadAvailabilityItems();
+                var historyPage = localStorageService.get('pageHistory');
+                console.log('add new ;)', historyPage);
+                $state.go('app.ui.story', {
+                    id: $scope.ProfileID
+                }, {
+                    reload: true,
+                    newtab: true // or smth like target : "_blank"
+                });
+                //$scope.isList = false;
+                //$scope.isAdd = true;
+                //$scope.isEdit = false;
+                //$scope.object = { ProfileID: $stateParams.id, AlbumStatus: true };//$route.current.params.id AlbumAvailability: 0
+
+                ////Load Components
+                //loadCategories();
+                //loadAvailabilityItems();
             }
 
             function edit(item) {
