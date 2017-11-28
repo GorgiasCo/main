@@ -79,7 +79,7 @@ namespace Gorgias.Controllers
             FirebaseNet.Messaging.FCMClient client = new FirebaseNet.Messaging.FCMClient("AAAAH1qDRKw:APA91bHX1I5ohgU4_gm42LmgFf7Gem_7gxq0-TlXYXptzXGnpBj4i9pw2o7Um3CUqT03YUN0HwmqgtdHqWCYhMh8LZUAX0jSHja4GJYnNebGo8B_i5Q4IzZaY1wk6F52XSM3u-OA6FHo");
 
             var serializer = new JavaScriptSerializer();
-            var data = new {AlbumID = objNotification.AlbumID, ProfileID = objNotification.ProfileID.Value, canValidate = true};
+            var data = new {AlbumID = objNotification.AlbumID, ProfileID = objNotification.ProfileID.Value, canValidate = true, NotificationType = "Story", ProfileFullname = objNotification.ProfileFullname};
             var json = serializer.Serialize(data);
 
             var message = new FirebaseNet.Messaging.Message()
@@ -97,6 +97,8 @@ namespace Gorgias.Controllers
                 {
                     {"AlbumID", objNotification.AlbumID },
                     {"ProfileID", objNotification.ProfileID.Value.ToString()},
+                    {"ProfileFullname", objNotification.ProfileFullname},
+                    {"NotificationType", "Story"},
                     {"canValidate", "true" },
                     {"extraData", json},
                     {"remote", "true"},

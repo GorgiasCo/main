@@ -342,7 +342,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3439 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3458 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {

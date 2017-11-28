@@ -10,6 +10,48 @@ namespace Gorgias.Business.Facades.Web
 {
     public class ReportFacade
     {
+        //V2
+        public FullProfileReport getCurrentProfileReportV2(int paramID, bool isCountry)
+        {
+            FullProfileReport resultFullProfileReport = new FullProfileReport();
+            resultFullProfileReport.TotalView = 0;
+            resultFullProfileReport.RevenueAmount = 0;
+
+            IList<DataTransferObjects.Report.ProfileReport> result;
+
+            if (isCountry)
+            {
+                result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrentByCountryV2(paramID);
+            }
+            else
+            {
+                result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrentV2(paramID);
+            }
+
+            resultFullProfileReport.ProfileReports = result.OrderByDescending(m => m.TotalView).ToList();
+
+            resultFullProfileReport.ActualEngagement = result.Sum(ae=> ae.TotalEngagement).HasValue ? result.Sum(ae => ae.TotalEngagement).Value : 0;
+            resultFullProfileReport.ActualSubscription = result.Sum(ae => ae.TotalSubscription).HasValue ? result.Sum(ae => ae.TotalSubscription).Value : 0;
+            resultFullProfileReport.ActualView = result.Sum(ae => ae.TotalView).HasValue ? result.Sum(ae => ae.TotalView).Value : 0; 
+
+            resultFullProfileReport.OverAllRevenue = 0;
+            resultFullProfileReport.OverAllEngagement = result.Sum(ae => ae.OverAllEngagement).HasValue ? result.Sum(ae => ae.OverAllEngagement).Value : 0;
+            resultFullProfileReport.OverAllSubscription = result.Sum(ae => ae.OverAllSubscription).HasValue ? result.Sum(ae => ae.OverAllSubscription).Value : 0;
+            resultFullProfileReport.OverAllView = result.Sum(ae => ae.OverAllView).HasValue ? result.Sum(ae => ae.OverAllView).Value : 0;
+
+            resultFullProfileReport.OverAllTotalEngagement = result.Sum(ae => ae.OverAllTotalEngagement).HasValue ? result.Sum(ae => ae.OverAllTotalEngagement).Value : 0;
+            resultFullProfileReport.OverAllTotalSubscription = result.Sum(ae => ae.OverAllTotalSubscription).HasValue ? result.Sum(ae => ae.OverAllTotalSubscription).Value : 0;
+            resultFullProfileReport.OverAllTotalView = result.Sum(ae => ae.OverAllTotalView).HasValue ? result.Sum(ae => ae.OverAllTotalView).Value : 0;
+
+            resultFullProfileReport.UserShareCommission = 0;
+
+            resultFullProfileReport.ProfileView = 0;
+            resultFullProfileReport.AlbumView = result.Sum(ae => ae.TotalView).HasValue ? result.Sum(ae => ae.TotalView).Value : 0; 
+
+            return resultFullProfileReport;
+        }
+
+        //End V2
         public FullProfileReport getCurrentProfileReport(int paramID, bool isCountry)
         {
             DataTransferObjects.RevenueDTO resultRevenue;

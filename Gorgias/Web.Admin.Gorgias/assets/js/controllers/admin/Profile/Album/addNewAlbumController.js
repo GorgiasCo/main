@@ -283,7 +283,7 @@
 
             function ProfileLoadCompleted(response) {
                 console.log(response.data.Result, 'ProfileLoadCompleted profile loaded');
-                //$scope.object = response.data.Result;
+                $scope.ProfileData = response.data.Result;
                 $scope.ProfileIsConfirmed = response.data.Result.ProfileIsConfirmed;
 
                 loadStorySettings();
@@ -651,9 +651,8 @@
             }
 
             function insertNewStoryCompleted(response) {
-                $scope.modalCongratulation();
-                $scope.errorStory = 0;
                 console.log(response, 'insertNewStoryCompleted');
+                sendNotification(response.data.Result.AlbumID);
             }
 
             function insertNewStoryFailed(error) {
@@ -733,15 +732,32 @@
                 return result;
             }
 
+            function sendNotification(albumID) {
+                var notificationData = {
+                    body: $scope.ProfileData.ProfileFullname + " has published new story",
+                    title: "New Story",
+                    albumid: albumID,
+                    ProfileFullname: $scope.ProfileData.ProfileFullname,
+                    channelid: "ch" + $scope.ProfileID,
+                    ProfileID: $scope.ProfileID,
+                    //NotificationType: 'Story',
+                    //canValidate: false,
+                };
 
-            //$scope.notificationDate = {
-            //    body: $scope.nProfile.ProfileFullname + " has published awesome candid " + $scope.AvailabilityName + " expires in" + $scope.resultN,
-            //    title: "ICONIC Candid",
-            //    albumid: $scope.object.AlbumID,
-            //    channelid: "ch" + $scope.item
-            //};
+                apiService.post($scope.baseURL + 'api/Web/Notification/V2/', notificationData,
+                    sendNotificationLoadCompleted,
+                    sendNotificationLoadFailed);
+            }
 
+            function sendNotificationLoadCompleted(response) {
+                $scope.modalCongratulation();
+                $scope.errorStory = 0;
+                console.log(response.data.Result, 'Notification');
+            }
 
+            function sendNotificationLoadFailed(response) {
+                console.log(response, 'Notification');
+            }
             //$scope.modalCongratulation();
             //$scope.stickUpSizeToggler();
 

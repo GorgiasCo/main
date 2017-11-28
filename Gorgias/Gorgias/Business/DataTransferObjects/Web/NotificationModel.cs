@@ -7,5 +7,6 @@
         public string AlbumID { get; set; }
         public string ChannelID { get; set; }
         public int? ProfileID { get; set; }
+        public string ProfileFullname { get; set; }
     }
 }

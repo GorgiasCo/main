@@ -118,7 +118,7 @@
                                                                                     <span class="hint-text pull-left text-white">{{obj.AlbumDateCreated | date:'MMM d, y'}}</span>
                                                                                     <div class="clearfix"></div>
                                                                                 </div>
-                                                                                <div class="m-t-10">
+                                                                                <!--<div class="m-t-10">
                                                                                     <div class="pull-left m-t-10">
                                                                                         <button class="btn btn-white btn-xs btn-mini bold fs-14" ng-click="edit(obj)" type="button">{{'Edit' | translate}}</button>
                                                                                     </div>
@@ -126,7 +126,7 @@
                                                                                         <button class="btn btn-danger btn-xs btn-mini bold fs-14" ng-click="delete(obj)" type="button">{{'Delete' | translate}}</button>
                                                                                     </div>
                                                                                     <div class="clearfix"></div>
-                                                                                </div>
+                                                                                </div>-->
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -587,7 +587,7 @@
                                     </div>
                                 </section>
                             </div>-->
-                            <div uib-accordion-group class="panel-default" heading="{{'ProfileCommission' | translate}}">
+                            <!--<div uib-accordion-group class="panel-default" heading="{{'ProfileCommission' | translate}}">
                                 <div ng-controller="listprofileProfileCommissionController as vm">
                                     <div ng-show="isList">
                                         <h3 class="admin box-title m-b-0"><button class="btn btn-success" ng-click="addNew()">+ {{'NewProfileShare' | translate}}</button></h3>
@@ -606,7 +606,6 @@
                                                     <tr ng-repeat="obj in items">
                                                         <td class="v-align-middle">
                                                             <div class="checkbox ">
-                                                                <!--<button class="btn btn-warning" ng-click="edit(obj)"><span class="button_icon"><i class="fa fa-pencil"></i></span></button>-->
                                                                 <button ng-if="obj.ProfileCommissionStatus" class="btn btn-danger" ng-click="delete(obj)"><span class="button_icon"><i class="fa fa-trash-o"></i></span></button>
                                                                 <i style="color:red" ng-if="!obj.ProfileCommissionStatus">{{'deleted' | translate}}</i>
                                                             </div>
@@ -635,11 +634,7 @@
                                             <div class="panel-body">
                                                 <div class="form-group"><label class="col-sm-3 control-label">Commission Rate<span class="required">*</span></label><div class="col-sm-9"><div class="input-group"><span class="input-group-addon"><i class="fa fa-money"></i></span><input type="text" name="ProfileCommissionRate" ng-model="object.ProfileCommissionRate" validate-on="blur" class="form-control" required /></div></div></div>                                                
                                                 <div class="form-group"><label class="col-sm-3 control-label">User</label><div class="col-sm-9"><select id="UserID" class="form-control" ng-model="object.UserID" ng-options="option.UserID as option.UserFullname for option in Users" title="Please select at least one" required></select><input type="hidden" name="UserID" ng-value="object.UserID" /></div></div>
-                                                <div class="form-group"><label class="col-sm-3 control-label">User Role</label><div class="col-sm-9"><select id="UserRoleID" class="form-control" ng-model="object.UserRoleID" ng-options="option.UserRoleID as option.UserRoleName for option in UserRoles" title="Please select at least one" required></select><input type="hidden" name="UserRoleID" ng-value="object.UserRoleID" /></div></div>
-
-                                                <!--<div ng-show="isAdd && !isEdit" class="form-group"><label class="col-sm-3 control-label">{{'SocialNetwork' | translate}}</label><div class="col-sm-9"><select id="SocialNetworkID" class="form-control" ng-model="object.SocialNetworkID" ng-options="option.SocialNetworkID as option.SocialNetworkName for option in SocialNetworks" title="Please select at least one" required></select><input type="hidden" name="SocialNetworkID" ng-value="object.SocialNetworkID" /></div></div>
-                                                <div ng-show="isAdd && isEdit" class="form-group"><label class="col-sm-3 control-label">{{'SocialNetwork' | translate}}</label><div class="col-sm-9"><select disabled id="SocialNetworkID" class="form-control" ng-model="object.SocialNetworkID" ng-options="option.SocialNetworkID as option.SocialNetworkName for option in SocialNetworks" title="Please select at least one" required></select><input type="hidden" name="SocialNetworkID" ng-value="object.SocialNetworkID" /></div></div>
-                                                <div class="form-group"><label class="col-sm-3 control-label">{{'Link' | translate}}<span class="required">*</span></label><div class="col-sm-9"><input type="text" name="ProfileSocialNetworkURL" ng-model="object.ProfileSocialNetworkURL" validate-on="blur" class="form-control" placeholder="eg.: http://www.website.com" required /></div></div>-->
+                                                <div class="form-group"><label class="col-sm-3 control-label">User Role</label><div class="col-sm-9"><select id="UserRoleID" class="form-control" ng-model="object.UserRoleID" ng-options="option.UserRoleID as option.UserRoleName for option in UserRoles" title="Please select at least one" required></select><input type="hidden" name="UserRoleID" ng-value="object.UserRoleID" /></div></div>                                               
                                             </div>
                                             <footer class="panel-footer">
                                                 <div class="row">
@@ -653,7 +648,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div uib-accordion-group class="panel-default" heading="{{'MyWebImages' | translate}}">
                                 <section class="panel" ng-controller="editAdminProfileUploadController as vm">
                                     <div>

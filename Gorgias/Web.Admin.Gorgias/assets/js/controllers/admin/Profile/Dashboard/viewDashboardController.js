@@ -65,34 +65,34 @@ angular.module('gorgiasapp')
             }
 
 
-            $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-            $scope.series = ['Series A', 'Series B'];
-            $scope.data = [
-              [65, 59, 80, 81, 56, 55, 40],
-              [28, 48, 40, 19, 86, 27, 90]
-            ];
-            $scope.onClick = function (points, evt) {
-                console.log(points, evt);
-            };
-            $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-            $scope.options = {
-                scales: {
-                    yAxes: [
-                      {
-                          id: 'y-axis-1',
-                          type: 'linear',
-                          display: true,
-                          position: 'left'
-                      },
-                      {
-                          id: 'y-axis-2',
-                          type: 'linear',
-                          display: true,
-                          position: 'right'
-                      }
-                    ]
-                }
-            };
+            //$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+            //$scope.series = ['Series A', 'Series B'];
+            //$scope.data = [
+            //  [65, 59, 80, 81, 56, 55, 40],
+            //  [28, 48, 40, 19, 86, 27, 90]
+            //];
+            //$scope.onClick = function (points, evt) {
+            //    console.log(points, evt);
+            //};
+            //$scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+            //$scope.options = {
+            //    scales: {
+            //        yAxes: [
+            //          {
+            //              id: 'y-axis-1',
+            //              type: 'linear',
+            //              display: true,
+            //              position: 'left'
+            //          },
+            //          {
+            //              id: 'y-axis-2',
+            //              type: 'linear',
+            //              display: true,
+            //              position: 'right'
+            //          }
+            //        ]
+            //    }
+            //};
 
             //$scope.refreshTest = function(portlet) {
             //    console.log("Refreshing...");
@@ -465,106 +465,106 @@ angular.module('gorgiasapp')
 
 
 
-angular.module('gorgiasapp')
-    .directive('widget5Chart', function () {
-        return {
-            restrict: 'C',
-            link: function (scope, el, attrs) {
+//angular.module('gorgiasapp')
+//    .directive('widget5Chart', function () {
+//        return {
+//            restrict: 'C',
+//            link: function (scope, el, attrs) {
 
-                var container = '.widget-5-chart';
+//                var container = '.widget-5-chart';
 
-                var seriesData = [
-                    [],
-                    []
-                ];
-                var random = new Rickshaw.Fixtures.RandomData(7);
-                for (var i = 0; i < 7; i++) {
-                    random.addData(seriesData);
-                }
+//                var seriesData = [
+//                    [],
+//                    []
+//                ];
+//                var random = new Rickshaw.Fixtures.RandomData(7);
+//                for (var i = 0; i < 7; i++) {
+//                    random.addData(seriesData);
+//                }
 
-                var graph = new Rickshaw.Graph({
-                    element: document.querySelector(container),
-                    renderer: 'bar',
-                    series: [{
-                        data: [{
-                            x: 0,
-                            y: 10
-                        }, {
-                            x: 1,
-                            y: 8
-                        }, {
-                            x: 2,
-                            y: 5
-                        }, {
-                            x: 3,
-                            y: 9
-                        }, {
-                            x: 4,
-                            y: 5
-                        }, {
-                            x: 5,
-                            y: 8
-                        }, {
-                            x: 6,
-                            y: 10
-                        }],
-                        color: $.Pages.getColor('danger')
-                    }, {
-                        data: [{
-                            x: 0,
-                            y: 0
-                        }, {
-                            x: 1,
-                            y: 2
-                        }, {
-                            x: 2,
-                            y: 5
-                        }, {
-                            x: 3,
-                            y: 1
-                        }, {
-                            x: 4,
-                            y: 5
-                        }, {
-                            x: 5,
-                            y: 2
-                        }, {
-                            x: 6,
-                            y: 0
-                        }],
-                        color: $.Pages.getColor('master-light')
-                    }]
+//                var graph = new Rickshaw.Graph({
+//                    element: document.querySelector(container),
+//                    renderer: 'bar',
+//                    series: [{
+//                        data: [{
+//                            x: 0,
+//                            y: 10
+//                        }, {
+//                            x: 1,
+//                            y: 8
+//                        }, {
+//                            x: 2,
+//                            y: 5
+//                        }, {
+//                            x: 3,
+//                            y: 9
+//                        }, {
+//                            x: 4,
+//                            y: 5
+//                        }, {
+//                            x: 5,
+//                            y: 8
+//                        }, {
+//                            x: 6,
+//                            y: 10
+//                        }],
+//                        color: $.Pages.getColor('danger')
+//                    }, {
+//                        data: [{
+//                            x: 0,
+//                            y: 0
+//                        }, {
+//                            x: 1,
+//                            y: 2
+//                        }, {
+//                            x: 2,
+//                            y: 5
+//                        }, {
+//                            x: 3,
+//                            y: 1
+//                        }, {
+//                            x: 4,
+//                            y: 5
+//                        }, {
+//                            x: 5,
+//                            y: 2
+//                        }, {
+//                            x: 6,
+//                            y: 0
+//                        }],
+//                        color: $.Pages.getColor('master-light')
+//                    }]
 
-                });
-
-
-                var MonthBarsRenderer = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
-                    barWidth: function (series) {
-
-                        return 7;
-                    }
-                });
+//                });
 
 
-                graph.setRenderer(MonthBarsRenderer);
+//                var MonthBarsRenderer = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
+//                    barWidth: function (series) {
+
+//                        return 7;
+//                    }
+//                });
 
 
-                graph.render();
+//                graph.setRenderer(MonthBarsRenderer);
 
 
-                $(window).resize(function () {
-                    graph.configure({
-                        width: $(container).width(),
-                        height: $(container).height()
-                    });
+//                graph.render();
 
-                    graph.render()
-                });
 
-                $(container).data('chart', graph);
-            }
-        };
-    });
+//                $(window).resize(function () {
+//                    graph.configure({
+//                        width: $(container).width(),
+//                        height: $(container).height()
+//                    });
+
+//                    graph.render()
+//                });
+
+//                $(container).data('chart', graph);
+//            }
+//        };
+//    });
 
 $('body').on('click', '.mapplic-pin', function (e) {
     e.preventDefault();

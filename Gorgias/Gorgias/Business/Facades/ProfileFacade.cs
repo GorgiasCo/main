@@ -121,9 +121,19 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrent(UserID);
         }
 
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentV2(int UserID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrentV2(UserID);
+        }
+
         public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountry(int CountryID)
         {
             return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrentByCountry(CountryID);
+        }
+
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountryV2(int CountryID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfileReportCurrentByCountryV2(CountryID);
         }
 
         public IEnumerable<ProfileDTO> GetListedProfile(int ProfileID)

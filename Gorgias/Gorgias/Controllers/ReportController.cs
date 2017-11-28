@@ -44,11 +44,11 @@ namespace Gorgias.Controllers
 
                 if (isCountry == 0)
                 {
-                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReport(paramID, true);
+                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReportV2(paramID, true);
                 }
                 else
                 {
-                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReport(paramID, false);
+                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReportV2(paramID, false);
                 }
                 if (result == null)
                 {
@@ -62,6 +62,36 @@ namespace Gorgias.Controllers
             });
         }
 
+        //V2
+        [Route("Reports/V2/Profiles/Current/{paramID}/{isCountry}", Name = "GetProfilesV2CurrentReportByUserID")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesCurrentReportV2(HttpRequestMessage request, int paramID, int isCountry)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                FullProfileReport result;
+
+                if (isCountry == 0)
+                {
+                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReportV2(paramID, true);
+                }
+                else
+                {
+                    result = BusinessLayer.Facades.Facade.ReportFacade().getCurrentProfileReportV2(paramID, false);
+                }
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<FullProfileReport>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+        //End V2
         [Route("Reports/Profiles/Current/Country/{CountryID}", Name = "GetProfilesCurrentReportByCountryID")]
         [HttpGet]
         public HttpResponseMessage GetProfilesCurrentReportByCountry(HttpRequestMessage request, int CountryID)

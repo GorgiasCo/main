@@ -589,7 +589,14 @@ namespace Gorgias.DataLayer.Repository.SQL
                     }
                     else
                     {
-                        obj.Categories.Add(new Category { CategoryName = Topic.CategoryName, CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 1, CategoryOrder = 0 });
+                        Category resultCategory = (from x in context.Categories where x.CategoryName.Trim().ToLower() == Topic.CategoryName.Trim().ToLower() && x.ProfileID == ProfileID select x).FirstOrDefault();
+                        if(resultCategory != null)
+                        {
+                            obj.Categories.Add(resultCategory);
+                        } else
+                        {
+                            obj.Categories.Add(new Category { CategoryName = Topic.CategoryName.Trim(), CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 1, CategoryOrder = 0 });
+                        }                        
                     }
                 }
 

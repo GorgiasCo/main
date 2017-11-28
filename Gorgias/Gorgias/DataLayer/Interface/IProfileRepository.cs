@@ -34,7 +34,9 @@ namespace Gorgias.DataLayer.Interface
         IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();
         Int64 GetProfileReportCurrentProfileViews();
         IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent(int UserID);
+        IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentV2(int UserID);
         IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountry(int CountryID);
+        IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountryV2(int CountryID);
 
         Business.DataTransferObjects.Web.AdminMiniProfile GetMiniProfile(int ProfileID);
         Business.DataTransferObjects.Web.LowAppProfileModel GetLowAppProfile(string ProfileURL);

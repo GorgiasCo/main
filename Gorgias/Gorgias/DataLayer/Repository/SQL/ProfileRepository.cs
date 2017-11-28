@@ -1044,6 +1044,34 @@ namespace Gorgias.DataLayer.Repository.SQL
             return result;
         }
 
+        //V2
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentV2(int UserID)
+        {
+            //int currentDay = DateTime.UtcNow.Day;
+            var result = (from w in context.Profiles
+                          where w.SubscriptionTypeID != 4 && w.UserProfiles.Any(up => up.UserID == UserID)
+                          select
+                            new Business.DataTransferObjects.Report.ProfileReport
+                            {
+                                ProfileFullname = w.ProfileFullname,
+                                ProfileID = w.ProfileID,
+                                ProfileView = w.ProfileView,
+                                AlbumView = w.Albums.Sum(av => av.ProfileActivities.Count(pa => pa.ActivityTypeID == 14 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day)),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count(c=> c.CommentDateTime.Year == DateTime.UtcNow.Year && c.CommentDateTime.Month == DateTime.UtcNow.Month && c.CommentDateTime.Day == DateTime.UtcNow.Day))),
+                                AlbumLikes = w.Albums.Sum(av => av.ProfileActivities.Where(pa => pa.ActivityTypeID == 13 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day).Sum(r => r.ProfileActivityCount)),
+                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 4).Count(),
+                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3 && sv.ConnectDateCreated.Year == DateTime.UtcNow.Year && sv.ConnectDateCreated.Month == DateTime.UtcNow.Month && sv.ConnectDateCreated.Day == DateTime.UtcNow.Day).Count(),
+                                //OverAllRevenue = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportRevenue),
+                                OverAllView = w.Albums.Sum(av => av.ProfileActivities.Count(pa => pa.ActivityTypeID == 14)),
+                                OverAllEngagement = w.Albums.Sum(av => av.ProfileActivities.Where(pa => pa.ActivityTypeID == 13).Sum(r => r.ProfileActivityCount)),
+                                OverAllSubscription = w.Connections.Count,
+                                //ConnectedUserShare = w.ProfileCommissions.Where(pc => pc.UserRoleID != 1).Sum(spc => spc.ProfileCommissionRate),
+                                //UserCommission = w.ProfileCommissions.Where(pc => pc.User.CountryID == CountryID && pc.UserRoleID == 6).FirstOrDefault().ProfileCommissionRate
+                            }).ToList();
+            return result;
+        }
+        //End V2
+
         public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountry(int CountryID)
         {
             //int currentDay = DateTime.UtcNow.Day;
@@ -1056,7 +1084,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                                 ProfileID = w.ProfileID,
                                 ProfileView = w.ProfileView,
                                 AlbumView = w.Albums.Sum(av => av.AlbumView),
-                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count(c => c.CommentDateTime.Year == DateTime.UtcNow.Year && c.CommentDateTime.Month == DateTime.UtcNow.Month && c.CommentDateTime.Day == DateTime.UtcNow.Day))),
                                 AlbumLikes = w.Albums.Sum(av => av.Contents.Sum(cv => cv.ContentLike)),
                                 Subscription = w.Connections.Where(sv => sv.RequestTypeID == 1).Count(),
                                 StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3).Count(),
@@ -1066,6 +1094,32 @@ namespace Gorgias.DataLayer.Repository.SQL
                                 OverAllSubscription = w.ProfileReports.Where(pp => pp.ReportTypeID == 5 || pp.ReportTypeID == 6).Sum(pps => pps.ProfileReportActivityCount),
                                 ConnectedUserShare = w.ProfileCommissions.Where(pc => pc.UserRoleID != 1).Sum(spc => spc.ProfileCommissionRate),
                                 UserCommission = w.ProfileCommissions.Where(pc => pc.User.CountryID == CountryID && pc.UserRoleID == 6).FirstOrDefault().ProfileCommissionRate
+                            }).ToList();
+            return result;
+        }
+
+        public IList<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrentByCountryV2(int CountryID)
+        {
+            //int currentDay = DateTime.UtcNow.Day;
+            var result = (from w in context.Profiles
+                          where w.SubscriptionTypeID != 4 && w.Addresses.Any(a => a.City.CountryID == CountryID) && w.ProfileIsConfirmed == true
+                          select
+                            new Business.DataTransferObjects.Report.ProfileReport
+                            {
+                                ProfileFullname = w.ProfileFullname,
+                                ProfileID = w.ProfileID,
+                                ProfileView = w.ProfileView,
+                                AlbumView = w.Albums.Sum(av => av.ProfileActivities.Count(pa=> pa.ActivityTypeID == 14 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day)),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
+                                AlbumLikes = w.Albums.Sum(av => av.ProfileActivities.Where(pa => pa.ActivityTypeID == 13 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day).Sum(r=> r.ProfileActivityCount)),
+                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 4).Count(),
+                                StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3 && sv.ConnectDateCreated.Year == DateTime.UtcNow.Year && sv.ConnectDateCreated.Month == DateTime.UtcNow.Month && sv.ConnectDateCreated.Day == DateTime.UtcNow.Day).Count(),
+                                //OverAllRevenue = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportRevenue),
+                                OverAllView = w.Albums.Sum(av => av.ProfileActivities.Count(pa => pa.ActivityTypeID == 14)),
+                                OverAllEngagement = w.Albums.Sum(av => av.ProfileActivities.Where(pa => pa.ActivityTypeID == 13).Sum(r => r.ProfileActivityCount)),
+                                OverAllSubscription = w.Connections.Count,
+                                //ConnectedUserShare = w.ProfileCommissions.Where(pc => pc.UserRoleID != 1).Sum(spc => spc.ProfileCommissionRate),
+                                //UserCommission = w.ProfileCommissions.Where(pc => pc.User.CountryID == CountryID && pc.UserRoleID == 6).FirstOrDefault().ProfileCommissionRate
                             }).ToList();
             return result;
         }
