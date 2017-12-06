@@ -328,11 +328,6 @@ angular.module('gorgiasapp')
                 notificationService.displayError(response.data.Errors);
             }
 
-
-
-
-
-
             loadIndustries()
             loadProfileTypes()
             loadThemes()
@@ -344,6 +339,8 @@ angular.module('gorgiasapp')
                 $location.url('/');
                 console.log('good bye ;)');
             }
+
+            console.log('profile admin it is me ;)');
 
         }]);
 //(function (app) {

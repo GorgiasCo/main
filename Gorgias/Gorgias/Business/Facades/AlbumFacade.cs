@@ -129,7 +129,8 @@ namespace Gorgias.BusinessLayer.Facades
                     break;
                 case 16:
                     //Expiring Soon
-                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m=> m.AlbumDateExpire).OrderByDescending(m => SqlFunctions.DateDiff("minute", m.AlbumDateExpire, m.AlbumDatePublish));//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
+                    //basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m=> m.AlbumDateExpire).OrderByDescending(m => SqlFunctions.DateDiff("minute", m.AlbumDateExpire, m.AlbumDatePublish));//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderBy(m => m.AlbumDateExpire);//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
                     break;
                 case 17:
                     //Expired ;)

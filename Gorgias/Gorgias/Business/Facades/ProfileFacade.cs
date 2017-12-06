@@ -22,6 +22,30 @@ namespace Gorgias.BusinessLayer.Facades
 {
     public class ProfileFacade
     {
+        //BrandSo
+        //getBrandSoProfiles
+
+        public PaginationSet<Business.DataTransferObjects.BrandSo.Profile> getBrandSoProfiles(int pageNumber = 1, int pageSize = 7)
+        {
+            var basequery = DataLayer.DataLayerFacade.ProfileRepository().getBrandSoProfiles();
+
+            var queryList = RepositoryHelper.Pagination<Business.DataTransferObjects.BrandSo.Profile>(pageNumber, pageSize, basequery).Future();
+            var queryTotal = basequery.FutureCount();
+
+            int intTotal = queryTotal.Value;
+
+            PaginationSet<Business.DataTransferObjects.BrandSo.Profile> result = new PaginationSet<Business.DataTransferObjects.BrandSo.Profile>()
+            {
+                Page = pageNumber,
+                TotalCount = intTotal,
+                TotalPages = (int)Math.Ceiling((decimal)intTotal / pageSize),
+                Items = queryList.ToList()
+            };
+
+            return result;
+        }
+
+        //End BrandSo
         //V2 Begin
         public Business.DataTransferObjects.Mobile.V2.NewUserRegisterMobileModel createNewMobileUser()
         {
@@ -75,13 +99,14 @@ namespace Gorgias.BusinessLayer.Facades
 
         public bool registerProfile(Business.DataTransferObjects.Mobile.V2.RegisterProfileMobileModel registerProfileMobileModel)
         {
-            if(!registerProfileMobileModel.isFirstRegistration)
+            if (!registerProfileMobileModel.isFirstRegistration)
             {
                 return DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileFullnameEnglish, registerProfileMobileModel.ProfileShortDescription, registerProfileMobileModel.ProfileEmail, registerProfileMobileModel.ProfileTypeID, registerProfileMobileModel.IndustryID, registerProfileMobileModel.CityID, registerProfileMobileModel.ProfileBirthday.Value, registerProfileMobileModel.ProfileLanguageApp);
-            } else
+            }
+            else
             {
                 return registerProfileFirstTime(registerProfileMobileModel);
-            }            
+            }
         }
 
         public bool registerProfileFirstTime(Business.DataTransferObjects.Mobile.V2.RegisterProfileMobileModel registerProfileMobileModel)
@@ -89,7 +114,7 @@ namespace Gorgias.BusinessLayer.Facades
             bool result = DataLayer.DataLayerFacade.ProfileRepository().Update(registerProfileMobileModel.ProfileID, registerProfileMobileModel.ProfileFullname, registerProfileMobileModel.ProfileEmail);
             if (result)
             {
-                                
+
             }
             return result;
         }

@@ -6,18 +6,31 @@
 //var serviceBase = 'https://gorgiasapi.azurewebsites.net/';
 //var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
 //var serviceBase = 'http://localhost:43587/';
+var serviceBase = 'http://gorgiasapp-v3.azurewebsites.net/';
 //var serviceBase = 'http://apiigorgias.azurewebsites.net/';
-var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
+//var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
 
 
 angular.module('gorgiasapp')
-    .run(['authService', '$location', "$rootScope", "$window",
-        function (authService, $location, $rootScope, $window) {
+    .run(['authService', '$location', "$rootScope", "$window", "localStorageService",
+        function (authService, $location, $rootScope, $window, localStorageService) {
             authService.fillAuthData();
 
             if (authService.authentication.userID == 0) {
                 $location.url('/access/login');
             }
+
+            $rootScope.previousState;
+            $rootScope.currentState;
+            $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+                $rootScope.previousState = from.name;
+                $rootScope.currentState = to.name;
+
+                localStorageService.set('pageHistory', {from: from.name, fromParams: fromParams, to: to.name, toParams: toParams});
+
+                console.log('Previous state:' + $rootScope.previousState, fromParams)
+                console.log('Current state:' + $rootScope.currentState, toParams)
+            });
 
             $rootScope.$on('$routeChangeSuccess', function (evt, absNewUrl, absOldUrl) {
                 //$anchorScroll('top');
@@ -53,6 +66,7 @@ angular.module('gorgiasapp')
             $httpProvider.defaults.headers.post = {};
             $httpProvider.defaults.headers.put = {};
             $httpProvider.defaults.headers.patch = {};
+
 
             $translateProvider.translations('en', {
                 AllMyProfile: 'Profiles',
@@ -95,7 +109,7 @@ angular.module('gorgiasapp')
                 Content: 'Content',
                 AboutMeSection: 'About Me Section',
                 Note: 'Note',
-                DescribeSomething: 'Describe Something',
+                DescribeSomething: 'Write something interesting',
                 Tags: 'Tags',
                 PrimaryTag: 'Primary Tag',
                 Add: 'Add',
@@ -167,7 +181,29 @@ angular.module('gorgiasapp')
                 expiredInTitle: " expires in",
                 candidNotificationTitle: "ICONIC Candid",
                 updateNotificationTitle: " Update",
-                AlbumHasComments: "Allow Comments",//允许评论
+                AlbumHasComments: "Allow Comments",//允许评论 new V2
+
+                NewStory: "Create new story",
+                AddNewPhoto: "+ Gallery",
+                AddNewText: "+ Text only",
+                AddNewCTA: "+ Call to actions",
+                NewStoryCategory: "Category",
+                NewStoryDate: "Publish Date",
+                NewStoryTopic: "Topic",
+                NewStoryReadingLanguage: "Story Language",
+                NewStoryAvailability: "Expiring in…",
+                NewStoryContentRating: "Story Content Rating",
+                NewStoryCanReview: "Able to review this story?",
+                NewStoryStoryTitlePlaceHolder: "your story need title",
+                NewStoryContentTitle: "Title",
+                NewStoryContentURLCTAPlaceholder: "Your url must start with https://",
+                NewStoryYouNeedAtLeastThreePhoto: "Title missing, choose a nice title for your Story and publish.\n Your story need at least 3 photos",
+                NewStoryContinue: "Back",
+                NewStoryCongratulationTitle: "Congratulation, your lovely story published. \n start sharing your story to get more HotSpot",
+                NewStoryCongratulationNewStoryTitle: "Create new story",
+                NewStoryCongratulationGoToMyProfileTitle: "Back",
+
+
                 
 
 
@@ -288,6 +324,27 @@ angular.module('gorgiasapp')
                   expiredInTitle: " 將過時在",
                   candidNotificationTitle: "Iconic 思密达",
                   updateNotificationTitle: " 更新",
+
+                  NewStory: "發佈新的故事",
+                  AddNewPhoto: "+ 我的相簿",
+                  AddNewText: "+ 僅限文字",
+                  AddNewCTA: "+ 行動呼籲 - CTA",
+                  NewStoryCategory: "類別",
+                  NewStoryDate: "發布日期",
+                  NewStoryTopic: "Gorgias 主題",
+                  NewStoryReadingLanguage: "故事語言",
+                  NewStoryAvailability: "即將過期在…",
+                  NewStoryContentRating: "故事內容評級",
+                  NewStoryCanReview: "這個故事能下評論嗎？",
+                  NewStoryStoryTitlePlaceHolder: "你的故事需要标题",
+                  NewStoryContentTitle: "Title",
+                  NewStoryContentURLCTAPlaceholder: "您的網址開頭必須以 https://",
+                  NewStoryYouNeedAtLeastThreePhoto: "標題丟失，為您的故事選擇一個不錯的標題並發布.\n 你的故事至少需要3张相片",
+                  NewStoryContinue: "再試一次",
+                  NewStoryCongratulationTitle: "恭喜 你有趣的故事已發布。 \n 開始分享另一個故事以獲得更多的熱點",
+                  NewStoryCongratulationNewStoryTitle: "發佈新的故事",
+                  NewStoryCongratulationGoToMyProfileTitle: "返回",
+
               })
                 .translations('my', {
                     Administration: 'Administration',
@@ -404,6 +461,26 @@ angular.module('gorgiasapp')
                     expiredInTitle: " akan tamat tempoh",
                     candidNotificationTitle: "Iconic Candid",
                     updateNotificationTitle: " Kemaskini",
+
+                    NewStory: "Create new story",
+                    AddNewPhoto: "+ Gallery",
+                    AddNewText: "+ Text only",
+                    AddNewCTA: "+ Call to actions",
+                    NewStoryCategory: "Category",
+                    NewStoryDate: "Publish Date",
+                    NewStoryTopic: "Topic",
+                    NewStoryReadingLanguage: "Story Language",
+                    NewStoryAvailability: "Expiring in…",
+                    NewStoryContentRating: "Story Content Rating",
+                    NewStoryCanReview: "Able to review this story?",
+                    NewStoryStoryTitlePlaceHolder: "your story need title",
+                    NewStoryContentTitle: "Title",
+                    NewStoryContentURLCTAPlaceholder: "Your url must start with https://",
+                    NewStoryYouNeedAtLeastThreePhoto: "Title missing, choose a nice title for your Story and publish.\n Your story need at least 3 photos",
+                    NewStoryContinue: "Back",
+                    NewStoryCongratulationTitle: "Congratulation, your lovely story published. \n start sharing your story to get more HotSpot",
+                    NewStoryCongratulationNewStoryTitle: "Create new story",
+                    NewStoryCongratulationGoToMyProfileTitle: "Back",
                 });
 
             $translateProvider.preferredLanguage('en');
@@ -418,8 +495,8 @@ angular.module('gorgiasapp')
                 })
                 .state('app.dashboard', {
                     url: "/dashboard",
-                    templateUrl: "tpl/dashboard.html",
-                    controller: 'DashboardCtrl',
+                    templateUrl: "tpl/admin/viewDashboard.html",//tpl/dashboard.html
+                    controller: 'viewDashboardController',//DashboardCtrl
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -435,7 +512,33 @@ angular.module('gorgiasapp')
                             })
                                 .then(function () {
                                     return $ocLazyLoad.load([
-                                        'assets/js/controllers/dashboard.js'
+                                        'assets/js/controllers/admin/Profile/Dashboard/viewDashboardController.js'
+//'assets/js/controllers/dashboard.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+                .state('app.dashboard.chart', {
+                    url: "/dashboard/chart",
+                    templateUrl: "tpl/admin/viewDashboard.html",
+                    controller: 'viewDashboardController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'nvd3',
+                                    'mapplic',
+                                    'rickshaw',
+                                    'metrojs',
+                                    'sparkline',
+                                    'skycons',
+                                    'switchery'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/admin/Profile/Dashboard/viewDashboardController.js'
                                     ]);
                                 });
                         }]
@@ -614,15 +717,21 @@ angular.module('gorgiasapp')
                         }]
                     }
                 })
-                .state('app.ui.modals', {
-                    url: '/modals',
-                    templateUrl: 'tpl/ui_modals.html',
-                    controller: 'ModalsCtrl',
+                .state('app.ui.story', {
+                    url: '/story/new/:id',
+                    templateUrl: 'tpl/admin/album/addnewalbum.html',
+                    controller: 'addNewAlbumController',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'assets/js/controllers/modals.js'
-                            ]);
+                                   'select',
+                                   'dropzone'
+                            ], {
+                                insertBefore: '#lazyload_placeholder'
+                            })
+                                .then(function () {
+                                    return $ocLazyLoad.load('assets/js/controllers/admin/profile/album/addNewAlbumController.js');
+                                });
                         }]
                     }
                 })
@@ -777,6 +886,24 @@ angular.module('gorgiasapp')
                         }]
                     }
                 })
+                 .state('app.forms.addnewalbum', {
+                     url: '/album/new',
+                     templateUrl: 'tpl/admin/album/addnewalbum.html',
+                     controller: 'addNewAlbumController',
+                     resolve: {
+                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                             return $ocLazyLoad.load([
+                                    'select',
+                                    'dropzone'
+                             ], {
+                                 insertBefore: '#lazyload_placeholder'
+                             })
+                                 .then(function () {
+                                     return $ocLazyLoad.load('assets/js/controllers/admin/profile/album/addNewAlbumController.js');
+                                 });
+                         }]
+                     }
+                 })
                 .state('app.forms.agency', {
                     url: '/agency/',
                     templateUrl: 'tpl/admin/viewAdminAgencyProfile.html',
@@ -1181,7 +1308,6 @@ angular.module('gorgiasapp')
                     url: '/timeline',
                     templateUrl: 'tpl/extra_timeline.html'
                 })
-
             // Extra - Others
             .state('access', {
                 url: '/access',

@@ -15,7 +15,60 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+        <div class="container-fluid padding-25 sm-padding-10">
+            <!--<div class="row">
+                <ng-owl-carousel class="owl-theme" owl-items="Profiles" owl-properties="properties">
+                    <div class="col-xlg-2 visible-xlg"  data-ng-repeat="item in Profiles">
+                        <div class="widget-18 card no-border  no-margin ">
+                            <div class="padding-15">
+                                <div class="item-header clearfix">
+                                    <div class="thumbnail-wrapper d32 circular">
+                                        <img width="40" height="40" src="assets/img/profiles/3.jpg" data-src="assets/img/profiles/3.jpg" data-src-retina="assets/img/profiles/3x.jpg" alt="">
+                                    </div>
+                                    <div class="inline m-l-10">
+                                        <p class="no-margin">
+                                            <strong>Anne Simons</strong>
+                                        </p>
+                                        <p class="no-margin hint-text">
+                                            Shared a link
+                                            <span class="location semi-bold"><i class="fa fa-map-marker"></i> NY center</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <ul class="buttons pull-top top-right list-inline p-r-10 p-t-10">
+                                    <li>
+                                        <a class="text-white" href="#">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="#">
+                                            <i class="fa fa-heart-o"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="widget-18-post bg-black no-overflow">
+                                </div>
+                            </div>
+                            <div class="padding-15">
+                                <div class="hint-text pull-left">few seconds ago</div>
+                                <ul class="list-inline pull-right no-margin">
+                                    <li>
+                                        <a class="text-master hint-text" href="#">5,345 <i class="fa fa-comment-o"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="text-master hint-text" href="#">23K <i class="fa fa-heart-o"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-owl-carousel>
+            </div>-->
+            <!-- END ROW -->
             <div class="row">
                 <div class="gallery-item" data-width="1" data-height="1" style="float:left;margin-right:11px;" ng-repeat="obj in Profiles">
                     <!-- START PREVIEW -->
@@ -27,7 +80,7 @@
                             <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
                                 <div class="">
                                     <p class="pull-left bold text-white fs-14 p-t-10">{{obj.ProfileFullname | cut:true:30:'...'}}</p>
-                                    <h5 class="pull-right semi-bold text-white font-montserrat bold">{{obj.ProfileLike}}</h5>
+                                    <h5 class="pull-right semi-bold text-white font-montserrat bold">{{obj.ProfileView}}</h5>
                                     <div class="clearfix"></div>
                                     <!--<span class="hint-text pull-left text-white">{{obj.ProfileDateCreated | date:'MMM d, y'}}</span>
                                     <div class="clearfix"></div>-->

@@ -26,6 +26,7 @@ namespace Gorgias.DataLayer.Interface
         Profile GetProfile(int ProfileID);
         string GetProfileFullname(int ProfileID);
         string GetProfileURL(int ProfileID);
+        IQueryable<Business.DataTransferObjects.BrandSo.Profile> getBrandSoProfiles();
         Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID);
         Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID, string languageCode);
         Profile GetV2Profile(int ProfileID);

@@ -707,6 +707,21 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Profiles.Include("Theme").Include("SubscriptionType").Include("ProfileType") where w.ProfileID == ProfileID select w).FirstOrDefault();
         }
 
+        public IQueryable<Business.DataTransferObjects.BrandSo.Profile> getBrandSoProfiles()
+        {
+            return (from w in context.Profiles
+                    where w.ProfileIsConfirmed == true && w.ProfileIsDeleted != true
+                    orderby w.ProfileFullname ascending
+                    select new Business.DataTransferObjects.BrandSo.Profile
+                    {
+                        ProfileFullname = w.ProfileFullname,
+                        ProfileID = w.ProfileID,
+                        ProfileImage = w.ProfileImage,
+                        ProfileIsConfirmed = w.ProfileIsConfirmed,
+                        ProfileEmail = w.ProfileEmail
+                    }).AsQueryable();
+        }
+
         //V2 Begin
         public string GetProfileFullname(int ProfileID)
         {
@@ -1057,9 +1072,9 @@ namespace Gorgias.DataLayer.Repository.SQL
                                 ProfileID = w.ProfileID,
                                 ProfileView = w.ProfileView,
                                 AlbumView = w.Albums.Sum(av => av.ProfileActivities.Count(pa => pa.ActivityTypeID == 14 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day)),
-                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count(c=> c.CommentDateTime.Year == DateTime.UtcNow.Year && c.CommentDateTime.Month == DateTime.UtcNow.Month && c.CommentDateTime.Day == DateTime.UtcNow.Day))),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count(m => m.CommentDateTime.Year == DateTime.UtcNow.Year && m.CommentDateTime.Month == DateTime.UtcNow.Month && m.CommentDateTime.Day == DateTime.UtcNow.Day))),
                                 AlbumLikes = w.Albums.Sum(av => av.ProfileActivities.Where(pa => pa.ActivityTypeID == 13 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day).Sum(r => r.ProfileActivityCount)),
-                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 4).Count(),
+                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 4 && sv.ConnectDateCreated.Year == DateTime.UtcNow.Year && sv.ConnectDateCreated.Month == DateTime.UtcNow.Month && sv.ConnectDateCreated.Day == DateTime.UtcNow.Day).Count(),
                                 StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3 && sv.ConnectDateCreated.Year == DateTime.UtcNow.Year && sv.ConnectDateCreated.Month == DateTime.UtcNow.Month && sv.ConnectDateCreated.Day == DateTime.UtcNow.Day).Count(),
                                 //OverAllRevenue = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportRevenue),
                                 OverAllView = w.Albums.Sum(av => av.ProfileActivities.Count(pa => pa.ActivityTypeID == 14)),
@@ -1109,10 +1124,10 @@ namespace Gorgias.DataLayer.Repository.SQL
                                 ProfileFullname = w.ProfileFullname,
                                 ProfileID = w.ProfileID,
                                 ProfileView = w.ProfileView,
-                                AlbumView = w.Albums.Sum(av => av.ProfileActivities.Count(pa=> pa.ActivityTypeID == 14 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day)),
-                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count)),
-                                AlbumLikes = w.Albums.Sum(av => av.ProfileActivities.Where(pa => pa.ActivityTypeID == 13 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day).Sum(r=> r.ProfileActivityCount)),
-                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 4).Count(),
+                                AlbumView = w.Albums.Sum(av => av.ProfileActivities.Count(pa => pa.ActivityTypeID == 14 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day)),
+                                AlbumComments = w.Albums.Sum(av => av.Contents.Sum(cv => cv.Comments.Count(m => m.CommentDateTime.Year == DateTime.UtcNow.Year && m.CommentDateTime.Month == DateTime.UtcNow.Month && m.CommentDateTime.Day == DateTime.UtcNow.Day))),
+                                AlbumLikes = w.Albums.Sum(av => av.ProfileActivities.Where(pa => pa.ActivityTypeID == 13 && pa.ProfileActivityDate.Year == DateTime.UtcNow.Year && pa.ProfileActivityDate.Month == DateTime.UtcNow.Month && pa.ProfileActivityDate.Day == DateTime.UtcNow.Day).Sum(r => r.ProfileActivityCount)),
+                                Subscription = w.Connections.Where(sv => sv.RequestTypeID == 4 && sv.ConnectDateCreated.Year == DateTime.UtcNow.Year && sv.ConnectDateCreated.Month == DateTime.UtcNow.Month && sv.ConnectDateCreated.Day == DateTime.UtcNow.Day).Count(),
                                 StayOnConnection = w.Connections.Where(sv => sv.RequestTypeID == 3 && sv.ConnectDateCreated.Year == DateTime.UtcNow.Year && sv.ConnectDateCreated.Month == DateTime.UtcNow.Month && sv.ConnectDateCreated.Day == DateTime.UtcNow.Day).Count(),
                                 //OverAllRevenue = w.ProfileReports.Where(pp => pp.ReportTypeID == 1 || pp.ReportTypeID == 2).Sum(pps => pps.ProfileReportRevenue),
                                 OverAllView = w.Albums.Sum(av => av.ProfileActivities.Count(pa => pa.ActivityTypeID == 14)),

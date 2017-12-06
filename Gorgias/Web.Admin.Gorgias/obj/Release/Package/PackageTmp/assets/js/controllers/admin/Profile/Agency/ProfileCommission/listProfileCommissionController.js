@@ -85,7 +85,7 @@
             function deleteRow(item) {
                 vm.message = 'You are trying to remove the row: ' + JSON.stringify(item);
                 if (confirm('Are you sure to delete?')) {
-                    apiService.deleteItem($scope.baseURL + 'api/ProfileCommission/ProfileCommissionID/' + item, null,
+                    apiService.deleteItem($scope.baseURL + 'api/ProfileCommission/DeleteOnly/ProfileCommissionID/' + item, null,
                     updateProfileCommissionSucceded,
                     updateProfileCommissionFailed);
                     console.log('Deleted');

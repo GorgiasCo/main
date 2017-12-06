@@ -28,7 +28,7 @@ namespace Gorgias.Business.Facades.Web
                 result = new BusinessLayer.Facades.ProfileFacade().GetProfileReportCurrentV2(paramID);
             }
 
-            resultFullProfileReport.ProfileReports = result.OrderByDescending(m => m.TotalView).ToList();
+            resultFullProfileReport.ProfileReports = result.OrderByDescending(m => m.AlbumLikes).ToList();
 
             resultFullProfileReport.ActualEngagement = result.Sum(ae=> ae.TotalEngagement).HasValue ? result.Sum(ae => ae.TotalEngagement).Value : 0;
             resultFullProfileReport.ActualSubscription = result.Sum(ae => ae.TotalSubscription).HasValue ? result.Sum(ae => ae.TotalSubscription).Value : 0;

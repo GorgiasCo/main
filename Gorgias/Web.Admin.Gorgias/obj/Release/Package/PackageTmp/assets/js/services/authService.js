@@ -61,7 +61,7 @@ angular.module('gorgiasapp')
                         _authentication.isAuth = true;
                         _authentication.userName = response.userName;
                         _authentication.userFullName = response.userFullName;
-                        _authentication.userID = response.userID;
+                        _authentication.userID = response.ProfileID;
                         _authentication.userProfileURL = response.profileURL;
                         _authentication.userProfileTypeID = response.profileTypeID;
                         _authentication.userIsConfirmed = response.profileIsConfirmed;
@@ -69,6 +69,7 @@ angular.module('gorgiasapp')
                         _authentication.userRole = response.UserRole;
                         _authentication.userUserID = response.userUserID;
                         _authentication.countryID = response.countryID;
+                        _authentication.profileID = response.ProfileID;
 
                         if (loginData.useRefreshTokens) {
                             localStorageService.set('authorizationData', { userID: _authentication.userID, userFullName: _authentication.userFullName, userIsConfirmed: _authentication.userIsConfirmed, userIsPeople: _authentication.userIsPeople, userProfileURL: _authentication.userProfileURL, userProfileTypeID: _authentication.userProfileTypeID, token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true, userRole: response.UserRole, userUserID: response.userUserID, countryID: response.countryID });

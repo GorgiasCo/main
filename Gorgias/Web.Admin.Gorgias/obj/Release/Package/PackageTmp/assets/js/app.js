@@ -10,10 +10,12 @@ angular.module('gorgiasapp', [
     'ui.router',
     'ui.utils',
     'oc.lazyLoad',
-    'LocalStorageModule', 'ngCookies', 'pascalprecht.translate', 'angularModalService', 'angularValidator', 'ngMap',
+    'LocalStorageModule', 'ngCookies', 'pascalprecht.translate', 'angularModalService', 'angularValidator', 'ngMap', 'chart.js',
     'angular-uuid',
     'angular-preload-image',
     'ui.bootstrap',
-    'datatables'
+    'datatables',
+    'angular-owl-carousel-2',
+    'angucomplete-alt'
 ]);
  
