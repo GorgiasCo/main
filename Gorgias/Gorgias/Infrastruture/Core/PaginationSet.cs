@@ -20,6 +20,12 @@ namespace Gorgias.Infrastruture.Core
         public int TotalPages { get; set; }
         public int TotalCount { get; set; }
 
+        public bool hasMore {
+            get {
+                return TotalPages == Page ? false : true;
+            }
+        }
+
         public IEnumerable<T> Items { get; set; }
     }
 }

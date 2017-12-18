@@ -39,11 +39,13 @@
 
         function ProfileLoadCompleted(response) {
             $scope.loginMessage = 'Password updated.';
+            console.log(response, 'success');
             $scope.isDone = true;
         }
 
         function ProfileLoadFailed(response) {
             $scope.isDone = false;
+            console.log(response, 'error');
             $scope.loginMessage = response.data.Errors[0];
         }
 

@@ -5,8 +5,8 @@
 
 //var serviceBase = 'https://gorgiasapi.azurewebsites.net/';
 //var serviceBase = 'https://gorgiasapp.azurewebsites.net/';
-var serviceBase = 'http://localhost:43587/';
-//var serviceBase = 'http://gorgiasapp-v3.azurewebsites.net/';
+//var serviceBase = 'http://localhost:43587/';
+var serviceBase = 'http://gorgiasapp-v3.azurewebsites.net/';
 //var serviceBase = 'http://apiigorgias.azurewebsites.net/';
 //var serviceBase = 'http://gorgiasapp.azurewebsites.net/';
 

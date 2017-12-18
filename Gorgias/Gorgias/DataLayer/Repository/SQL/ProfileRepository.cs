@@ -714,6 +714,8 @@ namespace Gorgias.DataLayer.Repository.SQL
                     orderby w.ProfileFullname ascending
                     select new Business.DataTransferObjects.BrandSo.Profile
                     {
+                        Country = w.Addresses.FirstOrDefault().City.Country.CountryName,
+                        CustomURL = w.ProfileURL,
                         ProfileFullname = w.ProfileFullname,
                         ProfileID = w.ProfileID,
                         ProfileImage = w.ProfileImage,

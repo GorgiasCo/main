@@ -16,6 +16,7 @@ angular.module('gorgiasapp', [
     'ui.bootstrap',
     'datatables',
     'angular-owl-carousel-2',
-    'angucomplete-alt'
+    'angucomplete-alt',
+    'slick'
 ]);
  

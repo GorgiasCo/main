@@ -1084,6 +1084,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Albums/Full/Filter", Name = "GetV2MobileAlbumFullFilter")]
+        [HttpPost]
+        public HttpResponseMessage AlbumFullFilter(HttpRequestMessage request, AlbumFilterMobileModel albumFilterMobileModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                PaginationSet<AlbumMobileModel> result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbumsFull(albumFilterMobileModel);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<PaginationSet<AlbumMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Profile/Activity", Name = "MobileV2ProfileActivityInsert")]
         [HttpPost]
         public HttpResponseMessage ProfileActivityInsert(HttpRequestMessage request, Business.DataTransferObjects.Mobile.V2.ProfileActivityUpdateMobileModel objProfileActivity)

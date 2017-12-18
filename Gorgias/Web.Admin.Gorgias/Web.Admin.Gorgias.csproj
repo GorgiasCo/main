@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\darktheme-old.css" />
     <Content Include="assets\css\darktheme.css" />
     <Content Include="assets\js\controllers\admin\Profile\addProfileController.js" />
     <Content Include="assets\js\controllers\admin\Profile\Address\listprofileAddressController.js" />
@@ -163,6 +164,8 @@
     <Content Include="assets\plugins\angular-owl\angular-owl-carousel-2.js" />
     <Content Include="assets\plugins\angular-owl\angular-owl-carousel.js" />
     <Content Include="assets\plugins\angular-pre-load-image\angular-preload-image.js" />
+    <Content Include="assets\plugins\angular-slick\slick.js" />
+    <Content Include="assets\plugins\angular-slick\slick.min.js" />
     <Content Include="assets\plugins\angular-toastr\toastr.js" />
     <Content Include="assets\plugins\angular-uuid\angular-uuid.js" />
     <Content Include="assets\plugins\angular-validator\angular-validator.js" />
@@ -264,6 +267,12 @@
     <Content Include="assets\plugins\ng-dropzone-2.0.1\dist\ng-dropzone.min.js" />
     <Content Include="assets\plugins\ng-dropzone-2.0.1\gulpfile.js" />
     <Content Include="assets\plugins\ng-dropzone-2.0.1\src\js\ng-dropzone.js" />
+    <Content Include="assets\plugins\slick\ajax-loader.gif" />
+    <Content Include="assets\plugins\slick\fonts\slick.svg" />
+    <Content Include="assets\plugins\slick\slick-theme.css" />
+    <Content Include="assets\plugins\slick\slick.css" />
+    <Content Include="assets\plugins\slick\slick.js" />
+    <Content Include="assets\plugins\slick\slick.min.js" />
     <Content Include="backupFormElement.html" />
     <Content Include="packages.config" />
     <Content Include="assets\js\api\charts.json" />
@@ -493,6 +502,14 @@
     <Content Include="assets\plugins\jquery-datatables\media\images\Sorting icons.psd" />
     <Content Include="assets\plugins\jquery-datatables\Readme.md" />
     <Content Include="assets\plugins\angular-chart.js\angular-chart.min.js.map" />
+    <Content Include="assets\plugins\slick\config.rb" />
+    <Content Include="assets\plugins\slick\fonts\slick.eot" />
+    <Content Include="assets\plugins\slick\fonts\slick.ttf" />
+    <Content Include="assets\plugins\slick\fonts\slick.woff" />
+    <Content Include="assets\plugins\slick\slick-theme.less" />
+    <Content Include="assets\plugins\slick\slick-theme.scss" />
+    <Content Include="assets\plugins\slick\slick.less" />
+    <Content Include="assets\plugins\slick\slick.scss" />
     <None Include="Properties\PublishProfiles\cpgorgias - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cpgorgias - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">

@@ -30,5 +30,25 @@ namespace Gorgias.Controllers
                 return response;
             });
         }
+
+        [Route("BrandSo/V2/Profiles/{Keyword}", Name = "GetV2BrandSoProfilesByKeyword")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesByKeyword(HttpRequestMessage request, string Keyword)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                IEnumerable<Business.DataTransferObjects.BrandSo.Profile> result = BusinessLayer.Facades.Facade.ProfileFacade().getBrandSoProfiles(Keyword);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, "Nothing Found");
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<Business.DataTransferObjects.BrandSo.Profile>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
     }
 }

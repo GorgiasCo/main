@@ -343,7 +343,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3489 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3496 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {
@@ -417,13 +417,13 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums where x.AlbumAvailability == 0 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums where x.AlbumID > 3496 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {
-                ex.Albums.Attach(objAlbum);
-                objAlbum.AlbumAvailability = 43200;
-                objAlbum.AlbumDateExpire = objAlbum.AlbumDatePublish.AddMinutes(43200);
+                //ex.Albums.Attach(objAlbum);
+                objAlbum.AlbumAvailability = 129600;
+                objAlbum.AlbumDateExpire = objAlbum.AlbumDatePublish.AddMinutes(129600);
 
                 Console.WriteLine(objAlbum.AlbumName + ',' + objAlbum.AlbumDatePublish.ToShortDateString());
                 Console.WriteLine(objAlbum.AlbumDatePublish.ToShortDateString() + "---------" + objAlbum.AlbumDateExpire.ToShortDateString());

@@ -12,5 +12,7 @@ namespace Gorgias.Business.DataTransferObjects.BrandSo
         public bool ProfileIsConfirmed { get; set; }
         public string ProfileImage { get; set; }       
         public string ProfileEmail { get; set; } 
+        public string Country { get; set; }
+        public string CustomURL { get; set; }        
     }
 }

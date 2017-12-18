@@ -1,14 +1,52 @@
+﻿
+/*=====================CONTENTS======================//
 
+  1.0 General
+
+  2.0 Panels
+
+  3.0 Forms
+
+  4.0 Tables
+
+  5.0. Sidebar
+
+//=====================================================*/
+
+/*Yasser*/
+.icon-thumbnail{
+    background:transparent;
+}
+
+.page-container .page-content-wrapper .content {
+    z-index: 10;
+    padding-top: 8%;
+    padding-bottom: 72px;
+    min-height: 100%;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+/*=====================1.0 - General======================*/
+#dark .page-header {
+    border-bottom: 1px solid #333;
+}
+
+#dark select,
+#dark textarea {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  background: #2c2c2c;
+}
 
 #dark .login-container.bg-white {
 	background-color: #333;
 }
 
 #dark .header {
-   
-   
     background-color: #292929;
-    border-bottom: 1px solid #ff0088;
+    border-bottom: 0px solid #ff0080;
 }
 
 #dark .header a {
@@ -18,31 +56,26 @@
 #dark > body {
 
     background-color:#292929;
-    color : #999;
+    /*color : #999;*/
+		color: #fff;
 }
 
-/*==============Panel==================*/
-#dark .col-sm-12 .panel {
-    background-color: #333;
+#dark .page-container .page-content-wrapper {
+		/*background-image: url(http://wallpaper.pickywallpapers.com/1920x1080/like-the-northern-lights.jpg);
+		background-size: cover;
+		background-attachment: fixed;*/
+
+         background: #3E5694; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #3E5694, #1D2A5F); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #3E5694, #1D2A5F); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #3E5694, #1D2A5F); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to left top, red, #3E5694); /* Standard syntax */
 }
 
-#dark .widget-11.panel {
-    background-color: #333;
+#dark .panel {
+    /*background-color: #333;*/
+		background-color: rgba(51, 51, 51, 0.6);
 }
-
-#dark .panel-group .panel-heading .panel-title > a:after {
-   color: #ff0088;
-}
-#dark .panel-group .panel-heading .panel-title > a:hover:{
-    color:red;
-}
-
-#dark .panel.panel-default {
-    border: 1px solid rgba(0, 0, 0, 0.07);
-    background-color: #333;
-}
-
-
 
 #dark h1,
 #dark h2,
@@ -50,7 +83,7 @@
 #dark h4,
 #dark h5,
 #dark h6 {
-  color: #cecece;
+  color: #FFF;
 }
 
 #dark .jumbotron {
@@ -58,20 +91,76 @@
 }
 
 
-/*================Tabs===============*/
-#dark .nav-tabs > li > a {
-    color: #929292;
-}
-
 #dark .nav-tabs > li.active > a,
 #dark .nav-tabs > li.active > a:hover,
 #dark .nav-tabs > li.active > a:focus {
-    border-color: #626262;
-    color: #292929;
-    background-color: #626262;
+	/*color: #ddd;*/
+	color:#fff;
+  /*background-color: rgba(230, 230, 230, 0.05);*/
+	background-color: rgba(51, 51, 51, 0.5);
+	/*border: 0px;*/
 }
 
-/*============== FORMS==============*/
+#dark .nav-tabs > li > a {
+  /*color: #777;*/
+	color: #999;
+}
+
+#dark .nav-tabs-simple > li:after {
+  background-color: #3a92a9;
+}
+
+#dark .panel-heading a:not(.btn) {
+  color: #ccc !important;
+}
+
+#dark .panel-group .panel-heading .panel-title > a:hover {
+  color: #f5f5f5 !important;
+}
+
+/*widget panel Shadows*/
+#dark .ar-1-1 {
+  box-shadow: 1px 1px 7px 3px rgba(44, 44, 44, 0.3);
+}
+
+#dark .ar-2-1 {
+  box-shadow: 1px 1px 7px 3px rgba(44, 44, 44, 0.3);
+}
+
+
+/*============================ 2.0 - Panels =============================*/
+#dark .nav-tabs > li > a:hover,
+#dark .nav-tabs > li > a:focus {
+  background: rgba(51, 51, 51, 0.5);
+  border-color: transparent;
+  color: #fff;
+}
+#dark .nav-tabs > li > a {
+	/*border-radius: 0;*/
+  color: #ccc;
+  /*border-color: rgba(0, 0, 0, 0.1);*/
+}
+
+#dark .panel-group .panel-heading .panel-title > a:after {
+  color: #999;
+  transition: all 0.6s;
+}
+.panel-group .panel-heading .panel-title > a:hover:after {
+  color: #fff !important;
+}
+
+/*---------- end of panels ----------*/
+
+/*========================== optional ==============================*/
+.gradient-grey {
+  background: none;
+}
+
+/*============================ 3.0 - FORMS============================*/
+
+#dark .panel-title {
+  color:#3a92a9;
+}
 
 #dark .form-group-default {
   background-color: #2c2c2c;
@@ -101,24 +190,25 @@
 
 #dark .btn-default,
 .btn-default:focus {
-  color: #ccc;
-  background-color: #2c2c2c;
-  border-color: #4e4e4e;
+		color: #ccc;
+		background-color: #2c2c2c;
+		border-color: #2c2c2c;
 }
 #dark .btn-default.active,
 #dark .btn-default:active,
 #dark .btn-default.active:focus,
 #dark .btn-default:active:focus,
 #dark .btn-default:active:hover {
-  background-color: #777;
-  border-color: #333;
-  color: #333; /*hover clicked*/
+	background-color: #212121;
+    border-color: #333;
+    color: #ccc; /*active*/
 }
 #dark .btn-default.hover,
 #dark .btn-default:hover {
-  background-color: #777;
-  border-color: rgba(98, 98, 98, 0.27);
-color: #1a1a1a; /*hover */}
+	background-color: #3a3737;
+    border-color: rgb(50, 50, 50);
+    color: #ffffff;
+	}
 
 #dark .form-group-default.has-error {
     background-color: rgba(255, 126, 122, 0.25);
@@ -131,6 +221,7 @@ color: #1a1a1a; /*hover */}
 
 #dark .form-control {
   background-color: #2c2c2c;
+	/*background-color: rgba(44, 44, 44, 0.5);*/
 }
 #dark .form-control:focus {
   border-color: rgba(0, 0, 0, 0.1);
@@ -138,65 +229,93 @@ color: #1a1a1a; /*hover */}
 }
 
 #dark .form-horizontal .form-group {
-  border-bottom: 1px solid #626262;
+  /*border-bottom: 1px solid #626262;*/
+	border-bottom: 1px solid rgba(44, 44, 44, 0.3);
 }
 
 #dark .panel-footer{
-    background-color: #2e2e2e;
-    border-top: 1px solid #2c2c2c;
+    /*background-color: #2e2e2e;
+    border-top: 1px solid #2c2c2c;*/
+
+		background-color: rgba(46, 46, 46, 0.3);
+    border-top: 1px solid  rgba(44, 44, 44, 0.4);
 }
 
-/*============ table ===========*/#211f1f;
+#dark .form-horizontal .form-group .control-label {
+
+  opacity: 1;
+
+}
+
+/*======================== 4.0 - Tables =============================*/
 
 #dark .table thead tr th {
   /*color: #777*/
-  color:#5f6060
+	border-bottom: 1px solid rgba(44, 44, 44, 0.5);
+	color: #FFF;
 }
+
 
 #dark .table thead tr th[class*='sorting_']:not([class='sorting_disabled']) {
-  color: #337ab7;
+  /*color: #337ab7;*/
+	color:#48b0f7;
 }
 
-#dark table.dataTable thead .sorting:after {
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
+
+#dark .table-bordered>thead>tr>th {
+	 border: 0px solid #ddd;
 }
 
-table.dataTable thead .sorting_asc:after {
-  background-image: url("../img/icons/sort_asc.png");
-  filter: invert(100%);
-}
-table.dataTable thead .sorting_desc:after {
-  background-image: url("../img/icons/sort_desc.png");
-  filter: invert(100%);
-}
-table.dataTable thead .sorting:after {
-  background-image: url("../img/icons/sort_both.png");
-  filter: invert(100%);
-}
-#dark .table thead tr th {
-  color: #999;
-}
-
-#dark .dataTables_wrapper .dataTables_paginate ul > li > a { 
+#dark .dataTables_wrapper .dataTables_paginate ul > li > a {
   color: #fafafa;
 }
 
-/*============*/
-#dark .page-header {
-    border-bottom: 1px solid #333;
+#dark .table tbody tr td {
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(98, 98, 98, 0.4);
+  color: #ccc;
 }
 
-/*======= sidebar =======*/
+/*table hover*/
+#dark .table.table-hover tbody tr:hover td {
+  background: rgba(51, 51, 51, 0.0) !important;
+}
+
+#dark .table-hover>tbody>tr:hover {
+    /*background-color: rgba(245, 245, 245, 0);*/
+		background-color: rgba(245, 245, 245, 0.25);
+}
+
+/*---striped table---*/
+#dark .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+#dark .table.table-striped tbody tr:nth-child(2n+1) td {
+  background: rgba(0, 0, 0, 0.35) !important;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+#dark .table.table-striped tbody tr td {
+  background: rgba(0, 0, 0, 0.35) !important;
+}
+
+#dark .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border-right: 1px solid #333;
+}
+
+
+/*====================== 5.0 - Sidebar ======================*/
 #dark .page-sidebar .sidebar-header {
   /* Side-bar header */
-  background-color: #2c2c2c;
-  border-bottom: 1px solid #ff005d;
+  margin-top:60%;
+  background-color: transparent;
+  border-bottom: 0px solid #3a92a9;
   color: #fff;
 
 }
 #dark .page-sidebar {
-  background-color: #211f1f;
+  background-color: #121D4B;
 }
 
 #dark .page-sidebar .sidebar-menu .menu-items > li ul.sub-menu {
@@ -241,4 +360,19 @@ table.dataTable thead .sorting:after {
 
 #dark.page-sidebar .sidebar-menu .menu-items > li ul.sub-menu > li .icon-thumbnail {
   background-color: #232323;
+}
+
+#dark .input-group-addon {
+  background: rgb(16, 207, 110);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  color: #3b4752;
+}
+
+
+/*on mobile*/
+
+@media (max-width: 991px){
+  .header {
+    background: #2c2c2c !important;
+  }
 }

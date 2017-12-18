@@ -12,7 +12,7 @@
 
         $scope.timestamp = new Date().getUTCMilliseconds();
 
-        console.log($route.current.params.name, $route.current.params.profileid, 'meta header ;)');
+        console.log($route.current.params.name, $route.current.params.profileid, 'meta header ;)', $window.navigator, $window.matchMedia('(display-mode: standalone)').matches, screen.height - document.documentElement.clientHeight);
         Page.setTitle($route.current.params.name);
         Page.setProfile($route.current.params.profileid);
 

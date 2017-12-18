@@ -51,6 +51,7 @@ namespace Gorgias.DataLayer.Interface
         IQueryable<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> GetV2AlbumContentsByCategoryAsQueryable(int CategoryID);
 
         IQueryable<Album> GetV2AlbumByCategoryAsQueryable();
+        IQueryable<Album> GetV3AlbumByCategoryAsQueryable();
         IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID);
         IQueryable<Album> GetV2AlbumByCategoryForMicroAppAsQueryable(int CategoryID);
         IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID, int ProfileID);

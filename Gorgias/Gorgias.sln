@@ -15,6 +15,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gorgias.Manual", "Gorgias.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gorgias.Image.Resizer", "Gorgias.Image.Resizer\Gorgias.Image.Resizer.csproj", "{518F261B-E20D-42AE-8F78-6A0741369D97}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web.React.Gorgias", "Web.React.Gorgias\", "{930EF964-C131-4306-BF7F-3480B053E452}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_21391"
+		Debug.AspNetCompiler.PhysicalPath = "Web.React.Gorgias\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_21391\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_21391"
+		Release.AspNetCompiler.PhysicalPath = "Web.React.Gorgias\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_21391\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "21391"
+		SlnRelativePath = "Web.React.Gorgias\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +67,10 @@ Global
 		{518F261B-E20D-42AE-8F78-6A0741369D97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{518F261B-E20D-42AE-8F78-6A0741369D97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{518F261B-E20D-42AE-8F78-6A0741369D97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930EF964-C131-4306-BF7F-3480B053E452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930EF964-C131-4306-BF7F-3480B053E452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930EF964-C131-4306-BF7F-3480B053E452}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{930EF964-C131-4306-BF7F-3480B053E452}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -158,6 +158,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Web/V2/Profiles/Brand/", Name = "GetWebV2ProfilesBrands")]
+        [HttpPost]
+        public HttpResponseMessage GetBrandProfiles(HttpRequestMessage request, ProfileSearch search)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var result = BusinessLayer.Facades.Facade.WebFacade().getProfiles(search.SubscriptionTypeID, search.PageNumber, search.PageSize, search.OrderType, search.CountryID, search.Industries, search.ProfileTypeID, search.Tags, search.Location, search.IsPeople.Value);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<ProfileItemModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Web/V2/Features", Name = "GetWebV2Features")]
         [HttpGet]
         public HttpResponseMessage GetFeatures(HttpRequestMessage request)

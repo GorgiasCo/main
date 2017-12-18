@@ -1125,6 +1125,115 @@ namespace Gorgias.Business.Facades.Web
             return (IEnumerable<ProfileItemModel>)r;
         }
 
+        public IEnumerable<ProfileItemModel> getProfiles(int? SubscriptionTypeID, int pagenumber, int pagesize, int OrderType, int? CountryID, string[] Industries, int? ProfileTypeID, string[] Tags, string Location, bool isPeople)
+        {
+            IList<SqlParameter> param = new List<SqlParameter>();
+
+            SqlParameter paramProfileID = new SqlParameter();
+            paramProfileID.DbType = System.Data.DbType.Int16;
+            paramProfileID.Value = SubscriptionTypeID;
+            paramProfileID.ParameterName = "@SubscriptionTypeID";
+            paramProfileID.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramIndustryID = new SqlParameter();
+            paramIndustryID.DbType = System.Data.DbType.String;
+            if (Industries != null && Industries.Length > 0)
+            {
+                string resultIndustries = "";
+                foreach (string obj in Industries)
+                {
+                    resultIndustries = resultIndustries + obj + ",";
+                }
+                paramIndustryID.Value = resultIndustries;
+            }
+            else
+            {
+                paramIndustryID.Value = DBNull.Value;
+            }
+            paramIndustryID.ParameterName = "@IndustryID";
+            paramIndustryID.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramProfileTypeID = new SqlParameter();
+            paramProfileTypeID.DbType = System.Data.DbType.Int16;
+            paramProfileTypeID.Value = ProfileTypeID;
+            paramProfileTypeID.ParameterName = "@ProfileTypeID";
+            paramProfileTypeID.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramCountryID = new SqlParameter();
+            paramCountryID.DbType = System.Data.DbType.Int16;
+            paramCountryID.Value = CountryID;
+            paramCountryID.ParameterName = "@CountryID";
+            paramCountryID.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramOrderType = new SqlParameter();
+            paramOrderType.DbType = System.Data.DbType.Int16;
+            paramOrderType.Value = OrderType;
+            paramOrderType.ParameterName = "@OrderType";
+            paramOrderType.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramLocation = new SqlParameter();
+            paramLocation.DbType = System.Data.DbType.String;
+            if (Location != null && !Location.Equals(""))
+            {
+                paramLocation.Value = Location;
+            }
+            else
+            {
+                paramLocation.Value = DBNull.Value;
+            }
+            paramLocation.ParameterName = "@Location";
+            paramLocation.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramTags = new SqlParameter();
+            paramTags.DbType = System.Data.DbType.String;
+            if (Tags != null && Tags.Length > 0)
+            {
+                string resultTags = "";
+                foreach (string obj in Tags)
+                {
+                    resultTags = resultTags + obj + ",";
+                }
+                paramTags.Value = resultTags;
+            }
+            else
+            {
+                paramTags.Value = DBNull.Value;
+            }
+            paramTags.ParameterName = "@Tags";
+            paramTags.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramPageNumber = new SqlParameter();
+            paramPageNumber.DbType = System.Data.DbType.Int16;
+            paramPageNumber.Value = pagenumber;
+            paramPageNumber.ParameterName = "@PageNumber";
+            paramPageNumber.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramPageSize = new SqlParameter();
+            paramPageSize.DbType = System.Data.DbType.Int16;
+            paramPageSize.Value = pagesize;
+            paramPageSize.ParameterName = "@PageSize";
+            paramPageSize.Direction = System.Data.ParameterDirection.Input;
+
+            param.Add(paramPageSize);
+            param.Add(paramPageNumber);
+            param.Add(paramTags);
+            param.Add(paramLocation);
+            param.Add(paramOrderType);
+            param.Add(paramCountryID);
+            param.Add(paramProfileTypeID);
+            param.Add(paramProfileID);
+            param.Add(paramIndustryID);
+
+            string spName = "[dbo].[getProfilesByPeople]";
+            if (!isPeople)
+            {
+                spName = "[dbo].[getProfilesByBrands]";
+            }
+
+            var r = new WebRepository().getStoredProcedure<ProfileItemModel>(spName, param).FirstOrDefault();
+            return (IEnumerable<ProfileItemModel>)r;
+        }
+
         public FreshProfiles getProfileEntities(int OrderType, int? CountryID, string[] Industries, int? ProfileTypeID, string[] Tags, string Location)
         {
             IList<SqlParameter> param = new List<SqlParameter>();

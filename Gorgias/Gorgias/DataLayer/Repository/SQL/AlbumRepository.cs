@@ -815,6 +815,13 @@ namespace Gorgias.DataLayer.Repository.SQL
             return result;
         }
 
+        public IQueryable<Album> GetV3AlbumByCategoryAsQueryable()
+        {
+            //var currentDate = DateTime.UtcNow;
+            var result = (from w in context.Albums.Include("Contents.ContentType1") where w.AlbumStatus == true && w.AlbumIsDeleted == false select w).AsQueryable();
+            return result;
+        }
+
         public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID)
         {
             //var currentDate = DateTime.UtcNow;
@@ -831,7 +838,7 @@ namespace Gorgias.DataLayer.Repository.SQL
 
         public IQueryable<Album> GetV2AlbumByCategoryAsQueryable(int CategoryID, int ProfileID)
         {
-            //var currentDate = DateTime.UtcNow;
+            //var currentDate = DateTime.UtcNow; edited yasser TODO:// Hiiiii
             var result = (from w in context.Albums where w.AlbumStatus == true && w.AlbumIsDeleted == false && w.Profile.ProfileIsConfirmed == true && w.Profile.ProfileIsPeople == true select w).AsQueryable();
             return result;
         }

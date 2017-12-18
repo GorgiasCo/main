@@ -17,5 +17,6 @@ namespace Gorgias.Business.DataTransferObjects.Web
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public int? SubscriptionTypeID { get; set; }
+        public bool? IsPeople { get; set; }
     }
 }

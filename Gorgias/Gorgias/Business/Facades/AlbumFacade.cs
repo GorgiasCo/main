@@ -26,6 +26,196 @@ namespace Gorgias.BusinessLayer.Facades
             return DataLayer.DataLayerFacade.AlbumRepository().GetAlbumViewsV2Mobile(ProfileID);
         }
 
+        //Full Filter
+        public PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> getAlbumsFull(Business.DataTransferObjects.Mobile.V2.AlbumFilterMobileModel albumFilterMobileModel)
+        {
+            IQueryable<Album> basequery;
+            //if (albumFilterMobileModel.CategoryTypeID == 2 && albumFilterMobileModel.isMicroApp == false)
+            if (albumFilterMobileModel.CategoryTypeID == 2)
+            {
+                basequery = getV3AlbumsByCategoryAction(albumFilterMobileModel);
+            }
+            else
+            {
+                basequery = getV3AlbumsByCategoryContent(albumFilterMobileModel);
+            }
+
+            //int pageRequested = 0;
+
+            //if(albumFilterMobileModel.Page > 2)
+            //{
+            //    pageRequested = albumFilterMobileModel.Page - 2;
+            //} else
+            //{
+            //    pageRequested = albumFilterMobileModel.Page;
+            //}
+
+            var queryList = RepositoryHelper.Pagination<Album>(albumFilterMobileModel.Page, albumFilterMobileModel.Size, basequery).Future();
+            var queryTotal = basequery.FutureCount();
+
+            int intTotal = queryTotal.Value;
+
+            var tt = queryList.Select(w => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
+            {
+                ProfileID = w.ProfileID,
+                AlbumID = w.AlbumID,
+                AlbumCover = w.AlbumCover,
+                AlbumDateCreated = w.AlbumDateCreated,
+                AlbumName = w.AlbumName,
+                AlbumAvailability = w.AlbumAvailability,
+                AlbumDateExpire = w.AlbumDateExpire,
+                AlbumDatePublish = w.AlbumDatePublish,
+                //AlbumAvailabilityName = w.AlbumType.AlbumTypeName,
+                AlbumLike = w.Contents.Sum(m => m.ContentLike),
+                AlbumContents = w.Contents.Count,
+                AlbumComments = w.Contents.Sum(m => m.Comments.Count),
+                AlbumHasComment = w.AlbumHasComment,
+                AlbumIsTokenAvailable = w.AlbumIsTokenAvailable,
+                CategoryID = w.CategoryID,
+                AlbumRepostRequest = w.AlbumRepostRequest,
+                AlbumRepostValue = w.AlbumRepostValue,
+                Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
+                {
+                    ContentLike = c.ContentLike,
+                    ContentComments = c.Comments.Count,
+                    //TopComments = c.Comments != null ? c.Comments.OrderByDescending(cc => cc.ContentID).Take(3).Select(m => new Business.DataTransferObjects.Mobile.V2.ContentCommentMobileModel { CommentNote = m.CommentNote, ProfileFullname = m.Profile.ProfileFullname, CommentID = m.CommentID }).ToList() : null,
+                    ContentURL = c.ContentURL,
+                    ContentID = c.ContentID,
+                    ContentTitle = c.ContentTitle,
+                    ContentDimension = c.ContentDimension,
+                    ContentTypeID = c.ContentType,
+                    ContentTypeExpression = c.ContentType1.ContentTypeExpression
+                }).ToList()
+            }).ToList();
+
+            //var tt = queryList.Select(w => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
+            //{                
+            //    AlbumID = w.AlbumID,                
+            //    AlbumDateExpire = w.AlbumDateExpire,
+            //    AlbumDatePublish = w.AlbumDatePublish,
+            //}).ToList();
+
+            PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> result = new PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel>()
+            {
+                Page = albumFilterMobileModel.Page,
+                TotalCount = intTotal,
+                TotalPages = (int)Math.Ceiling((decimal)intTotal / albumFilterMobileModel.Size),
+                Items = tt//queryList.Select(w => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel { ProfileID = w.ProfileID, AlbumID = w.AlbumID, AlbumCover = w.AlbumCover, AlbumDateCreated = w.AlbumDateCreated, AlbumName = w.AlbumName, AlbumAvailability = w.AlbumAvailability, AlbumDateExpire = w.AlbumDateExpire, AlbumDatePublish = w.AlbumDatePublish, AlbumAvailabilityName = w.AlbumType.AlbumTypeName, AlbumLike = w.Contents.Sum(m => m.ContentLike), AlbumContents = w.Contents.Count, AlbumComments = w.Contents.Sum(m => m.Comments.Count), AlbumHasComment = w.AlbumHasComment, Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel() { ContentLike = c.ContentLike, ContentURL = c.ContentURL, ContentID = c.ContentID, ContentTitle = c.ContentTitle, ContentComments = c.Comments.Count, ContentDimension = c.ContentDimension, ContentTypeExpression = c.ContentType1.ContentTypeExpression }).ToList() }).ToList()
+            };
+
+            return result;
+        }
+
+        public IQueryable<Album> getV3AlbumsByCategoryAction(Business.DataTransferObjects.Mobile.V2.AlbumFilterMobileModel albumFilterMobileModel)
+        {
+            IQueryable<Album> basequery;
+            //Seperate based on Where ;)
+            var currentDate = DateTime.UtcNow;
+            switch (albumFilterMobileModel.CategoryID)
+            {
+                case 1:
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).OrderByDescending(m => m.AlbumView);
+                    break;
+                case 3:
+                    //Not Expired
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m => m.Contents.Count);
+                    break;
+                case 12:
+                    //Gorgias
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID, albumFilterMobileModel.ProfileID).OrderByDescending(m => m.AlbumDateCreated);
+                    break;
+                case 15:
+                    //Upcoming ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.AlbumDatePublish >= currentDate).OrderBy(m => m.AlbumDatePublish);
+                    break;
+                case 16:
+                    //Expiring Soon
+                    //basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderByDescending(m=> m.AlbumDateExpire).OrderByDescending(m => SqlFunctions.DateDiff("minute", m.AlbumDateExpire, m.AlbumDatePublish));//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire >= currentDate && m.AlbumDatePublish <= currentDate).OrderBy(m => m.AlbumDateExpire);//EntityFunctions.DiffMinutes(m.AlbumDateExpire,m.AlbumDatePublish)
+                    break;
+                case 17:
+                    //Expired ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.AlbumDateExpire <= currentDate).OrderByDescending(m => m.AlbumDateExpire);
+                    break;
+                case 21:
+                    //iFelt ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.ProfileActivities.Any(a => a.ProfileID == albumFilterMobileModel.ProfileID && a.ActivityType.ActivityTypeParentID == 2)).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 22:
+                    //stayOn ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.Profile.Connections.Any(c => c.RequestedProfileID == albumFilterMobileModel.ProfileID && c.RequestTypeID == 3)).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 23:
+                    //myStories ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.ProfileID == albumFilterMobileModel.ProfileID).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 24:
+                    //storyLand ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.AlbumDatePublish <= currentDate).OrderByDescending(m => m.Contents.Count);
+                    break;
+                case 25:
+                    //BrandSo ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.Profile.ProfileIsConfirmed == true && m.Profile.ProfileIsPeople == false && m.AlbumDatePublish < currentDate).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                case 86:
+                    //MicroApp Home All Stories ;)
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV3AlbumByCategoryAsQueryable().Where(m => m.ProfileID == albumFilterMobileModel.MicroAppProfileID).OrderByDescending(m => m.AlbumDatePublish);
+                    break;
+                default:
+                    basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID);
+                    break;
+            }
+
+            //switch (albumFilterMobileModel.Page)
+            //{
+            //    case 1:
+            //        basequery = basequery.OrderByDescending(m => m.AlbumView);
+            //        break;
+            //    case 2:
+            //        basequery = basequery.OrderByDescending(m => m.AlbumID);
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+
+
+            return basequery;
+        }
+
+        public IQueryable<Album> getV3AlbumsByCategoryContent(Business.DataTransferObjects.Mobile.V2.AlbumFilterMobileModel albumFilterMobileModel)
+        {
+            IQueryable<Album> basequery;
+
+            //switch (albumFilterMobileModel.Page)
+            //{
+            //    case 1:
+            //        basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).OrderByDescending(m => m.AlbumView);
+            //        break;
+            //    case 2:
+            //        basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).Where(wm => wm.Profile.ProfileIsPeople == true && wm.Profile.ProfileStatus == true).OrderByDescending(m => m.AlbumView);
+            //        break;
+            //    default:
+            //        var currentDate = DateTime.UtcNow;
+            //        basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).Where(wm=> wm.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
+            //        break;
+            //}
+
+            var currentDate = DateTime.UtcNow;
+            if (albumFilterMobileModel.isMicroApp == false)
+            {
+                basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryAsQueryable(albumFilterMobileModel.CategoryID).Where(wm => wm.AlbumDatePublish <= currentDate).OrderByDescending(m => m.AlbumDatePublish);
+            }
+            else
+            {
+                basequery = DataLayer.DataLayerFacade.AlbumRepository().GetV2AlbumByCategoryForMicroAppAsQueryable(albumFilterMobileModel.CategoryID).Where(wm => wm.AlbumDatePublish <= currentDate && wm.ProfileID == albumFilterMobileModel.MicroAppProfileID).OrderByDescending(m => m.AlbumDatePublish);
+            }
+
+            return basequery;
+        }
+
+        //Full Filter
+
         public PaginationSet<Business.DataTransferObjects.Mobile.V2.AlbumMobileModel> getAlbums(Business.DataTransferObjects.Mobile.V2.AlbumFilterMobileModel albumFilterMobileModel)
         {
             IQueryable<Album> basequery;
@@ -211,7 +401,7 @@ namespace Gorgias.BusinessLayer.Facades
             }
 
             return basequery;
-        }
+        }        
 
         public Business.DataTransferObjects.Mobile.V2.AlbumMobileModel getAlbum(int AlbumID, int ProfileID, int DeviceWidth)
         {
