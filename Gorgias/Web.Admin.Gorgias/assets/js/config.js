@@ -519,10 +519,10 @@ angular.module('gorgiasapp')
                         }]
                     }
                 })
-                .state('app.dashboard.chart', {
-                    url: "/dashboard/chart",
-                    templateUrl: "tpl/admin/viewDashboard.html",
-                    controller: 'viewDashboardController',
+                .state('app.landing', {
+                    url: "/landing",
+                    templateUrl: "tpl/admin/V2/profile/viewLandingPage.html",
+                    controller: 'landingPageController',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -538,7 +538,7 @@ angular.module('gorgiasapp')
                             })
                                 .then(function () {
                                     return $ocLazyLoad.load([
-                                        'assets/js/controllers/admin/Profile/Dashboard/viewDashboardController.js'
+                                        'assets/js/controllers/V2/Profile/landingPageController.js'
                                     ]);
                                 });
                         }]

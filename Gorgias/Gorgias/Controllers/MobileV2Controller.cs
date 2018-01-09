@@ -12,6 +12,26 @@ namespace Gorgias.Controllers
     [RoutePrefix("api")]
     public class MobileV2Controller : ApiControllerBase
     {
+        [Route("Mobile/V2/Profiles/Keyword/{keyword}", Name = "GetV2MobileProfilesByKeyword")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesByKeyword(HttpRequestMessage request, string keyword)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                IEnumerable<ProfileMobileModel> result = BusinessLayer.Facades.Facade.ProfileFacade().getProfilesByKeyword(keyword);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<ProfileMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Album/Story/{AlbumID}", Name = "GetV2MobileAlbumStory")]
         [HttpGet]
         public HttpResponseMessage GetAlbumStory(HttpRequestMessage request, int AlbumID)

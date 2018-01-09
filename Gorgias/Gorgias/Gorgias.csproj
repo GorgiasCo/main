@@ -398,6 +398,7 @@
     <Compile Include="Business\DataTransferObjects\Mobile\V2\NewUserRegisterMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\PhoneConfigMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileActivityUpdateMobileModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingLanguageMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileReadingMobileModel.cs" />
     <Compile Include="Business\DataTransferObjects\Mobile\V2\ProfileRegisterMobileModel.cs" />
@@ -479,6 +480,7 @@
     <Compile Include="Business\DataTransferObjects\Web\SocialNetworkModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\SponsoredFeatureModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\TagModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Web\V2\StoreProfileModel.cs" />
     <Compile Include="Business\Facades\ActivityTypeFacade.cs" />
     <Compile Include="Business\Facades\AddressTypeFacade.cs" />
     <Compile Include="Business\Facades\AlbumTypeFacade.cs" />

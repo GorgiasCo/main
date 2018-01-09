@@ -417,6 +417,11 @@ namespace Gorgias.Business.Facades.Web
         }
 
         //V2
+        public DataTransferObjects.Web.V2.StoreProfileModel getStoreProfile(int ProfileID)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().getStoreProfile(ProfileID);
+        }
+
         public MainEntities getMainV2Entities()
         {
             MainEntities objEntities = new MainEntities();

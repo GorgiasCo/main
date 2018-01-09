@@ -47,12 +47,18 @@ namespace Gorgias.BusinessLayer.Facades
 
         public IEnumerable<Business.DataTransferObjects.BrandSo.Profile> getBrandSoProfiles(string Keyword)
         {
-            var basequery = DataLayer.DataLayerFacade.ProfileRepository().getBrandSoProfiles().Where(m=> m.ProfileFullname.ToLower().Contains(Keyword.ToLower())).ToList();            
+            var basequery = DataLayer.DataLayerFacade.ProfileRepository().getBrandSoProfiles().Where(m => m.ProfileFullname.ToLower().Contains(Keyword.ToLower())).ToList();
             return basequery;
         }
 
         //End BrandSo
         //V2 Begin
+
+        public IEnumerable<Business.DataTransferObjects.Mobile.V2.ProfileMobileModel> getProfilesByKeyword(string keyword)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().getProfilesByKeyword(keyword.ToLower());
+        }
+
         public Business.DataTransferObjects.Mobile.V2.NewUserRegisterMobileModel createNewMobileUser()
         {
             Profile registeredUser = DataLayer.DataLayerFacade.ProfileRepository().Insert();

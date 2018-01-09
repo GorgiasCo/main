@@ -1000,6 +1000,22 @@ namespace Gorgias.DataLayer.Repository.SQL
         {
             return (from w in context.Profiles.Include("ProfileType").Include("ProfileReadings").Include("ProfileSetting") where w.ProfileID == ProfileID select w).FirstOrDefault();
         }
+
+        public IEnumerable<Business.DataTransferObjects.Mobile.V2.ProfileMobileModel> getProfilesByKeyword(string keyword)
+        {
+            return (from x in context.Profiles
+                    where ((x.ProfileFullname.ToLower().Contains(keyword) && !x.ProfileFullname.EndsWith(x.ProfileID.ToString())) || (x.ProfileFullnameEnglish.ToLower().Contains(keyword) && !x.ProfileFullnameEnglish.EndsWith(x.ProfileID.ToString())))
+                    orderby x.ProfileFullname
+                    select new Business.DataTransferObjects.Mobile.V2.ProfileMobileModel
+                    {
+                        ProfileFullname = x.ProfileFullname,
+                        ProfileFullnameEnglish = x.ProfileFullnameEnglish,
+                        ProfileID = x.ProfileID,
+                        ProfileImage = x.ProfileImage,
+                        ProfileIsConfirmed = x.ProfileIsConfirmed,
+                        ProfileIsPeople = x.ProfileIsPeople
+                    }).ToList();
+        }
         //V2 Ends
 
         public IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent()
@@ -1158,6 +1174,34 @@ namespace Gorgias.DataLayer.Repository.SQL
             return (from w in context.Profiles where w.ProfileEmail == ProfileEmail select w).FirstOrDefault();
         }
         //V2
+        public Business.DataTransferObjects.Web.V2.StoreProfileModel getStoreProfile(int ProfileID)
+        {
+            return (from w in context.Profiles.Include("Addresses").Include("Industries")
+                    where w.ProfileID == ProfileID
+                    select new Business.DataTransferObjects.Web.V2.StoreProfileModel
+                    {
+                        ProfileTypeName = w.ProfileType.ProfileTypeName,
+                        CountryName = w.Addresses.FirstOrDefault().City.Country.CountryName,
+                        IndustryName = w.Industries.FirstOrDefault().IndustryName,
+                        ProfileFullname = w.ProfileFullname,
+                        ProfileID = w.ProfileID,
+                        ProfileImage = w.ProfileImage,
+                        ProfileShortDescription = w.ProfileShortDescription,
+                        ProfileIsPeople = w.ProfileIsPeople,
+                        ProfileURL = w.ProfileURL,
+                        SubscriptionTypeName = w.SubscriptionType.SubscriptionTypeName,
+                        ThemeClassCode = w.ThemeID.ToString(),
+                        ProfileDescription = w.ProfileDescription,
+                        CountryShortName = w.Addresses.FirstOrDefault().City.Country.CountryShortName,
+                        Albums = w.Albums.Select(m => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel {
+                             AlbumID = m.AlbumID,
+                              AlbumCover = m.AlbumCover,
+                              AlbumDatePublish = m.AlbumDatePublish,
+                              AlbumName = m.AlbumName,                               
+                        }).ToList()
+                    }).FirstOrDefault();
+        }
+
         public Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID)
         {
             var emailResult = (from w in context.Profiles where w.ProfileEmail.ToLower() == ProfileEmail.ToLower() select new Business.DataTransferObjects.Mobile.V2.LoginAttempt { ProfileEmail = w.ProfileEmail, ProfileID = w.ProfileID, alreadyRegistered = true }).FirstOrDefault();

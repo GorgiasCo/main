@@ -18,6 +18,26 @@ namespace Gorgias.Controllers
     public class WebV2Controller : ApiControllerBase
     {
 
+        [Route("Web/V2/Store/Profile/{ProfileID}", Name = "GetWebV2StoreProfile")]
+        [HttpGet]
+        public HttpResponseMessage GetStoreProfile(HttpRequestMessage request, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                Business.DataTransferObjects.Web.V2.StoreProfileModel result = BusinessLayer.Facades.Facade.WebFacade().getStoreProfile(ProfileID);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<Business.DataTransferObjects.Web.V2.StoreProfileModel>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Web/V2/MainEntities", Name = "GetWebV2MainEntities")]
         [HttpGet]
         public HttpResponseMessage GetMainEntities(HttpRequestMessage request)

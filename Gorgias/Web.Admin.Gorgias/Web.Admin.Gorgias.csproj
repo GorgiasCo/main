@@ -110,6 +110,7 @@
     <Content Include="assets\js\controllers\admin\Profile\viewProfileController.js" />
     <Content Include="assets\js\controllers\headerMenuController.js" />
     <Content Include="assets\js\controllers\loginController.js" />
+    <Content Include="assets\js\controllers\V2\Profile\landingPageController.js" />
     <Content Include="assets\js\filter\CutString.js" />
     <Content Include="assets\js\filter\MegaNumber.js" />
     <Content Include="assets\js\services\apiservice.js" />
@@ -274,6 +275,7 @@
     <Content Include="assets\plugins\slick\slick.js" />
     <Content Include="assets\plugins\slick\slick.min.js" />
     <Content Include="backupFormElement.html" />
+    <Content Include="favicon.png" />
     <Content Include="packages.config" />
     <Content Include="assets\js\api\charts.json" />
     <Content Include="assets\js\api\countries.json" />
@@ -1705,6 +1707,7 @@
     <Content Include="tpl\admin\User\editUser.html" />
     <Content Include="tpl\admin\User\listUser.html" />
     <Content Include="tpl\admin\User\viewUser.html" />
+    <Content Include="tpl\admin\V2\Profile\viewLandingPage.html" />
     <Content Include="tpl\admin\viewAdminAgencyProfile.html" />
     <Content Include="tpl\admin\viewAdminAgencyProfileEdit.html" />
     <Content Include="tpl\admin\viewAdminProfile.html" />

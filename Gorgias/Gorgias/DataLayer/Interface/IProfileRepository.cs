@@ -30,6 +30,7 @@ namespace Gorgias.DataLayer.Interface
         Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID);
         Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel GetProfileSetting(int ProfileID, string languageCode);
         Profile GetV2Profile(int ProfileID);
+        IEnumerable<Business.DataTransferObjects.Mobile.V2.ProfileMobileModel> getProfilesByKeyword(string keyword);
         Business.DataTransferObjects.Mobile.V2.MiniProfileMobileModel GetV2MiniMobileProfile(int ProfileID, int RequestedProfileID, string languageCode);
         Business.DataTransferObjects.Mobile.V2.SettingProfileMobileModel GetV2SettingMobileProfile(int ProfileID, string languageCode);
         IEnumerable<Business.DataTransferObjects.Report.ProfileReport> GetProfileReportCurrent();
@@ -43,6 +44,7 @@ namespace Gorgias.DataLayer.Interface
         Business.DataTransferObjects.Web.LowAppProfileModel GetLowAppProfile(string ProfileURL);
         Business.DataTransferObjects.Mobile.V2.LoginAttempt getLoginAttempt(string ProfileEmail, int? ProfileID);
         Profile GetProfile(string ProfileEmail);
+        Business.DataTransferObjects.Web.V2.StoreProfileModel getStoreProfile(int ProfileID);
         int[] GetAdministrationProfiles(int CountryID);
         IEnumerable<Profile> GetProfiles(string ProfileEmail);
         IEnumerable<Profile> getListed(int ProfileID);

@@ -1,0 +1,63 @@
+﻿<div class="social-wrapper">
+    <div class="social">
+        <div class="container-fluid padding-25 sm-padding-10">
+            <div class="row">
+                <ng-owl-carousel class="owl-theme" owl-items="items" owl-properties="properties">
+                    <div class="col-xlg-3 visible-xlg" data-ng-repeat="item in items">
+                        <div class="widget-18 card no-border no-margin" style="background-image:url({{item.cdnAlbumCover}}?width=600);background-repeat: no-repeat;background-size: cover;border-radius: 11px;">
+                            <!--<div class="padding-15">
+                                <div class="item-header clearfix">
+                                    <div class="thumbnail-wrapper d32 circular">
+                                        <img width="70" height="70" ng-src='https://gorgiasasia.blob.core.windows.net/images/profile-{{item.ProfileID}}.jpg' alt="">
+                                    </div>
+                                    <div class="inline m-l-10">
+                                        <p class="no-margin">
+                                            <strong>Anne Simons</strong>
+                                        </p>
+                                        <p class="no-margin hint-text">
+                                            Shared a link
+                                            <span class="location semi-bold"><i class="fa fa-map-marker"></i> NY center</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="relative">
+                                <!--<ul class="buttons pull-top top-right list-inline p-r-10 p-t-10">
+                                    <li>
+                                        <a class="text-white" href="#">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="text-white" href="#">
+                                            <i class="fa fa-heart-o"></i>
+                                        </a>
+                                    </li>
+                                </ul>-->
+                                <div class="widget-18-post bg-black no-overflow" style="background-image:none;height:465px;background: linear-gradient(transparent,rgba(0,0,0,0.6));border-radius: 11px;">
+                                    <div class="padding-15" style="position: absolute;bottom: 0px;">
+                                        <div class="text-white" style="font-size:15px;">{{item.AlbumName}}</div>
+                                        <div class="hint-text">
+                                            <ul class="list-inline" style="font-size:11px;">
+                                                <li>
+                                                    {{item.MomentDate}}
+                                                </li>
+                                                <li>
+                                                    <a class="text-master hint-text" href="#">{{item.AlbumView}} <i class="fa fa-comment-o"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a class="text-master hint-text" href="#">{{item.AlbumLike}} <i class="fa fa-heart-o"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-owl-carousel>
+            </div>
+        </div>
+    </div>
+</div>

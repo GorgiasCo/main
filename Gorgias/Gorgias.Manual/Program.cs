@@ -34,8 +34,27 @@ namespace Gorgias.Manual
 
             SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
+
+            //Main
             //setupContents();
-            setupContentsAvailability();
+            //setupContentsAvailability();
+
+            //Tags ;)
+            //string title = "hi how #2 #AA ##Yasser are @#服裝小露露 ##小露露 #服裝 you, la # lal la #my #myLove you are great professor #WOW #mylove";
+            //var regex = new System.Text.RegularExpressions.Regex(@"\B#\w\w+");
+            //var matches = regex.Matches(title);
+
+            //HashSet<string> hashTags = new HashSet<string>();
+            
+            //foreach (System.Text.RegularExpressions.Match m in matches)
+            //{
+            //    hashTags.Add(m.Value.ToLower());                
+            //}
+
+            //foreach (string m in hashTags)
+            //{                
+            //    Console.WriteLine(m);
+            //}
 
             //Add countries ;)
             //var resultCountry = readCountriesJSON();
@@ -343,7 +362,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3496 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3671 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {
@@ -417,7 +436,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums where x.AlbumID > 3496 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums where x.AlbumID > 3671 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {
