@@ -715,6 +715,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                     select new Business.DataTransferObjects.BrandSo.Profile
                     {
                         Country = w.Addresses.FirstOrDefault().City.Country.CountryName,
+                        CurrencyCode = w.Addresses.FirstOrDefault().City.Country.CountryDescription,
                         CustomURL = w.ProfileURL,
                         ProfileFullname = w.ProfileFullname,
                         ProfileID = w.ProfileID,

@@ -199,7 +199,7 @@ namespace Gorgias.Providers
                     },
                     {
                         "countryID", "0"
-                    },                    
+                    },
                     {
                         "userUserID", resultProfile.UserID.ToString()
                     },
@@ -263,7 +263,8 @@ namespace Gorgias.Providers
                 if (headerLanguage != "")
                 {
                     profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID, headerLanguage.ToLower());
-                } else
+                }
+                else
                 {
                     profileSetting = new BusinessLayer.Facades.ProfileFacade().getProfileSetting(resultProfile.ProfileID);
                 }
@@ -397,7 +398,8 @@ namespace Gorgias.Providers
                 context.Validated(ticket);
             }
 
-            if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m=> m.Profile.ProfileStatus == true && m.Profile.ProfileIsPeople == false && m.Profile.ProfileIsConfirmed == false))
+            //if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m => m.Profile.ProfileStatus == true && m.Profile.ProfileIsPeople == false && m.Profile.ProfileIsConfirmed == false))
+            if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m => m.Profile.ProfileStatus == true))
             {
                 UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
 
@@ -474,7 +476,7 @@ namespace Gorgias.Providers
                     },
                     {
                         "ProfileBirthday", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.ToString() : " "
-                    },                    
+                    },
                     {
                         "ProfileBirthdayTitle", profileSetting.ProfileBirthday.HasValue ? profileSetting.ProfileBirthday.Value.ToString("MMMM dd, yyyy") : " "
                     },

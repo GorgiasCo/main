@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Spatial;
+using System.Linq;
 
 namespace Gorgias.Business.DataTransferObjects.Mobile.V2
 {
@@ -21,5 +22,64 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
         
         //Content Type Info
         public int ContentTypeID { get; set; }
+
+        public string[] Dimension
+        {
+            get
+            {
+                if (ContentDimension != null)
+                {
+                    return ContentDimension.Split('-');
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public int ContentWidth
+        {
+            get
+            {
+                if (Dimension != null)
+                {
+                    if (Dimension.Count() > 0)
+                    {
+                        return int.Parse(Dimension[0]);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        public int ContentHeight
+        {
+            get
+            {
+                if (Dimension != null)
+                {
+                    if (Dimension.Count() > 0)
+                    {
+                        return int.Parse(Dimension[1]);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
     }
 }

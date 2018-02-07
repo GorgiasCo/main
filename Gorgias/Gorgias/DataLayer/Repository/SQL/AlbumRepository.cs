@@ -610,6 +610,155 @@ namespace Gorgias.DataLayer.Repository.SQL
             }
         }
 
+        public Album Update(int AlbumID, String AlbumName, Boolean AlbumStatus, String AlbumCover, int CategoryID, int ProfileID, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID, ICollection<Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel> Contents, Business.DataTransferObjects.Mobile.V2.CategoryNewMobileModel Topic, int? AlbumParentID)
+        {
+            try
+            {
+                Album obj = new Album();
+                obj = (from w in context.Albums.Include("Contents") where w.AlbumID == AlbumID select w).FirstOrDefault();
+
+                if (obj == null)
+                {
+                    throw new Exception("No Album is existed");
+                }
+
+                context.Albums.Attach(obj);
+
+                obj.AlbumName = AlbumName;
+                obj.AlbumDateCreated = DateTime.UtcNow;
+                obj.AlbumStatus = AlbumStatus;
+                obj.AlbumCover = AlbumCover;
+                obj.AlbumIsDeleted = false;
+                obj.CategoryID = CategoryID;
+                obj.ProfileID = ProfileID;
+
+                obj.AlbumDatePublish = AlbumDatePublish;
+
+                //if (AlbumStatus)
+                //{
+                //    obj.AlbumDatePublish = obj.AlbumDateCreated;
+                //}
+                //else
+                //{
+                //    obj.AlbumDatePublish = AlbumDatePublish;
+                //}
+
+                if (AlbumHasComment.HasValue)
+                {
+                    obj.AlbumHasComment = AlbumHasComment.Value;
+                }
+                else
+                {
+                    obj.AlbumHasComment = false;
+                }
+
+                //Add for Hottest
+                if (AlbumAvailability > 0)
+                {
+                    obj.AlbumDateExpire = obj.AlbumDatePublish.AddMinutes(AlbumAvailability);
+                }
+                else
+                {
+                    //4 years to expire
+                    obj.AlbumDateExpire = obj.AlbumDateCreated.AddMonths(48);
+                }
+
+                if (AlbumParentID.HasValue)
+                {
+                    obj.AlbumParentID = AlbumParentID.Value;
+                }
+
+                //obj.AlbumDatePublish = obj.AlbumDateCreated;
+                obj.AlbumAvailability = AlbumAvailability;
+
+                //obj.AlbumHasComment = AlbumHasComment;
+                obj.AlbumReadingLanguageCode = AlbumReadingLanguageCode;
+                //Repost value * 100 as logic
+                obj.AlbumRepostValue = AlbumAvailability * 100;
+                obj.AlbumRepostRequest = AlbumRepostRequest.HasValue ? AlbumRepostRequest.Value : 0;
+                obj.AlbumRepostAttempt = AlbumRepostAttempt.HasValue ? AlbumRepostAttempt.Value : 0;
+                obj.AlbumPrice = AlbumPrice.HasValue ? AlbumPrice.Value : 0;
+                obj.AlbumIsTokenAvailable = AlbumIsTokenAvailable.HasValue ? AlbumIsTokenAvailable.Value : false;
+                obj.AlbumPriceToken = AlbumPriceToken.HasValue ? AlbumPriceToken.Value : 0;
+
+                if (ContentRatingID.HasValue)
+                {
+                    obj.ContentRatingID = ContentRatingID.Value;
+                }
+                else
+                {
+                    obj.ContentRatingID = null;
+                }
+
+                int[] contentsID = obj.Contents.Where(m=> m.ContentIsDeleted == false).Select(c => c.ContentID).ToArray();
+                int[] updatedContentsID = Contents.Select(c => c.ContentID).ToArray();
+                //int[] newContentsID = Contents.Where(m=> m.ContentID == 0).Select(c => c.ContentID).ToArray();
+
+                foreach (int contentID in contentsID)
+                {
+                    Content existContent = obj.Contents.Where(m => m.ContentID == contentID).First();
+                    var updateContent = Contents.Where(m => m.ContentID == contentID).FirstOrDefault();
+
+                    if(updateContent != null)
+                    {
+                        //Updated
+                        existContent.ContentTitle = updateContent.ContentTitle;
+                        existContent.ContentURL = updateContent.ContentURL;
+                        existContent.ContentDimension = updateContent.ContentDimension;                        
+                    } else
+                    {
+                        //Deleted ;)
+                        existContent.ContentIsDeleted = true;
+                    }
+                }
+
+                //Not found above can be new ones ;)
+                foreach (Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel objContent in Contents.Where(m => m.ContentID == 0).ToList())
+                {
+                    obj.Contents.Add(new Content
+                    {
+                        ContentCreatedDate = obj.AlbumDateCreated,
+                        ContentDimension = objContent.ContentDimension,
+                        ContentIsDeleted = false,
+                        ContentLike = 0,
+                        ContentTitle = objContent.ContentTitle,
+                        ContentStatus = true,
+                        ContentURL = objContent.ContentURL,
+                        ContentType = objContent.ContentTypeID,
+                        ContentGeoLocation = objContent.ContentGeoLocation,
+                    });
+                }
+
+                //if (Topic != null)
+                //{
+                //    if (Topic.CategoryID.HasValue)
+                //    {
+                //        Category resultCategory = (from x in context.Categories where x.CategoryID == Topic.CategoryID select x).First();
+                //        obj.Categories.Add(resultCategory);
+                //    }
+                //    else
+                //    {
+                //        Category resultCategory = (from x in context.Categories where x.CategoryName.Trim().ToLower() == Topic.CategoryName.Trim().ToLower() && x.ProfileID == ProfileID select x).FirstOrDefault();
+                //        if (resultCategory != null)
+                //        {
+                //            obj.Categories.Add(resultCategory);
+                //        }
+                //        else
+                //        {
+                //            obj.Categories.Add(new Category { CategoryName = Topic.CategoryName.Trim(), CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 1, CategoryOrder = 0 });
+                //        }
+                //    }
+                //}
+
+                context.SaveChanges();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public bool Update(int AlbumID, String AlbumName, Boolean AlbumStatus, String AlbumCover, Boolean AlbumIsDeleted, int CategoryID, int ProfileID, int AlbumView, DateTime AlbumDatePublish, int AlbumAvailability, Boolean? AlbumHasComment, String AlbumReadingLanguageCode, int? AlbumRepostValue, int? AlbumRepostRequest, int? AlbumRepostAttempt, Decimal? AlbumPrice, Boolean? AlbumIsTokenAvailable, int? AlbumPriceToken, int? ContentRatingID)
         {
             Album obj = new Album();
@@ -694,7 +843,7 @@ namespace Gorgias.DataLayer.Repository.SQL
                         AlbumRepostValue = w.AlbumRepostValue,
                         CategoryID = w.CategoryID,
                         ContentRatingID = w.ContentRatingID,
-                        Contents = w.Contents.Select(c => new Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel
+                        Contents = w.Contents.Where(m => m.ContentIsDeleted == false).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentUpdateMobileModel
                         {
                             ContentDimension = c.ContentDimension,
                             ContentGeoLocation = c.ContentGeoLocation,

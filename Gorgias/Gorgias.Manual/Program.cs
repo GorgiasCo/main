@@ -37,7 +37,7 @@ namespace Gorgias.Manual
 
             //Main
             //setupContents();
-            //setupContentsAvailability();
+            setupContentsAvailability();
 
             //Tags ;)
             //string title = "hi how #2 #AA ##Yasser are @#服裝小露露 ##小露露 #服裝 you, la # lal la #my #myLove you are great professor #WOW #mylove";
@@ -362,7 +362,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3671 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums.Include("Contents") where x.AlbumID > 3735 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {
@@ -436,7 +436,7 @@ namespace Gorgias.Manual
             GorgiasEntities ex = new GorgiasEntities();
 
             //!x.AlbumCover.EndsWith(".jpg") 3291 x.Contents.Any(m=> m.ContentDimension == null && m.ContentType == 1)
-            var list = (from x in ex.Albums where x.AlbumID > 3671 orderby x.AlbumID descending select x).ToList();
+            var list = (from x in ex.Albums where x.AlbumID > 3735 orderby x.AlbumID descending select x).ToList();
 
             foreach (Album objAlbum in list)
             {

@@ -52,6 +52,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Album/Story/Edit/{AlbumID}/{ProfileID}/{DeviceWidth}", Name = "GetV2MobileAlbumEditStory")]
+        [HttpGet]
+        public HttpResponseMessage GetAlbumEditStory(HttpRequestMessage request, int AlbumID, int ProfileID, int DeviceWidth)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                AlbumUpdateV2MobileModel result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbumForEdit(AlbumID, ProfileID, DeviceWidth);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<AlbumUpdateV2MobileModel>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Profile/Preferences/{ProfileID}", Name = "GetV2MobileProfilePreferences")]
         [HttpGet]
         public HttpResponseMessage GetProfilePreferences(HttpRequestMessage request, int ProfileID)
@@ -1204,6 +1224,56 @@ namespace Gorgias.Controllers
                 HttpResponseMessage response = null;
 
                 Business.DataTransferObjects.AlbumDTO result = BusinessLayer.Facades.Facade.AlbumFacade().InsertV2Topic(objAlbum);
+                if (result != null)
+                {
+                    response = request.CreateResponse<Business.DataTransferObjects.AlbumDTO>(HttpStatusCode.Created, result);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotAcceptable, false);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Album/Edit/Topic", Name = "MobileV2AlbumUpdateWithNewTopic")]
+        [HttpPost]
+        public HttpResponseMessage AlbumWithTopicUpdate(HttpRequestMessage request, AlbumUpdateV2MobileModel objAlbum)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                Business.DataTransferObjects.AlbumDTO result = BusinessLayer.Facades.Facade.AlbumFacade().UpdateV2Topic(objAlbum);
+                if (result != null)
+                {
+                    response = request.CreateResponse<Business.DataTransferObjects.AlbumDTO>(HttpStatusCode.Created, result);
+                }
+                else
+                {
+                    response = request.CreateResponse<bool>(HttpStatusCode.NotAcceptable, false);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Album/Story/Manage/{TypeName}", Name = "MobileV2AlbumInsertUpdateWithNewTopic")]
+        [HttpPost]
+        public HttpResponseMessage AlbumWithTopicInsertUpdate(HttpRequestMessage request, AlbumUpdateV2MobileModel objAlbum, string TypeName)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                Business.DataTransferObjects.AlbumDTO result;
+                if (TypeName.Equals("Insert"))
+                {
+                    result = BusinessLayer.Facades.Facade.AlbumFacade().InsertV2Topic(objAlbum);
+                } else
+                {
+                    result = BusinessLayer.Facades.Facade.AlbumFacade().UpdateV2Topic(objAlbum);
+                }
+                
                 if (result != null)
                 {
                     response = request.CreateResponse<Business.DataTransferObjects.AlbumDTO>(HttpStatusCode.Created, result);

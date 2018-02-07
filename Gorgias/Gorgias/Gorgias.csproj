@@ -2701,6 +2701,8 @@
     <None Include="Properties\PublishProfiles\gorgiasapp-v2 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\gorgiasapp-v3 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gorgiasapp-v3 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\gorgiasapp-v4 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gorgiasapp-v4 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatables\angular-datatables.directive.js" />
     <Content Include="Scripts\datatables\angular-datatables.factory.js" />

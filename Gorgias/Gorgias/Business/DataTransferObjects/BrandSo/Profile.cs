@@ -14,5 +14,6 @@ namespace Gorgias.Business.DataTransferObjects.BrandSo
         public string ProfileEmail { get; set; } 
         public string Country { get; set; }
         public string CustomURL { get; set; }        
+        public string CurrencyCode { get; set; }
     }
 }

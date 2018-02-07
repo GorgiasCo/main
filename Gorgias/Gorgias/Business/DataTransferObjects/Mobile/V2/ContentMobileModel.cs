@@ -7,6 +7,7 @@ namespace Gorgias.Business.DataTransferObjects.Mobile.V2
 {
     public class ContentMobileModel
     {
+        public bool ContentIsUpdated { get; set; } = false;
         public int ContentID { get; set; }
         public string ContentTitle { get; set; }
         public string ContentURL { get; set; }
