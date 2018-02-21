@@ -329,26 +329,26 @@ namespace Gorgias.Controllers
             });
         }
 
-        [Route("Mobile/V2/Cities/{searchKey}", Name = "GetV2MobileCitiesByCountryID")]
-        [HttpGet]
-        public HttpResponseMessage GetCities(HttpRequestMessage request, string searchKey)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                HttpResponseMessage response = null;
-                var headerLanguage = request.Headers.AcceptLanguage;
-                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CityFacade().getCities(searchKey, headerLanguage.First().Value);
-                if (result == null)
-                {
-                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
-                }
-                else
-                {
-                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
-                }
-                return response;
-            });
-        }
+        //[Route("Mobile/V2/Cities/{searchKey}", Name = "GetV2MobileCitiesByCountryID")]
+        //[HttpGet]
+        //public HttpResponseMessage GetCities(HttpRequestMessage request, string searchKey)
+        //{
+        //    return CreateHttpResponse(request, () =>
+        //    {
+        //        HttpResponseMessage response = null;
+        //        var headerLanguage = request.Headers.AcceptLanguage;
+        //        IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CityFacade().getCities(searchKey, headerLanguage.First().Value);
+        //        if (result == null)
+        //        {
+        //            response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+        //        }
+        //        else
+        //        {
+        //            response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
+        //        }
+        //        return response;
+        //    });
+        //}
 
         [Route("Mobile/V2/Countries/", Name = "GetV2MobileCountries")]
         [HttpGet]
@@ -380,6 +380,48 @@ namespace Gorgias.Controllers
                 HttpResponseMessage response = null;
                 var headerLanguage = request.Headers.AcceptLanguage;
                 IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CountryFacade().getCountries(headerLanguage.First().Value, keyword);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Cities/{keyword}", Name = "GetV2MobileCitiesByKeyword")]
+        [HttpGet]
+        public HttpResponseMessage GetCitiesByKeyword(HttpRequestMessage request, string keyword)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CityFacade().getCities(headerLanguage.First().Value, keyword);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<KeyValueMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Cities/", Name = "GetV2MobileCities")]
+        [HttpGet]
+        public HttpResponseMessage GetCities(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var headerLanguage = request.Headers.AcceptLanguage;
+                IEnumerable<KeyValueMobileModel> result = BusinessLayer.Facades.Facade.CityFacade().getCities(headerLanguage.First().Value,"a");
                 if (result == null)
                 {
                     response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
