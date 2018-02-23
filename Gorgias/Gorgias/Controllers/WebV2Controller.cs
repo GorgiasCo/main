@@ -17,6 +17,33 @@ namespace Gorgias.Controllers
     [RoutePrefix("api")]
     public class WebV2Controller : ApiControllerBase
     {
+        [Route("Web/V2/Address/{ProfileID}/{AddressTypeID}", Name = "GetWebV2AddressPage")]
+        [HttpGet]
+        public HttpResponseMessage GetAddressPage(HttpRequestMessage request, int ProfileID, int AddressTypeID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                AddressPageModelV2 result = new AddressPageModelV2();
+                if (AddressTypeID != 0)
+                {
+                    result = BusinessLayer.Facades.Facade.WebFacade().getAddressesByProfileID(ProfileID, AddressTypeID);
+                }
+                else
+                {
+                    result = BusinessLayer.Facades.Facade.WebFacade().getAddressesByProfileID(ProfileID, null);
+                }
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<AddressPageModelV2>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
 
         [Route("Web/V2/Store/Profile/{ProfileID}", Name = "GetWebV2StoreProfile")]
         [HttpGet]

@@ -32,59 +32,64 @@ namespace Gorgias.Infrastruture.Core.Upload.Provider
             {
                 // Sometimes the filename has a leading and trailing double-quote character
                 // when uploaded, so we trim it; otherwise, we get an illegal character exception
-                var fileName = Path.GetFileName(fileData.Headers.ContentDisposition.FileName.Trim('"'));
+                if(fileData.Headers.ContentDisposition.FileName != null)
+                {
+                    var fileName = Path.GetFileName(fileData.Headers.ContentDisposition.FileName.Trim('"'));
 
-                // Retrieve reference to a blob ;)
-                Microsoft.WindowsAzure.Storage.Blob.CloudBlobContainer blobContainer;
-                if (MasterFileName.StartsWith("profile"))
-                {
-                    blobContainer = BlobHelper.GetBlobContainer();
-                } else
-                {
-                    blobContainer = BlobHelper.GetAlbumBlobContainer();
-                }
-                
-                
-                var extension = fileName.Split('.');
-                if (extension[extension.Length - 1].Equals("jpg") || extension[extension.Length - 1].Equals("jpeg") || extension[extension.Length - 1].Equals("png") || extension[extension.Length - 1].Equals("gif")) {
-                    string newFileName = "";
-                    if (ImageName != "")
+                    // Retrieve reference to a blob ;)
+                    Microsoft.WindowsAzure.Storage.Blob.CloudBlobContainer blobContainer;
+                    if (MasterFileName.StartsWith("profile"))
                     {
-                        //newFileName = MasterFileName + "-" + ImageName + "." + extension[1];
-                        newFileName = ImageName;
+                        blobContainer = BlobHelper.GetBlobContainer();
                     }
-                    else {
-                        //newFileName = MasterFileName + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + fileName;
-                        newFileName = MasterFileName + "-" + Guid.NewGuid().ToString() + "-" + fileName;
-                    }                    
-
-                    var blob = blobContainer.GetBlockBlobReference(newFileName);
-                    // = DateTime.Now.ToShortTimeString();
-                    // Set the blob content type
-                    blob.Properties.ContentType = fileData.Headers.ContentType.MediaType;
-
-                    // Upload file into blob storage, basically copying it from local disk into Azure
-                    using (var fs = File.OpenRead(fileData.LocalFileName))
+                    else
                     {
-                        blob.UploadFromStream(fs);
+                        blobContainer = BlobHelper.GetAlbumBlobContainer();
                     }
 
-                    // Delete local file from disk ;)
-                    //File.Delete(fileData.LocalFileName);
 
-                    // Create blob upload model with properties from blob info
-                    var blobUpload = new BlobUploadModel
+                    var extension = fileName.Split('.');
+                    if (extension[extension.Length - 1].Equals("jpg") || extension[extension.Length - 1].Equals("jpeg") || extension[extension.Length - 1].Equals("png") || extension[extension.Length - 1].Equals("gif"))
                     {
-                        FileName = blob.Name,
-                        FileUrl = blob.Uri.AbsoluteUri,
-                        FileSizeInBytes = blob.Properties.Length
-                    };
+                        string newFileName = "";
+                        if (ImageName != "")
+                        {
+                            //newFileName = MasterFileName + "-" + ImageName + "." + extension[1];
+                            newFileName = ImageName;
+                        }
+                        else
+                        {
+                            //newFileName = MasterFileName + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + fileName;
+                            newFileName = MasterFileName + "-" + Guid.NewGuid().ToString() + "-" + fileName;
+                        }
 
-                    // Add uploaded blob to the list
-                    Uploads.Add(blobUpload);
+                        var blob = blobContainer.GetBlockBlobReference(newFileName);
+                        // = DateTime.Now.ToShortTimeString();
+                        // Set the blob content type
+                        blob.Properties.ContentType = fileData.Headers.ContentType.MediaType;
+
+                        // Upload file into blob storage, basically copying it from local disk into Azure
+                        using (var fs = File.OpenRead(fileData.LocalFileName))
+                        {
+                            blob.UploadFromStream(fs);
+                        }
+
+                        // Delete local file from disk ;)
+                        //File.Delete(fileData.LocalFileName);
+
+                        // Create blob upload model with properties from blob info
+                        var blobUpload = new BlobUploadModel
+                        {
+                            FileName = blob.Name,
+                            FileUrl = blob.Uri.AbsoluteUri,
+                            FileSizeInBytes = blob.Properties.Length
+                        };
+
+                        // Add uploaded blob to the list
+                        Uploads.Add(blobUpload);
+                    }
                 }                
             }
-
             return base.ExecutePostProcessingAsync();
         }
     }

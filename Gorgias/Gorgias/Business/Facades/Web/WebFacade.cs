@@ -261,6 +261,34 @@ namespace Gorgias.Business.Facades.Web
             return result;
         }
 
+        public AddressPageModelV2 getAddressesByProfileID(int ProfileID, int? AddressTypeID)
+        {
+            AddressPageModelV2 result = new AddressPageModelV2();
+
+            IList<SqlParameter> param = new List<SqlParameter>();
+
+            SqlParameter paramProfileID = new SqlParameter();
+            paramProfileID.DbType = System.Data.DbType.Int32;
+            paramProfileID.Value = ProfileID;
+            paramProfileID.ParameterName = "@ProfileID";
+            paramProfileID.Direction = System.Data.ParameterDirection.Input;
+
+            SqlParameter paramAddressTypeID = new SqlParameter();
+            paramAddressTypeID.DbType = System.Data.DbType.Int16;
+            paramAddressTypeID.Value = AddressTypeID;
+            paramAddressTypeID.ParameterName = "@AddressTypeID";
+            paramAddressTypeID.Direction = System.Data.ParameterDirection.Input;
+
+            param.Add(paramProfileID);
+            param.Add(paramAddressTypeID);
+
+            var r = new WebRepository().getStoredProcedure<AddressModelV4, AddressTypeModel>("[dbo].[getAddresses]", param);
+            result.Addresses = (IEnumerable<AddressModelV4>)r[0];
+            result.AddressTypes = (IEnumerable<AddressTypeModel>)r[1];
+
+            return result;
+        }
+
         public IEnumerable<DataTransferObjects.Mobile.AddressModel> getAddressMobile(int ProfileID)
         {
             IEnumerable<DataTransferObjects.Mobile.AddressModel> result;

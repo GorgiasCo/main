@@ -441,6 +441,7 @@
     <Compile Include="Business\DataTransferObjects\Web\AboutModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\AddressModelV2.cs" />
     <Compile Include="Business\DataTransferObjects\Web\AddressModelV3.cs" />
+    <Compile Include="Business\DataTransferObjects\Web\AddressModelV4.cs" />
     <Compile Include="Business\DataTransferObjects\Web\AddressTypeModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\AdminMiniProfile.cs" />
     <Compile Include="Business\DataTransferObjects\Web\AlbumImageSetModel.cs" />
@@ -457,6 +458,7 @@
     <Compile Include="Business\DataTransferObjects\Web\List\AboutPageModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\List\AddressList.cs" />
     <Compile Include="Business\DataTransferObjects\Web\List\AddressPageModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Web\List\AddressPageModelV2.cs" />
     <Compile Include="Business\DataTransferObjects\Web\List\ContentItemModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\List\FeatureDetailModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\List\FeatureListModel.cs" />
