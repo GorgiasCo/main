@@ -45,6 +45,26 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Web/V2/Connection/{ProfileID}/{RequestTypeID}/{PageSize}/{PageNumber}", Name = "GetConnectionByProfileIDAsFollower")]
+        [HttpGet]
+        public HttpResponseMessage GetConnectionByProfileIDAsFollower(HttpRequestMessage request, int ProfileID, int RequestTypeID, int PageSize, int PageNumber)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                PaginationSet<Business.DataTransferObjects.Web.V2.ProfileFollowerModel> result = BusinessLayer.Facades.Facade.ConnectionFacade().getProfileSubscribesAsFollower(ProfileID, RequestTypeID, PageSize, PageNumber);
+                if (result == null)
+                {
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<PaginationSet<Business.DataTransferObjects.Web.V2.ProfileFollowerModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Web/V2/Store/Profile/{ProfileID}", Name = "GetWebV2StoreProfile")]
         [HttpGet]
         public HttpResponseMessage GetStoreProfile(HttpRequestMessage request, int ProfileID)

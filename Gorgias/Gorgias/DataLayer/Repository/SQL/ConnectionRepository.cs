@@ -96,7 +96,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         public bool Insert(int ProfileID, int RequestedProfileID, int RequestTypeID, bool ConnectionStatus)
         {
             Connection resultStayON = (from w in context.Connections where w.ProfileID == ProfileID && w.RequestedProfileID == RequestedProfileID && w.RequestTypeID == 3 select w).FirstOrDefault();
-            if(resultStayON != null)
+            if (resultStayON != null)
             {
                 try
                 {
@@ -171,7 +171,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             if (obj != null)
             {
                 context.Connections.Attach(obj);
-                obj.ConnectStatus = true;                
+                obj.ConnectStatus = true;
                 context.SaveChanges();
                 return true;
             }
@@ -272,6 +272,19 @@ namespace Gorgias.DataLayer.Repository.SQL
         public IQueryable<Business.DataTransferObjects.Mobile.V2.ProfileSubscribeMobileModel> GetConnectionsByProfileIDAllAsQueryable(int ProfileID)
         {
             return context.Connections.Where(m => m.RequestedProfileID == ProfileID && m.RequestTypeID == 3).Select(c => new Business.DataTransferObjects.Mobile.V2.ProfileSubscribeMobileModel { ProfileID = c.ProfileID }).AsQueryable();
+        }
+
+        public IQueryable<Business.DataTransferObjects.Web.V2.ProfileFollowerModel> GetConnectionsByProfileIDAsFollowerAsQueryable(int ProfileID, int RequesTypeID)
+        {
+            return context.Connections.Where(m => m.ProfileID == ProfileID && m.RequestTypeID == RequesTypeID).OrderByDescending(m=> m.ConnectDateCreated)
+                .Select(c => new Business.DataTransferObjects.Web.V2.ProfileFollowerModel
+                {
+                    ProfileID = c.RequestedProfileID,
+                    ConnectionDateCreate = c.ConnectDateCreated,
+                    ConnectionStatus = c.ConnectStatus,
+                    ProfileFullname = c.Profile1.ProfileFullname,
+                    RequestTypeID = c.RequestTypeID
+                }).AsQueryable();
         }
         //V2 End ;)
 

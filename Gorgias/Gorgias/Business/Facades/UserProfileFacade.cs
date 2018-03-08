@@ -23,6 +23,11 @@ namespace Gorgias.BusinessLayer.Facades
         {
             return DataLayer.DataLayerFacade.UserProfileRepository().GetUserProfilesAsQueryable(UserID);
         }
+
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel> getUserProfileForContentManagers(int ProfileID)
+        {
+            return DataLayer.DataLayerFacade.UserProfileRepository().GetUserProfilesAsContentManagersAsQueryable(ProfileID);
+        }       
         //Ends V2
         public UserProfileDTO GetUserProfile(int ProfileID, int UserRoleID, int UserID)
         {

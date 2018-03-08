@@ -23,6 +23,26 @@ namespace Gorgias.BusinessLayer.Facades
         {
             return DataLayer.DataLayerFacade.ConnectionRepository().GetConnectionsByProfileIDAllAsQueryable(ProfileID);
         }
+
+        public PaginationSet<Business.DataTransferObjects.Web.V2.ProfileFollowerModel> getProfileSubscribesAsFollower(int ProfileID, int RequestTypeID, int pagesize, int page)
+        {
+            var basequery = DataLayer.DataLayerFacade.ConnectionRepository().GetConnectionsByProfileIDAsFollowerAsQueryable(ProfileID, RequestTypeID);
+
+            var queryList = RepositoryHelper.Pagination<Business.DataTransferObjects.Web.V2.ProfileFollowerModel>(page, pagesize, basequery).Future();
+            var queryTotal = basequery.FutureCount();
+
+            int intTotal = queryTotal.Value;
+
+            PaginationSet<Business.DataTransferObjects.Web.V2.ProfileFollowerModel> result = new PaginationSet<Business.DataTransferObjects.Web.V2.ProfileFollowerModel>()
+            {
+                Page = page,
+                TotalCount = intTotal,
+                TotalPages = (int)Math.Ceiling((decimal)intTotal / pagesize),
+                Items = queryList.ToList()
+            };
+
+            return result;// DataLayer.DataLayerFacade.ConnectionRepository().GetConnectionsByProfileIDAsFollowerAsQueryable(ProfileID, RequestTypeID);
+        }        
         //V2 Ends ;)
 
         public ConnectionDTO GetConnection(int ProfileID, int RequestedProfileID, int RequestTypeID)

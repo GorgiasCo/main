@@ -70,6 +70,7 @@ namespace Gorgias.DataLayer.Interface
 
         //IQueryable
         IQueryable<Profile> GetProfilesAllAsQueryable();
+        IQueryable<Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel> GetProfilesAllAsQueryable(string ProfileEmail);
         IQueryable<Profile> GetProfilesAllAsQueryable(int CountryID);
         IQueryable<Profile> GetProfilesAllAsQueryable(bool ProfileStatus);
         IQueryable<Profile> GetProfilesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);

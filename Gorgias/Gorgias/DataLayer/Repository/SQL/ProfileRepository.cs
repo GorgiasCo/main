@@ -1194,11 +1194,12 @@ namespace Gorgias.DataLayer.Repository.SQL
                         ThemeClassCode = w.ThemeID.ToString(),
                         ProfileDescription = w.ProfileDescription,
                         CountryShortName = w.Addresses.FirstOrDefault().City.Country.CountryShortName,
-                        Albums = w.Albums.Select(m => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel {
-                             AlbumID = m.AlbumID,
-                              AlbumCover = m.AlbumCover,
-                              AlbumDatePublish = m.AlbumDatePublish,
-                              AlbumName = m.AlbumName,                               
+                        Albums = w.Albums.Select(m => new Business.DataTransferObjects.Mobile.V2.AlbumMobileModel
+                        {
+                            AlbumID = m.AlbumID,
+                            AlbumCover = m.AlbumCover,
+                            AlbumDatePublish = m.AlbumDatePublish,
+                            AlbumName = m.AlbumName,
                         }).ToList()
                     }).FirstOrDefault();
         }
@@ -1277,6 +1278,19 @@ namespace Gorgias.DataLayer.Repository.SQL
         public IQueryable<Profile> GetProfilesAllAsQueryable()
         {
             return (from w in context.Profiles orderby w.ProfileID descending select w).AsQueryable();
+        }
+
+        public IQueryable<Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel> GetProfilesAllAsQueryable(string ProfileEmail)
+        {
+            return (from w in context.Profiles.Include("UserProfiles")
+                    where w.ProfileEmail.ToLower().Contains(ProfileEmail.ToLower()) && w.UserProfiles.Any(m => m.UserRoleID == 1)
+                    orderby w.ProfileID descending
+                    select new Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel
+                    {
+                        ProfileEmail = w.ProfileEmail,
+                        ProfileFullname = w.ProfileFullname,
+                        UserID = w.UserProfiles.Where(m => m.UserRoleID == 1).FirstOrDefault().UserID
+                    }).AsQueryable();
         }
 
         public IQueryable<Profile> GetProfilesAllAsQueryable(int CountryID)

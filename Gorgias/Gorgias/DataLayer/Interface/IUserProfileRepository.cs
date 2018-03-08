@@ -31,6 +31,7 @@ namespace Gorgias.DataLayer.Interface
         //IQueryable
         IQueryable<UserProfile> GetUserProfilesAllAsQueryable();
         IQueryable<Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel> GetUserProfilesAsQueryable(int UserID);
+        IQueryable<Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel> GetUserProfilesAsContentManagersAsQueryable(int ProfileID);
         IQueryable<UserProfile> GetUserProfilesAllAsQueryable(int page = 1, int pageSize = 7, string filter=null);
         IQueryable<UserProfile> GetUserProfilesByProfileIDAsQueryable(int ProfileID);
         IQueryable<UserProfile> GetUserProfilesByProfileIDAsQueryable(int ProfileID, int page = 1, int pageSize = 7, string filter=null);       

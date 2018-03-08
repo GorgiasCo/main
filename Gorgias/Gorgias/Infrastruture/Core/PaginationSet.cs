@@ -22,7 +22,13 @@ namespace Gorgias.Infrastruture.Core
 
         public bool hasMore {
             get {
-                return TotalPages == Page ? false : true;
+                if(Count > 0)
+                {
+                    return TotalPages == Page ? false : true;
+                } else
+                {
+                    return false;
+                }                
             }
         }
 

@@ -771,6 +771,27 @@ namespace Gorgias.Controllers
             });
         }
 
+        [Route("Mobile/V2/Profile/Content/Management/{ProfileID}", Name = "GetProfileManagementByProfileIDContentManagersMobileV2")]
+        [HttpGet]
+        public HttpResponseMessage ContentManagersAsSubscriber(HttpRequestMessage request, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                IEnumerable<UserProfileMobileModel> result = BusinessLayer.Facades.Facade.UserProfileFacade().getUserProfileForContentManagers(ProfileID);
+
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<IEnumerable<UserProfileMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
         [Route("Mobile/V2/Profile/MicroApp/Subscribe/Status/{ProfileID}/{MicroAppProfileID}", Name = "SubscriberBookmarkFromMicroAppMobileV2")]
         [HttpGet]
         public HttpResponseMessage SubscriberFromMicroApp(HttpRequestMessage request, int ProfileID, int MicroAppProfileID)
@@ -1153,6 +1174,35 @@ namespace Gorgias.Controllers
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
+                PaginationSet<AlbumMobileModel> result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbums(albumFilterMobileModel);
+                if (result == null)
+                {
+                    response = request.CreateResponse<string>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<PaginationSet<AlbumMobileModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Mobile/V2/Albums/Filter/Profile/{ProfileID}", Name = "GetV2MobileAlbumFilterByProfileID")]
+        [HttpGet]
+        public HttpResponseMessage AlbumFilterByProfileID(HttpRequestMessage request, int ProfileID)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                AlbumFilterMobileModel albumFilterMobileModel = new AlbumFilterMobileModel();
+                albumFilterMobileModel.ProfileID = ProfileID;
+                albumFilterMobileModel.isMicroApp = true;
+                //albumFilterMobileModel.Languages = ["en"];
+                albumFilterMobileModel.MicroAppProfileID = ProfileID;
+                albumFilterMobileModel.Page = 1;
+                albumFilterMobileModel.Size = 7;
+                albumFilterMobileModel.CategoryTypeID = 2;
+                albumFilterMobileModel.CategoryID = 86;
                 PaginationSet<AlbumMobileModel> result = BusinessLayer.Facades.Facade.AlbumFacade().getAlbums(albumFilterMobileModel);
                 if (result == null)
                 {

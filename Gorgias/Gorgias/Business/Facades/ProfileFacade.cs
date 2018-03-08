@@ -278,6 +278,11 @@ namespace Gorgias.BusinessLayer.Facades
             return basequery;
         }
 
+        public List<Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel> GetProfiles(string ProfileEmail)
+        {
+            return DataLayer.DataLayerFacade.ProfileRepository().GetProfilesAllAsQueryable(ProfileEmail).ToList();            
+        }
+
         /// <summary>
         /// Get Profiles filter by CountryID, need changes to be lighter ;)
         /// </summary>

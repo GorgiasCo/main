@@ -16,7 +16,7 @@ using Gorgias.Business.DataTransferObjects.Web;
 namespace Gorgias.Controllers
 {   
     [RoutePrefix("api")]
-    [Authorize]
+    //[Authorize]
     public class ProfileController : ApiControllerBase
     {
         [Route("Profile/ProfileID/{ProfileID}", Name = "GetProfileByID")]
@@ -145,9 +145,49 @@ namespace Gorgias.Controllers
                 return response;
             });                        
         }
-        
-        
-        
+
+        [Route("Profiles/Autocomplete/{ProfileEmail}", Name = "GetProfilesByProfileEmail")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesByProfileEmail(HttpRequestMessage request, string ProfileEmail)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel> result = BusinessLayer.Facades.Facade.ProfileFacade().GetProfiles(ProfileEmail);
+                if (result == null)
+                {
+                    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
+                }
+                else
+                {
+                    response = request.CreateResponse<List<Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel>>(HttpStatusCode.OK, result);
+                }
+                return response;
+            });
+        }
+
+        [Route("Profiles/Autocomplete/", Name = "GetProfilesAutocompleteByProfileEmail")]
+        [HttpGet]
+        public HttpResponseMessage GetProfilesByProfileEmailAutocomplete(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                response = request.CreateResponse<List<Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel>>(HttpStatusCode.OK, new List<Business.DataTransferObjects.Web.V2.ProfileAutoCompleteModel>());
+                return response;
+                //= BusinessLayer.Facades.Facade.ProfileFacade().GetProfiles(ProfileEmail);
+                //if (result == null)
+                //{
+                //    response = request.CreateResponse<String>(HttpStatusCode.NotFound, null);
+                //}
+                //else
+                //{
+                //    response = request.CreateResponse<List<ProfileDTO>>(HttpStatusCode.OK, result);
+                //}
+                //return response;
+            });
+        }
+
         [Route("Profiles/Industry/{IndustryID}/data", Name = "GetProfilesDataTablesByIndustryID}")]
         [HttpPost]
         public DTResult<ProfileDTO> GetProfilesByIndustryID(HttpRequestMessage request, int IndustryID, DTParameters param)

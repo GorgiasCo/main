@@ -185,6 +185,36 @@ namespace Gorgias.DataLayer.Repository.SQL
                     }).AsQueryable();
         }
 
+        public IQueryable<Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel> GetUserProfilesAsContentManagersAsQueryable(int ProfileID)
+        {
+            //return (from w in context.Profiles
+            //        where w.UserProfiles.Any(m=> m.ProfileID == ProfileID && m.UserRoleID == 5)
+            //        orderby w.ProfileID ascending
+            //        select new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
+            //        {
+            //            ProfileID = w.ProfileID,
+            //            UserID = 0,
+            //            UserRoleID = 5,
+            //            ProfileFullname = w.ProfileFullname,
+            //            ProfileImage = w.ProfileImage,
+            //            ProfileIsConfirmed = w.ProfileIsConfirmed,
+            //            ProfileIsPeople = w.ProfileIsPeople
+            //        }).AsQueryable();
+            return (from w in context.UserProfiles
+                    where w.ProfileID == ProfileID
+                    orderby w.UserRoleID ascending
+                    select new Business.DataTransferObjects.Mobile.V2.UserProfileMobileModel
+                    {
+                        ProfileID = w.User.UserProfiles.Where(m=> m.UserRoleID == 1).FirstOrDefault().Profile.ProfileID,
+                        UserID = w.UserID,
+                        UserRoleID = w.UserRoleID,
+                        ProfileFullname = w.User.UserProfiles.Where(m => m.UserRoleID == 1).FirstOrDefault().Profile.ProfileFullname,
+                        ProfileImage = w.User.UserProfiles.Where(m => m.UserRoleID == 1).FirstOrDefault().Profile.ProfileImage,
+                        ProfileIsConfirmed = w.User.UserProfiles.Where(m => m.UserRoleID == 1).FirstOrDefault().Profile.ProfileIsConfirmed,
+                        ProfileIsPeople = w.User.UserProfiles.Where(m => m.UserRoleID == 1).FirstOrDefault().Profile.ProfileIsPeople
+                    }).AsQueryable();
+        }
+
         //Ends V2
         //IQueryable Pagings
         public IQueryable<UserProfile> GetUserProfilesAllAsQueryable(int page = 1, int pageSize = 7, string filter = null)

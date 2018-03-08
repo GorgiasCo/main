@@ -38,6 +38,7 @@ namespace Gorgias.DataLayer.Interface
         IQueryable<Connection> GetConnectionsAllAsQueryable(bool ConnectStatus);
         IQueryable<Connection> GetConnectionsAllAsQueryable(int page = 1, int pageSize = 7, string filter = null);
         IQueryable<Business.DataTransferObjects.Mobile.V2.ProfileSubscribeMobileModel> GetConnectionsByProfileIDAllAsQueryable(int ProfileID);
+        IQueryable<Business.DataTransferObjects.Web.V2.ProfileFollowerModel> GetConnectionsByProfileIDAsFollowerAsQueryable(int ProfileID, int RequesTypeID);
         IQueryable<Connection> GetConnectionsAllAsQueryable(bool ConnectStatus, int page = 1, int pageSize = 7, string filter = null);
         IQueryable<Connection> GetConnectionsByProfileIDAsQueryable(int ProfileID);
         IQueryable<Connection> GetConnectionsByProfileIDAsQueryable(int ProfileID, bool ConnectStatus);

@@ -482,6 +482,8 @@
     <Compile Include="Business\DataTransferObjects\Web\SocialNetworkModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\SponsoredFeatureModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\TagModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Web\V2\ProfileAutoCompleteModel.cs" />
+    <Compile Include="Business\DataTransferObjects\Web\V2\ProfileFollowerModel.cs" />
     <Compile Include="Business\DataTransferObjects\Web\V2\StoreProfileModel.cs" />
     <Compile Include="Business\Facades\ActivityTypeFacade.cs" />
     <Compile Include="Business\Facades\AddressTypeFacade.cs" />
