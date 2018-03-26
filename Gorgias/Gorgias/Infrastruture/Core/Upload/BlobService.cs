@@ -60,6 +60,30 @@ namespace Gorgias.Infrastruture.Core.Upload
             return list;
         }
 
+        public async Task<List<BlobUploadModel>> UploadBlobsAllFiles(HttpContent httpContent, string MasterFileName, string ImageName)
+        {
+            var blobUploadProvider = new BlobStorageUploadAllFilesProvider();
+            blobUploadProvider.MasterFileName = MasterFileName;
+            blobUploadProvider.ImageName = ImageName;
+
+            var list = await httpContent.ReadAsMultipartAsync(blobUploadProvider)
+                .ContinueWith(task =>
+                {
+                    if (task.IsFaulted || task.IsCanceled)
+                    {
+                        throw task.Exception;
+                    }
+
+                    var provider = task.Result;
+                    return provider.Uploads.ToList();
+                });
+
+            // TODO: Use data in the list to store blob info in your
+            // database so that you can always retrieve it later.
+
+            return list;
+        }
+
 
     }
 }

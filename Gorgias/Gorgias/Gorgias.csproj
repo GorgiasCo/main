@@ -829,6 +829,7 @@
     <Compile Include="Infrastruture\Core\PaginationSet.cs" />
     <Compile Include="Infrastruture\Core\Upload\BlobService.cs" />
     <Compile Include="Infrastruture\Core\Upload\Provider\BlobStorageMultipartStreamProvider.cs" />
+    <Compile Include="Infrastruture\Core\Upload\Provider\BlobStorageUploadAllFilesProvider.cs" />
     <Compile Include="Infrastruture\Core\Upload\Provider\BlobStorageUploadProvider.cs" />
     <Compile Include="Infrastruture\Core\Upload\Helper\BlobHelper.cs" />
     <Compile Include="Infrastruture\Core\Upload\Interface\IBlobService.cs" />

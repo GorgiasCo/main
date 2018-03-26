@@ -12,5 +12,6 @@ namespace Gorgias.Infrastruture.Core.Upload.Interface
     {
         Task<List<BlobUploadModel>> UploadBlobs(HttpContent httpContent, string MasterFileName);
         Task<List<BlobUploadModel>> UploadBlobs(HttpContent httpContent, string MasterFileName, string ImageName);
+        Task<List<BlobUploadModel>> UploadBlobsAllFiles(HttpContent httpContent, string MasterFileName, string ImageName);
     }
 }

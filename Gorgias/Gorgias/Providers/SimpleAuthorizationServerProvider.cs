@@ -253,10 +253,10 @@ namespace Gorgias.Providers
                 var ticket = new AuthenticationTicket(identity, props);
                 context.Validated(ticket);
             }
-
+            //it is correct
             if (resultuser.CountryID != null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1))
             {
-                UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
+               UserProfileDTO resultProfile = resultuser.UserProfiles.Where(m => m.UserRoleID == 1).First();
 
                 Business.DataTransferObjects.Mobile.V2.LoginProfileMobileModel profileSetting;
 
@@ -332,7 +332,7 @@ namespace Gorgias.Providers
                         "countryID", "0"
                     },
                     {
-                        "profileURL", resultProfile.Profile.ProfileURL != null ? resultProfile.Profile.ProfileURL : " "
+                        "ProfileURL", resultProfile.Profile.ProfileURL != null ? resultProfile.Profile.ProfileURL : " "
                     }
                     ,
                     {
@@ -348,6 +348,9 @@ namespace Gorgias.Providers
                     },
                     {
                         "userUserID", resultProfile.UserID.ToString()
+                    },
+                    {
+                        "UserID", resultProfile.UserID.ToString()
                     },
                     {
                         "Role", userRole
@@ -398,6 +401,7 @@ namespace Gorgias.Providers
                 context.Validated(ticket);
             }
 
+            //And this ;)
             //if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m => m.Profile.ProfileStatus == true && m.Profile.ProfileIsPeople == false && m.Profile.ProfileIsConfirmed == false))
             if (resultuser.CountryID == null & resultuser.UserProfiles.Count() > 0 && resultuser.UserProfiles.Any(m => m.UserRoleID == 1) && resultuser.UserProfiles.Any(m => m.Profile.ProfileStatus == true))
             {
@@ -436,7 +440,7 @@ namespace Gorgias.Providers
                         "countryID", "0"
                     },
                     {
-                        "profileURL", resultProfile.Profile.ProfileURL != null ? resultProfile.Profile.ProfileURL : " "
+                        "ProfileURL", resultProfile.Profile.ProfileURL != null ? resultProfile.Profile.ProfileURL : " "
                     }
                     ,
                     {
@@ -452,6 +456,9 @@ namespace Gorgias.Providers
                     },
                     {
                         "userUserID", resultProfile.UserID.ToString()
+                    },
+                    {
+                        "UserID", resultProfile.UserID.ToString()
                     },
                     {
                         "Role", userRole

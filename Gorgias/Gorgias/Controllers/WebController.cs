@@ -18,6 +18,8 @@ namespace Gorgias.Controllers
     [RoutePrefix("api")]
     public class WebController : ApiControllerBase
     {
+        private static readonly HttpClient client = new HttpClient();
+
         [Route("Web/Validity", Name = "GetValidity")]
         [Authorize]
         [HttpGet]
@@ -66,7 +68,7 @@ namespace Gorgias.Controllers
             var result = await client.SendMessageAsync(message);
 
             response = request.CreateResponse(HttpStatusCode.Accepted, result);
-            return response;            
+            return response;
         }
 
         [Route("Web/Notification/V2/", Name = "SendV2Notification")]
@@ -79,8 +81,17 @@ namespace Gorgias.Controllers
             FirebaseNet.Messaging.FCMClient client = new FirebaseNet.Messaging.FCMClient("AAAAH1qDRKw:APA91bHX1I5ohgU4_gm42LmgFf7Gem_7gxq0-TlXYXptzXGnpBj4i9pw2o7Um3CUqT03YUN0HwmqgtdHqWCYhMh8LZUAX0jSHja4GJYnNebGo8B_i5Q4IzZaY1wk6F52XSM3u-OA6FHo");
 
             var serializer = new JavaScriptSerializer();
-            var data = new {AlbumID = objNotification.AlbumID, ProfileID = objNotification.ProfileID.Value, canValidate = true, NotificationType = "Story", ProfileFullname = objNotification.ProfileFullname};
+            var data = new { AlbumID = objNotification.AlbumID, ProfileID = objNotification.ProfileID.Value, canValidate = true, NotificationType = "Story", ProfileFullname = objNotification.ProfileFullname };
             var json = serializer.Serialize(data);
+
+            string r = "{\"title\":" + objNotification.Title + ",body:" + objNotification.Body + ",sound:default" + "priority:high" + "show_in_foreground:true" + "extraData:" + json + "}";
+
+            //"title": title,
+            //"body": body,
+            //"click_action": "fcm.ACTION.HELLO",
+            //"remote": true,
+            //  "albumID": data.albumID,
+            //"extraData": data,
 
             var message = new FirebaseNet.Messaging.Message()
             {
@@ -91,19 +102,21 @@ namespace Gorgias.Controllers
                     Title = objNotification.Title,
                     Icon = "myIcon",
                     Sound = "default",
-                    ClickAction = "fcm.ACTION.HELLO"
+                    ClickAction = "fcm.ACTION.HELLO",
                 },
                 Data = new Dictionary<string, string>
                 {
-                    {"AlbumID", objNotification.AlbumID },
+                    {"custom_notification", r},
+                    {"content_available", "true"},
+                    {"albumID", objNotification.AlbumID },
                     {"ProfileID", objNotification.ProfileID.Value.ToString()},
                     {"ProfileFullname", objNotification.ProfileFullname},
                     {"NotificationType", "Story"},
                     {"canValidate", "true" },
                     {"extraData", json},
                     {"remote", "true"},
-                    {"Body", objNotification.Body},
-                    {"Title", objNotification.Title},
+                    {"body", objNotification.Body},
+                    {"title", objNotification.Title},
                     {"click_action", "fcm.ACTION.HELLO"},
                 }
             };
@@ -113,7 +126,6 @@ namespace Gorgias.Controllers
             response = request.CreateResponse(HttpStatusCode.Accepted, result);
             return response;
         }
-
 
         [Route("Web/Validity/{UserID}/{ProfileID}", Name = "GetValidityByUserIDANDProfileID")]
         [Authorize]

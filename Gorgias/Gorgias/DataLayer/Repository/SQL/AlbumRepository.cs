@@ -615,7 +615,7 @@ namespace Gorgias.DataLayer.Repository.SQL
             try
             {
                 Album obj = new Album();
-                obj = (from w in context.Albums.Include("Contents") where w.AlbumID == AlbumID select w).FirstOrDefault();
+                obj = (from w in context.Albums.Include("Contents").Include("Categories") where w.AlbumID == AlbumID select w).FirstOrDefault();
 
                 if (obj == null)
                 {
@@ -704,7 +704,8 @@ namespace Gorgias.DataLayer.Repository.SQL
                         //Updated
                         existContent.ContentTitle = updateContent.ContentTitle;
                         existContent.ContentURL = updateContent.ContentURL;
-                        existContent.ContentDimension = updateContent.ContentDimension;                        
+                        existContent.ContentDimension = updateContent.ContentDimension;
+                        existContent.ContentType = updateContent.ContentTypeID;             
                     } else
                     {
                         //Deleted ;)
@@ -729,26 +730,28 @@ namespace Gorgias.DataLayer.Repository.SQL
                     });
                 }
 
-                //if (Topic != null)
-                //{
-                //    if (Topic.CategoryID.HasValue)
-                //    {
-                //        Category resultCategory = (from x in context.Categories where x.CategoryID == Topic.CategoryID select x).First();
-                //        obj.Categories.Add(resultCategory);
-                //    }
-                //    else
-                //    {
-                //        Category resultCategory = (from x in context.Categories where x.CategoryName.Trim().ToLower() == Topic.CategoryName.Trim().ToLower() && x.ProfileID == ProfileID select x).FirstOrDefault();
-                //        if (resultCategory != null)
-                //        {
-                //            obj.Categories.Add(resultCategory);
-                //        }
-                //        else
-                //        {
-                //            obj.Categories.Add(new Category { CategoryName = Topic.CategoryName.Trim(), CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 1, CategoryOrder = 0 });
-                //        }
-                //    }
-                //}
+                if (Topic != null)
+                {
+                    var categories = obj.Categories;
+                    obj.Categories.Clear();
+                    if (Topic.CategoryID.HasValue)
+                    {
+                        Category resultCategory = (from x in context.Categories where x.CategoryID == Topic.CategoryID select x).First();
+                        obj.Categories.Add(resultCategory);
+                    }
+                    else
+                    {
+                        Category resultCategory = (from x in context.Categories where x.CategoryName.Trim().ToLower() == Topic.CategoryName.Trim().ToLower() && x.ProfileID == ProfileID select x).FirstOrDefault();
+                        if (resultCategory != null)
+                        {
+                            obj.Categories.Add(resultCategory);
+                        }
+                        else
+                        {
+                            obj.Categories.Add(new Category { CategoryName = Topic.CategoryName.Trim(), CategoryStatus = true, CategoryDescription = AlbumReadingLanguageCode, ProfileID = ProfileID, CategoryType = 1, CategoryOrder = 0 });
+                        }
+                    }
+                }
 
                 context.SaveChanges();
                 return obj;
@@ -858,7 +861,7 @@ namespace Gorgias.DataLayer.Repository.SQL
         public Album GetAlbumV2Mobile(int AlbumID, int ProfileID)
         {
             Update(AlbumID);
-            return (from w in context.Albums.Include("AlbumParent.Profile").Include("AlbumParent.Contents").Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections").Include("Profile") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
+            return (from w in context.Albums.Include("AlbumParent.Profile").Include("AlbumParent.Contents").Include("Contents.Comments.Profile").Include("Contents.ContentType1").Include("Category").Include("ProfileActivities").Include("Profile.Connections").Include("Profile").Include("Categories") where w.AlbumID == AlbumID && w.AlbumIsDeleted == false select w).First();
         }
 
         public int? GetAlbumViewsV2Mobile(int ProfileID)

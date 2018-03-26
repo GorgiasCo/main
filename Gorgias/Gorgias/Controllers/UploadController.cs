@@ -81,6 +81,35 @@ namespace Gorgias.Controllers
         }
 
         [ResponseType(typeof(List<BlobUploadModel>))]
+        [Route("Files/Name", Name = "BlobMultiUploadAllFilesWithName")]
+        [HttpPost]
+        public async Task<IHttpActionResult> PostBlobUploadWithNameAllFiles(string MasterFileName, string ImageName)
+        {
+            try
+            {
+                // This endpoint only supports multipart form data
+                if (!Request.Content.IsMimeMultipartContent("form-data"))
+                {
+                    return StatusCode(HttpStatusCode.UnsupportedMediaType);
+                }
+
+                // Call service to perform upload, then check result to return as content
+                var result = await _service.UploadBlobsAllFiles(Request.Content, MasterFileName, ImageName);
+                if (result != null && result.Count > 0)
+                {
+                    return Ok(result);
+                }
+
+                // Otherwise
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [ResponseType(typeof(List<BlobUploadModel>))]
         [Route("Images/Album", Name = "BlobMultiUploadImagesForAlbums")]
         [HttpPost]
         public async Task<IHttpActionResult> PostBlobUploadAlbums(int AlbumID, string MasterFileName)

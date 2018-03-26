@@ -267,6 +267,8 @@ namespace Gorgias.BusinessLayer.Facades
                 CategoryID = w.CategoryID,
                 AlbumRepostRequest = w.AlbumRepostRequest,
                 AlbumRepostValue = w.AlbumRepostValue,
+                AlbumReadingLanguageCode = w.AlbumReadingLanguageCode,
+                ContentRatingID = w.ContentRatingID,
                 //Contents = w.Contents.OrderByDescending(c => c.ContentCreatedDate).Select(c => new Business.DataTransferObjects.Mobile.V2.ContentMobileModel()
                 //{
                 //    ContentLike = c.ContentLike,
